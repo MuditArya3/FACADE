@@ -1,5 +1,6 @@
 # React Json Schema Form
 
+P.S.: Do check out my blog on [React JSON Schema Form](https://medium.com/p/cdc8fbb06f8c)
 ## Available Scripts
 
 To run the app make sure you have `npm version 8.3.1` if not, do the same via below command:
