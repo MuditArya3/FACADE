@@ -1,7 +1,5 @@
 # React Json Schema Form
 
-## Available Scripts
-
 To run the app make sure you have `npm version 8.3.1` if not, do the same via below command:
 ### `npm install -g npm@8.3.1`
 check if the version has been downgraded,
