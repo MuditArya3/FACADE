@@ -1,12 +1,13 @@
 {
   "ui:submitButtonOptions": {
-    "submitText": "Confirm Details",
+    "submitText": "Confirm",
     "norender": false,
     "props": {
       "disabled": false,
       "className": "btn btn-info"
     }
   },
+
   "firstName": {
     "ui:autofocus": true,
     "ui:emptyValue": "",

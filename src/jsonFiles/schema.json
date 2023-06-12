@@ -219,13 +219,15 @@
       "title": "Custom array of strings",
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "customF":""
       }
     },
     "checkbox": {
       "type": "boolean",
       "title": "I agree to the terms and conditions.",
       "description": "This is the checkbox-description"
-    }
+    },
+    "custom":""
   }
 }
