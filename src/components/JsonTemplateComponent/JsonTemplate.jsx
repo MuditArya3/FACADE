@@ -354,7 +354,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       localStorage.setItem("jsonSchema", json);
     } else if (buttonClicked === "GenerateForm") {
       //comment the below line when storing in database
-      
+
       //   console.log(json);
       const blob = new Blob([json], { type: "application/json" });
       const url = URL.createObjectURL(blob);
@@ -383,11 +383,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     jsonfile.length && handlestatedatachange();
   }, [jsonfile]);
 
-
   useEffect(() => {
-  buttonClicked && handleData()
-  }, [buttonClicked])
-
+    buttonClicked && handleData();
+  }, [buttonClicked]);
 
   return (
     <Container
@@ -767,6 +765,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   }}
                   sx={{ mt: 1 }}
                   type="submit"
+                  disabled={!Actions}
                 >
                   Generate Form
                 </Button>

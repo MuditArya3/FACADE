@@ -7,7 +7,7 @@ const GridComponent = () => {
   const [formData, setFormData] = useState([]);
   const [searchGrid, setSearchGrid] = useState([]);
   //   console.log(searchGrid);
-  const searchBox = require("../jsonFiles/searchBox.json");
+  const searchBox = require("../../jsonFiles/searchBox.json");
   //const formData = require("../jsonFiles/formData.json");
 
   console.log(formData.Search);
@@ -40,7 +40,6 @@ const GridComponent = () => {
   //   }, []);
   // console.log(Object.key(searchGrid));
 
-  
   const CustomFieldTemplate = (props) => {
     const [getAPIData, setAPIData] = useState([]);
     const getGridData = async () => {

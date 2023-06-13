@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import FormComponent from "./components/FormComponent.jsx";
-import GridComponent from "./components/GridComponent";
-import ApplicationForm from "./components/ApplicationFormComponent";
+import FormComponent from "./components/FormComponent/FormComponent.jsx";
+import GridComponent from "./components/GridComponent/GridComponent.js";
+import ApplicationForm from "./components/ApplicationFormComponent/ApplicationForm.jsx";
 import JsonTemplate from "./components/JsonTemplateComponent/JsonTemplate.jsx";
 import { useState } from "react";
 
 function App() {
   const [jsonData, setJsonData] = useState();
-  console.log(jsonData);
   return (
     <div className="App">
       <Router>

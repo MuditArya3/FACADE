@@ -1,5 +1,6 @@
 import Form from "@rjsf/core";
 import React, { useState } from "react";
+import "../FormComponent/FormComponent.css";
 
 const FormComponent = ({ jsonData }) => {
   //const [formData, setformData] = useState([]);
@@ -11,7 +12,7 @@ const FormComponent = ({ jsonData }) => {
   let schema1 = JSON.parse(localStorage.getItem("jsonSchema"));
   console.log(schema1);
   // console.log(schema);
-  const uiSchema = require("../jsonFiles/uiSchema.json");
+  const uiSchema = require("../../jsonFiles/uiSchema.json");
   // const CustomSchemaField = function () {
   //   return (
   //     <div id="custom">
@@ -34,6 +35,7 @@ const FormComponent = ({ jsonData }) => {
     <div>
       <div className="form">
         <Form
+          className="formComponent"
           schema={schema1}
           //uiSchema={uiSchema}
           // formData={formData}
