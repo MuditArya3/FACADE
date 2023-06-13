@@ -26,7 +26,7 @@ import {
   handleFileSelectChange,
   getdesiredvalue,
   handleTableSwaggerSubmit,
-  handleApiSelected
+  handleApiSelected,
 } from "./JsonTemplate";
 import { useState } from "react";
 import "../JsonTemplateComponent/JsonTemplate.css";
@@ -52,7 +52,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
   const [Actions, setActions] = useState();
   const [stateData, setStateData] = useState({});
   const [required, setRequired] = useState([]);
-  // const [tableNames, setTableNames] = useState([]);
+  const [buttonClicked, setButtonClicked] = useState();
 
   console.log(options);
 
@@ -116,11 +116,17 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
   //   };
 
   useEffect(() => {
-    handleTableSwaggerSubmit(selectedTable,selectApiMethod,SelectedResponse,swaggerData,required,setColumns);
+    handleTableSwaggerSubmit(
+      selectedTable,
+      selectApiMethod,
+      SelectedResponse,
+      swaggerData,
+      required,
+      setColumns
+    );
     handleAccordionChange(setExpandedAccordion);
   }, [SelectedResponse, required]);
 
-  
   const handleData = (e) => {
     let apidatas;
     if (selectApiMethod === "post") {
@@ -263,7 +269,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
           `;
 
     uu["custom"] = x;
-    window.open("/form", "_blank");
+    if (buttonClicked === "SaveMapping") {
+      window.open("/form", "_blank");
+    }
     console.log(uu);
     handleSave(uu, requiredFields);
     console.log(selected);
@@ -322,8 +330,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     });
   }, [required]);
 
-
-
   const handleSave = (data, requiredFields) => {
     console.log(data);
     console.log(jsonfile);
@@ -341,22 +347,25 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
   // let json;
   const handlecreatefile = (data) => {
     console.log(data);
-
-    setJsonfile(JSON.stringify(data));
-    setJsonData(JSON.stringify(data));
-    //comment the below line when storing in database
     const json = JSON.stringify(data);
-    localStorage.setItem("jsonSchema", json);
-    //   console.log(json);
-    const blob = new Blob([json], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.download = "data.json";
-    link.href = url;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    if (buttonClicked === "SaveMapping") {
+      setJsonfile(JSON.stringify(data));
+      setJsonData(JSON.stringify(data));
+      localStorage.setItem("jsonSchema", json);
+    } else if (buttonClicked === "GenerateForm") {
+      //comment the below line when storing in database
+      
+      //   console.log(json);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.download = "data.json";
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
   };
 
   useEffect(() => {
@@ -373,6 +382,12 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     };
     jsonfile.length && handlestatedatachange();
   }, [jsonfile]);
+
+
+  useEffect(() => {
+  buttonClicked && handleData()
+  }, [buttonClicked])
+
 
   return (
     <Container
@@ -440,7 +455,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   id="table-select"
                   value={selectedTable}
                   label="Select Table:"
-                  onChange={(e) => handleApiSelected(e.target.value,setSelectedTable)}
+                  onChange={(e) =>
+                    handleApiSelected(e.target.value, setSelectedTable)
+                  }
                 >
                   <MenuItem value={""}>
                     <em>None</em>
@@ -744,7 +761,10 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
               >
                 <Button
                   variant={"contained"}
-                  //   onClick={handleOpenNewColumnModal}
+                  onClick={() => {
+                    setButtonClicked("GenerateForm");
+                    // handleData();
+                  }}
                   sx={{ mt: 1 }}
                   type="submit"
                 >
@@ -754,7 +774,8 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                 <Button
                   variant={"contained"}
                   onClick={() => {
-                    handleData();
+                    setButtonClicked("SaveMapping");
+                    // handleData();
                   }}
                   sx={{ mt: 1 }}
                   type="submit"
