@@ -17,19 +17,21 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-//   import React, { useState } from "react";
+import {
+  handleAction,
+  actionMethods,
+  handleAccordionChange,
+  handleApiMethodChange,
+  handleResponse,
+  handleFileSelectChange,
+  getdesiredvalue,
+  handleTableSwaggerSubmit,
+  handleApiSelected
+} from "./JsonTemplate";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../JsonTemplateComponent/JsonTemplate.css";
-// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useEffect } from "react";
-import axios from "axios";
-//   import localswagger from "../localswagger.json"; // eslint-disable-next-line
-import { type } from "@testing-library/user-event/dist/type"; // eslint-disable-next-line
-import { DataObject } from "@mui/icons-material";
-import { styled } from "@mui/material/styles";
-//  import { SwaggerClient } from 'swagger-client'
 
 const JsonTemplate = ({ jsonData, setJsonData }) => {
   const [mappings, setMappings] = useState({});
@@ -40,13 +42,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
   const [swaggerData, setSwaggerData] = useState();
   const [columns, setColumns] = useState();
   const [options, setOptions] = useState(); // eslint-disable-next-line
-  const [swaggerDatas, setSwaggerDatas] = useState();
   const [services, setServices] = useState("");
-  const [openNewColumnModal, setOpenNewColumnModal] = useState(false);
-  const [newColumnDetails, setNewColumnDetails] = useState({
-    columnName: "",
-    columnType: "",
-  });
   const [apiMethods, setapiMethods] = useState([]); // eslint-disable-next-line
   const [response, setResponse] = useState([]);
   const [SelectedResponse, setSelectedResponse] = useState("");
@@ -104,71 +100,27 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
   console.log("swaggerData", swaggerData);
 
   console.log(swaggerData);
-  const actionMethods = ["CREATE", "FETCH", "UPDATE", "SEARCH", "DELETE"];
 
-  const handleAction = (e) => {
-    setActions(e.target.value);
-  };
+  //   const handleAccordionChange = () => {
+  //     setExpandedAccordion(true);
+  //   };
 
-  const handleOpenNewColumnModal = () => setOpenNewColumnModal(true);
+  //   const handleApiMethodChange = (e) => {
+  //     setSelectApiMethod(e.target.value);
+  //     console.log(selectApiMethod);
+  //   };
 
-  const handleCloseNewColumnModal = () => {
-    setNewColumnDetails({
-      columnName: "",
-      columnType: "",
-    });
-    setOpenNewColumnModal(false);
-  };
-
-  const handleAccordionChange = () => {
-    setExpandedAccordion(true);
-  };
-
-  const handleApiMethodChange = (e) => {
-    setSelectApiMethod(e.target.value);
-    console.log(selectApiMethod);
-  };
-
-  const handleResponse = (e) => {
-    setSelectedResponse(e.target.value);
-    console.log(SelectedResponse);
-  };
-
-  const handlechange = (e) => {
-    setServices(e.target.value);
-  };
-  console.log(services);
+  //   const handleResponse = (e) => {
+  //     setSelectedResponse(e.target.value);
+  //     console.log(SelectedResponse);
+  //   };
 
   useEffect(() => {
-    handleTableSwaggerSubmit();
-    handleAccordionChange();
-  }, [SelectedResponse,required]);
+    handleTableSwaggerSubmit(selectedTable,selectApiMethod,SelectedResponse,swaggerData,required,setColumns);
+    handleAccordionChange(setExpandedAccordion);
+  }, [SelectedResponse, required]);
 
-  const handleFileSelectChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const data = JSON.parse(reader.result);
-        setSwaggerData(data);
-      } catch (error) {
-        console.error("Error parsing Swagger data:", error);
-      }
-    };
-    reader.readAsText(file);
-    setTableNames([]);
-    setSelectedTable("");
-    setColumns();
-    console.log("swaggerData", swaggerData);
-  };
-
-  const getdesiredvalue = (apidatas) => {
-    const valueArray = apidatas.split("/");
-    const desiredValue = valueArray[valueArray.length - 1];
-    console.log("desired----", desiredValue);
-    return desiredValue;
-  };
-
+  
   const handleData = (e) => {
     let apidatas;
     if (selectApiMethod === "post") {
@@ -345,10 +297,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       if (Object.keys(p).includes("required")) {
         setRequired(p.required);
       }
-      
     }
   }, [swaggerData, selectedTable, selectApiMethod, SelectedResponse]);
-console.log(required);
+  console.log(required);
   useEffect(() => {
     swaggerData &&
       selectedTable.length &&
@@ -360,90 +311,18 @@ console.log(required);
     setServices("");
   }, [swaggerData, selectedTable, selectApiMethod]);
 
-  const handleTableSwaggerSubmit = () => {
-    if (selectedTable) {
-      if (selectApiMethod === "post" && SelectedResponse === "requestBody") {
-        let z =
-          swaggerData.paths[selectedTable][selectApiMethod][SelectedResponse]
-            .content["application/json"].schema["$ref"];
-        console.log(z);
-        console.log(selectedTable);
-        var i = getdesiredvalue(z);
-        const apidata = swaggerData.components.schemas[i];
-        console.log(Object.keys(apidata.properties));
-        console.log(apidata.properties);
-      
-        const apidataProperties = Object.keys(apidata.properties);
-        const filteredColumnsData = apidataProperties.filter((elem) => !required.includes(elem));
-        console.log(filteredColumnsData);
-        setColumns(filteredColumnsData);
-      
-        // setColumns(Object.keys(apidata.properties))
-      } else if (
-        selectApiMethod === "get" &&
-        SelectedResponse === "responses"
-      ) {
-        let x =
-          swaggerData.paths[selectedTable][selectApiMethod].responses["200"]
-            .content["application/vnd.connectwise.com+json; version=2022.1"]
-            .schema;
-        if (x.type === "array") {
-          x = x.items["$ref"];
-        } else {
-          x = x["$ref"];
-        }
-        var k = getdesiredvalue(x);
-        const apidata1 = swaggerData.components.schemas[k];
-
-        const apidataProperties = Object.keys(apidata1.properties);
-        const filteredColumnsData = apidataProperties.filter((elem) => !required.includes(elem));
-        console.log(filteredColumnsData);
-        setColumns(filteredColumnsData);
-      
-        // setColumns(Object.keys(apidata1.properties))
-      }
-    }
-  };
-
   useEffect(() => {
-    required.map((e,index)=>{
-        setMappings((prev) => {
-            return {
-              ...prev,
-            [e]:[e]
-            };
-          });
-    })
-    
-  }, [required])
-  
-
-  const handleApiSelected = (tableName) => {
-    setSelectedTable(tableName);
-    console.log("setSelectedTable -", selectedTable);
-  };
-
-  const handleNewColumnNameChange = (e) => {
-    setNewColumnDetails((prev) => {
-      return { ...prev, columnName: e.target.value };
-    });
-  };
-
-  const handleNewColumnTypeChange = (e) => {
-    setNewColumnDetails((prev) => {
-      return { ...prev, columnType: e.target.value };
-    });
-  };
-
-  const handleNewColumnSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("https://localhost:7055/NewColumn", newColumnDetails)
-      .then(() => {
-        console.log("Data inserted successfully");
-        handleCloseNewColumnModal();
+    required.map((e, index) => {
+      setMappings((prev) => {
+        return {
+          ...prev,
+          [e]: [e],
+        };
       });
-  };
+    });
+  }, [required]);
+
+
 
   const handleSave = (data, requiredFields) => {
     console.log(data);
@@ -535,7 +414,15 @@ console.log(required);
                   minWidth: "17%",
                   pointerEvents: "auto",
                 }}
-                onChange={handleFileSelectChange}
+                onChange={(e) =>
+                  handleFileSelectChange(
+                    e,
+                    setSwaggerData,
+                    setTableNames,
+                    setSelectedTable,
+                    setColumns
+                  )
+                }
               />
 
               <FormControl
@@ -553,7 +440,7 @@ console.log(required);
                   id="table-select"
                   value={selectedTable}
                   label="Select Table:"
-                  onChange={(e) => handleApiSelected(e.target.value)}
+                  onChange={(e) => handleApiSelected(e.target.value,setSelectedTable)}
                 >
                   <MenuItem value={""}>
                     <em>None</em>
@@ -583,7 +470,7 @@ console.log(required);
                   id="api-method-select"
                   value={selectApiMethod}
                   label="API Method"
-                  onChange={handleApiMethodChange}
+                  onChange={(e) => handleApiMethodChange(e, setSelectApiMethod)}
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -617,9 +504,8 @@ console.log(required);
                   value={SelectedResponse}
                   label="API Method"
                   onChange={(e) => {
-                    handleResponse(e);
+                    handleResponse(e, setSelectedResponse);
                   }}
-                  // handleResponse}
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -667,7 +553,7 @@ console.log(required);
                     id="demo-simple-select"
                     value={Actions}
                     label="Select Services"
-                    onChange={handleAction}
+                    onChange={(e) => handleAction(e, setActions)}
                     // sx={{width:"50%"}}
                   >
                     {actionMethods.map((action, index) => (
@@ -715,52 +601,50 @@ console.log(required);
                   }}
                 >
                   {columns.map((lsCol, index) => {
-                      return (
-                        <Paper
+                    return (
+                      <Paper
+                        key={index}
+                        id={`${lsCol}${index}`}
+                        elevation={4}
+                        sx={{
+                          pr: 2,
+                          py: 1,
+                          mx: 2,
+                          my: 1,
+                          cursor: "grab",
+                          minWidth: "160px",
+                          maxWidth: "80%",
+                          display: "flex",
+                          height: "min-content",
+                        }}
+                        draggable="true"
+                        onDragStart={(e) => {
+                          e.dataTransfer.setData("dragId", e.target.id); // eslint-disable-next-line
+                          mappings &&
+                            Object.keys(mappings).map((mapKey) => {
+                              mappings[mapKey].includes(e.target.textContent) &&
+                                setMappings((prev) => {
+                                  return {
+                                    ...prev,
+                                    [mapKey]: prev[mapKey].filter(
+                                      (x) => x !== e.target.textContent
+                                    ),
+                                  };
+                                });
+                            });
+                        }}
+                      >
+                        <DragIndicatorIcon sx={{ mr: 2 }} />
+                        <Typography
                           key={index}
-                          id={`${lsCol}${index}`}
-                          elevation={4}
-                          sx={{
-                            pr: 2,
-                            py: 1,
-                            mx: 2,
-                            my: 1,
-                            cursor: "grab",
-                            minWidth: "160px",
-                            maxWidth: "80%",
-                            display: "flex",
-                            height: "min-content",
-                          }}
-                          draggable="true"
-                          onDragStart={(e) => {
-                            e.dataTransfer.setData("dragId", e.target.id); // eslint-disable-next-line
-                            mappings &&
-                              Object.keys(mappings).map((mapKey) => {
-                                mappings[mapKey].includes(
-                                  e.target.textContent
-                                ) &&
-                                  setMappings((prev) => {
-                                    return {
-                                      ...prev,
-                                      [mapKey]: prev[mapKey].filter(
-                                        (x) => x !== e.target.textContent
-                                      ),
-                                    };
-                                  });
-                              });
-                          }}
+                          value={lsCol}
+                          className={"capitalizeData"}
                         >
-                          <DragIndicatorIcon sx={{ mr: 2 }} />
-                          <Typography
-                            key={index}
-                            value={lsCol}
-                            className={"capitalizeData"}
-                          >
-                            {lsCol}
-                          </Typography>
-                        </Paper>
-                      );
-                    })}
+                          {lsCol}
+                        </Typography>
+                      </Paper>
+                    );
+                  })}
                 </Paper>
                 <Box
                   sx={{
@@ -860,7 +744,7 @@ console.log(required);
               >
                 <Button
                   variant={"contained"}
-                  onClick={handleOpenNewColumnModal}
+                  //   onClick={handleOpenNewColumnModal}
                   sx={{ mt: 1 }}
                   type="submit"
                 >
@@ -878,108 +762,6 @@ console.log(required);
                 >
                   Save mapping
                 </Button>
-
-                <Modal
-                  open={openNewColumnModal}
-                  onClose={handleCloseNewColumnModal}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                      width: 400,
-                      bgcolor: "background.paper",
-                      border: "2px solid #000",
-                      boxShadow: 24,
-                      p: 4,
-                      borderRadius: "5px",
-                    }}
-                  >
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                    >
-                      Add new column to map to it
-                    </Typography>
-                    <Box
-                      id="modal-modal-description"
-                      sx={{
-                        mt: 2,
-                        display: "flex",
-                        justifyContent: "center",
-                        width: "100%",
-                      }}
-                    >
-                      <form
-                        className="new-column-form"
-                        onSubmit={handleNewColumnSubmit}
-                      >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            width: "100%",
-                          }}
-                        >
-                          <FormControl>
-                            <TextField
-                              label="Column name:"
-                              variant="outlined"
-                              sx={{ my: 1 }}
-                              id={"column-name"}
-                              value={newColumnDetails.columnName}
-                              onChange={handleNewColumnNameChange}
-                            />
-                          </FormControl>
-                          <FormControl sx={{ my: 1 }}>
-                            <InputLabel id="data-type-select-label">
-                              Data type
-                            </InputLabel>
-                            <Select
-                              labelId="data-type-select-label"
-                              id="data-type-select"
-                              value={newColumnDetails.columnType}
-                              label="Data type"
-                              onChange={handleNewColumnTypeChange}
-                            >
-                              <MenuItem value={""}>
-                                <em>None</em>
-                              </MenuItem>
-                              <MenuItem value={"string"}>String</MenuItem>
-                              <MenuItem value={"int"}>Int</MenuItem>
-                              <MenuItem value={"float"}>Float</MenuItem>
-                              <MenuItem value={"double"}>Double</MenuItem>
-                            </Select>
-                          </FormControl>
-                        </Box>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            width: "50%",
-                            ml: "auto",
-                            justifyContent: "space-between",
-                            mt: 3,
-                          }}
-                        >
-                          <Button
-                            variant="contained"
-                            onClick={handleCloseNewColumnModal}
-                          >
-                            Cancel
-                          </Button>
-                          <Button variant="contained" type="submit">
-                            Save
-                          </Button>
-                        </Box>
-                      </form>
-                    </Box>
-                  </Box>
-                </Modal>
               </Box>
             </Box>
           )}
