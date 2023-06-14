@@ -1,45 +1,50 @@
-
-export const handleAction = (e,setActions) => {
-    setActions(e.target.value);
-  };
+export const handleAction = (e, setActions) => {
+  setActions(e.target.value);
+};
 
 export const actionMethods = ["CREATE", "FETCH", "UPDATE", "SEARCH", "DELETE"];
 
 export const handleAccordionChange = (setExpandedAccordion) => {
-    setExpandedAccordion(true);
-  };
+  setExpandedAccordion(true);
+};
 
-export const handleApiMethodChange = (e,setSelectApiMethod) => {
-    setSelectApiMethod(e.target.value);
-  };
+export const handleApiMethodChange = (e, setSelectApiMethod) => {
+  setSelectApiMethod(e.target.value);
+};
 
-export const handleResponse = (e,setSelectedResponse) => {
-    setSelectedResponse(e.target.value);
-  };
+export const handleResponse = (e, setSelectedResponse) => {
+  setSelectedResponse(e.target.value);
+};
 
-export  const handleFileSelectChange = (e,setSwaggerData,setTableNames,setSelectedTable,setColumns) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const data = JSON.parse(reader.result);
-        setSwaggerData(data);
-      } catch (error) {
-        console.error("Error parsing Swagger data:", error);
-      }
-    };
-    reader.readAsText(file);
-    setTableNames([]);
-    setSelectedTable("");
-    setColumns();
+export const handleFileSelectChange = (
+  e,
+  setSwaggerData,
+  setTableNames,
+  setSelectedTable,
+  setColumns
+) => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      setSwaggerData(data);
+    } catch (error) {
+      console.error("Error parsing Swagger data:", error);
+    }
   };
+  reader.readAsText(file);
+  setTableNames([]);
+  setSelectedTable("");
+  setColumns();
+};
 
 export const getdesiredvalue = (apidatas) => {
-    const valueArray = apidatas.split("/");
-    const desiredValue = valueArray[valueArray.length - 1];
-    console.log("desired----", desiredValue);
-    return desiredValue;
-  };
+  const valueArray = apidatas.split("/");
+  const desiredValue = valueArray[valueArray.length - 1];
+  console.log("desired----", desiredValue);
+  return desiredValue;
+};
 
 // export const handleData = (e,selectApiMethod,swaggerData,selectedTable,required,setApiData,mappings,selected) => {
 //     let apidatas;
@@ -189,8 +194,40 @@ export const getdesiredvalue = (apidatas) => {
 //     console.log(selected);
 //   };
 
-export const handleTableSwaggerSubmit = (selectedTable,selectApiMethod,SelectedResponse,swaggerData,required,setColumns) => {
-    if (selectedTable) {
+export const handleTableSwaggerSubmit = (
+  selectedTable,
+  selectApiMethod,
+  SelectedResponse,
+  swaggerData,
+  required,
+  setColumns
+) => {
+  if (selectedTable) {
+    if (Object.keys(swaggerData).includes("swagger")) {
+      if (selectApiMethod && SelectedResponse === "responses") {
+        let y = swaggerData.paths[selectedTable][selectApiMethod].responses;
+        if (Object.keys(y).includes("200")) {
+          y = y["200"]["$ref"];
+        } else if (Object.keys(y).includes("201")) {
+          y = y["201"]["$ref"];
+        } else {
+          y = y["204"]["$ref"];
+        }
+        console.log(y);
+        var k = getdesiredvalue(y);
+        console.log(k);
+        let step2 = swaggerData.responses[k].schema["$ref"];
+        var j = getdesiredvalue(step2);
+
+        let step3 = swaggerData.definitions[j];
+        const apidataProperties = Object.keys(step3.properties);
+        const filteredColumnsData = apidataProperties.filter(
+          (elem) => !required.includes(elem)
+        );
+        console.log(filteredColumnsData);
+        setColumns(filteredColumnsData);
+      }
+    } else if (Object.keys(swaggerData).includes("openapi")) {
       if (selectApiMethod === "post" && SelectedResponse === "requestBody") {
         let z =
           swaggerData.paths[selectedTable][selectApiMethod][SelectedResponse]
@@ -236,11 +273,12 @@ export const handleTableSwaggerSubmit = (selectedTable,selectApiMethod,SelectedR
         // setColumns(Object.keys(apidata1.properties))
       }
     }
-  };
+  }
+};
 
-export const handleApiSelected = (tableName,setSelectedTable) => {
-    setSelectedTable(tableName);
-  };
+export const handleApiSelected = (tableName, setSelectedTable) => {
+  setSelectedTable(tableName);
+};
 
 // export const handleSave = (data, requiredFields) => {
 //     console.log(data);
