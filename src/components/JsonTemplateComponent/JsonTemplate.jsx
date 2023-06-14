@@ -97,6 +97,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     selectedTable.length&&
     selectApiMethod.length&&
     setColumns()
+    setActions()
    }, [SelectedResponse])
 
 
@@ -145,6 +146,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     let uu=[];
     console.log(Object.keys(swaggerData));
     if(Object.keys(swaggerData).includes("swagger")){
+        console.log("hello");
         let apidatas=swaggerData.paths[selectedTable][selectApiMethod].responses;
         if(selectApiMethod==="get" || selectApiMethod==="put"){
             apidatas=apidatas["200"]["$ref"];
@@ -160,6 +162,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                 console.log("post");
             }else{
                 apidatas=apidatas["200"]["$ref"]
+                console.log("post");
             }
         }
 
@@ -167,13 +170,93 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
         let apidata=swaggerData.responses[requiredval].schema["$ref"];
 
         const requiredval2=getdesiredvalue(apidata);
-        const apidata1=swaggerData.definitions[requiredval2];
-
-        if (Object.keys(apidata1).includes("required")) {
+        const apidata1=swaggerData.definitions[requiredval2].properties;
+        console.log(apidata1);
+        let p = swaggerData.definitions[requiredval2];
+        if (Object.keys(p).includes("required")) {
           // setRequiredFields(p.required);
-          requiredFields = apidata1.required;
+          requiredFields = p.required;
         }
         console.log(requiredFields);
+        setApiData(Object.keys(apidata1));
+        Object.keys(apidata1).map((item) => {
+            Object.keys(mappings).map((elem, index) => {
+              console.log(item, mappings[elem][0]);
+              if (mappings[elem][0] === item) {
+                console.log(item);
+                // console.log(Object.keys(apidata[item]));
+                console.log(selected);
+                let dd = () => {
+                  let a = {};
+                  let x = Object.keys(apidata1[item]);
+                  console.log(x);
+      
+                  if (Object.keys(apidata1[item]).includes("data")) {
+                    a = {
+                      data: {
+                        url: "",
+                        headers: [
+                          {
+                            key: "",
+                            value: "",
+                          },
+                        ],
+                      },
+                    };
+                    a.title = item;
+                    a.tableView = apidata[item].tableView;
+                    a.dataSrc = apidata[item].dataSrc;
+                    a.data.url = apidata[item].data.url;
+                    console.log(a.data.url);
+                    a.template = apidata[item].template;
+                    a.noRefreshOnScroll = apidata[item].noRefreshOnScroll;
+                    a.input = apidata[item].input;
+                    a.selectValues = apidata[item].selectValues;
+                    a.disableLimit = apidata[item].disableLimit;
+                    a.valueProperty = apidata[item].valueProperty;
+                    a.key = [item][0];
+                    a.type = apidata[item].type;
+                    a.widget = apidata1[item].widget;
+                  } else if (Object.keys(apidata1[item]).includes("enum")) {
+                    // a.source = apidata[item].enum;
+      
+                    a.title = item;
+      
+                    a.type = "string";
+                    a.key = "select";
+                    a.input = true;
+      
+                    a.enum = apidata1[item].enum;
+                  } else if (Object.keys(apidata1[item]).includes("$ref")) {
+                    a.type = "textfield";
+                    a.ignore = "ref";
+                    a.label = item;
+                    a.key = item;
+                  } else {
+                    a.title = item;
+                    if (apidata1[item].format === "int32") {
+                      a.type = "integer";
+                    } else if (apidata1[item].format === "double") {
+                      a.type = "number";
+                    } else {
+                      a.type = "string";
+                    }
+                    if (apidata1[item].nullable) {
+                      a.nullable = true;
+                    }
+                    if (apidata1[item].tableView) {
+                      a.tableView = true;
+                    }
+      
+                    a.key = [item][0];
+                  }
+                  return a;
+                };
+                console.log(dd());
+                uu[item] = dd();
+              }
+            });
+          });
 
     }else if(Object.keys(swaggerData).includes("openapi")){
         let apidatas;
