@@ -86,11 +86,27 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       );
   }, [swaggerData, selectedTable, apiMethods, selectApiMethod]);
   console.log(response);
+<<<<<<< HEAD
   //   useEffect(() => {
   //     swaggerData&&
   //     setSelectApiMethod("");
   //     setSelectedResponse("")
   //    }, [selectedTable ])
+=======
+//   useEffect(() => {
+//     swaggerData&&
+//     setSelectApiMethod("");
+//     setSelectedResponse("")
+//    }, [selectedTable ])
+   
+   useEffect(() => {
+    swaggerData&&
+    selectedTable.length&&
+    selectApiMethod.length&&
+    setColumns()
+    setActions()
+   }, [SelectedResponse])
+>>>>>>> 2c3972d1c50d6f099cde4d500f22921053ceabad
 
   useEffect(() => {
     swaggerData &&
@@ -143,6 +159,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     let requiredFields;
     let uu = [];
     console.log(Object.keys(swaggerData));
+<<<<<<< HEAD
     if (Object.keys(swaggerData).includes("swagger")) {
       let apidatas =
         swaggerData.paths[selectedTable][selectApiMethod].responses;
@@ -158,12 +175,34 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
           console.log("post");
         } else {
           apidatas = apidatas["200"]["$ref"];
+=======
+    if(Object.keys(swaggerData).includes("swagger")){
+        console.log("hello");
+        let apidatas=swaggerData.paths[selectedTable][selectApiMethod].responses;
+        if(selectApiMethod==="get" || selectApiMethod==="put"){
+            apidatas=apidatas["200"]["$ref"];
+            console.log("get");
+        }
+        else if(selectApiMethod==="delete"){
+            apidatas=apidatas["204"]["$ref"]
+            console.log("delete");
+        }
+        else if(selectApiMethod==="post"){
+            if(apidatas.includes("201")){
+                apidatas=apidatas["201"]["$ref"]
+                console.log("post");
+            }else{
+                apidatas=apidatas["200"]["$ref"]
+                console.log("post");
+            }
+>>>>>>> 2c3972d1c50d6f099cde4d500f22921053ceabad
         }
       }
 
       let requiredval = getdesiredvalue(apidatas);
       let apidata = swaggerData.responses[requiredval].schema["$ref"];
 
+<<<<<<< HEAD
       const requiredval2 = getdesiredvalue(apidata);
       const apidata1 = swaggerData.definitions[requiredval2];
 
@@ -185,6 +224,96 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
             .content["application/vnd.connectwise.com+json; version=2022.1"]
             .schema.items["$ref"];
       }
+=======
+        const requiredval2=getdesiredvalue(apidata);
+        const apidata1=swaggerData.definitions[requiredval2].properties;
+        console.log(apidata1);
+        let p = swaggerData.definitions[requiredval2];
+        if (Object.keys(p).includes("required")) {
+          // setRequiredFields(p.required);
+          requiredFields = p.required;
+        }
+        console.log(requiredFields);
+        setApiData(Object.keys(apidata1));
+        Object.keys(apidata1).map((item) => {
+            Object.keys(mappings).map((elem, index) => {
+              console.log(item, mappings[elem][0]);
+              if (mappings[elem][0] === item) {
+                console.log(item);
+                // console.log(Object.keys(apidata[item]));
+                console.log(selected);
+                let dd = () => {
+                  let a = {};
+                  let x = Object.keys(apidata1[item]);
+                  console.log(x);
+      
+                  if (Object.keys(apidata1[item]).includes("data")) {
+                    a = {
+                      data: {
+                        url: "",
+                        headers: [
+                          {
+                            key: "",
+                            value: "",
+                          },
+                        ],
+                      },
+                    };
+                    a.title = item;
+                    a.tableView = apidata[item].tableView;
+                    a.dataSrc = apidata[item].dataSrc;
+                    a.data.url = apidata[item].data.url;
+                    console.log(a.data.url);
+                    a.template = apidata[item].template;
+                    a.noRefreshOnScroll = apidata[item].noRefreshOnScroll;
+                    a.input = apidata[item].input;
+                    a.selectValues = apidata[item].selectValues;
+                    a.disableLimit = apidata[item].disableLimit;
+                    a.valueProperty = apidata[item].valueProperty;
+                    a.key = [item][0];
+                    a.type = apidata[item].type;
+                    a.widget = apidata1[item].widget;
+                  } else if (Object.keys(apidata1[item]).includes("enum")) {
+                    // a.source = apidata[item].enum;
+      
+                    a.title = item;
+      
+                    a.type = "string";
+                    a.key = "select";
+                    a.input = true;
+      
+                    a.enum = apidata1[item].enum;
+                  } else if (Object.keys(apidata1[item]).includes("$ref")) {
+                    a.type = "textfield";
+                    a.ignore = "ref";
+                    a.label = item;
+                    a.key = item;
+                  } else {
+                    a.title = item;
+                    if (apidata1[item].format === "int32") {
+                      a.type = "integer";
+                    } else if (apidata1[item].format === "double") {
+                      a.type = "number";
+                    } else {
+                      a.type = "string";
+                    }
+                    if (apidata1[item].nullable) {
+                      a.nullable = true;
+                    }
+                    if (apidata1[item].tableView) {
+                      a.tableView = true;
+                    }
+      
+                    a.key = [item][0];
+                  }
+                  return a;
+                };
+                console.log(dd());
+                uu[item] = dd();
+              }
+            });
+          });
+>>>>>>> 2c3972d1c50d6f099cde4d500f22921053ceabad
 
       let requiredval = getdesiredvalue(apidatas);
       let apidata = swaggerData.components.schemas[requiredval].properties;
@@ -392,13 +521,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       });
     });
   }, [required]);
-
-  useEffect(() => {
-    setSelectApiMethod();
-    setSelectApiMethod();
-    setSelectedResponse();
-    setActions();
-  }, [selectedTable]);
 
   const handleSave = (data, requiredFields) => {
     console.log(data);
