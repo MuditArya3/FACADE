@@ -86,19 +86,18 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       );
   }, [swaggerData, selectedTable, apiMethods, selectApiMethod]);
   console.log(response);
-//   useEffect(() => {
-//     swaggerData&&
-//     setSelectApiMethod("");
-//     setSelectedResponse("")
-//    }, [selectedTable ])
-   
-   useEffect(() => {
-    swaggerData&&
-    selectedTable.length&&
-    selectApiMethod.length&&
-    setColumns()
-   }, [SelectedResponse])
+  //   useEffect(() => {
+  //     swaggerData&&
+  //     setSelectApiMethod("");
+  //     setSelectedResponse("")
+  //    }, [selectedTable ])
 
+  useEffect(() => {
+    swaggerData &&
+      selectedTable.length &&
+      selectApiMethod.length &&
+      setColumns();
+  }, [SelectedResponse]);
 
   useEffect(() => {
     const filteredEndpoints = swaggerData
@@ -142,151 +141,147 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
 
   const handleData = (e) => {
     let requiredFields;
-    let uu=[];
+    let uu = [];
     console.log(Object.keys(swaggerData));
-    if(Object.keys(swaggerData).includes("swagger")){
-        let apidatas=swaggerData.paths[selectedTable][selectApiMethod].responses;
-        if(selectApiMethod==="get" || selectApiMethod==="put"){
-            apidatas=apidatas["200"]["$ref"];
-            console.log("get");
+    if (Object.keys(swaggerData).includes("swagger")) {
+      let apidatas =
+        swaggerData.paths[selectedTable][selectApiMethod].responses;
+      if (selectApiMethod === "get" || selectApiMethod === "put") {
+        apidatas = apidatas["200"]["$ref"];
+        console.log("get");
+      } else if (selectApiMethod === "delete") {
+        apidatas = apidatas["204"]["$ref"];
+        console.log("delete");
+      } else if (selectApiMethod === "post") {
+        if (apidatas.includes("201")) {
+          apidatas = apidatas["201"]["$ref"];
+          console.log("post");
+        } else {
+          apidatas = apidatas["200"]["$ref"];
         }
-        else if(selectApiMethod==="delete"){
-            apidatas=apidatas["204"]["$ref"]
-            console.log("delete");
-        }
-        else if(selectApiMethod==="post"){
-            if(apidatas.includes("201")){
-                apidatas=apidatas["201"]["$ref"]
-                console.log("post");
-            }else{
-                apidatas=apidatas["200"]["$ref"]
-            }
-        }
+      }
 
-        let requiredval= getdesiredvalue(apidatas);
-        let apidata=swaggerData.responses[requiredval].schema["$ref"];
+      let requiredval = getdesiredvalue(apidatas);
+      let apidata = swaggerData.responses[requiredval].schema["$ref"];
 
-        const requiredval2=getdesiredvalue(apidata);
-        const apidata1=swaggerData.definitions[requiredval2];
+      const requiredval2 = getdesiredvalue(apidata);
+      const apidata1 = swaggerData.definitions[requiredval2];
 
-        if (Object.keys(apidata1).includes("required")) {
-          // setRequiredFields(p.required);
-          requiredFields = apidata1.required;
-        }
-        console.log(requiredFields);
+      if (Object.keys(apidata1).includes("required")) {
+        // setRequiredFields(p.required);
+        requiredFields = apidata1.required;
+      }
+      console.log(requiredFields);
+    } else if (Object.keys(swaggerData).includes("openapi")) {
+      let apidatas;
+      if (selectApiMethod === "post") {
+        apidatas =
+          swaggerData.paths[selectedTable][selectApiMethod].requestBody.content[
+            "application/json"
+          ].schema["$ref"];
+      } else if (selectApiMethod === "get") {
+        apidatas =
+          swaggerData.paths[selectedTable][selectApiMethod].responses["200"]
+            .content["application/vnd.connectwise.com+json; version=2022.1"]
+            .schema.items["$ref"];
+      }
 
-    }else if(Object.keys(swaggerData).includes("openapi")){
-        let apidatas;
-        if (selectApiMethod === "post") {
-          apidatas =
-            swaggerData.paths[selectedTable][selectApiMethod].requestBody.content[
-              "application/json"
-            ].schema["$ref"];
-        } else if (selectApiMethod === "get") {
-          apidatas =
-            swaggerData.paths[selectedTable][selectApiMethod].responses["200"]
-              .content["application/vnd.connectwise.com+json; version=2022.1"]
-              .schema.items["$ref"];
-        }
-    
-        let requiredval = getdesiredvalue(apidatas);
-        let apidata = swaggerData.components.schemas[requiredval].properties;
-      
-        let p = swaggerData.components.schemas[requiredval];
-        if (Object.keys(p).includes("required")) {
-          // setRequiredFields(p.required);
-          requiredFields = p.required;
-        }
-        //   setRequired(requiredFields);
-        console.log(requiredFields);
-        console.log(required);
-        console.log("swaggerData", Object.keys(apidata));
-    
-        setApiData(Object.keys(apidata));
-        console.log(apidata);
-       
-    
-        Object.keys(apidata).map((item) => {
-          Object.keys(mappings).map((elem, index) => {
-            console.log(item, mappings[elem][0]);
-            if (mappings[elem][0] === item) {
-              console.log(item);
-              console.log(Object.keys(apidata[item]));
-              console.log(selected);
-              let dd = () => {
-                let a = {};
-                let x = Object.keys(apidata[item]);
-                console.log(x);
-    
-                if (Object.keys(apidata[item]).includes("data")) {
-                  a = {
-                    data: {
-                      url: "",
-                      headers: [
-                        {
-                          key: "",
-                          value: "",
-                        },
-                      ],
-                    },
-                  };
-                  a.title = item;
-                  a.tableView = apidata[item].tableView;
-                  a.dataSrc = apidata[item].dataSrc;
-                  a.data.url = apidata[item].data.url;
-                  console.log(a.data.url);
-                  a.template = apidata[item].template;
-                  a.noRefreshOnScroll = apidata[item].noRefreshOnScroll;
-                  a.input = apidata[item].input;
-                  a.selectValues = apidata[item].selectValues;
-                  a.disableLimit = apidata[item].disableLimit;
-                  a.valueProperty = apidata[item].valueProperty;
-                  a.key = [item][0];
-                  a.type = apidata[item].type;
-                  a.widget = apidata[item].widget;
-                } else if (Object.keys(apidata[item]).includes("enum")) {
-                  // a.source = apidata[item].enum;
-    
-                  a.title = item;
-    
-                  a.type = "string";
-                  a.key = "select";
-                  a.input = true;
-    
-                  a.enum = apidata[item].enum;
-                } else if (Object.keys(apidata[item]).includes("$ref")) {
-                  a.type = "textfield";
-                  a.ignore = "ref";
-                  a.label = item;
-                  a.key = item;
+      let requiredval = getdesiredvalue(apidatas);
+      let apidata = swaggerData.components.schemas[requiredval].properties;
+
+      let p = swaggerData.components.schemas[requiredval];
+      if (Object.keys(p).includes("required")) {
+        // setRequiredFields(p.required);
+        requiredFields = p.required;
+      }
+      //   setRequired(requiredFields);
+      console.log(requiredFields);
+      console.log(required);
+      console.log("swaggerData", Object.keys(apidata));
+
+      setApiData(Object.keys(apidata));
+      console.log(apidata);
+
+      Object.keys(apidata).map((item) => {
+        Object.keys(mappings).map((elem, index) => {
+          console.log(item, mappings[elem][0]);
+          if (mappings[elem][0] === item) {
+            console.log(item);
+            console.log(Object.keys(apidata[item]));
+            console.log(selected);
+            let dd = () => {
+              let a = {};
+              let x = Object.keys(apidata[item]);
+              console.log(x);
+
+              if (Object.keys(apidata[item]).includes("data")) {
+                a = {
+                  data: {
+                    url: "",
+                    headers: [
+                      {
+                        key: "",
+                        value: "",
+                      },
+                    ],
+                  },
+                };
+                a.title = item;
+                a.tableView = apidata[item].tableView;
+                a.dataSrc = apidata[item].dataSrc;
+                a.data.url = apidata[item].data.url;
+                console.log(a.data.url);
+                a.template = apidata[item].template;
+                a.noRefreshOnScroll = apidata[item].noRefreshOnScroll;
+                a.input = apidata[item].input;
+                a.selectValues = apidata[item].selectValues;
+                a.disableLimit = apidata[item].disableLimit;
+                a.valueProperty = apidata[item].valueProperty;
+                a.key = [item][0];
+                a.type = apidata[item].type;
+                a.widget = apidata[item].widget;
+              } else if (Object.keys(apidata[item]).includes("enum")) {
+                // a.source = apidata[item].enum;
+
+                a.title = item;
+
+                a.type = "string";
+                a.key = "select";
+                a.input = true;
+
+                a.enum = apidata[item].enum;
+              } else if (Object.keys(apidata[item]).includes("$ref")) {
+                a.type = "textfield";
+                a.ignore = "ref";
+                a.label = item;
+                a.key = item;
+              } else {
+                a.title = item;
+                if (apidata[item].format === "int32") {
+                  a.type = "integer";
+                } else if (apidata[item].format === "double") {
+                  a.type = "number";
                 } else {
-                  a.title = item;
-                  if (apidata[item].format === "int32") {
-                    a.type = "integer";
-                  } else if (apidata[item].format === "double") {
-                    a.type = "number";
-                  } else {
-                    a.type = "string";
-                  }
-                  if (apidata[item].nullable) {
-                    a.nullable = true;
-                  }
-                  if (apidata[item].tableView) {
-                    a.tableView = true;
-                  }
-    
-                  a.key = [item][0];
+                  a.type = "string";
                 }
-                return a;
-              };
-              console.log(dd());
-              uu[item] = dd();
-            }
-          });
+                if (apidata[item].nullable) {
+                  a.nullable = true;
+                }
+                if (apidata[item].tableView) {
+                  a.tableView = true;
+                }
+
+                a.key = [item][0];
+              }
+              return a;
+            };
+            console.log(dd());
+            uu[item] = dd();
+          }
         });
+      });
     }
 
-   
     console.log(uu);
     const results = [];
     uu.forEach((e) => {
@@ -335,47 +330,44 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       selectApiMethod.length &&
       SelectedResponse.length
     ) {
-        if(Object.keys(swaggerData).includes("openapi")){
-            console.log("hello");
-            let apidatas;
-            if (selectApiMethod === "post") {
-              apidatas =
-                swaggerData.paths[selectedTable][selectApiMethod].requestBody.content[
-                  "application/json"
-                ].schema["$ref"];
-            } else if (selectApiMethod === "get") {
-              apidatas =
-                swaggerData.paths[selectedTable][selectApiMethod].responses["200"]
-                  .content["application/vnd.connectwise.com+json; version=2022.1"]
-                  .schema.items["$ref"];
-            }
-            let requiredval = getdesiredvalue(apidatas);
-            //   let apidata = swaggerData.components.schemas[requiredval].properties;
-            //   let requiredFields;
-            let p = swaggerData.components.schemas[requiredval];
-            if (Object.keys(p).includes("required")) {
-              setRequired(p.required);
-            }
+      if (Object.keys(swaggerData).includes("openapi")) {
+        console.log("hello");
+        let apidatas;
+        if (selectApiMethod === "post") {
+          apidatas =
+            swaggerData.paths[selectedTable][selectApiMethod].requestBody
+              .content["application/json"].schema["$ref"];
+        } else if (selectApiMethod === "get") {
+          apidatas =
+            swaggerData.paths[selectedTable][selectApiMethod].responses["200"]
+              .content["application/vnd.connectwise.com+json; version=2022.1"]
+              .schema.items["$ref"];
         }
-        else{
-            let data1=swaggerData.paths[selectedTable][selectApiMethod].responses;
-            if(Object.keys(data1).includes("200")){
-                data1 = data1["200"]["$ref"];
-               }else if(Object.keys(data1).includes("201")){
-                data1 = data1["201"]["$ref"];
-               }else {
-                data1 = data1["204"]["$ref"];
-               }
-            let requiredval1= getdesiredvalue(data1);
-            let apidatas=swaggerData.responses[requiredval1].schema["$ref"]
-            let requiredval2 = getdesiredvalue(apidatas);
-           
-            let p = swaggerData.definitions[requiredval2];
-            if (Object.keys(p).includes("required")) {
-              setRequired(p.required);
-            }
-        }  
-         
+        let requiredval = getdesiredvalue(apidatas);
+        //   let apidata = swaggerData.components.schemas[requiredval].properties;
+        //   let requiredFields;
+        let p = swaggerData.components.schemas[requiredval];
+        if (Object.keys(p).includes("required")) {
+          setRequired(p.required);
+        }
+      } else {
+        let data1 = swaggerData.paths[selectedTable][selectApiMethod].responses;
+        if (Object.keys(data1).includes("200")) {
+          data1 = data1["200"]["$ref"];
+        } else if (Object.keys(data1).includes("201")) {
+          data1 = data1["201"]["$ref"];
+        } else {
+          data1 = data1["204"]["$ref"];
+        }
+        let requiredval1 = getdesiredvalue(data1);
+        let apidatas = swaggerData.responses[requiredval1].schema["$ref"];
+        let requiredval2 = getdesiredvalue(apidatas);
+
+        let p = swaggerData.definitions[requiredval2];
+        if (Object.keys(p).includes("required")) {
+          setRequired(p.required);
+        }
+      }
     }
   }, [swaggerData, selectedTable, selectApiMethod, SelectedResponse]);
   console.log(required);
@@ -400,6 +392,13 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       });
     });
   }, [required]);
+
+  useEffect(() => {
+    setSelectApiMethod();
+    setSelectApiMethod();
+    setSelectedResponse();
+    setActions();
+  }, [selectedTable]);
 
   const handleSave = (data, requiredFields) => {
     console.log(data);
