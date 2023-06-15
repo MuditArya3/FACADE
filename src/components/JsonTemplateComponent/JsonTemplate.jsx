@@ -61,32 +61,24 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     setTableNames(
       swaggerData
         ? // eslint-disable-next-line
+
           Object.keys(swaggerData.paths).map((item) => {
             Object.keys(swaggerData.paths[item]);
+
             // console.log(swaggerData.paths[item].selectApiMethod);
           })
         : []
     );
-    // setTableNames(swaggerData.paths)
   }, [swaggerData]);
-
-  //   if (selectedTable != undefined || selectedTable != null) {
-  //     swaggerData &&
-  //       selectedTable &&
-  //       setapiMethods(Object.keys(swaggerData.paths[selectedTable]));
-  //   }
-  //   {
-  //     swaggerData &&
-  //       selectedTable &&
-  //       setapiMethods(Object.keys(swaggerData.paths[selectedTable]));
-  //   }
 
   useEffect(() => {
     console.log(selectedTable);
+
     swaggerData &&
       selectedTable &&
       setapiMethods(Object.keys(swaggerData.paths[selectedTable]));
   }, [swaggerData, selectedTable]);
+
   console.log(apiMethods);
 
   useEffect(() => {
@@ -97,24 +89,20 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
         Object.keys(swaggerData.paths[selectedTable][selectApiMethod])
       );
   }, [swaggerData, selectedTable, apiMethods, selectApiMethod]);
+
   console.log(response);
 
   useEffect(() => {
-
     console.log("shreesh");
-
     swaggerData && setSelectApiMethod("");
-
     setSelectedResponse("");
-
     setActions();
-
     setColumns();
-
   }, [selectedTable]);
-  
+
   const handlechange = () => {
     setapiMethods("");
+
     setResponse("");
   };
 
@@ -123,17 +111,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       selectedTable.length &&
       selectApiMethod.length &&
       setColumns();
+
     setActions();
   }, [SelectedResponse]);
-
-  //    useEffect(() => {
-  //     swaggerData&&
-  //     setSelectedTable("");
-  //     setSelectApiMethod("");
-  //     setSelectedResponse("");
-  //     setColumns();
-  //     setActions();
-  //    }, [swaggerData])
 
   useEffect(() => {
     const filteredEndpoints = swaggerData
@@ -154,6 +134,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       required,
       setColumns
     );
+
     handleAccordionChange(setExpandedAccordion);
   }, [SelectedResponse, required]);
 
@@ -178,14 +159,14 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
               .schema.items["$ref"];
         }
         let requiredval = getdesiredvalue(apidatas);
-        //   let apidata = swaggerData.components.schemas[requiredval].properties;
-        //   let requiredFields;
         let p = swaggerData.components.schemas[requiredval];
+
         if (Object.keys(p).includes("required")) {
           setRequired(p.required);
         }
       } else {
         let data1 = swaggerData.paths[selectedTable][selectApiMethod].responses;
+
         if (Object.keys(data1).includes("200")) {
           data1 = data1["200"]["$ref"];
         } else if (Object.keys(data1).includes("201")) {
@@ -193,26 +174,36 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
         } else {
           data1 = data1["204"]["$ref"];
         }
+
         let requiredval1 = getdesiredvalue(data1);
+
         let apidatas = swaggerData.responses[requiredval1].schema["$ref"];
+
         let requiredval2 = getdesiredvalue(apidatas);
 
         let p = swaggerData.definitions[requiredval2];
+
         if (Object.keys(p).includes("required")) {
           setRequired(p.required);
         }
       }
     }
   }, [swaggerData, selectedTable, selectApiMethod, SelectedResponse]);
+
   console.log(required);
+
   useEffect(() => {
     swaggerData &&
       selectedTable.length &&
       selectApiMethod.length &&
       setSelectedResponse("");
+
     setColumns();
+
     setExpandedAccordion(false);
+
     setActions();
+
     setServices("");
   }, [swaggerData, selectedTable, selectApiMethod]);
 
@@ -221,6 +212,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       setMappings((prev) => {
         return {
           ...prev,
+
           [e]: [e],
         };
       });
@@ -269,18 +261,23 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     <Container
       sx={{
         display: "flex",
+
         flexDirection: "column",
+
         alignItems: "center",
+
         py: 4,
       }}
     >
       <Typography variant="h4" sx={{ mb: 2 }}>
         Add API and Map Tables
       </Typography>
+
       <Accordion sx={{ width: "100%" }} expanded={expandedAccordion}>
         <AccordionSummary
           sx={{
             pointerEvents: "none",
+
             cursor: "default",
           }}
           aria-controls="panel-content"
@@ -290,7 +287,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
             <Box
               sx={{
                 display: "flex",
-
                 width: "150%",
                 maxWidth: "150%",
                 pb: 2,
@@ -326,6 +322,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                 }}
               >
                 <InputLabel id="table-select-label">Select Api:</InputLabel>
+
                 <Select
                   labelId="table-select-label"
                   id="table-select"
@@ -333,6 +330,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   label="Select Table:"
                   onChange={(e) => {
                     handleApiSelected(e.target.value, setSelectedTable);
+
                     // handlechange();
                   }}
                 >
@@ -346,16 +344,22 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   ))}
                 </Select>
               </FormControl>
+
               <FormControl
                 sx={{
                   width: "13%",
+
                   maxWidth: "13%",
+
                   minWidth: "13%",
+
                   pointerEvents: "auto",
+
                   ml: "1%",
                 }}
               >
                 <InputLabel id="api-method-label">Api Method</InputLabel>
+
                 <Select
                   sx={{
                     pointerEvents: "auto",
@@ -369,6 +373,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
+
                   {selectedTable &&
                     apiMethods.length > 0 &&
                     apiMethods.map((apiMethod, index) => (
@@ -378,6 +383,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                     ))}
                 </Select>
               </FormControl>
+
               <FormControl
                 sx={{
                   width: "13%",
@@ -404,6 +410,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
+
                   {selectedTable &&
                     apiMethods &&
                     response.length &&
@@ -417,6 +424,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
             </Box>
           </form>
         </AccordionSummary>
+
         <AccordionDetails sx={{ borderTop: "2px solid grey", pt: 3 }}>
           {columns && (
             <Box
@@ -430,7 +438,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                 sx={{
                   display: "flex",
                   justifyContent: "space-evenly",
-
                   width: "100%",
                   maxWidth: "100%",
                   pb: 2,
@@ -441,6 +448,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   <InputLabel id="demo-simple-select-label">
                     Action Tag
                   </InputLabel>
+
                   <Select
                     required
                     labelId="demo-simple-select-label"
@@ -448,6 +456,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                     value={Actions}
                     label="Select Services"
                     onChange={(e) => handleAction(e, setActions)}
+
                     // sx={{width:"50%"}}
                   >
                     {actionMethods.map((action, index) => (
@@ -471,11 +480,8 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   id="columnsCard"
                   sx={{
                     minWidth: "88%",
-
                     flexWrap: "wrap",
-
                     display: "flex",
-
                     alignItems: "flex-start",
                     backgroundColor: "#e7eaf6",
                     mt: 2,
@@ -514,12 +520,14 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                         draggable="true"
                         onDragStart={(e) => {
                           e.dataTransfer.setData("dragId", e.target.id); // eslint-disable-next-line
+
                           mappings &&
                             Object.keys(mappings).map((mapKey) => {
                               mappings[mapKey].includes(e.target.textContent) &&
                                 setMappings((prev) => {
                                   return {
                                     ...prev,
+
                                     [mapKey]: prev[mapKey].filter(
                                       (x) => x !== e.target.textContent
                                     ),
@@ -529,6 +537,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                         }}
                       >
                         <DragIndicatorIcon sx={{ mr: 2 }} />
+
                         <Typography
                           key={index}
                           value={lsCol}
@@ -540,6 +549,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                     );
                   })}
                 </Paper>
+
                 <Box
                   sx={{
                     minWidth: "72%",
@@ -564,7 +574,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                       }}
                       onDrop={(ev) => {
                         ev.preventDefault();
+
                         var dragComponent = ev.dataTransfer.getData("dragId");
+
                         ev.currentTarget.appendChild(
                           document.getElementById(dragComponent)
                         );
@@ -572,12 +584,14 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                         setMappings((prev) => {
                           return {
                             ...prev,
+
                             [dragComponent]: [
                               document.getElementById(dragComponent)
                                 .textContent,
                             ],
                           };
                         });
+
                         console.log(mappings);
                       }}
                       component="span"
@@ -627,6 +641,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   </Box>
                 </Box>
               </FormControl>
+
               <Box
                 sx={{
                   mt: 5,
@@ -640,7 +655,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   variant={"contained"}
                   onClick={() => {
                     setButtonClicked("GenerateForm");
-                    // handleData();
                   }}
                   sx={{ mt: 1 }}
                   type="submit"
@@ -653,7 +667,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   variant={"contained"}
                   onClick={() => {
                     setButtonClicked("SaveMapping");
-                    // handleData();
                   }}
                   sx={{ mt: 1 }}
                   type="submit"
@@ -669,4 +682,5 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     </Container>
   );
 };
+
 export default JsonTemplate;
