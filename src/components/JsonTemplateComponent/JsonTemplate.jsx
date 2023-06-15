@@ -99,12 +99,20 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
   }, [swaggerData, selectedTable, apiMethods, selectApiMethod]);
   console.log(response);
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  // setapiMethods("")
-  // setResponse("")
-  // }, [selectedTable])
+    console.log("shreesh");
 
+    swaggerData && setSelectApiMethod("");
+
+    setSelectedResponse("");
+
+    setActions();
+
+    setColumns();
+
+  }, [selectedTable]);
+  
   const handlechange = () => {
     setapiMethods("");
     setResponse("");
