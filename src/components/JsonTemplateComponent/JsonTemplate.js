@@ -134,6 +134,7 @@ export const handleApiSelected = (tableName, setSelectedTable) => {
 export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,setApiData,selected,required,buttonClicked,setJsonData,setJsonfile,setButtonClicked) => {
     let requiredFields;
     let uu=[];
+    console.log(mappings);
     console.log(Object.keys(swaggerData));
     if(Object.keys(swaggerData).includes("swagger")){
         console.log("hello");

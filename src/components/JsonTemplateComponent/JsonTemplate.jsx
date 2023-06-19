@@ -238,6 +238,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
 
   useEffect(
     (e) => {
+      console.log(mappings);
       buttonClicked &&
         handleData(
           e,
@@ -576,7 +577,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                         ev.preventDefault();
 
                         var dragComponent = ev.dataTransfer.getData("dragId");
-
+                        console.log(dragComponent);
                         ev.currentTarget.appendChild(
                           document.getElementById(dragComponent)
                         );
