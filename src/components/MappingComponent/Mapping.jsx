@@ -666,7 +666,7 @@ import { handleSave } from "../SwaggerGrid/SwaggerGrid";
                     type="submit"
                     disabled={!Actions}
                   >
-                    Download Form
+                    Download JSON
                   </Button>
   
                   <Button
