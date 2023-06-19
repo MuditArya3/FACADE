@@ -184,20 +184,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
               >
                 Save Mapping
               </Button>
-              <Button
-                sx={{ pointerEvents: "auto" }}
-                variant="contained"
-                size="small"
-                type="button"
-                marg
-                onClick={()=>{
-                  
-                  window.open("/mapping", "_blank");
-                }
-                }
-              >
-                Next Page
-              </Button>
             </Box>
           </form>
         </AccordionSummary>
