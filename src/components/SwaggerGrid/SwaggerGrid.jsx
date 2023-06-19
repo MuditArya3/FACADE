@@ -5,6 +5,7 @@ import {
     Button,
     Container,
     FormControl,
+    FormHelperText,
     Input,
     InputLabel,
     MenuItem,
@@ -32,6 +33,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [jsonfile, setJsonfile] = useState([]);
     const [endpoints, setEndpoints] = useState([]);
     const [selectedValue, setSelectedValue] = useState("");
+    const [showMessage, setShowMessage] = useState(false);
 
     const selectedEndpoint = selectedValue.split("--")[0];
     const selectedEndpointType = selectedValue.split("--")[1];
@@ -95,6 +97,27 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         localStorage.setItem("jsonSchema", json);
     };
 
+    const handleFormSubmit = () => {
+        handleData(columns, handleSave);
+    };
+
+    const handleInputChange = (e) => {
+        handleFileSelectChange(e, setSwaggerData);
+        setShowMessage(false); // Reset showMessage to false when file input changes
+    };
+
+    useEffect(() => {
+        if (swaggerData) {
+            if (endpoints.length === 0) {
+                setShowMessage(true);
+            } else {
+                setShowMessage(false);
+            }
+        } else {
+            setShowMessage(false);
+        }
+    }, [endpoints, swaggerData]);
+
     return (
         <Container
             sx={{
@@ -102,12 +125,23 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                 flexDirection: "column",
                 alignItems: "center",
                 py: 4,
+                marginTop: "8rem",
             }}
         >
-            <Typography variant="h4" sx={{ mb: 2 }}>
-                Add API and Map Tables
+            <Typography variant="h4" sx={{ mb: 2, marginBottom: "4rem" }}>
+                Facade Application
             </Typography>
-            <Accordion sx={{ width: "100%" }}>
+            <Accordion
+                sx={{
+                    width: "100%",
+                    boxShadow: "1px 1px 1px 2px rgba(0, 0, 0, 0.2)",
+                    height: "27rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    backgroundColor: "#fbf7f7",
+                }}
+            >
                 <AccordionSummary
                     sx={{
                         pointerEvents: "none",
@@ -126,74 +160,117 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                 pt: 2,
                             }}
                         >
-                            <Input
-                                type="file"
+                            <Box
                                 sx={{
-                                    width: "27%",
-                                    maxWidth: "27%",
-                                    minWidth: "17%",
-                                    pointerEvents: "auto",
-                                }}
-                                onChange={(e) => {
-                                    handleFileSelectChange(e, setSwaggerData);
-                                }}
-                            />
-                            <FormControl
-                                sx={{
-                                    width: "17%",
-                                    maxWidth: "17%",
-                                    minWidth: "17%",
-                                    pointerEvents: "auto",
-                                    ml: "1%",
-                                    // mr: "1%",
+                                    display: "flex",
+                                    flexDirection: "column",
                                 }}
                             >
-                                <InputLabel id="table-select-label">
-                                    Select Api:
-                                </InputLabel>
-                                <Select
-                                    labelId="table-select-label"
-                                    id="table-select"
-                                    value={selectedValue}
-                                    onChange={(e) => {
-                                        handleNameChange(e, setSelectedValue);
-                                    }}
-                                    label="Select Annotation:"
+                                <InputLabel
+                                    htmlFor="json-file"
+                                    id="json-file-label"
+                                    sx={{ fontSize: "1rem" }}
                                 >
-                                    <MenuItem value={""}>
-                                        <em>None</em>
-                                    </MenuItem>
-                                    {endpoints.map((endpoint, index) => {
-                                        const displayValue =
-                                            endpoint.split("--")[2];
-                                        return (
-                                            <MenuItem
-                                                value={endpoint}
-                                                key={index}
-                                            >
-                                                {displayValue}
+                                    Upload a JSON file with annotations
+                                </InputLabel>
+                                <Input
+                                    type="file"
+                                    sx={{
+                                        pointerEvents: "auto",
+                                        width: "100%", // Adjust the width as needed
+                                        //height: 40, // Adjust the height as needed
+                                        fontSize: "1.5rem",
+                                    }}
+                                    accept=".json"
+                                    onChange={handleInputChange}
+                                />
+                            </Box>
+
+                            {!showMessage && endpoints.length > 0 && (
+                                <>
+                                    <FormControl
+                                        sx={{
+                                            width: "17%",
+                                            maxWidth: "17%",
+                                            minWidth: "22%",
+                                            pointerEvents: "auto",
+                                            ml: "1%",
+                                            marginTop: "7px",
+                                        }}
+                                    >
+                                        <InputLabel
+                                            id="table-select-label"
+                                            sx={{ fontSize: "1.5rem" }}
+                                        >
+                                            Select Api:
+                                        </InputLabel>
+                                        <Select
+                                            labelId="table-select-label"
+                                            id="table-select"
+                                            value={selectedValue}
+                                            onChange={(e) => {
+                                                handleNameChange(
+                                                    e,
+                                                    setSelectedValue
+                                                );
+                                            }}
+                                            label="Select Annotation:"
+                                        >
+                                            <MenuItem value={""}>
+                                                <em>None</em>
                                             </MenuItem>
-                                        );
-                                    })}
-                                </Select>
-                            </FormControl>
-                            <Button
-                                sx={{ pointerEvents: "auto" }}
-                                variant="contained"
-                                size="small"
-                                type="button"
-                                marg
-                                onClick={() => {
-                                    //setButtonClicked("SaveMapping");
-                                    handleData(columns, handleSave);
-                                }}
-                            >
-                                Save Mapping
-                            </Button>
+                                            {endpoints.map(
+                                                (endpoint, index) => {
+                                                    const displayValue =
+                                                        endpoint.split("--")[2];
+                                                    return (
+                                                        <MenuItem
+                                                            value={endpoint}
+                                                            key={index}
+                                                            sx={{
+                                                                fontSize:
+                                                                    "1.3rem",
+                                                            }}
+                                                        >
+                                                            {displayValue}
+                                                        </MenuItem>
+                                                    );
+                                                }
+                                            )}
+                                        </Select>
+                                    </FormControl>
+                                    <Button
+                                        sx={{
+                                            pointerEvents: "auto",
+                                            height: "5rem",
+                                        }}
+                                        variant="contained"
+                                        size="small"
+                                        type="button"
+                                        marg
+                                        onClick={handleFormSubmit}
+                                    >
+                                        Save Mapping
+                                    </Button>
+                                </>
+                            )}
                         </Box>
                     </form>
                 </AccordionSummary>
             </Accordion>
+            {swaggerData && endpoints.length === 0 && (
+                <Typography
+                    variant="subtitle1"
+                    sx={{
+                        fontSize: "1.3rem",
+                        padding: "1rem",
+                        fontWeight: 600,
+                        color: "#a10c0c",
+                    }}
+                >
+                    Please upload a JSON file with proper data annotation!!
+                </Typography>
+            )}
         </Container>
     );
 };
