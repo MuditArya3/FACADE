@@ -31,6 +31,8 @@ import "../JsonTemplateComponent/JsonTemplate.css";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useEffect } from "react";
 import { red } from "@mui/material/colors";
+import FormComponent from "../FormComponent";
+
 
 
 const Mapping = ({ jsonData, setJsonData }) => {
@@ -291,6 +293,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
   );
 
   return (
+    <div>
     <div
     className={lowercaseAnnotation.includes("create") ? "create" : "get"}>
     <Container
@@ -566,6 +569,10 @@ const Mapping = ({ jsonData, setJsonData }) => {
         </AccordionDetails>
       </Accordion>
     </Container>
+    </div>
+    <div className="form">
+    {buttonClicked==="SaveMapping" && <FormComponent/>}
+    </div>
     </div>
   );
 };

@@ -28,7 +28,7 @@ function App() {
           <Route
             path="/"
             element={
-              <JsonTemplate jsonData={jsonData} setJsonData={setJsonData} />
+              <JsonTemplate  />
             }
           />
           <Route path="/mapping" element={<Mapping jsonData={jsonData} setJsonData={setJsonData} />}/>

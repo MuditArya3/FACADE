@@ -469,9 +469,9 @@ export const handleData = (
       `;
 
   uu["custom"] = x;
-  if (buttonClicked === "SaveMapping") {
-    window.open("/form", "_blank");
-  }
+//   if (buttonClicked === "SaveMapping") {
+//     window.open("/form", "_blank");
+//   }
 
   handleSave(
     uu,
