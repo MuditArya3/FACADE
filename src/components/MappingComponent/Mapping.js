@@ -2,7 +2,7 @@ export const handleAction = (e, setActions) => {
   setActions(e.target.value);
 };
 
-export const actionMethods = ["CREATE", "FETCH", "UPDATE", "SEARCH", "DELETE"];
+// export const actionMethods = ["CREATE", "FETCH", "UPDATE", "SEARCH", "DELETE"];
 
 export const handleAccordionChange = (setExpandedAccordion) => {
   setExpandedAccordion(true);
@@ -45,6 +45,19 @@ export const getdesiredvalue = (apidatas) => {
   console.log("desired----", desiredValue);
   return desiredValue;
 };
+export const getdesiredannotation = (apidatas) => {
+    console.log(apidatas);
+    const valueArray = apidatas.split("--");
+    const desiredValue = valueArray[valueArray.length - 1];
+    console.log("desired----", desiredValue);
+    const Arr=desiredValue.split('"');
+    console.log(Arr);
+    const value=Arr[0]
+    console.log(value);
+    // desiredValue=desiredValue.split('"');
+    // console.log(desiredValue);
+    return value;
+  };
 
 export const handleTableSwaggerSubmit = (
   selectedTable,
@@ -409,7 +422,7 @@ export const handleData = (
   setButtonClicked,
   columns
 ) => {
-  localStorage.setItem("ColumnData", JSON.stringify(columns));
+//   localStorage.setItem("ColumnData", JSON.stringify(columns));
   let requiredFields;
   console.log(mappings);
   let uu = {};

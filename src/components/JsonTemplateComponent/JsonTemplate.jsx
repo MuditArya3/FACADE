@@ -16,7 +16,9 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
+
 import React from "react";
+
 import {
   handleAction,
   actionMethods,
@@ -29,9 +31,13 @@ import {
   handleApiSelected,
   handleData,
 } from "./JsonTemplate";
+
 import { useState } from "react";
+
 import "../JsonTemplateComponent/JsonTemplate.css";
+
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+
 import { useEffect } from "react";
 
 const JsonTemplate = ({ jsonData, setJsonData }) => {
@@ -683,5 +689,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     </Container>
   );
 };
+
 
 export default JsonTemplate;

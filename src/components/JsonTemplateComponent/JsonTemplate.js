@@ -181,7 +181,7 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
                   let a = {};
                   let x = Object.keys(apidata1[item]);
                   console.log(x);
-      
+
                   if (Object.keys(apidata1[item]).includes("data")) {
                     a = {
                       data: {
@@ -210,13 +210,10 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
                     a.widget = apidata1[item].widget;
                   } else if (Object.keys(apidata1[item]).includes("enum")) {
                     // a.source = apidata[item].enum;
-      
                     a.title = item;
-      
                     a.type = "string";
                     a.key = "select";
                     a.input = true;
-      
                     a.enum = apidata1[item].enum;
                   } else if (Object.keys(apidata1[item]).includes("$ref")) {
                     a.type = "textfield";
@@ -238,7 +235,6 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
                     if (apidata1[item].tableView) {
                       a.tableView = true;
                     }
-      
                     a.key = [item][0];
                   }
                   return a;
@@ -262,10 +258,8 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
               .content["application/vnd.connectwise.com+json; version=2022.1"]
               .schema.items["$ref"];
         }
-    
         let requiredval = getdesiredvalue(apidatas);
         let apidata = swaggerData.components.schemas[requiredval].properties;
-      
         let p = swaggerData.components.schemas[requiredval];
         if (Object.keys(p).includes("required")) {
           // setRequiredFields(p.required);
@@ -275,11 +269,9 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
         console.log(requiredFields);
         console.log(required);
         console.log("swaggerData", Object.keys(apidata));
-    
         setApiData(Object.keys(apidata));
         console.log(apidata);
-       
-    
+
         Object.keys(apidata).map((item) => {
           Object.keys(mappings).map((elem, index) => {
             console.log(item, mappings[elem][0]);
@@ -291,7 +283,7 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
                 let a = {};
                 let x = Object.keys(apidata[item]);
                 console.log(x);
-    
+
                 if (Object.keys(apidata[item]).includes("data")) {
                   a = {
                     data: {
@@ -320,13 +312,10 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
                   a.widget = apidata[item].widget;
                 } else if (Object.keys(apidata[item]).includes("enum")) {
                   // a.source = apidata[item].enum;
-    
                   a.title = item;
-    
                   a.type = "string";
                   a.key = "select";
                   a.input = true;
-    
                   a.enum = apidata[item].enum;
                 } else if (Object.keys(apidata[item]).includes("$ref")) {
                   a.type = "textfield";
@@ -348,7 +337,6 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
                   if (apidata[item].tableView) {
                     a.tableView = true;
                   }
-    
                   a.key = [item][0];
                 }
                 return a;
@@ -360,7 +348,6 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
         });
     }
 
-   
     console.log(uu);
     const results = [];
     uu.forEach((e) => {
@@ -396,7 +383,6 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
     uu["custom"] = x;
     if (buttonClicked === "SaveMapping") {
       window.open("/form", "_blank");
-     
     }
     console.log(uu);
     handleSave(uu, requiredFields,buttonClicked,setJsonData,setJsonfile,setButtonClicked);
@@ -428,7 +414,6 @@ export const handleData = (e,swaggerData,selectedTable,selectApiMethod,mappings,
       setButtonClicked();
     } else if (buttonClicked === "GenerateForm") {
       //comment the below line when storing in database
-      
       //   console.log(json);
       const blob = new Blob([json], { type: "application/json" });
       const url = URL.createObjectURL(blob);
