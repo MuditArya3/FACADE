@@ -244,6 +244,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                             </MenuItem>
                                             {endpoints.map(
                                                 (endpoint, index) => {
+                                                    console.log(endpoint);
                                                     const displayValue =
                                                         endpoint.split("--")[2];
                                                     return (

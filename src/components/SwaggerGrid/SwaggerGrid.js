@@ -3,7 +3,9 @@ import { ParameterPostApi } from "../../Services/EndpointServices/EndpointServic
 
 export const handleNameChange = (event, setSelectedValue) => {
     const selectedValue = event.target.value;
+    console.log(selectedValue);
     setSelectedValue(selectedValue);
+    localStorage.setItem("Annotation",JSON.stringify(selectedValue));
 };
 
 export const handleFileSelectChange = (e, setSwaggerData) => {
