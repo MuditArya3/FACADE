@@ -29,6 +29,7 @@ import {
 import Mapping from "../MappingComponent/Mapping.jsx";
 import "./SwaggerGrid.css";
 import bg from "../../assets/bg.jpg";
+import c from "../../assets/3.jpg";
 import a from "../../assets/1.png";
 import b from "../../assets/2.png";
 
@@ -148,7 +149,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
             className="acc-container"
             //style={{ backgroundImage: `url(${bg})` }}
         >
-            <img className="bg_image" src={b} />
+            <img className="bg_image" src={c} />
             <Container
                 sx={{
                     display: "flex",
