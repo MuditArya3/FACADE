@@ -1,0 +1,28 @@
+.form {
+    height: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 10px;
+    padding-bottom: 5rem;
+    overflow: hidden;
+}
+legend{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+    font-weight: 500;
+    font-size: 30px;;
+}
+.form button{
+    display: flex;
+    background-color: #1976d2;
+    border-color: #1976d2;
+    margin-left: 46%;
+}
+.field-description{
+    font-size: 20px;
+}

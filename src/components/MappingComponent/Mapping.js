@@ -469,9 +469,9 @@ export const handleData = (
       `;
 
   uu["custom"] = x;
-  if (buttonClicked === "SaveMapping") {
-    window.open("/form", "_blank");
-  }
+//   if (buttonClicked === "SaveMapping") {
+//     window.open("/form", "_blank");
+//   }
 
   handleSave(
     uu,
@@ -497,7 +497,7 @@ const handleSave = (
     {
       label: "search",
       title: "Search Form",
-      description: "Search using belox Textbox",
+      description: "Search using below Textbox",
       type: "object",
       required: requiredFields,
       properties: json,
@@ -523,7 +523,7 @@ const handlecreatefile = (
     setJsonfile(JSON.stringify(data));
     setJsonData(JSON.stringify(data));
     localStorage.setItem("jsonSchema", json);
-    setButtonClicked();
+  
   } else if (buttonClicked === "GenerateForm") {
     //comment the below line when storing in database
 
@@ -540,3 +540,13 @@ const handlecreatefile = (
     setButtonClicked();
   }
 };
+
+export const handleform=(e,buttonClicked,setshowform,showform,setButtonClicked,formRef)=>{
+    console.log(buttonClicked);
+    if(buttonClicked==="SaveMapping"){
+        setshowform(true)
+        formRef.current.scrollIntoView({ behavior: "smooth" });
+        setButtonClicked();
+    }
+    console.log(showform);
+}
