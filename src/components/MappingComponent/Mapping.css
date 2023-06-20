@@ -1,13 +1,14 @@
 .create{
-    background-color: rgb(233, 236, 240);
-    height: 100vh;
+    /* height: 100vh; */  overflow: hidden;
+    background-color: rgb(229, 219, 253);
 }
 
 .get{
-    background-color: rgb(229, 219, 253);
-    height: 100vh;
+    background-color: rgb(233, 236, 240);
+    /* height: 100vh; */  overflow: hidden;
 }
 
-/* .form{
-    padding-top: 100rem;
-} */
+.outerdiv{
+    overflow-y: hidden;
+    
+}

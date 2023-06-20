@@ -18,22 +18,22 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import "./Mapping.css"
+import "./Mapping.css";
 import {
   handleAction,
   getdesiredvalue,
   handleTableSwaggerSubmit,
   handleData,
   getdesiredannotation,
+  handleform,
 } from "./Mapping";
 import { useState } from "react";
 import "../JsonTemplateComponent/JsonTemplate.css";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useEffect } from "react";
 import { red } from "@mui/material/colors";
-import FormComponent from "../FormComponent";
-
-
+import FormComponent from "../FormComponent/FormComponent";
+import { useRef } from "react";
 
 const Mapping = ({ jsonData, setJsonData }) => {
   const [mappings, setMappings] = useState({});
@@ -55,30 +55,28 @@ const Mapping = ({ jsonData, setJsonData }) => {
   const [stateData, setStateData] = useState({});
   const [required, setRequired] = useState([]);
   const [buttonClicked, setButtonClicked] = useState();
-  const [actionMethods, setactionMethods] = useState([])
-  
-//   let actionMethods=[];
+  const [actionMethods, setactionMethods] = useState([]);
+  const [showform, setshowform] = useState(false);
+  const formRef = useRef(null);
+  //   let actionMethods=[];
   console.log(options);
   let annotation = getdesiredannotation(localStorage.getItem("Annotation"));
   console.log(annotation);
   const lowercaseAnnotation = annotation.toLowerCase();
 
   useEffect(() => {
-    
     if (lowercaseAnnotation.includes("create")) {
       console.log("Create");
-      actionMethods.push("CREATE")
-      actionMethods.map((action)=>{
+      actionMethods.push("CREATE");
+      actionMethods.map((action) => {
         console.log(action);
-      })
+      });
     } else if (lowercaseAnnotation.includes("get")) {
-        actionMethods.push("FETCH")
-        actionMethods.push("SEARCH")
+      actionMethods.push("FETCH");
+      actionMethods.push("SEARCH");
     } else if (lowercaseAnnotation.includes("update")) {
-      console.log(
-        actionMethods.push("UPDATE")
-      );
-    }else if (lowercaseAnnotation.includes("delete")) {
+      console.log(actionMethods.push("UPDATE"));
+    } else if (lowercaseAnnotation.includes("delete")) {
       console.log(
         actionMethods.includes("DELETE") ? "DELETE" : "Invalid action"
       );
@@ -288,291 +286,333 @@ const Mapping = ({ jsonData, setJsonData }) => {
           setButtonClicked,
           columns
         );
+      handleform(
+        e,
+        buttonClicked,
+        setshowform,
+        showform,
+        setButtonClicked,
+        formRef
+      );
     },
     [buttonClicked]
   );
+  useEffect(() => {
+    if (showform && formRef.current) {
+      formRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
+  }, [showform]);
 
   return (
-    <div>
-    <div
-    className={lowercaseAnnotation.includes("create") ? "create" : "get"}>
-    <Container
-    // style={{ background: '#f3e5f5' }}
-    // {annotation.includes("create")?className="create" : className="get" }
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        overflow:"Hidden",
-        py: 4,
-        // bgcolor: purple
-      }}
-    >
-      <Typography variant="h4" sx={{ mb: 2 }}>
-        {annotation}
-      </Typography>
+    <div className="outerdiv">
+      <div
+        className={lowercaseAnnotation.includes("create") ? "create" : "get"}
+      >
+        <Container
+          // style={{ background: '#f3e5f5' }}
+          // {annotation.includes("create")?className="create" : className="get" }
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "Hidden",
+            py: 4,
+            // bgcolor: purple
+          }}
+        >
+          <Typography variant="h2" sx={{ mb: 2 }}>
+            {annotation}
+          </Typography>
 
-      <Accordion sx={{ width: "100%" }} expanded={true}>
-        <AccordionDetails sx={{ borderTop: "2px solid grey", pt: 3 }}>
-          {columns && (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  width: "100%",
-                  maxWidth: "100%",
-                  pb: 2,
-                  pt: 2,
-                }}
-              >
-                <FormControl fullWidth sx={{ ml: 1 }}>
-                  <InputLabel id="demo-simple-select-label">
-                    Action Tag
-                  </InputLabel>
-
-                  <Select
-                    required
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={Actions}
-                    label="Select Services"
-                    onChange={(e) => handleAction(e, setActions)}
-
-                    // sx={{width:"50%"}}
-                  >
-                    {actionMethods.map((action, index) => (
-                      <MenuItem value={action} key={index}>
-                        {action}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-
-              <FormControl
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  width: "90%",
-                }}
-              >
-                <Paper
-                  id="columnsCard"
-                  sx={{
-                    minWidth: "88%",
-                    flexWrap: "wrap",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    backgroundColor: "#e7eaf6",
-                    mt: 2,
-                    py: 2,
-                    px: 2,
-                  }}
-                  elevation={5}
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                  }}
-                  onDrop={(ev) => {
-                    ev.preventDefault();
-                    var dragComponent = ev.dataTransfer.getData("dragId");
-                    ev.currentTarget.appendChild(
-                      document.getElementById(dragComponent)
-                    );
-                  }}
-                >
-                  {columns.map((lsCol, index) => {
-                    return (
-                      <Paper
-                        key={index}
-                        id={`${lsCol.Name}${index}`}
-                        elevation={4}
-                        sx={{
-                          pr: 2,
-                          py: 1,
-                          mx: 2,
-                          my: 1,
-                          cursor: "grab",
-                          minWidth: "160px",
-                          maxWidth: "80%",
-                          display: "flex",
-                          height: "min-content",
-                        }}
-                        draggable="true"
-                        onDragStart={(e) => {
-                          console.log("Dragged element ID:", e.target.id);
-                          e.dataTransfer.setData("dragId", e.target.id); // eslint-disable-next-line
-
-                          mappings &&
-                            Object.keys(mappings).map((mapKey) => {
-                              mappings[mapKey].includes(e.target.textContent) &&
-                                setMappings((prev) => {
-                                  return {
-                                    ...prev,
-
-                                    [mapKey]: prev[mapKey].filter(
-                                      (x) => x !== e.target.textContent
-                                    ),
-                                  };
-                                });
-                            });
-                        }}
-                      >
-                        <DragIndicatorIcon sx={{ mr: 2 }} />
-
-                        <Typography
-                          key={index}
-                          value={lsCol}
-                          className={"capitalizeData"}
-                        >
-                          {lsCol.Name}
-                        </Typography>
-                      </Paper>
-                    );
-                  })}
-                </Paper>
-
+          <Accordion sx={{ width: "100%" }} expanded={true}>
+            <AccordionDetails sx={{ pt: 3 }}>
+              {columns && (
                 <Box
                   sx={{
-                    minWidth: "72%",
-                    maxWidth: "80%",
-                    px: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
                   }}
                 >
                   <Box
                     sx={{
                       display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      my: 1,
-                      mt: 5,
-                      width: "235%",
-                      minHeight: "76px",
+                      justifyContent: "space-evenly",
+                      width: "100%",
+                      maxWidth: "100%",
+                      pb: 2,
+                      pt: 2,
                     }}
                   >
-                    <Box
+                    <FormControl fullWidth sx={{ ml: 1 }}>
+                      <InputLabel id="demo-simple-select-label">
+                        Action Tag
+                      </InputLabel>
+
+                      <Select
+                        required
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={Actions}
+                        label="Select Services"
+                        onChange={(e) => handleAction(e, setActions)}
+
+                        // sx={{width:"50%"}}
+                      >
+                        {actionMethods.map((action, index) => (
+                          <MenuItem value={action} key={index}>
+                            {action}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+
+                  <FormControl
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      width: "90%",
+                    }}
+                  >
+                    <Paper
+                      id="columnsCard"
+                      sx={{
+                        minWidth: "88%",
+                        flexWrap: "wrap",
+                        display: "flex",
+                        alignItems: "flex-start",
+                        backgroundColor: "#e7eaf6",
+                        mt: 2,
+                        py: 2,
+                        px: 2,
+                      }}
+                      elevation={5}
                       onDragOver={(e) => {
                         e.preventDefault();
                       }}
                       onDrop={(ev) => {
                         ev.preventDefault();
-
                         var dragComponent = ev.dataTransfer.getData("dragId");
-                        console.log(dragComponent);
                         ev.currentTarget.appendChild(
                           document.getElementById(dragComponent)
                         );
-
-                        setMappings((prev) => {
-                          return {
-                            ...prev,
-
-                            [dragComponent]: [
-                              document.getElementById(dragComponent)
-                                .textContent,
-                            ],
-                          };
-                        });
-
-                        console.log(mappings);
-                      }}
-                      component="span"
-                      sx={{
-                        p: 1,
-                        border: "2px dashed grey",
-                        width: "50%",
-                        minHeight: "56px",
-                        backgroundColor: "#e7eaf6",
-                        display: "flex",
-                        justifyContent: "center",
-                        flexWrap: "wrap",
                       }}
                     >
-                      {required.length > 0 &&
-                        required.map((field, index) => {
-                          return (
-                            <Paper
+                      {columns.map((lsCol, index) => {
+                        return (
+                          <Paper
+                            key={index}
+                            id={`${lsCol.Name}${index}`}
+                            elevation={4}
+                            sx={{
+                              pr: 2,
+                              py: 1,
+                              mx: 2,
+                              my: 1,
+                              cursor: "grab",
+                              minWidth: "160px",
+                              maxWidth: "80%",
+                              display: "flex",
+                              height: "min-content",
+                            }}
+                            draggable="true"
+                            onDragStart={(e) => {
+                              console.log("Dragged element ID:", e.target.id);
+                              e.dataTransfer.setData("dragId", e.target.id); // eslint-disable-next-line
+
+                              mappings &&
+                                Object.keys(mappings).map((mapKey) => {
+                                  mappings[mapKey].includes(
+                                    e.target.textContent
+                                  ) &&
+                                    setMappings((prev) => {
+                                      return {
+                                        ...prev,
+
+                                        [mapKey]: prev[mapKey].filter(
+                                          (x) => x !== e.target.textContent
+                                        ),
+                                      };
+                                    });
+                                });
+                            }}
+                          >
+                            <DragIndicatorIcon sx={{ mr: 2 }} />
+
+                            <Typography
                               key={index}
-                              id={`${field}${index}`}
-                              sx={{
-                                pr: 2,
-                                py: 1,
-                                pl: 2,
-                                mx: 2,
-                                my: 1,
-                                cursor: "grab",
-                                minWidth: "160px",
-                                maxWidth: "80%",
-                                display: "flex",
-                                height: "min-content",
-                              }}
-                              elevation={5}
+                              value={lsCol}
+                              className={"capitalizeData"}
                             >
-                              <Typography
-                                key={field}
-                                value={field}
-                                className={"capitalizeData"}
-                                // style={{ margin: "4px" }}
-                              >
-                                {field}
-                              </Typography>
-                            </Paper>
-                          );
-                        })}
+                              {lsCol.Name}
+                            </Typography>
+                          </Paper>
+                        );
+                      })}
+                    </Paper>
+
+                    <Box
+                      sx={{
+                        minWidth: "72%",
+                        maxWidth: "80%",
+                        px: 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          my: 1,
+                          mt: 5,
+                          width: "235%",
+                          minHeight: "76px",
+                        }}
+                      >
+                        <Box
+                          onDragOver={(e) => {
+                            e.preventDefault();
+                          }}
+                          onDrop={(ev) => {
+                            ev.preventDefault();
+
+                            var dragComponent =
+                              ev.dataTransfer.getData("dragId");
+                            console.log(dragComponent);
+                            ev.currentTarget.appendChild(
+                              document.getElementById(dragComponent)
+                            );
+
+                            setMappings((prev) => {
+                              return {
+                                ...prev,
+
+                                [dragComponent]: [
+                                  document.getElementById(dragComponent)
+                                    .textContent,
+                                ],
+                              };
+                            });
+
+                            console.log(mappings);
+                          }}
+                          component="span"
+                          sx={{
+                            p: 1,
+                            border: "2px dashed grey",
+                            width: "50%",
+                            minHeight: "56px",
+                            backgroundColor: "#e7eaf6",
+                            display: "flex",
+                            justifyContent: "center",
+                            flexWrap: "wrap",
+                          }}
+                        >
+                          {required.length > 0 &&
+                            required.map((field, index) => {
+                              return (
+                                <Paper
+                                  key={index}
+                                  id={`${field}${index}`}
+                                  sx={{
+                                    pr: 2,
+                                    py: 1,
+                                    pl: 2,
+                                    mx: 2,
+                                    my: 1,
+                                    cursor: "grab",
+                                    minWidth: "160px",
+                                    maxWidth: "80%",
+                                    display: "flex",
+                                    height: "min-content",
+                                  }}
+                                  elevation={5}
+                                >
+                                  <Typography
+                                    key={field}
+                                    value={field}
+                                    className={"capitalizeData"}
+                                    // style={{ margin: "4px" }}
+                                  >
+                                    {field}
+                                  </Typography>
+                                </Paper>
+                              );
+                            })}
+                        </Box>
+                      </Box>
                     </Box>
+                  </FormControl>
+
+                  <Box
+                    sx={{
+                      mt: 5,
+                      ml: "auto",
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Button
+                      variant={"contained"}
+                      onClick={() => {
+                        setButtonClicked("GenerateForm");
+                      }}
+                      sx={{ mt: 1 }}
+                      type="submit"
+                      disabled={!Actions}
+                    >
+                      Download JSON
+                    </Button>
+
+                    <Button
+                      variant={"contained"}
+                      onClick={(e) => {
+                        setButtonClicked("SaveMapping");
+                      }}
+                      sx={{ mt: 1 }}
+                      type="submit"
+                      disabled={!Actions}
+                    >
+                      Generate Form
+                    </Button>
                   </Box>
                 </Box>
-              </FormControl>
-
-              <Box
-                sx={{
-                  mt: 5,
-                  ml: "auto",
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Button
-                  variant={"contained"}
-                  onClick={() => {
-                    setButtonClicked("GenerateForm");
-                  }}
-                  sx={{ mt: 1 }}
-                  type="submit"
-                  disabled={!Actions}
-                >
-                  Download JSON
-                </Button>
-
-                <Button
-                  variant={"contained"}
-                  onClick={() => {
-                    setButtonClicked("SaveMapping");
-                  }}
-                  sx={{ mt: 1 }}
-                  type="submit"
-                  disabled={!Actions}
-                >
-                  Generate Form
-                </Button>
-              </Box>
-            </Box>
-          )}
-        </AccordionDetails>
-      </Accordion>
-    </Container>
-    </div>
-    <div className="form">
-    {buttonClicked==="SaveMapping" && <FormComponent/>}
-    </div>
+              )}
+            </AccordionDetails>
+          </Accordion>
+        </Container>
+      </div>
+      <div
+        className={lowercaseAnnotation.includes("create") ? "create" : "get"}
+        ref={formRef}
+      >
+        <Container
+          // style={{ background: '#f3e5f5' }}
+          // {annotation.includes("create")?className="create" : className="get" }
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "Hidden",
+            py: 4,
+            // bgcolor: purple
+          }}
+        >{showform &&
+            <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
+            <AccordionDetails sx={{ pt: 3 }}>
+            {showform && <FormComponent />}
+            </AccordionDetails>
+            </Accordion>
+        }
+        </Container>
+      </div>
     </div>
   );
 };
