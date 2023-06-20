@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 import { ParameterPostApi } from "../../Services/EndpointServices/EndpointService";
 
 export const handleNameChange = (event, setSelectedValue) => {
@@ -20,6 +21,9 @@ export const handleFileSelectChange = (e, setSwaggerData) => {
 };
 
 export const handleData = (columns, handleSave) => {
+
+    localStorage.setItem("ColumnData",JSON.stringify(columns));
+    console.log(columns);
     let uu = {};
     columns.forEach((column) => {
         const layout = {
@@ -56,7 +60,7 @@ export const handleData = (columns, handleSave) => {
 
     uu["custom"] = x;
 
-    window.open("/form", "_blank");
+    window.open("/mapping", "_blank");
 
     handleSave(uu);
 };

@@ -26,6 +26,7 @@ import {
     handleSave,
     handlecreatefile,
 } from "./SwaggerGrid";
+import Mapping from "../MappingComponent/Mapping.jsx";
 
 const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [swaggerData, setSwaggerData] = useState();
@@ -34,6 +35,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [endpoints, setEndpoints] = useState([]);
     const [selectedValue, setSelectedValue] = useState("");
     const [showMessage, setShowMessage] = useState(false);
+    const [showInvalidFileType, setShowInvalidFileType] = useState(false);
 
     const selectedEndpoint = selectedValue.split("--")[0];
     const selectedEndpointType = selectedValue.split("--")[1];
@@ -101,9 +103,28 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         handleData(columns, handleSave);
     };
 
+    const allowedExtensions = /\.(json)$/i;
+
     const handleInputChange = (e) => {
-        handleFileSelectChange(e, setSwaggerData);
-        setShowMessage(false); // Reset showMessage to false when file input changes
+        const file = e.target.files[0];
+
+        if (file && allowedExtensions.test(file.name)) {
+            handleFileSelectChange(e, setSwaggerData);
+            setShowMessage(false);
+            setShowInvalidFileType(false);
+        } else {
+            setSwaggerData(null);
+            setEndpoints([]);
+            setShowMessage(false);
+            setShowInvalidFileType(true);
+        }
+    };
+
+    const handlePreviousButton = () => {
+        setSwaggerData(null);
+        setEndpoints([]);
+        setShowMessage(false);
+        setShowInvalidFileType(false);
     };
 
     useEffect(() => {
@@ -125,7 +146,8 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                 flexDirection: "column",
                 alignItems: "center",
                 py: 4,
-                marginTop: "8rem",
+                mt: "8rem",
+                //backgroundColor: "#f5ddf5",
             }}
         >
             <Typography variant="h4" sx={{ mb: 2, marginBottom: "4rem" }}>
@@ -160,31 +182,32 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                 pt: 2,
                             }}
                         >
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <InputLabel
-                                    htmlFor="json-file"
-                                    id="json-file-label"
-                                    sx={{ fontSize: "1rem" }}
-                                >
-                                    Upload a JSON file with annotations
-                                </InputLabel>
-                                <Input
-                                    type="file"
+                            {endpoints.length === 0 && (
+                                <Box
                                     sx={{
-                                        pointerEvents: "auto",
-                                        width: "100%", // Adjust the width as needed
-                                        //height: 40, // Adjust the height as needed
-                                        fontSize: "1.5rem",
+                                        display: "flex",
+                                        flexDirection: "column",
                                     }}
-                                    accept=".json"
-                                    onChange={handleInputChange}
-                                />
-                            </Box>
+                                >
+                                    <InputLabel
+                                        htmlFor="json-file"
+                                        id="json-file-label"
+                                        sx={{ fontSize: "1rem" }}
+                                    >
+                                        Upload a JSON file with annotations
+                                    </InputLabel>
+                                    <Input
+                                        type="file"
+                                        sx={{
+                                            pointerEvents: "auto",
+                                            width: "100%",
+                                            fontSize: "1.5rem",
+                                        }}
+                                        accept="application/json"
+                                        onChange={handleInputChange}
+                                    />
+                                </Box>
+                            )}
 
                             {!showMessage && endpoints.length > 0 && (
                                 <>
@@ -258,6 +281,31 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                     </form>
                 </AccordionSummary>
             </Accordion>
+            {!showMessage && endpoints.length > 0 && (
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "flex-end",
+                        width: "100%",
+                        marginTop: "1rem",
+                    }}
+                >
+                    <Button
+                        sx={{
+                            pointerEvents: "auto",
+                            height: "5rem",
+                        }}
+                        variant="contained"
+                        size="small"
+                        type="button"
+                        marg
+                        onClick={handlePreviousButton}
+                    >
+                        Previous
+                    </Button>
+                </Box>
+            )}
             {swaggerData && endpoints.length === 0 && (
                 <Typography
                     variant="subtitle1"
@@ -269,6 +317,19 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                     }}
                 >
                     Please upload a JSON file with proper data annotation!!
+                </Typography>
+            )}
+            {showInvalidFileType && (
+                <Typography
+                    variant="subtitle1"
+                    sx={{
+                        fontSize: "1.3rem",
+                        padding: "1rem",
+                        fontWeight: 600,
+                        color: "#a10c0c",
+                    }}
+                >
+                    Invalid file type. Please select a valid JSON file.
                 </Typography>
             )}
         </Container>

@@ -16,9 +16,7 @@ import {
     ToggleButtonGroup,
     Typography,
 } from "@mui/material";
-
 import React from "react";
-
 import {
     handleAction,
     actionMethods,
@@ -31,52 +29,30 @@ import {
     handleApiSelected,
     handleData,
 } from "./JsonTemplate";
-
 import { useState } from "react";
-
 import "../JsonTemplateComponent/JsonTemplate.css";
-
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
-
 import { useEffect } from "react";
 
 const JsonTemplate = ({ jsonData, setJsonData }) => {
     const [mappings, setMappings] = useState({});
-
     const [expandedAccordion, setExpandedAccordion] = useState(false);
-
     const [selectApiMethod, setSelectApiMethod] = useState("");
-
     const [tableNames, setTableNames] = useState([]);
-
     const [selectedTable, setSelectedTable] = useState("");
-
     const [swaggerData, setSwaggerData] = useState();
-
     const [columns, setColumns] = useState();
-
     const [options, setOptions] = useState(); // eslint-disable-next-line
-
     const [services, setServices] = useState("");
-
     const [apiMethods, setapiMethods] = useState([]); // eslint-disable-next-line
-
     const [response, setResponse] = useState([]);
-
     const [SelectedResponse, setSelectedResponse] = useState("");
-
     const [selected, setSelected] = useState({});
-
     const [jsonfile, setJsonfile] = useState([]);
-
     const [ApiData, setApiData] = useState();
-
     const [Actions, setActions] = useState();
-
     const [stateData, setStateData] = useState({});
-
     const [required, setRequired] = useState([]);
-
     const [buttonClicked, setButtonClicked] = useState();
 
     console.log(options);
@@ -93,29 +69,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   })
                 : []
         );
-
-        // setTableNames(swaggerData.paths)
     }, [swaggerData]);
-
-    //   if (selectedTable != undefined || selectedTable != null) {
-
-    //     swaggerData &&
-
-    //       selectedTable &&
-
-    //       setapiMethods(Object.keys(swaggerData.paths[selectedTable]));
-
-    //   }
-
-    //   {
-
-    //     swaggerData &&
-
-    //       selectedTable &&
-
-    //       setapiMethods(Object.keys(swaggerData.paths[selectedTable]));
-
-    //   }
 
     useEffect(() => {
         console.log(selectedTable);
@@ -140,13 +94,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
 
     useEffect(() => {
         console.log("shreesh");
-
         swaggerData && setSelectApiMethod("");
-
         setSelectedResponse("");
-
         setActions();
-
         setColumns();
     }, [selectedTable]);
 
@@ -165,22 +115,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
         setActions();
     }, [SelectedResponse]);
 
-    //    useEffect(() => {
-
-    //     swaggerData&&
-
-    //     setSelectedTable("");
-
-    //     setSelectApiMethod("");
-
-    //     setSelectedResponse("");
-
-    //     setColumns();
-
-    //     setActions();
-
-    //    }, [swaggerData])
-
     useEffect(() => {
         const filteredEndpoints = swaggerData
             ? Object.keys(swaggerData.paths).filter(() => {
@@ -194,15 +128,10 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     useEffect(() => {
         handleTableSwaggerSubmit(
             selectedTable,
-
             selectApiMethod,
-
             SelectedResponse,
-
             swaggerData,
-
             required,
-
             setColumns
         );
 
@@ -218,9 +147,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
         ) {
             if (Object.keys(swaggerData).includes("openapi")) {
                 console.log("hello");
-
                 let apidatas;
-
                 if (selectApiMethod === "post") {
                     apidatas =
                         swaggerData.paths[selectedTable][selectApiMethod]
@@ -234,13 +161,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                             "application/vnd.connectwise.com+json; version=2022.1"
                         ].schema.items["$ref"];
                 }
-
                 let requiredval = getdesiredvalue(apidatas);
-
-                //   let apidata = swaggerData.components.schemas[requiredval].properties;
-
-                //   let requiredFields;
-
                 let p = swaggerData.components.schemas[requiredval];
 
                 if (Object.keys(p).includes("required")) {
@@ -309,54 +230,36 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
         const handlestatedatachange = () => {
             setStateData({
                 ...stateData,
-
                 ApiEndpoint: selectedTable,
-
                 ApiMethod: selectApiMethod,
-
                 Response: SelectedResponse,
-
                 MappedServices: services,
-
                 jsonTemplate: jsonfile,
-
                 ActionTag: Actions,
             });
         };
-
         jsonfile.length && handlestatedatachange();
     }, [jsonfile]);
 
     useEffect(
         (e) => {
+            console.log(mappings);
             buttonClicked &&
                 handleData(
                     e,
-
                     swaggerData,
-
                     selectedTable,
-
                     selectApiMethod,
-
                     mappings,
-
                     setApiData,
-
                     selected,
-
                     required,
-
                     buttonClicked,
-
                     setJsonData,
-
                     setJsonfile,
-
                     setButtonClicked
                 );
         },
-
         [buttonClicked]
     );
 
@@ -390,13 +293,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                         <Box
                             sx={{
                                 display: "flex",
-
                                 width: "150%",
-
                                 maxWidth: "150%",
-
                                 pb: 2,
-
                                 pt: 2,
                             }}
                         >
@@ -404,23 +303,16 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                 type="file"
                                 sx={{
                                     width: "17%",
-
                                     maxWidth: "7%",
-
                                     minWidth: "17%",
-
                                     pointerEvents: "auto",
                                 }}
                                 onChange={(e) =>
                                     handleFileSelectChange(
                                         e,
-
                                         setSwaggerData,
-
                                         setTableNames,
-
                                         setSelectedTable,
-
                                         setColumns
                                     )
                                 }
@@ -429,13 +321,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                             <FormControl
                                 sx={{
                                     width: "17%",
-
                                     maxWidth: "17%",
-
                                     minWidth: "17%",
-
                                     pointerEvents: "auto",
-
                                     ml: "1%",
                                 }}
                             >
@@ -460,7 +348,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                     <MenuItem value={""}>
                                         <em>None</em>
                                     </MenuItem>
-
                                     {tableNames.map((tableName, index) => (
                                         <MenuItem value={tableName} key={index}>
                                             {tableName}
@@ -521,22 +408,16 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                             <FormControl
                                 sx={{
                                     width: "13%",
-
                                     maxWidth: "13%",
-
                                     minWidth: "13%",
-
                                     pointerEvents: "auto",
-
                                     ml: "1%",
-
                                     mr: "1%",
                                 }}
                             >
                                 <InputLabel id="api-method-label">
                                     Responses
                                 </InputLabel>
-
                                 <Select
                                     sx={{
                                         pointerEvents: "auto",
@@ -572,24 +453,17 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                         <Box
                             sx={{
                                 display: "flex",
-
                                 flexDirection: "column",
-
                                 alignItems: "center",
                             }}
                         >
                             <Box
                                 sx={{
                                     display: "flex",
-
                                     justifyContent: "space-evenly",
-
                                     width: "100%",
-
                                     maxWidth: "100%",
-
                                     pb: 2,
-
                                     pt: 2,
                                 }}
                             >
@@ -625,11 +499,8 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                             <FormControl
                                 sx={{
                                     display: "flex",
-
                                     flexDirection: "column",
-
                                     justifyContent: "space-between",
-
                                     width: "90%",
                                 }}
                             >
@@ -637,19 +508,12 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                     id="columnsCard"
                                     sx={{
                                         minWidth: "88%",
-
                                         flexWrap: "wrap",
-
                                         display: "flex",
-
                                         alignItems: "flex-start",
-
                                         backgroundColor: "#e7eaf6",
-
                                         mt: 2,
-
                                         py: 2,
-
                                         px: 2,
                                     }}
                                     elevation={5}
@@ -658,10 +522,8 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                     }}
                                     onDrop={(ev) => {
                                         ev.preventDefault();
-
                                         var dragComponent =
                                             ev.dataTransfer.getData("dragId");
-
                                         ev.currentTarget.appendChild(
                                             document.getElementById(
                                                 dragComponent
@@ -677,21 +539,13 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                                 elevation={4}
                                                 sx={{
                                                     pr: 2,
-
                                                     py: 1,
-
                                                     mx: 2,
-
                                                     my: 1,
-
                                                     cursor: "grab",
-
                                                     minWidth: "160px",
-
                                                     maxWidth: "80%",
-
                                                     display: "flex",
-
                                                     height: "min-content",
                                                 }}
                                                 draggable="true"
@@ -753,26 +607,18 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                 <Box
                                     sx={{
                                         minWidth: "72%",
-
                                         maxWidth: "80%",
-
                                         px: 2,
                                     }}
                                 >
                                     <Box
                                         sx={{
                                             display: "flex",
-
                                             justifyContent: "space-between",
-
                                             alignItems: "center",
-
                                             my: 1,
-
                                             mt: 5,
-
                                             width: "235%",
-
                                             minHeight: "76px",
                                         }}
                                     >
@@ -787,7 +633,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                                     ev.dataTransfer.getData(
                                                         "dragId"
                                                     );
-
+                                                console.log(dragComponent);
                                                 ev.currentTarget.appendChild(
                                                     document.getElementById(
                                                         dragComponent
@@ -811,19 +657,12 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                             component="span"
                                             sx={{
                                                 p: 1,
-
                                                 border: "2px dashed grey",
-
                                                 width: "50%",
-
                                                 minHeight: "56px",
-
                                                 backgroundColor: "#e7eaf6",
-
                                                 display: "flex",
-
                                                 justifyContent: "center",
-
                                                 flexWrap: "wrap",
                                             }}
                                         >
@@ -835,24 +674,15 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                                             id={`${field}${index}`}
                                                             sx={{
                                                                 pr: 2,
-
                                                                 py: 1,
-
                                                                 pl: 2,
-
                                                                 mx: 2,
-
                                                                 my: 1,
-
                                                                 cursor: "grab",
-
                                                                 minWidth:
                                                                     "160px",
-
                                                                 maxWidth: "80%",
-
                                                                 display: "flex",
-
                                                                 height: "min-content",
                                                             }}
                                                             elevation={5}
@@ -863,7 +693,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                                                 className={
                                                                     "capitalizeData"
                                                                 }
-
                                                                 // style={{ margin: "4px" }}
                                                             >
                                                                 {field}
@@ -879,13 +708,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                             <Box
                                 sx={{
                                     mt: 5,
-
                                     ml: "auto",
-
                                     width: "100%",
-
                                     display: "flex",
-
                                     justifyContent: "space-between",
                                 }}
                             >
@@ -893,8 +718,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                     variant={"contained"}
                                     onClick={() => {
                                         setButtonClicked("GenerateForm");
-
-                                        // handleData();
                                     }}
                                     sx={{ mt: 1 }}
                                     type="submit"
@@ -907,8 +730,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                     variant={"contained"}
                                     onClick={() => {
                                         setButtonClicked("SaveMapping");
-
-                                        // handleData();
                                     }}
                                     sx={{ mt: 1 }}
                                     type="submit"
