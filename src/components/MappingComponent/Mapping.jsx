@@ -383,7 +383,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                     <Paper
                       id="columnsCard"
                       sx={{
-                        minWidth: "88%",
+                        minWidth: "90%",
                         flexWrap: "wrap",
                         display: "flex",
                         alignItems: "flex-start",
@@ -471,7 +471,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                           alignItems: "center",
                           my: 1,
                           mt: 5,
-                          width: "235%",
+                          width: "251%",
                           minHeight: "76px",
                         }}
                       >
