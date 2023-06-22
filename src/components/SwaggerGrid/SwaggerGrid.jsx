@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import {
   EndpointPostApi,
+  ParameterGetApi,
   ParameterPostApi,
 } from "../../Services/EndpointServices/EndpointService";
 import {
@@ -70,7 +71,12 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
             "Content-Type": "application/json",
           };
           const swaggertext = JSON.stringify(swaggerData);
-          const response = await ParameterPostApi(swaggertext, headers);
+          let response=[];
+          if(selectedEndpointType==="get"){
+            response = await ParameterGetApi(swaggertext, headers);
+          }else{
+            response = await ParameterPostApi(swaggertext, headers);
+          }
           console.log("Parameters", response);
           setColumns(response);
         } catch (error) {
