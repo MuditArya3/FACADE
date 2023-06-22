@@ -1,5 +1,5 @@
 import { json } from "react-router-dom";
-import { ParameterPostApi } from "../../Services/EndpointServices/EndpointService";
+import { EndpointPostApi, EndpointServicePostApi, ParameterPostApi } from "../../Services/EndpointServices/EndpointService";
 
 export const handleNameChange = (event, setSelectedValue) => {
     const selectedValue = event.target.value;
@@ -7,6 +7,10 @@ export const handleNameChange = (event, setSelectedValue) => {
     setSelectedValue(selectedValue);
     localStorage.setItem("Annotation",JSON.stringify(selectedValue));
 };
+
+export const handleService = (event, setSelectedService) => {
+    setSelectedService(event.target.value)
+}
 
 export const handleFileSelectChange = (e, setSwaggerData) => {
     const file = e.target.files[0];
@@ -25,7 +29,6 @@ export const handleFileSelectChange = (e, setSwaggerData) => {
 export const handleData = (columns, handleSave) => {
 
     localStorage.setItem("ColumnData",JSON.stringify(columns));
-    console.log(columns);
     let uu = {};
     columns.forEach((column) => {
         const layout = {
@@ -100,5 +103,25 @@ export   const fetchParameters = async (selectedEndpoint,selectedEndpointType,se
         setColumns(response);
     } catch (error) {
         console.error("Error fetching parameters:", error);
+    }
+};
+
+export  const fetchData = async (swaggerData, setEndpoints) => {
+    try {
+        const swaggertext = JSON.stringify(swaggerData);
+        const response = await EndpointPostApi(swaggertext);
+        setEndpoints(response);
+    } catch (error) {
+        console.error("Error fetching endpoints:", error);
+    }
+};
+
+export  const fetchService = async (swaggerData, setService) => {
+    try {
+        const swaggertext = JSON.stringify(swaggerData);
+        const response = await EndpointServicePostApi(swaggertext);
+        setService(response);
+    } catch (error) {
+        console.error("Error fetching service:", error);
     }
 };
