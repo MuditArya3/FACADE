@@ -695,7 +695,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                                                                 }
                                                                 // style={{ margin: "4px" }}
                                                             >
-                                                                {field}
+                                                                {field}*
                                                             </Typography>
                                                         </Paper>
                                                     );

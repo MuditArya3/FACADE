@@ -17,8 +17,10 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import {
-    EndpointPostApi,
-    ParameterPostApi,
+
+  EndpointPostApi,
+  ParameterGetApi,
+  ParameterPostApi,
 } from "../../Services/EndpointServices/EndpointService";
 import {
     handleNameChange,
@@ -58,27 +60,27 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         swaggerData && fetchService(swaggerData, setServices);
     }, [swaggerData]);
 
-    useEffect(() => {
-        if (selectedValue) {
-            const fetchParameters = async () => {
-                try {
-                    const headers = {
-                        endPoint: selectedEndpoint,
-                        endPointType: selectedEndpointType,
-                        "Content-Type": "application/json",
-                    };
-                    const swaggertext = JSON.stringify(swaggerData);
-                    const response = await ParameterPostApi(
-                        swaggertext,
-                        headers
-                    );
-                    console.log("Parameters", response);
-                    setColumns(response);
-                } catch (error) {
-                    console.error("Error fetching parameters:", error);
-                }
-            };
-            fetchParameters();
+
+  useEffect(() => {
+    if (selectedValue) {
+      const fetchParameters = async () => {
+        try {
+          const headers = {
+            endPoint: selectedEndpoint,
+            endPointType: selectedEndpointType,
+            "Content-Type": "application/json",
+          };
+          const swaggertext = JSON.stringify(swaggerData);
+          let response=[];
+          if(selectedEndpointType==="get"){
+            response = await ParameterGetApi(swaggertext, headers);
+          }else{
+            response = await ParameterPostApi(swaggertext, headers);
+          }
+          console.log("Parameters", response);
+          setColumns(response);
+        } catch (error) {
+          console.error("Error fetching parameters:", error);
         }
     }, [selectedValue]);
 
