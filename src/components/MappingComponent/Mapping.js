@@ -59,85 +59,85 @@ export const getdesiredannotation = (apidatas) => {
     return value;
   };
 
-export const handleTableSwaggerSubmit = (
-  selectedTable,
-  selectApiMethod,
-  SelectedResponse,
-  swaggerData,
-  required
-  // setColumns
-) => {
-  if (selectedTable) {
-    if (Object.keys(swaggerData).includes("swagger")) {
-      if (selectApiMethod && SelectedResponse === "responses") {
-        let y = swaggerData.paths[selectedTable][selectApiMethod].responses;
-        if (Object.keys(y).includes("200")) {
-          y = y["200"]["$ref"];
-        } else if (Object.keys(y).includes("201")) {
-          y = y["201"]["$ref"];
-        } else {
-          y = y["204"]["$ref"];
-        }
-        console.log(y);
-        var k = getdesiredvalue(y);
-        console.log(k);
-        let step2 = swaggerData.responses[k].schema["$ref"];
-        var j = getdesiredvalue(step2);
+// export const handleTableSwaggerSubmit = (
+//   selectedTable,
+//   selectApiMethod,
+//   SelectedResponse,
+//   swaggerData,
+//   required
+//   // setColumns
+// ) => {
+//   if (selectedTable) {
+//     if (Object.keys(swaggerData).includes("swagger")) {
+//       if (selectApiMethod && SelectedResponse === "responses") {
+//         let y = swaggerData.paths[selectedTable][selectApiMethod].responses;
+//         if (Object.keys(y).includes("200")) {
+//           y = y["200"]["$ref"];
+//         } else if (Object.keys(y).includes("201")) {
+//           y = y["201"]["$ref"];
+//         } else {
+//           y = y["204"]["$ref"];
+//         }
+//         console.log(y);
+//         var k = getdesiredvalue(y);
+//         console.log(k);
+//         let step2 = swaggerData.responses[k].schema["$ref"];
+//         var j = getdesiredvalue(step2);
 
-        let step3 = swaggerData.definitions[j];
-        const apidataProperties = Object.keys(step3.properties);
-        const filteredColumnsData = apidataProperties.filter(
-          (elem) => !required.includes(elem)
-        );
-        console.log(filteredColumnsData);
-        //   setColumns(filteredColumnsData);
-      }
-    } else if (Object.keys(swaggerData).includes("openapi")) {
-      if (selectApiMethod === "post" && SelectedResponse === "requestBody") {
-        let z =
-          swaggerData.paths[selectedTable][selectApiMethod][SelectedResponse]
-            .content["application/json"].schema["$ref"];
-        console.log(z);
-        console.log(selectedTable);
-        var i = getdesiredvalue(z);
-        const apidata = swaggerData.components.schemas[i];
-        console.log(Object.keys(apidata.properties));
-        console.log(apidata.properties);
+//         let step3 = swaggerData.definitions[j];
+//         const apidataProperties = Object.keys(step3.properties);
+//         const filteredColumnsData = apidataProperties.filter(
+//           (elem) => !required.includes(elem)
+//         );
+//         console.log(filteredColumnsData);
+//         //   setColumns(filteredColumnsData);
+//       }
+//     } else if (Object.keys(swaggerData).includes("openapi")) {
+//       if (selectApiMethod === "post" && SelectedResponse === "requestBody") {
+//         let z =
+//           swaggerData.paths[selectedTable][selectApiMethod][SelectedResponse]
+//             .content["application/json"].schema["$ref"];
+//         console.log(z);
+//         console.log(selectedTable);
+//         var i = getdesiredvalue(z);
+//         const apidata = swaggerData.components.schemas[i];
+//         console.log(Object.keys(apidata.properties));
+//         console.log(apidata.properties);
 
-        const apidataProperties = Object.keys(apidata.properties);
-        const filteredColumnsData = apidataProperties.filter(
-          (elem) => !required.includes(elem)
-        );
-        console.log(filteredColumnsData);
-        //   setColumns(filteredColumnsData);
+//         const apidataProperties = Object.keys(apidata.properties);
+//         const filteredColumnsData = apidataProperties.filter(
+//           (elem) => !required.includes(elem)
+//         );
+//         console.log(filteredColumnsData);
+//         //   setColumns(filteredColumnsData);
 
-        // setColumns(Object.keys(apidata.properties))
-      } else if (
-        selectApiMethod === "get" &&
-        SelectedResponse === "responses"
-      ) {
-        let x =
-          swaggerData.paths[selectedTable][selectApiMethod].responses["200"]
-            .content["application/vnd.connectwise.com+json; version=2022.1"]
-            .schema;
-        if (x.type === "array") {
-          x = x.items["$ref"];
-        } else {
-          x = x["$ref"];
-        }
-        var k = getdesiredvalue(x);
-        const apidata1 = swaggerData.components.schemas[k];
+//         // setColumns(Object.keys(apidata.properties))
+//       } else if (
+//         selectApiMethod === "get" &&
+//         SelectedResponse === "responses"
+//       ) {
+//         let x =
+//           swaggerData.paths[selectedTable][selectApiMethod].responses["200"]
+//             .content["application/vnd.connectwise.com+json; version=2022.1"]
+//             .schema;
+//         if (x.type === "array") {
+//           x = x.items["$ref"];
+//         } else {
+//           x = x["$ref"];
+//         }
+//         var k = getdesiredvalue(x);
+//         const apidata1 = swaggerData.components.schemas[k];
 
-        const apidataProperties = Object.keys(apidata1.properties);
-        const filteredColumnsData = apidataProperties.filter(
-          (elem) => !required.includes(elem)
-        );
-        console.log(filteredColumnsData);
-        //   setColumns(filteredColumnsData);
-      }
-    }
-  }
-};
+//         const apidataProperties = Object.keys(apidata1.properties);
+//         const filteredColumnsData = apidataProperties.filter(
+//           (elem) => !required.includes(elem)
+//         );
+//         console.log(filteredColumnsData);
+//         //   setColumns(filteredColumnsData);
+//       }
+//     }
+//   }
+// };
 
 export const handleApiSelected = (tableName, setSelectedTable) => {
   setSelectedTable(tableName);
@@ -426,18 +426,30 @@ export const handleData = (
   let requiredFields;
   console.log(mappings);
   let uu = {};
+  let layout={}
   Object.keys(mappings).map((col) => {
-    console.log(mappings[col]);
+    console.log(mappings[col][0]);
     columns.forEach((rcol) => {
       console.log(columns);
       console.log(rcol.Name);
       if (mappings[col][0] === rcol.Name) {
-        console.log("hello");
-        const layout = {
-          key: rcol.Name,
-          title: rcol.Name,
-          type: rcol.Type.toLowerCase(),
-        };
+        if(rcol.IsRequired===true){
+            requiredFields=rcol.Name;
+            console.log("hi");
+            layout = {
+                key: rcol.Name,
+                title: rcol.Name,
+                type: rcol.Type.toLowerCase(),
+              };
+        }
+        else{
+            console.log("hello");
+            layout = {
+              key: rcol.Name,
+              title: rcol.Name,
+              type: rcol.Type.toLowerCase(),
+            };
+        }
         console.log(layout);
         uu[rcol.Name] = { ...layout };
       }
@@ -499,7 +511,7 @@ const handleSave = (
       title: "Search Form",
       description: "Search using below Textbox",
       type: "object",
-      required: requiredFields,
+      required: [requiredFields],
       properties: json,
     },
     buttonClicked,
