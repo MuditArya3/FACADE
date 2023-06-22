@@ -82,7 +82,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         } catch (error) {
           console.error("Error fetching parameters:", error);
         }
-    }, [selectedValue]);
+    }}} ,[selectedValue]);
 
     const handleSave = (data) => {
         var json = Object.assign({}, data);
