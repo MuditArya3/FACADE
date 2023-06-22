@@ -11,6 +11,7 @@ import {
     MenuItem,
     Select,
     Typography,
+    makeStyles,
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
@@ -23,15 +24,13 @@ import {
     handleNameChange,
     handleFileSelectChange,
     handleData,
-    handleSave,
-    handlecreatefile,
+    fetchData,
+    fetchService,
+    handleService,
 } from "./SwaggerGrid";
-import Mapping from "../MappingComponent/Mapping.jsx";
+
 import "./SwaggerGrid.css";
-import bg from "../../assets/bg.jpg";
 import c from "../../assets/3.jpg";
-import a from "../../assets/1.png";
-import b from "../../assets/2.png";
 
 const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [swaggerData, setSwaggerData] = useState();
@@ -41,23 +40,22 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [selectedValue, setSelectedValue] = useState("");
     const [showMessage, setShowMessage] = useState(false);
     const [showInvalidFileType, setShowInvalidFileType] = useState(false);
+    const [services, setServices] = useState([]);
+    const [selectedService, setSelectedService] = useState("");
 
     const selectedEndpoint = selectedValue.split("--")[0];
     const selectedEndpointType = selectedValue.split("--")[1];
 
-    const fetchData = async () => {
-        try {
-            const swaggertext = JSON.stringify(swaggerData);
-            const response = await EndpointPostApi(swaggertext);
-            console.log("Endpoints", response);
-            setEndpoints(response);
-        } catch (error) {
-            console.error("Error fetching endpoints:", error);
-        }
-    };
+    const uniqueServices = services.filter((value, index, self) => {
+        return self.indexOf(value) === index;
+    });
 
     useEffect(() => {
-        swaggerData && fetchData();
+        swaggerData && fetchData(swaggerData, setEndpoints);
+    }, [swaggerData]);
+
+    useEffect(() => {
+        swaggerData && fetchService(swaggerData, setServices);
     }, [swaggerData]);
 
     useEffect(() => {
@@ -85,10 +83,8 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     }, [selectedValue]);
 
     const handleSave = (data) => {
-        console.log(data);
-        console.log(jsonfile);
         var json = Object.assign({}, data);
-        console.log(json);
+
         handlecreatefile({
             label: "search",
             title: "Search Form",
@@ -144,6 +140,15 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         }
     }, [endpoints, swaggerData]);
 
+    const annotation = endpoints.map((ann) => ann.split("--")[2]);
+
+    const filteredEndpoints = endpoints.filter((endpoint) =>
+        endpoint
+            .toLowerCase()
+            .includes(selectedService.toLowerCase().split(" ")[0])
+    );
+    console.log(selectedValue);
+
     return (
         <div
             className="acc-container"
@@ -174,7 +179,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                 </Typography>
                 <Accordion
                     sx={{
-                        width: "40%",
+                        width: "35%",
                         boxShadow: "1px 1px 1px 2px rgba(0, 0, 0, 0.2)",
                         height: "70vh",
                         display: "flex",
@@ -230,9 +235,96 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                         />
                                     </Box>
                                 )}
-
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-evenly",
+                                        width: "100%",
+                                        mt: "5rem",
+                                    }}
+                                >
+                                    {swaggerData && endpoints.length === 0 && (
+                                        <Typography
+                                            variant="subtitle1"
+                                            sx={{
+                                                fontSize: "1.5rem",
+                                                padding: "1rem",
+                                                fontWeight: 600,
+                                                color: "red",
+                                            }}
+                                        >
+                                            Please upload a JSON file with
+                                            proper data annotation!!
+                                        </Typography>
+                                    )}
+                                    {showInvalidFileType && (
+                                        <Typography
+                                            variant="subtitle1"
+                                            sx={{
+                                                fontSize: "1.5rem",
+                                                padding: "1rem",
+                                                fontWeight: 500,
+                                                color: "red",
+                                            }}
+                                        >
+                                            Invalid file type. Please select a
+                                            valid JSON file.
+                                        </Typography>
+                                    )}
+                                </Box>
                                 {!showMessage && endpoints.length > 0 && (
                                     <>
+                                        <FormControl
+                                            sx={{
+                                                width: "80%",
+                                                display: "flex",
+                                                //justifyContent: "space-between",
+                                                flexDirection: "row",
+                                                alignItems: "center",
+                                                mb: 2,
+                                                pointerEvents: "auto",
+                                            }}
+                                        >
+                                            <InputLabel
+                                                id="table-select-label"
+                                                sx={{ fontSize: "1.5rem" }}
+                                            >
+                                                Select Service:
+                                            </InputLabel>
+                                            <Select
+                                                labelId="table-select-label"
+                                                id="table-select"
+                                                value={selectedService}
+                                                onChange={(e) => {
+                                                    handleService(
+                                                        e,
+                                                        setSelectedService
+                                                    );
+                                                }}
+                                                label="Select Service:"
+                                                sx={{ flex: 1, ml: 1 }}
+                                            >
+                                                <MenuItem value={""}>
+                                                    <em>None</em>
+                                                </MenuItem>
+                                                {uniqueServices.map(
+                                                    (service, index) => {
+                                                        return (
+                                                            <MenuItem
+                                                                value={service}
+                                                                key={index}
+                                                                sx={{
+                                                                    fontSize:
+                                                                        "1.3rem",
+                                                                }}
+                                                            >
+                                                                {service}
+                                                            </MenuItem>
+                                                        );
+                                                    }
+                                                )}
+                                            </Select>
+                                        </FormControl>
                                         <FormControl
                                             sx={{
                                                 width: "80%",
@@ -262,13 +354,13 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 }}
                                                 label="Select Annotation:"
                                                 sx={{ flex: 1, ml: 1 }}
+                                                className="scrollable"
                                             >
                                                 <MenuItem value={""}>
                                                     <em>None</em>
                                                 </MenuItem>
-                                                {endpoints.map(
+                                                {filteredEndpoints.map(
                                                     (endpoint, index) => {
-                                                        console.log(endpoint);
                                                         const displayValue =
                                                             endpoint.split(
                                                                 "--"
@@ -289,6 +381,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 )}
                                             </Select>
                                         </FormControl>
+
                                         <Box
                                             sx={{
                                                 display: "flex",
@@ -332,32 +425,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                         </form>
                     </AccordionSummary>
                 </Accordion>
-                {swaggerData && endpoints.length === 0 && (
-                    <Typography
-                        variant="subtitle1"
-                        sx={{
-                            fontSize: "1.5rem",
-                            padding: "1rem",
-                            fontWeight: 600,
-                            color: "red",
-                        }}
-                    >
-                        Please upload a JSON file with proper data annotation!!
-                    </Typography>
-                )}
-                {showInvalidFileType && (
-                    <Typography
-                        variant="subtitle1"
-                        sx={{
-                            fontSize: "1.5rem",
-                            padding: "1rem",
-                            fontWeight: 500,
-                            color: "red",
-                        }}
-                    >
-                        Invalid file type. Please select a valid JSON file.
-                    </Typography>
-                )}
             </Container>
         </div>
     );
