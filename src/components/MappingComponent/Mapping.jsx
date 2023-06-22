@@ -386,70 +386,59 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                         </FormControl>
                                     </Box>
 
-                                    <FormControl
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            justifyContent: "space-between",
-                                            width: "90%",
-                                        }}
-                                    >
-                                        <Paper
-                                            id="columnsCard"
-                                            sx={{
-                                                minWidth: "88%",
-                                                flexWrap: "wrap",
-                                                display: "flex",
-                                                alignItems: "flex-start",
-                                                backgroundColor: "#e7eaf6",
-                                                mt: 2,
-                                                py: 2,
-                                                px: 2,
-                                            }}
-                                            elevation={5}
-                                            onDragOver={(e) => {
-                                                e.preventDefault();
-                                            }}
-                                            onDrop={(ev) => {
-                                                ev.preventDefault();
-                                                var dragComponent =
-                                                    ev.dataTransfer.getData(
-                                                        "dragId"
-                                                    );
-                                                ev.currentTarget.appendChild(
-                                                    document.getElementById(
-                                                        dragComponent
-                                                    )
-                                                );
-                                            }}
-                                        >
-                                            {columns.map((lsCol, index) => {
-                                                return (
-                                                    <Paper
-                                                        key={index}
-                                                        id={`${lsCol.Name}${index}`}
-                                                        elevation={4}
-                                                        sx={{
-                                                            pr: 2,
-                                                            py: 1,
-                                                            mx: 2,
-                                                            my: 1,
-                                                            cursor: "grab",
-                                                            minWidth: "160px",
-                                                            maxWidth: "80%",
-                                                            display: "flex",
-                                                            height: "min-content",
-                                                        }}
-                                                        draggable="true"
-                                                        onDragStart={(e) => {
-                                                            console.log(
-                                                                "Dragged element ID:",
-                                                                e.target.id
-                                                            );
-                                                            e.dataTransfer.setData(
-                                                                "dragId",
-                                                                e.target.id
-                                                            ); // eslint-disable-next-line
+                  <FormControl
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      width: "90%",
+                    }}
+                  >
+                    <Paper
+                      id="columnsCard"
+                      sx={{
+                        minWidth: "90%",
+                        flexWrap: "wrap",
+                        display: "flex",
+                        alignItems: "flex-start",
+                        backgroundColor: "#e7eaf6",
+                        mt: 2,
+                        py: 2,
+                        px: 2,
+                      }}
+                      elevation={5}
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                      }}
+                      onDrop={(ev) => {
+                        ev.preventDefault();
+                        var dragComponent = ev.dataTransfer.getData("dragId");
+                        ev.currentTarget.appendChild(
+                          document.getElementById(dragComponent)
+                        );
+                      }}
+                    >
+                      {columns.map((lsCol, index) => {
+                        return (
+                          <Paper
+                            key={index}
+                            id={`${lsCol.Name}${index}`}
+                            elevation={4}
+                            sx={{
+                              pr: 2,
+                              py: 1,
+                              mx: 2,
+                              my: 1,
+                              cursor: "grab",
+                              minWidth: "160px",
+                              maxWidth: "80%",
+                              display: "flex",
+                              height: "min-content",
+                            }}
+                            draggable="true"
+                            onDragStart={(e) => {
+                              console.log("Dragged element ID:", e.target.id);
+                              e.dataTransfer.setData("dragId", e.target.id); // eslint-disable-next-line
 
                                                             mappings &&
                                                                 Object.keys(
@@ -509,31 +498,30 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                             })}
                                         </Paper>
 
-                                        <Box
-                                            sx={{
-                                                minWidth: "72%",
-                                                maxWidth: "80%",
-                                                px: 2,
-                                            }}
-                                        >
-                                            <Box
-                                                sx={{
-                                                    display: "flex",
-                                                    justifyContent:
-                                                        "space-between",
-                                                    alignItems: "center",
-                                                    my: 1,
-                                                    mt: 5,
-                                                    width: "235%",
-                                                    minHeight: "76px",
-                                                }}
-                                            >
-                                                <Box
-                                                    onDragOver={(e) => {
-                                                        e.preventDefault();
-                                                    }}
-                                                    onDrop={(ev) => {
-                                                        ev.preventDefault();
+                    <Box
+                      sx={{
+                        minWidth: "72%",
+                        maxWidth: "80%",
+                        px: 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          my: 1,
+                          mt: 5,
+                          width: "251%",
+                          minHeight: "76px",
+                        }}
+                      >
+                        <Box
+                          onDragOver={(e) => {
+                            e.preventDefault();
+                          }}
+                          onDrop={(ev) => {
+                            ev.preventDefault();
 
                                                         var dragComponent =
                                                             ev.dataTransfer.getData(

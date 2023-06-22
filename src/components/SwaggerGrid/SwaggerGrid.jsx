@@ -140,14 +140,11 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         }
     }, [endpoints, swaggerData]);
 
-    const annotation = endpoints.map((ann) => ann.split("--")[2]);
-
     const filteredEndpoints = endpoints.filter((endpoint) =>
         endpoint
             .toLowerCase()
             .includes(selectedService.toLowerCase().split(" ")[0])
     );
-    console.log(selectedValue);
 
     return (
         <div
