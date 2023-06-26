@@ -59,6 +59,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
   const [buttonClicked, setButtonClicked] = useState();
   const [actionMethods, setactionMethods] = useState([]);
   const [showform, setshowform] = useState(false);
+  const [showGridComponent, setShowGridComponent] = useState(false);
   const formRef = useRef(null);
   //   let actionMethods=[];
   console.log(options);
@@ -77,7 +78,12 @@ const Mapping = ({ jsonData, setJsonData }) => {
       actionMethods.push("FETCH");
       actionMethods.push("SEARCH");
     } else if (lowercaseAnnotation.includes("update")) {
-      console.log(actionMethods.push("UPDATE"));
+      // console.log(actionMethods.push("UPDATE"));
+      // return (
+      //   <GridComponent/>
+      // );
+      actionMethods.push("FETCH");
+      actionMethods.push("CREATE");
     } else if (lowercaseAnnotation.includes("delete")) {
       actionMethods.push("DELETE");
     } else if (lowercaseAnnotation.includes("search")) {
@@ -87,6 +93,11 @@ const Mapping = ({ jsonData, setJsonData }) => {
     }
   }, [annotation]);
 
+  useEffect(() => {
+    if (lowercaseAnnotation.includes("update")) {
+      setShowGridComponent(true);
+    }
+  }, [lowercaseAnnotation]);
   let st = localStorage.getItem("ColumnData");
 
   useEffect(() => {
@@ -336,7 +347,10 @@ console.log(newcolumns);
 
   return (
     <div className="outerdiv">
-      <div
+      <div className="outerdiv">
+      { showGridComponent && <GridComponent />}
+    </div>
+      {!showGridComponent && <div
         className={lowercaseAnnotation.includes("create") ? "create" : "get"}
       >
         <Container
@@ -615,8 +629,8 @@ console.log(newcolumns);
             </AccordionDetails>
           </Accordion>
         </Container>
-      </div>
-      <div
+      </div>}
+      {!showGridComponent && <div
         className={lowercaseAnnotation.includes("create") ? "create" : "get"}
         ref={formRef}
       >
@@ -640,8 +654,8 @@ console.log(newcolumns);
             </Accordion>
           )}
         </Container>
-      </div>
-      <div
+      </div>}
+      {!showGridComponent&&<div
         className={lowercaseAnnotation.includes("create") ? "create" : "get"}
         ref={formRef}
       >
@@ -666,6 +680,7 @@ console.log(newcolumns);
           )}
         </Container>
       </div>
+}
     </div>
   );
 };

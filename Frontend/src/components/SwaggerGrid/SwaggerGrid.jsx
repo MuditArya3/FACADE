@@ -75,7 +75,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
           if (selectedEndpointType === "get") {
             response = await ParameterGetApi(swaggertext, headers);
           } else {
-            const response = await ParameterPostApi(swaggertext, headers);
+            response = await ParameterPostApi(swaggertext, headers);
           }
           console.log("Parameters", response);
           setColumns(response);
