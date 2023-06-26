@@ -70,7 +70,7 @@ const GridComponent = () => {
   const getGridData = () => {
     axios
 
-      .get(`https://localhost:7031/api/GridData`)
+      .get(`https://localhost:7184/api/Invoices/Invoices`)
 
       .then((res) => {
         if (res && res.data) {

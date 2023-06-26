@@ -7,6 +7,7 @@ import JsonTemplate from "./components/JsonTemplateComponent/JsonTemplate.jsx";
 import { useState } from "react";
 import SwaggerGrid from "./components/SwaggerGrid/SwaggerGrid.jsx";
 import Mapping from "./components/MappingComponent/Mapping.jsx";
+import UpdateGrid from "./components/UpdateGrid/UpdateGrid.jsx";
 
 function App() {
   const [jsonData, setJsonData] = useState();
@@ -25,12 +26,12 @@ function App() {
           <Route path="/grid" element={<GridComponent />} />
           <Route path="/application" element={<ApplicationForm />} />
           <Route
-            path="/swagger"
+            path="/"
             element={
               <SwaggerGrid jsonData={jsonData} setJsonData={setJsonData} />
             }
           />
-          <Route path="/" element={<JsonTemplate />} />
+          <Route path="/update" element={<UpdateGrid />} />
           <Route
             path="/mapping"
             element={<Mapping jsonData={jsonData} setJsonData={setJsonData} />}
