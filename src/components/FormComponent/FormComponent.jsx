@@ -6,11 +6,13 @@ const FormComponent = ({ jsonData }) => {
   //const [formData, setformData] = useState([]);
 
   //let schema = localStorage.getItem("jsonSchema");
-  //const schema = require("../jsonFiles/schema.json");
+  const schema = require("../jsonFiles/schema.json");
   // const newData = require("../jsonFiles/searchBox.json");
   //const schema = jsonData;
-  let schema1 = JSON.parse(localStorage.getItem("jsonSchema"));
-  console.log(schema1);
+
+  // let schema1 = JSON.parse(localStorage.getItem("jsonSchema"));
+  // console.log(schema1);
+
   // console.log(schema);
   const uiSchema = require("../../jsonFiles/uiSchema.json");
   // const CustomSchemaField = function () {
@@ -36,7 +38,7 @@ const FormComponent = ({ jsonData }) => {
       <div className="form">
         <Form
           className="formComponent"
-          schema={schema1}
+          schema={schema}
           //uiSchema={uiSchema}
           // formData={formData}
           // onChange={(e) => {

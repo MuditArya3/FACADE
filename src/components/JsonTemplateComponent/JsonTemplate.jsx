@@ -61,13 +61,14 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     setTableNames(
       swaggerData
         ? // eslint-disable-next-line
+
           Object.keys(swaggerData.paths).map((item) => {
             Object.keys(swaggerData.paths[item]);
+
             // console.log(swaggerData.paths[item].selectApiMethod);
           })
         : []
     );
-    // setTableNames(swaggerData.paths)
   }, [swaggerData]);
 
   //   if (selectedTable != undefined || selectedTable != null) {
@@ -83,6 +84,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
 
   useEffect(() => {
     console.log(selectedTable);
+
     swaggerData &&
       selectedTable &&
       setapiMethods(Object.keys(swaggerData.paths[selectedTable]));
@@ -111,6 +113,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
 
   const handlechange = () => {
     setapiMethods("");
+
     setResponse("");
   };
 
@@ -119,6 +122,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       selectedTable.length &&
       selectApiMethod.length &&
       setColumns();
+
     setActions();
   }, [SelectedResponse]);
 
@@ -164,13 +168,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
               .content["application/vnd.connectwise.com+json; version=2022.1"]
               .schema.items["$ref"];
         }
-
         let requiredval = getdesiredvalue(apidatas);
-
-        //   let apidata = swaggerData.components.schemas[requiredval].properties;
-        //   let requiredFields;
-
         let p = swaggerData.components.schemas[requiredval];
+
         if (Object.keys(p).includes("required")) {
           setRequired(p.required);
         }
@@ -186,8 +186,11 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
         }
 
         let requiredval1 = getdesiredvalue(data1);
+
         let apidatas = swaggerData.responses[requiredval1].schema["$ref"];
+
         let requiredval2 = getdesiredvalue(apidatas);
+
         let p = swaggerData.definitions[requiredval2];
 
         if (Object.keys(p).includes("required")) {
@@ -204,9 +207,13 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       selectedTable.length &&
       selectApiMethod.length &&
       setSelectedResponse("");
+
     setColumns();
+
     setExpandedAccordion(false);
+
     setActions();
+
     setServices("");
   }, [swaggerData, selectedTable, selectApiMethod]);
 
@@ -215,11 +222,14 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
       setMappings((prev) => {
         return {
           ...prev,
+
           [e]: [e],
         };
       });
     });
   }, [required]);
+
+  // let json;
 
   useEffect(() => {
     const handlestatedatachange = () => {
@@ -261,8 +271,11 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
     <Container
       sx={{
         display: "flex",
+
         flexDirection: "column",
+
         alignItems: "center",
+
         py: 4,
       }}
     >
@@ -274,6 +287,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
         <AccordionSummary
           sx={{
             pointerEvents: "none",
+
             cursor: "default",
           }}
           aria-controls="panel-content"
@@ -326,6 +340,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   label="Select Table:"
                   onChange={(e) => {
                     handleApiSelected(e.target.value, setSelectedTable);
+
                     // handlechange();
                   }}
                 >
@@ -344,9 +359,13 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
               <FormControl
                 sx={{
                   width: "13%",
+
                   maxWidth: "13%",
+
                   minWidth: "13%",
+
                   pointerEvents: "auto",
+
                   ml: "1%",
                 }}
               >
@@ -567,7 +586,9 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                       }}
                       onDrop={(ev) => {
                         ev.preventDefault();
+
                         var dragComponent = ev.dataTransfer.getData("dragId");
+
                         ev.currentTarget.appendChild(
                           document.getElementById(dragComponent)
                         );
@@ -575,6 +596,7 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                         setMappings((prev) => {
                           return {
                             ...prev,
+
                             [dragComponent]: [
                               document.getElementById(dragComponent)
                                 .textContent,
@@ -645,7 +667,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   variant={"contained"}
                   onClick={() => {
                     setButtonClicked("GenerateForm");
-                    // handleData();
                   }}
                   sx={{ mt: 1 }}
                   type="submit"
@@ -658,7 +679,6 @@ const JsonTemplate = ({ jsonData, setJsonData }) => {
                   variant={"contained"}
                   onClick={() => {
                     setButtonClicked("SaveMapping");
-                    // handleData();
                   }}
                   sx={{ mt: 1 }}
                   type="submit"
