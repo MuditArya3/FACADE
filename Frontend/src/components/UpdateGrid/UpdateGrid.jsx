@@ -1,10 +1,11 @@
 import React from "react";
 import GridComponent from "../GridComponent";
 
-const UpdateGrid = () => {
+const UpdateGrid = (lowercaseAnnotation) => {
     return (
         <div>
-            <GridComponent />
+            <GridComponent 
+            lowercaseAnnotation={lowercaseAnnotation}/>
         </div>
     );
 };

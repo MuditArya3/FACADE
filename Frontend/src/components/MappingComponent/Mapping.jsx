@@ -35,6 +35,7 @@ import { red } from "@mui/material/colors";
 import FormComponent from "../FormComponent/FormComponent";
 import { useRef } from "react";
 import GridComponent from "../GridComponent";
+import UpdateGrid from "../UpdateGrid/UpdateGrid";
 
 const Mapping = ({ jsonData, setJsonData }) => {
   const [mappings, setMappings] = useState({});
@@ -347,9 +348,7 @@ console.log(newcolumns);
 
   return (
     <div className="outerdiv">
-      <div className="outerdiv">
-      { showGridComponent && <GridComponent />}
-    </div>
+     
       {!showGridComponent && <div
         className={lowercaseAnnotation.includes("create") ? "create" : "get"}
       >
@@ -674,12 +673,40 @@ console.log(newcolumns);
           {showform && (
             <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
               <AccordionDetails sx={{ pt: 3 }}>
-                {showform && <GridComponent />}
+                <h3>FORM GRID</h3>
+                {showform && <GridComponent 
+                lowercaseAnnotation={lowercaseAnnotation}/>}
               </AccordionDetails>
             </Accordion>
           )}
         </Container>
       </div>
+} {showGridComponent &&
+<div className="update">
+    <Container
+          // style={{ background: '#f3e5f5' }}
+          // {annotation.includes("create")?className="create" : className="get" }
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "Hidden",
+            py: 4,
+            // bgcolor: purple
+          }}
+        >
+          <Typography variant="h2" sx={{ mb: 2 }}>
+            {annotation}
+          </Typography>
+            <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
+              <AccordionDetails sx={{ pt: 3 }}>
+                <h3>FORM GRID</h3>
+               <GridComponent
+                lowercaseAnnotation={lowercaseAnnotation}/>
+              </AccordionDetails>
+            </Accordion>
+        </Container>
+    </div>
 }
     </div>
   );
