@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import FormComponent from "./components/FormComponent/FormComponent.jsx";
-import GridComponent from "./components/GridComponent";
+import GridComponent from "./components/GridComponent/GridComponent.js";
 import ApplicationForm from "./components/ApplicationFormComponent";
 import JsonTemplate from "./components/JsonTemplateComponent/JsonTemplate.jsx";
 import { useState } from "react";
