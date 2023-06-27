@@ -508,8 +508,8 @@ const handleSave = (
   handlecreatefile(
     {
       label: "search",
-      title: "Search Form",
-      description: "Search using below Textbox",
+      title: "JSON Form",
+      // description: "Search using below Textbox",
       type: "object",
       required: [requiredFields],
       properties: json,

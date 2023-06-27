@@ -35,6 +35,7 @@ import { red } from "@mui/material/colors";
 import FormComponent from "../FormComponent/FormComponent";
 import { useRef } from "react";
 import GridComponent from "../GridComponent";
+import UpdateGrid from "../UpdateGrid/UpdateGrid";
 
 const Mapping = ({ jsonData, setJsonData }) => {
   const [mappings, setMappings] = useState({});
@@ -59,6 +60,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
   const [buttonClicked, setButtonClicked] = useState();
   const [actionMethods, setactionMethods] = useState([]);
   const [showform, setshowform] = useState(false);
+  const [showGridComponent, setShowGridComponent] = useState(false);
   const formRef = useRef(null);
   //   let actionMethods=[];
   console.log(options);
@@ -77,7 +79,12 @@ const Mapping = ({ jsonData, setJsonData }) => {
       actionMethods.push("FETCH");
       actionMethods.push("SEARCH");
     } else if (lowercaseAnnotation.includes("update")) {
-      console.log(actionMethods.push("UPDATE"));
+      // console.log(actionMethods.push("UPDATE"));
+      // return (
+      //   <GridComponent/>
+      // );
+      actionMethods.push("FETCH");
+      actionMethods.push("CREATE");
     } else if (lowercaseAnnotation.includes("delete")) {
       actionMethods.push("DELETE");
     } else if (lowercaseAnnotation.includes("search")) {
@@ -87,6 +94,11 @@ const Mapping = ({ jsonData, setJsonData }) => {
     }
   }, [annotation]);
 
+  useEffect(() => {
+    if (lowercaseAnnotation.includes("update")) {
+      setShowGridComponent(true);
+    }
+  }, [lowercaseAnnotation]);
   let st = localStorage.getItem("ColumnData");
 
   useEffect(() => {
@@ -336,7 +348,8 @@ console.log(newcolumns);
 
   return (
     <div className="outerdiv">
-      <div
+     
+      {!showGridComponent && <div
         className={lowercaseAnnotation.includes("create") ? "create" : "get"}
       >
         <Container
@@ -615,8 +628,8 @@ console.log(newcolumns);
             </AccordionDetails>
           </Accordion>
         </Container>
-      </div>
-      <div
+      </div>}
+      {!showGridComponent && <div
         className={lowercaseAnnotation.includes("create") ? "create" : "get"}
         ref={formRef}
       >
@@ -640,8 +653,8 @@ console.log(newcolumns);
             </Accordion>
           )}
         </Container>
-      </div>
-      <div
+      </div>}
+      {!showGridComponent&&<div
         className={lowercaseAnnotation.includes("create") ? "create" : "get"}
         ref={formRef}
       >
@@ -660,12 +673,41 @@ console.log(newcolumns);
           {showform && (
             <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
               <AccordionDetails sx={{ pt: 3 }}>
-                {showform && <GridComponent />}
+                <h3>FORM GRID</h3>
+                {showform && <GridComponent 
+                lowercaseAnnotation={lowercaseAnnotation}/>}
               </AccordionDetails>
             </Accordion>
           )}
         </Container>
       </div>
+} {showGridComponent &&
+<div className="update">
+    <Container
+          // style={{ background: '#f3e5f5' }}
+          // {annotation.includes("create")?className="create" : className="get" }
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "Hidden",
+            py: 4,
+            // bgcolor: purple
+          }}
+        >
+          <Typography variant="h2" sx={{ mb: 2 }}>
+            {annotation}
+          </Typography>
+            <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
+              <AccordionDetails sx={{ pt: 3 }}>
+                <h3>FORM GRID</h3>
+               <GridComponent
+                lowercaseAnnotation={lowercaseAnnotation}/>
+              </AccordionDetails>
+            </Accordion>
+        </Container>
+    </div>
+}
     </div>
   );
 };

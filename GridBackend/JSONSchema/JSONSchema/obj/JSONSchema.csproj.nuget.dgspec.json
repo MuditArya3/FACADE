@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\RJSF Backend\\JSONSchema\\JSONSchema\\JSONSchema.csproj": {}
+    "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\GridBackend\\JSONSchema\\JSONSchema\\JSONSchema.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\RJSF Backend\\JSONSchema\\JSONSchema\\JSONSchema.csproj": {
+    "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\GridBackend\\JSONSchema\\JSONSchema\\JSONSchema.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\RJSF Backend\\JSONSchema\\JSONSchema\\JSONSchema.csproj",
+        "projectUniqueName": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\GridBackend\\JSONSchema\\JSONSchema\\JSONSchema.csproj",
         "projectName": "JSONSchema",
-        "projectPath": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\RJSF Backend\\JSONSchema\\JSONSchema\\JSONSchema.csproj",
+        "projectPath": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\GridBackend\\JSONSchema\\JSONSchema\\JSONSchema.csproj",
         "packagesPath": "C:\\Users\\Mudit.Arya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\RJSF Backend\\JSONSchema\\JSONSchema\\obj\\",
+        "outputPath": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\GridBackend\\JSONSchema\\JSONSchema\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mudit.Arya\\AppData\\Roaming\\NuGet\\NuGet.Config",

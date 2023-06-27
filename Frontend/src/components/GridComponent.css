@@ -1,6 +1,6 @@
 .gridColumnHeadingItem {
-    min-width: 400px;
-    width: 100%;
+    min-width: 40px;
+    width: 20%;
     /* max-width: 12.5%; */
     align-items: center;
     text-align: center;
@@ -27,8 +27,9 @@
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
+    padding-bottom: 1rem;
     border: 1px solid rgb(145, 144, 144);
-    height: fit-content;
+    /* height: fit-content; */
     max-width: 80vw;
     max-height: 60vh;
     overflow: scroll;
@@ -54,8 +55,8 @@
     border-right: 1px solid rgb(156, 156, 156);
     border-bottom: 1px solid rgb(156, 156, 156); */
 
-    min-width: 400px;
-    width: 100%;
+    min-width: 40px;
+    width: 20%;
     /* max-width: 12.5%; */
     align-items: center;
     text-align: center;

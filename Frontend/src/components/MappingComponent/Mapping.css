@@ -2,16 +2,29 @@
     height: 100%;  
     overflow: hidden;
     /* background-color: rgb(229, 219, 253); */
-    background-image: linear-gradient(to right, rgb(234, 228, 250) , rgb(169, 131, 179));
+    background-image: linear-gradient(to right, rgb(142, 171, 233) , rgb(156, 65, 179));
 }
-
+h3{
+    display: flex;
+    justify-content: center;
+}
 .get{
     /* background-color: rgb(233, 236, 240); */
-    background-image: linear-gradient(to right, rgb(233, 250, 249) , rgb(85, 146, 123));
+    background-image: linear-gradient(to right, rgb(241, 178, 106) , rgb(240, 114, 11));
     /* height: 100vh; */  overflow: hidden;
 }
 
 .outerdiv{
     overflow-y: hidden;
     
+}
+
+.update{
+    height: 100vh;  
+    background-image: linear-gradient(to right, rgb(214, 105, 105) , rgb(172, 40, 40));
+}
+
+.update h3{
+    display: flex;
+    justify-content: center;
 }
