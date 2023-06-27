@@ -2,12 +2,12 @@
     height: 100%;  
     overflow: hidden;
     /* background-color: rgb(229, 219, 253); */
-    background-image: linear-gradient(to right, rgb(234, 228, 250) , rgb(169, 131, 179));
+    background-image: linear-gradient(to right, rgb(142, 171, 233) , rgb(156, 65, 179));
 }
 
 .get{
     /* background-color: rgb(233, 236, 240); */
-    background-image: linear-gradient(to right, rgb(233, 250, 249) , rgb(85, 146, 123));
+    background-image: linear-gradient(to right, rgb(241, 239, 81) , rgb(216, 102, 8));
     /* height: 100vh; */  overflow: hidden;
 }
 
