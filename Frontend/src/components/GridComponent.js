@@ -2,6 +2,7 @@ import Form from "@rjsf/core";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./GridComponent.css";
+import { Edit } from "@mui/icons-material";
 
 const GridComponent = (lowercaseAnnotation) => {
   const [formData, setFormData] = useState([]);
@@ -88,6 +89,9 @@ console.log(showformbutton);
     <div>
       <div className={"gridData"}>
         <div className={"gridColumns"}>
+        <div className={"gridColumnHeadingItem"} >
+          Actions
+        </div>
           {getAPIData &&
             getAPIData.length > 0 &&
             Object.keys(getAPIData[0]).map((key, id) => {
@@ -100,7 +104,7 @@ console.log(showformbutton);
               );
             })}
         </div>
-
+     
         <div className={"gridDataAPI"}>
           {getAPIData.length > 0 &&
             Object.keys(getAPIData).map((key, index) => {
@@ -108,6 +112,9 @@ console.log(showformbutton);
 
               return (
                 <div className={"apiGridRow"} key={index}>
+                  <div className={"apiGridItems"}>
+                    <Edit/>
+                  </div>
                   {Object.keys(getAPIData[key]).map((ind) => {
                     return (
                       <div className={"apiGridItems"}>
