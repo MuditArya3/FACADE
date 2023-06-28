@@ -84,7 +84,8 @@
           "200": {
             "description": "Success"
           }
-        }
+        },
+        "x_cw_operation": "Update Customer by Id"
       }
     },
     "/api/Customers/Customers": {

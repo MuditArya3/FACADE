@@ -3,26 +3,17 @@ import React, { useState } from "react";
 import "./FormComponent.css";
 import axios from "axios";
 
-const FormComponent = ({ jsonData, editData }) => {
+const FormComponent = ({ jsonData, selecteddata }) => {
     const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        const customerId = editData.customerId;
-
-        const requestOptions = {
-            method: "PUT",
-            body: JSON.stringify(Object.fromEntries(formData)),
-        };
+        const formData = e.formData;
+        console.log(formData);
+        const customerId = selecteddata.customerId;
 
         const apiUrl = `https://localhost:7184/api/Customers/Customers/${customerId}`;
-
         axios
-            .put(apiUrl, requestOptions.body)
-            .then((response) => {
-                console.log(response.data);
+            .put(apiUrl, formData)
+            .then(() => {
+                alert("Updated successfully");
             })
             .catch((error) => {
                 console.error(error);

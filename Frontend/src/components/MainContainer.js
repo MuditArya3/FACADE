@@ -1,7 +1,7 @@
 import FormComponent from "./FormComponent";
 import React from "react";
 import "./compStyling/MainContainer.css";
-import GridComponent from "./GridComponent";
+import GridComponent from "./GridComponent/GridComponent";
 
 function MainContainer() {
   return (
