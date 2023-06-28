@@ -20,7 +20,7 @@ h3{
 }
 
 .update{
-    height: 100vh;  
+    /* height: 100vh;   */
     background-image: linear-gradient(to right, rgb(214, 105, 105) , rgb(172, 40, 40));
 }
 
