@@ -19,6 +19,27 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
   const [showform, setshowform] = useState(false);
   const formRef = useRef(null);
 
+  useEffect(() => {
+    if (showform && formRef.current) {
+      formRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
+  }, [showform]);
+
+  useEffect(() => {
+    !getAPIData.length && getGridData();
+  }, []);
+
+  useEffect(() => {
+    if (lowercaseAnnotation.includes("update")) {
+      setshowformbutton(true);
+    }
+  }, [lowercaseAnnotation]);
+
+
   const handleSubmit = () => {
     console.log(formData);
     console.log(formData.Search);
@@ -69,20 +90,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
 
     //   return response;
   };
-  // getGridData();
-
-  // const handleEditClick = (apiGridItems) => {
-  //   console.log(JSON.stringify(apiGridItems));
-  //   setselecteddata(apiGridItems);
-  //   console.log(selecteddata);
-  //   // localStorage.setItem("editData", JSON.stringify(apiGridItems));
-  // };
-  // console.log(selecteddata);
-
-  // useEffect(() => {
-  // handleData(selecteddata);
-  // }, [selecteddata])
-
+ 
   const handleData = (selecteddata) => {
     //   localStorage.setItem("ColumnData", JSON.stringify(columns));
     let requiredFields;
@@ -94,7 +102,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
       layout = {
         key: rcol,
         title: rcol,
-        type: "string",
+        type: typeof selecteddata[rcol]=== "number" ? "integer" : typeof selecteddata[rcol],
         default: selecteddata[rcol],
       };
       uu[rcol] = { ...layout };
@@ -171,31 +179,6 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
     localStorage.setItem("jsonSchema", json);
   };
 
-  useEffect(() => {
-    if (showform && formRef.current) {
-      formRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    }
-  }, [showform]);
-
-  useEffect(() => {
-    !newApiState.length && getGridData();
-  }, []);
-
-  console.log(lowercaseAnnotation);
-  // const annotation = lowercaseAnnotation.lowercaseAnnotation;
-  // console.log(annotation);
-  useEffect(() => {
-    if (lowercaseAnnotation.includes("update")) {
-      setshowformbutton(true);
-    }
-  }, [lowercaseAnnotation]);
-
-  console.log(showformbutton);
-
   return (
     <div>
       <div className={"gridData"}>
@@ -222,7 +205,8 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
               return (
                 <div className={"apiGridRow"} key={index}>
                   <div className={"apiGridItems"}>
-                    <Edit onClick={() => handleData(getAPIData[key])} />
+                    <Edit onClick={() => {handleData(getAPIData[key])
+                    setselecteddata(getAPIData[key])}} />
                   </div>
                   {Object.keys(getAPIData[key]).map((ind) => {
                     return (
@@ -249,7 +233,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
             console.log(formData);
             console.log(formData.Search);
           }}
-          onSubmit={(e) => handleSubmit()}
+          //onSubmit={(e) => handleEdit()}
         />
       )}
       {showform && (
@@ -268,7 +252,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
           >
             <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
               <AccordionDetails sx={{ pt: 3 }}>
-                <FormComponent />
+                <FormComponent selecteddata={selecteddata} />
               </AccordionDetails>
             </Accordion>
           </Container>
