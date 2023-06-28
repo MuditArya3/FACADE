@@ -131,22 +131,11 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
     // window.open("/form", "_blank");
     //   }
     handleSave(uu);
-    // handleSave(
-    //   uu,
-    //   requiredFields,
-    //   buttonClicked,
-    //   setJsonData,
-    //   setJsonfile,
-    //   setButtonClicked
-    // );
+   
   };
   const handleSave = (
     data
-    // requiredFields,
-    // buttonClicked,
-    // setJsonData,
-    // setJsonfile,
-    // setButtonClicked
+   
   ) => {
     console.log(data);
     var json = Object.assign({}, data);
