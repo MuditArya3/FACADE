@@ -2,7 +2,7 @@ import Form from "@rjsf/core";
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "../GridComponent/GridComponent.css";
-import { Edit } from "@mui/icons-material";
+import { Edit, FolderZip } from "@mui/icons-material";
 import { handleData } from "../SwaggerGrid/SwaggerGrid";
 import FormComponent from "../FormComponent/FormComponent";
 import { Container } from "@mui/system";
@@ -178,6 +178,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
     setJsonData(JSON.stringify(data));
     localStorage.setItem("jsonSchema", json);
   };
+  
 
   return (
     <div>
@@ -230,8 +231,6 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
           idPrefix={"rjsf_prefix"}
           onChange={(e) => {
             setFormData(e.formData);
-            console.log(formData);
-            console.log(formData.Search);
           }}
           //onSubmit={(e) => handleEdit()}
         />
@@ -252,7 +251,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
           >
             <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
               <AccordionDetails sx={{ pt: 3 }}>
-                <FormComponent selecteddata={selecteddata} />
+                <FormComponent selecteddata={selecteddata} setAPIData={setAPIData} showform={showform} setshowform={setshowform}/>
               </AccordionDetails>
             </Accordion>
           </Container>
