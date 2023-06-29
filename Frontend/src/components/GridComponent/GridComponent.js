@@ -2,7 +2,7 @@ import Form from "@rjsf/core";
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "../GridComponent/GridComponent.css";
-import { Edit } from "@mui/icons-material";
+import { Edit, FolderZip } from "@mui/icons-material";
 import { handleData } from "../SwaggerGrid/SwaggerGrid";
 import FormComponent from "../FormComponent/FormComponent";
 import { Container } from "@mui/system";
@@ -168,12 +168,13 @@ console.log(baseURL);
     setJsonData(JSON.stringify(data));
     localStorage.setItem("jsonSchema", json);
   };
+  
 
   return (
     <div>
       <div className={"gridData"}>
         <div className={"gridColumns"}>
-          <div className={"gridColumnHeadingItem"}>Actions</div>
+          {showformbutton && <div className={"gridColumnHeadingItem"}>Actions</div>}
           {getAPIData &&
             getAPIData.length > 0 &&
             Object.keys(getAPIData[0]).map((key, id) => {
@@ -194,10 +195,10 @@ console.log(baseURL);
 
               return (
                 <div className={"apiGridRow"} key={index}>
-                  <div className={"apiGridItems"}>
+                  {showformbutton && <div className={"apiGridItems"}>
                     <Edit onClick={() => {handleData(getAPIData[key])
                     setselecteddata(getAPIData[key])}} />
-                  </div>
+                  </div>}
                   {Object.keys(getAPIData[key]).map((ind) => {
                     return (
                       <div className={"apiGridItems"}>
@@ -220,8 +221,6 @@ console.log(baseURL);
           idPrefix={"rjsf_prefix"}
           onChange={(e) => {
             setFormData(e.formData);
-            console.log(formData);
-            console.log(formData.Search);
           }}
           //onSubmit={(e) => handleEdit()}
         />
@@ -242,7 +241,8 @@ console.log(baseURL);
           >
             <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
               <AccordionDetails sx={{ pt: 3 }}>
-                <FormComponent selecteddata={selecteddata} />
+                <FormComponent selecteddata={selecteddata} setAPIData={setAPIData} showform={showform} setshowform={setshowform}
+                submitText={showformbutton ? "Update" : undefined} />
               </AccordionDetails>
             </Accordion>
           </Container>
