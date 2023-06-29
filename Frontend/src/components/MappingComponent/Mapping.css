@@ -2,7 +2,7 @@
     background-image: linear-gradient(to right, rgb(142, 171, 233) , rgb(156, 65, 179));
     background-size: cover;
     overflow: auto;
-    height: 100vh;
+    /* height: 100%; */
     /* background-color: rgb(229, 219, 253); */
   
 }
@@ -15,7 +15,7 @@ h3{
     background-image: linear-gradient(to right, rgb(241, 178, 106) , rgb(240, 114, 11));
     background-size: cover;
     overflow: auto;
-    height: 100vh;
+    /* height: 34vh; */
 }
 
 .outerdiv{

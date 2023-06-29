@@ -7,6 +7,7 @@ import { handleData } from "../SwaggerGrid/SwaggerGrid";
 import FormComponent from "../FormComponent/FormComponent";
 import { Container } from "@mui/system";
 import { Accordion, AccordionDetails } from "@mui/material";
+import { baseURL } from "../../AppSettings.js";
 
 const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
   const [formData, setFormData] = useState([]);
@@ -71,10 +72,10 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
   console.log(searchGrid);
   console.log(getAPIData);
   const [newApiState, setNewApiState] = useState([]);
-
+console.log(baseURL);
   const getGridData = () => {
     axios
-      .get(`https://localhost:7184/api/Customers/Customers`)
+      .get(`${baseURL}/api/Customers/Customers`)
       .then((res) => {
         if (res && res.data) {
           // props = res.data;
