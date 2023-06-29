@@ -5,8 +5,7 @@
         "disabled": false,
         "className": "btn btn-info"
       },
-      "norender": false,
-      "submitText": "Update"
+      "norender": false
     }
   }
 }

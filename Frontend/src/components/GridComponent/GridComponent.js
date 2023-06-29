@@ -184,7 +184,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
     <div>
       <div className={"gridData"}>
         <div className={"gridColumns"}>
-          <div className={"gridColumnHeadingItem"}>Actions</div>
+          {showformbutton && <div className={"gridColumnHeadingItem"}>Actions</div>}
           {getAPIData &&
             getAPIData.length > 0 &&
             Object.keys(getAPIData[0]).map((key, id) => {
@@ -205,10 +205,10 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
 
               return (
                 <div className={"apiGridRow"} key={index}>
-                  <div className={"apiGridItems"}>
+                  {showformbutton && <div className={"apiGridItems"}>
                     <Edit onClick={() => {handleData(getAPIData[key])
                     setselecteddata(getAPIData[key])}} />
-                  </div>
+                  </div>}
                   {Object.keys(getAPIData[key]).map((ind) => {
                     return (
                       <div className={"apiGridItems"}>
@@ -251,7 +251,8 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
           >
             <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
               <AccordionDetails sx={{ pt: 3 }}>
-                <FormComponent selecteddata={selecteddata} setAPIData={setAPIData} showform={showform} setshowform={setshowform}/>
+                <FormComponent selecteddata={selecteddata} setAPIData={setAPIData} showform={showform} setshowform={setshowform}
+                submitText={showformbutton ? "Update" : undefined} />
               </AccordionDetails>
             </Accordion>
           </Container>

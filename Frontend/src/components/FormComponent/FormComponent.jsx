@@ -9,6 +9,7 @@ const FormComponent = ({
     setAPIData,
     showform,
     setshowform,
+    submitText,
 }) => {
     const handleSubmit = (e) => {
         const formData = e.formData;
@@ -41,6 +42,8 @@ const FormComponent = ({
     console.log(schema1);
     // console.log(schema);
     const uiSchema = require("../../jsonFiles/uiSchema.json");
+    uiSchema["ui:options"]["submitButtonOptions"]["submitText"] =
+        submitText || "Submit";
 
     return (
         <div>
