@@ -11,6 +11,515 @@
     }
   ],
   "paths": {
+    "/v1/partners/{partnerID}/sites/{siteID}/resources/{resourceID}/alerts": {
+      "get": {
+        "tags": [
+          "alerts"
+        ],
+        "summary": "Gets the Alert details for the given combination of partner/site/resource.",
+        "operationId": "getAlertIncidentDetails",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Operation",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/sites/{siteID}/resources/{resourceID}/tickets": {
+      "get": {
+        "tags": [
+          "tickets"
+        ],
+        "summary": "Gets the ticket details for the given combination of partner/site/resource.",
+        "operationId": "getTicketIncidentDetails",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Operation",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/users/{userID}/mAuth": {
+      "get": {
+        "tags": [
+          "mAuth"
+        ],
+        "summary": "Gets the Auth details for the given combination of partner/users.",
+        "operationId": "getMenuAuthDetails",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/migrateEntitlement": {
+      "get": {
+        "tags": [
+          "partnerEntitlementMigration"
+        ],
+        "summary": "Migrates the partner specific entitlements for the mentioned ID.",
+        "operationId": "migratePartnerEntitlments",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/clients/{clientID}/migrateEntitlement": {
+      "get": {
+        "tags": [
+          "clientEntitlementMigration"
+        ],
+        "summary": "Migrates the client specific entitlements for the mentioned ID.",
+        "operationId": "migrateClientEntitlments",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "version"
+        ],
+        "summary": "Gets the version for the repo.",
+        "operationId": "getVersion",
+        "responses": {
+          "200": {
+            "description": "Local Version type for the RMM Alerting API",
+            "headers": {
+              "Major": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ServiceName": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Build": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ServiceProvider": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Minor": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "SolutionName": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Patch": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {}
+          },
+          "400": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
     "/v1/alerts": {
       "put": {
         "tags": [
@@ -171,9 +680,212 @@
             }
           }
         },
-        "x_cw_service": "Customer Service",
-        "x_cw_operation": "Get a customer by ID",
         "x-codegen-request-body-name": "body"
+      }
+    },
+    "/v1/partners/{partnerID}/sites/{siteID}/resources/{resourceID}/conditions/{conditionID}validatePassword": {
+      "get": {
+        "tags": [
+          "passwordVault"
+        ],
+        "summary": "Check whether specific password is available for the given combination of partner/site/resource.",
+        "operationId": "getResourcePassword",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conditionID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Password is available",
+            "content": {}
+          },
+          "404": {
+            "description": "Password is not available",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/sites/{siteID}/conditions/{conditionID}validatePassword": {
+      "get": {
+        "tags": [
+          "passwordVault"
+        ],
+        "summary": "Check whether specific password is available for the given combination of partner/site.",
+        "operationId": "getSitePassword",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conditionID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Password is available",
+            "content": {}
+          },
+          "404": {
+            "description": "Password is not available",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/sites/{siteID}/resources/{resourceID}/ValidatePasswordVault": {
+      "get": {
+        "tags": [
+          "passwordVault"
+        ],
+        "summary": "Check whether any password is available for the given combination of partner/site/resource.",
+        "operationId": "getgeneralResourcePassword",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Password is available",
+            "content": {}
+          },
+          "404": {
+            "description": "Password is not available",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/resources/{resourceID}/ospatchpolicy": {
+      "get": {
+        "tags": [
+          "OSPatching"
+        ],
+        "summary": "Fetch OS Patch policy details for given resource id",
+        "parameters": [
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OS Patch policy details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OSPatchPolicyDetailsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Policy data not found for given resource id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/v1/ospatchpolicymigrate": {
@@ -1041,83 +1753,83 @@
           }
         }
       }
+    }
+  },
+  "responses": {
+    "apiResp": {
+      "description": "response structure",
+      "headers": {
+        "data": {
+          "schema": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "content": {}
     },
-    "responses": {
-      "apiResp": {
-        "description": "response structure",
-        "headers": {
-          "data": {
-            "schema": {
-              "type": "string"
-            }
-          },
-          "status": {
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+    "apiRespSch": {
+      "description": "response structure",
+      "headers": {
+        "outdata": {
+          "schema": {
+            "type": "string"
           }
         },
-        "content": {}
+        "status": {
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
       },
-      "apiRespSch": {
-        "description": "response structure",
-        "headers": {
-          "outdata": {
-            "schema": {
-              "type": "string"
-            }
-          },
-          "status": {
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+      "content": {}
+    },
+    "versionResp": {
+      "description": "Local Version type for the RMM Alerting API",
+      "headers": {
+        "Major": {
+          "schema": {
+            "type": "string"
           }
         },
-        "content": {}
+        "ServiceName": {
+          "schema": {
+            "type": "string"
+          }
+        },
+        "Build": {
+          "schema": {
+            "type": "string"
+          }
+        },
+        "ServiceProvider": {
+          "schema": {
+            "type": "string"
+          }
+        },
+        "Minor": {
+          "schema": {
+            "type": "string"
+          }
+        },
+        "SolutionName": {
+          "schema": {
+            "type": "string"
+          }
+        },
+        "Patch": {
+          "schema": {
+            "type": "string"
+          }
+        }
       },
-      "versionResp": {
-        "description": "Local Version type for the RMM Alerting API",
-        "headers": {
-          "Major": {
-            "schema": {
-              "type": "string"
-            }
-          },
-          "ServiceName": {
-            "schema": {
-              "type": "string"
-            }
-          },
-          "Build": {
-            "schema": {
-              "type": "string"
-            }
-          },
-          "ServiceProvider": {
-            "schema": {
-              "type": "string"
-            }
-          },
-          "Minor": {
-            "schema": {
-              "type": "string"
-            }
-          },
-          "SolutionName": {
-            "schema": {
-              "type": "string"
-            }
-          },
-          "Patch": {
-            "schema": {
-              "type": "string"
-            }
-          }
-        },
-        "content": {}
-      }
+      "content": {}
     }
   }
 }
