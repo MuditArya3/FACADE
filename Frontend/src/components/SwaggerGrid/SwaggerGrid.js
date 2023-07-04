@@ -121,6 +121,7 @@ export  const fetchService = async (swaggerData, setService) => {
         const swaggertext = JSON.stringify(swaggerData);
         const response = await EndpointServicePostApi(swaggertext);
         setService(response);
+        console.log(response);
     } catch (error) {
         console.error("Error fetching service:", error);
     }

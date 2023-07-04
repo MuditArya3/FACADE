@@ -252,7 +252,8 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
             <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
               <AccordionDetails sx={{ pt: 3 }}>
                 <FormComponent selecteddata={selecteddata} setAPIData={setAPIData} showform={showform} setshowform={setshowform}
-                submitText={showformbutton ? "Update" : undefined} />
+                submitText={showformbutton ? "Update" : undefined}
+                showformbutton={showformbutton} />
               </AccordionDetails>
             </Accordion>
           </Container>
