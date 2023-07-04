@@ -221,22 +221,22 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
                           (getAPIData[key][ind] === 1 ? (
                             <div
                               style={{
-                                width: "50px",
+                                width: "60px",
                                 height: "20px",
                                 backgroundColor: "green",
-                                marginLeft: "15px",
-                                borderRadius: "10%",
+                                marginLeft: "10px",
+                                borderRadius: "30px",
                                 color:"white"
                               }}
                             >Online</div>
                           ) : (
                             <div
                               style={{
-                                width: "50px",
+                                width: "60px",
                                 height: "20px",
                                 backgroundColor: "red",
-                                marginLeft: "15px",
-                                borderRadius: "10%",
+                                marginLeft: "10px",
+                                borderRadius: "30px",
                               }}
                             >Offline</div>
                           ))}
