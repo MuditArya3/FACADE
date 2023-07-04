@@ -1,5 +1,5 @@
 .gridColumnHeadingItem {
-    min-width: 40px;
+    min-width: 100px;
     width: 20%;
     /* max-width: 12.5%; */
     align-items: center;
@@ -8,9 +8,24 @@
     border-bottom: 1px solid rgb(156, 156, 156);
     padding: 10px;
     background-color: #ededed;
-    position: sticky;
-    top: 0;
-}
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* .gridColumnHeadingItem:hover {
+    content: attr(data-name);
+    position: absolute;
+    top: 0px;
+    left: auto;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #ccc;
+    white-space: nowrap;
+    z-index: 1;
+  } */
+  
 
 .gridData{
     /* display: flex; */
@@ -19,7 +34,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-
+    
 }
 
 .gridData {
@@ -32,12 +47,13 @@
     /* height: fit-content; */
     max-width: 90vw;
     max-height: 60vh;
-    /* overflow: scroll; */
+    overflow: auto;
 }
 
 .gridColumns{
     display: flex;
     width: 100%;
+
 }
 
 .gridDataAPI{
@@ -45,7 +61,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    
+ 
 }
 
 .apiGridItems{
@@ -55,8 +71,11 @@
     text-align: center;
     border-right: 1px solid rgb(156, 156, 156);
     border-bottom: 1px solid rgb(156, 156, 156); */
-    overflow: auto;
-    min-width: 40px;
+    /* overflow: auto; */ 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    overflow: hidden;
+    min-width: 100px;
     width: 20%;
     /* max-width: 12.5%; */
     align-items: center;
@@ -73,4 +92,5 @@
     display: flex;
     color: #333;
     width: 100%;
+    
 }

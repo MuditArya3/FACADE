@@ -35,11 +35,10 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
   }, []);
 
   useEffect(() => {
-    if (lowercaseAnnotation.includes("update")) {
+    if (lowercaseAnnotation.includes("get")) {
       setshowformbutton(true);
     }
   }, [lowercaseAnnotation]);
-
 
   const handleSubmit = () => {
     console.log(formData);
@@ -72,10 +71,10 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
   console.log(searchGrid);
   console.log(getAPIData);
   const [newApiState, setNewApiState] = useState([]);
-console.log(baseURL);
+  console.log(baseURL);
   const getGridData = () => {
     axios
-      .get(`${baseURL}/api/Customers/Customers`)
+      .get(`https://localhost:7184/api/Desktop/Desktops`)
       .then((res) => {
         if (res && res.data) {
           // props = res.data;
@@ -91,7 +90,7 @@ console.log(baseURL);
 
     //   return response;
   };
- 
+
   const handleData = (selecteddata) => {
     //   localStorage.setItem("ColumnData", JSON.stringify(columns));
     let requiredFields;
@@ -103,7 +102,10 @@ console.log(baseURL);
       layout = {
         key: rcol,
         title: rcol,
-        type: typeof selecteddata[rcol]=== "number" ? "integer" : typeof selecteddata[rcol],
+        type:
+          typeof selecteddata[rcol] === "number"
+            ? "integer"
+            : typeof selecteddata[rcol],
         default: selecteddata[rcol],
       };
       uu[rcol] = { ...layout };
@@ -140,12 +142,8 @@ console.log(baseURL);
     // window.open("/form", "_blank");
     //   }
     handleSave(uu);
-   
   };
-  const handleSave = (
-    data
-   
-  ) => {
+  const handleSave = (data) => {
     console.log(data);
     var json = Object.assign({}, data);
     console.log(json);
@@ -168,20 +166,27 @@ console.log(baseURL);
     setJsonData(JSON.stringify(data));
     localStorage.setItem("jsonSchema", json);
   };
-  
 
   return (
     <div>
       <div className={"gridData"}>
         <div className={"gridColumns"}>
-          {showformbutton && <div className={"gridColumnHeadingItem"}>Actions</div>}
+          {showformbutton && (
+            <div className={"gridColumnHeadingItem"} title="Actions">
+              Actions
+            </div>
+          )}
           {getAPIData &&
             getAPIData.length > 0 &&
             Object.keys(getAPIData[0]).map((key, id) => {
               console.log(Object.keys(getAPIData[0]));
               console.log(key);
               return (
-                <div className={"gridColumnHeadingItem"} htmlFor={id}>
+                <div
+                  className={"gridColumnHeadingItem"}
+                  htmlFor={id}
+                  title={key}
+                >
                   {key}
                 </div>
               );
@@ -195,14 +200,88 @@ console.log(baseURL);
 
               return (
                 <div className={"apiGridRow"} key={index}>
-                  {showformbutton && <div className={"apiGridItems"}>
-                    <Edit onClick={() => {handleData(getAPIData[key])
-                    setselecteddata(getAPIData[key])}} />
-                  </div>}
+                  {showformbutton && (
+                    <div className={"apiGridItems"}>
+                      <Edit
+                        onClick={() => {
+                          handleData(getAPIData[key]);
+                          setselecteddata(getAPIData[key]);
+                        }}
+                      />
+                    </div>
+                  )}
                   {Object.keys(getAPIData[key]).map((ind) => {
+                    console.log(ind);
                     return (
-                      <div className={"apiGridItems"}>
-                        {getAPIData[key][ind]}
+                      <div
+                        className={"apiGridItems"}
+                        title={getAPIData[key][ind]}
+                      >
+                        {ind === "alive" &&
+                          (getAPIData[key][ind] === 1 ? (
+                            <div
+                              style={{
+                                width: "50px",
+                                height: "20px",
+                                backgroundColor: "green",
+                                marginLeft: "15px",
+                                borderRadius: "10%",
+                                color:"white"
+                              }}
+                            >Online</div>
+                          ) : (
+                            <div
+                              style={{
+                                width: "50px",
+                                height: "20px",
+                                backgroundColor: "red",
+                                marginLeft: "15px",
+                                borderRadius: "10%",
+                              }}
+                            >Offline</div>
+                          ))}
+                        {ind === "antivirus" &&
+                          (getAPIData[key][ind] === 1 ? (
+                            <div> Running</div>
+                          ) : getAPIData[key][ind] === 0 ? (
+                            <div> Inactive</div>
+                          ) : getAPIData[key][ind] === 2 ?(
+                            <div>Not Instlled</div>
+                          ):(
+                            <div>Not Synced</div>
+                          ))}
+                           {ind === "diskSpace" &&
+                          (getAPIData[key][ind] === 1 ? (
+                            <div> Succeeds</div>
+                          ) : getAPIData[key][ind] === 0 ? (
+                            <div> Inactive</div>
+                          ) : (
+                            <div>Exceeds</div>
+                          ))}
+                          {ind === "smartDisk" &&
+                          (getAPIData[key][ind] === 1 ? (
+                            <div>Active</div>
+                          ) : getAPIData[key][ind] === 0 ? (
+                            <div> Inactive</div>
+                          ) : getAPIData[key][ind] === 2 ?(
+                            <div>Offline</div>
+                          ):(
+                            <div>No Info</div>
+                          ))}
+                          {ind === "amt" &&
+                          (getAPIData[key][ind] === 1 ? (
+                            <div> Not Activated</div>
+                          ) : getAPIData[key][ind] === 0 ? (
+                            <div> Not Configured</div>
+                          ) : (
+                            <div>Compliant</div>
+                          ))}
+                        {ind !== "alive" &&
+                          ind !== "antivirus" &&
+                          ind !== "diskSpace" &&
+                          ind !== "smartDisk" &&
+                          ind !== "amt" &&
+                          getAPIData[key][ind]}
                       </div>
                     );
                   })}
@@ -241,8 +320,13 @@ console.log(baseURL);
           >
             <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
               <AccordionDetails sx={{ pt: 3 }}>
-                <FormComponent selecteddata={selecteddata} setAPIData={setAPIData} showform={showform} setshowform={setshowform}
-                submitText={showformbutton ? "Update" : undefined} />
+                <FormComponent
+                  selecteddata={selecteddata}
+                  setAPIData={setAPIData}
+                  showform={showform}
+                  setshowform={setshowform}
+                  submitText={showformbutton ? "Update" : undefined}
+                />
               </AccordionDetails>
             </Accordion>
           </Container>

@@ -75,9 +75,10 @@ const Mapping = ({ jsonData, setJsonData }) => {
             actionMethods.map((action) => {
                 console.log(action);
             });
-        } else if (lowercaseAnnotation.includes("get")) {
-            actionMethods.push("FETCH");
-            actionMethods.push("SEARCH");
+        } else if (lowercaseAnnotation.includes("get")) { 
+            setShowGridComponent(true);
+            // actionMethods.push("FETCH");
+            // actionMethods.push("SEARCH");
         } else if (lowercaseAnnotation.includes("update")) {
             // console.log(actionMethods.push("UPDATE"));
             // return (
