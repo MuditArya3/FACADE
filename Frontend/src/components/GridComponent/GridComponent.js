@@ -36,7 +36,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData ,mappings}) => {
   }, []);
 
   useEffect(() => {
-    if (lowercaseAnnotation.includes("get")) {
+    if (lowercaseAnnotation.includes("update")) {
       setshowformbutton(true);
     }
   }, [lowercaseAnnotation]);
