@@ -1,0 +1,15 @@
+{
+  "ui:options": {
+    "title": "Title",
+    "description": "Description",
+    "classNames": "my-class",
+    "submitButtonOptions": {
+      "props": {
+        "disabled": false,
+        "className": "btn btn-info"
+      },
+      "norender": false,
+      "submitText": "Hello"
+    }
+  }
+}

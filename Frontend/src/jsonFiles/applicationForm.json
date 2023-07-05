@@ -1,0 +1,56 @@
+{
+  "label": "search",
+  "title": "Search Form",
+  "description": "Search using belox Textbox",
+  "type": "object",
+  "required": [
+    "name",
+    "format"
+  ],
+  "properties": {
+    "id": {
+      "title": "id",
+      "type": "integer",
+      "key": "id"
+    },
+    "name": {
+      "title": "name",
+      "type": "string",
+      "key": "name"
+    },
+    "format": {
+      "title": "format",
+      "type": "string",
+      "key": "format"
+    },
+    "defaultFlag": {
+      "title": "defaultFlag",
+      "type": "string",
+      "nullable": true,
+      "key": "defaultFlag"
+    },
+    "countryIds": {
+      "title": "countryIds",
+      "type": "string",
+      "key": "countryIds"
+    },
+    "addAllCountries": {
+      "title": "addAllCountries",
+      "type": "string",
+      "nullable": true,
+      "key": "addAllCountries"
+    },
+    "removeAllCountries": {
+      "title": "removeAllCountries",
+      "type": "string",
+      "nullable": true,
+      "key": "removeAllCountries"
+    },
+    "_info": {
+      "title": "_info",
+      "type": "string",
+      "key": "_info"
+    },
+    "custom": "fetch('https://yrzoud88dh5x80f4266.simplifycloudlab.com/v4_6_release/apis/3.0/service/tickets', {\n            method: 'POST',\n            headers: {\n                'Content-Type': 'application/json',\n                'Access-Control-Allow-Origin': '*',\n                'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',\n                'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',\n            },\n            body:JSON.stringify({})\n          }).then(function (response) {\n          console.log(response,'gagan');\n            if (response.ok) {\n              return response.json();\n            }\n            //throw response;\n          }).then(function (data) {\n            console.log(data);\n          }).catch(function (error) {\n            console.warn(error);\n          });\n          input: true,\n          "
+  }
+}

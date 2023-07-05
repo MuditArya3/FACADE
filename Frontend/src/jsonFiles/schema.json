@@ -1,0 +1,28 @@
+{
+  "title": "Test form",
+  "type": "object",
+  "required": [
+    "firstName",
+    "lastName"
+  ],
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "title": "First name",
+      "default": "Perterstein",
+      "minLength": 8
+    },
+    "turns": {
+        "type": "string",
+        "represents": "turns",
+        "format":"radio",
+        "enum":  ["option1", "option2", "option3"],
+        "enumNames": ["a", "b", "c"],
+        "uniqueItems": true,
+        "imgs":["data:image/png;base64,...", 
+                "data:image/png;base64,...",
+                "data:image/png;base64,..."
+               ]
+        }
+  }
+}
