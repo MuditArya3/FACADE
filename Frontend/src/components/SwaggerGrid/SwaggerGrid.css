@@ -8,7 +8,6 @@
 }
 .bg_image{
     opacity: 1;
-
     position: absolute;
     left: 0;
     top: 0;
@@ -18,4 +17,9 @@
 .css-6hp17o-MuiList-root-MuiMenu-list {
     max-height: 23rem;
     overflow-y: auto;
+}
+.toprightaccordian{
+    position: absolute;
+  top: 0;
+  right: 0;
 }

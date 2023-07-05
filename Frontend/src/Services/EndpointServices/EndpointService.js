@@ -9,7 +9,7 @@ export const EndpointPostApi = async data => {
     try {
         const jsonData = JSON.stringify(data);
         const response = await postApi(baseURL, jsonData, headers);
-        console.log("Endpoints", response.data);
+        //console.log("Endpoints", response.data);
         return response.data;
     } catch (error) {
         console.error("Error fetching endpoints:", error);
@@ -26,7 +26,7 @@ export const EndpointServicePostApi = async data => {
     try {
         const jsonData = JSON.stringify(data);
         const response = await postApi(baseURL, jsonData, headers);
-        console.log("Endpoints", response.data);
+        //console.log("Endpoints", response.data);
         return response.data;
     } catch (error) {
         console.error("Error fetching endpoints:", error);
