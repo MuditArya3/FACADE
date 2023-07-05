@@ -442,6 +442,7 @@ export const handleData = (
                 type: rcol.Type.toLowerCase(),
               };
         }
+
         else{
             console.log("hello");
             layout = {
@@ -457,30 +458,31 @@ export const handleData = (
     });
   });
 
-  let x = `fetch('https://yrzoud88dh5x80f4266.simplifycloudlab.com/v4_6_release/apis/3.0/service/tickets', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
-            'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
-        },
-        body:JSON.stringify({})
-      }).then(function (response) {
-      console.log(response,'gagan');
-        if (response.ok) {
-          return response.json();
-        }
-        //throw response;
-      }).then(function (data) {
-        console.log(data);
-      }).catch(function (error) {
-        console.warn(error);
-      });
-      input: true,
-      `;
+  // let x = `fetch('https://yrzoud88dh5x80f4266.simplifycloudlab.com/v4_6_release/apis/3.0/service/tickets', {
+  //       method: 'POST',
+  //       headers: {
+  //           'Content-Type': 'application/json',
+  //           'Access-Control-Allow-Origin': '*',
+  //           'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
+  //           'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
+  //       },
+  //       body:JSON.stringify({})
+  //     }).then(function (response) {
+  //     console.log(response,'gagan');
+  //       if (response.ok) {
+  //         return response.json();
+  //       }
+  //       //throw response;
+  //     }).then(function (data) {
+  //       console.log(data);
+  //     }).catch(function (error) {
+  //       console.warn(error);
+  //     });
+  //     input: true,
+  //     `;
 
-  uu["custom"] = x;
+  // uu["custom"] = x;
+  
 //   if (buttonClicked === "SaveMapping") {
 //     window.open("/form", "_blank");
 //   }

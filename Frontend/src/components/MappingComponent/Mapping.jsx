@@ -76,9 +76,9 @@ const Mapping = ({ jsonData, setJsonData }) => {
                 console.log(action);
             });
         } else if (lowercaseAnnotation.includes("get")) { 
-            setShowGridComponent(true);
-            // actionMethods.push("FETCH");
-            // actionMethods.push("SEARCH");
+            // setShowGridComponent(true);
+            actionMethods.push("FETCH");
+            actionMethods.push("SEARCH");
         } else if (lowercaseAnnotation.includes("update")) {
             // console.log(actionMethods.push("UPDATE"));
             // return (
@@ -742,7 +742,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                     </Container>
                 </div>
             )}
-            {!showGridComponent && (
+            {!showGridComponent && lowercaseAnnotation.includes("create") &&(
                 <div
                     className={
                         lowercaseAnnotation.includes("create")
@@ -812,6 +812,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                                 lowercaseAnnotation
                                             }
                                             setJsonData={setJsonData}
+                                            mappings={mappings}
                                         />
                                     )}
                                 </AccordionDetails>

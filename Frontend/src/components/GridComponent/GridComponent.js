@@ -9,7 +9,7 @@ import { Container } from "@mui/system";
 import { Accordion, AccordionDetails } from "@mui/material";
 import { baseURL } from "../../AppSettings.js";
 
-const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
+const GridComponent = ({ lowercaseAnnotation, setJsonData ,mappings}) => {
   const [formData, setFormData] = useState([]);
   const [searchGrid, setSearchGrid] = useState([]);
   const [getAPIData, setAPIData] = useState([]);
@@ -19,6 +19,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
   const [selecteddata, setselecteddata] = useState([]);
   const [showform, setshowform] = useState(false);
   const formRef = useRef(null);
+  const [mappedGrid, setMappedGrid] = useState(false)
 
   useEffect(() => {
     if (showform && formRef.current) {
@@ -40,6 +41,12 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
     }
   }, [lowercaseAnnotation]);
 
+  useEffect(() => {
+    mappings &&
+      setMappedGrid(true);
+  }, [mappings])
+  console.log(mappings);
+  console.log(mappedGrid);
   const handleSubmit = () => {
     console.log(formData);
     console.log(formData.Search);
@@ -113,30 +120,30 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
 
     console.log(uu);
 
-    let x = `fetch('https://yrzoud88dh5x80f4266.simplifycloudlab.com/v4_6_release/apis/3.0/service/tickets', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
-            'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
-        },
-        body:JSON.stringify({})
-      }).then(function (response) {
-      console.log(response,'gagan');
-        if (response.ok) {
-          return response.json();
-        }
-        //throw response;
-      }).then(function (data) {
-        console.log(data);
-      }).catch(function (error) {
-        console.warn(error);
-      });
-      input: true,
-      `;
+    // let x = `fetch('https://yrzoud88dh5x80f4266.simplifycloudlab.com/v4_6_release/apis/3.0/service/tickets', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Access-Control-Allow-Origin': '*',
+    //         'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
+    //         'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
+    //     },
+    //     body:JSON.stringify({})
+    //   }).then(function (response) {
+    //   console.log(response,'gagan');
+    //     if (response.ok) {
+    //       return response.json();
+    //     }
+    //     //throw response;
+    //   }).then(function (data) {
+    //     console.log(data);
+    //   }).catch(function (error) {
+    //     console.warn(error);
+    //   });
+    //   input: true,
+    //   `;
 
-    uu["custom"] = x;
+    // uu["custom"] = x;
     setshowform(true);
     //   if (buttonClicked === "SaveMapping") {
     // window.open("/form", "_blank");
@@ -169,7 +176,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
 
   return (
     <div>
-      <div className={"gridData"}>
+      {!mappedGrid &&<div className={"gridData"}>
         <div className={"gridColumns"}>
           {showformbutton && (
             <div className={"gridColumnHeadingItem"} title="Actions">
@@ -217,26 +224,27 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
                         className={"apiGridItems"}
                         title={getAPIData[key][ind]}
                       >
-                        {ind === "alive" &&
+                        {getAPIData[key][ind]}
+                        {/* {ind === "alive" &&
                           (getAPIData[key][ind] === 1 ? (
                             <div
                               style={{
-                                width: "50px",
+                                width: "60px",
                                 height: "20px",
                                 backgroundColor: "green",
-                                marginLeft: "15px",
-                                borderRadius: "10%",
+                                marginLeft: "10px",
+                                borderRadius: "30px",
                                 color:"white"
                               }}
                             >Online</div>
                           ) : (
                             <div
                               style={{
-                                width: "50px",
+                                width: "60px",
                                 height: "20px",
                                 backgroundColor: "red",
-                                marginLeft: "15px",
-                                borderRadius: "10%",
+                                marginLeft: "10px",
+                                borderRadius: "30px",
                               }}
                             >Offline</div>
                           ))}
@@ -281,7 +289,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
                           ind !== "diskSpace" &&
                           ind !== "smartDisk" &&
                           ind !== "amt" &&
-                          getAPIData[key][ind]}
+                          getAPIData[key][ind]} */}
                       </div>
                     );
                   })}
@@ -289,7 +297,67 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
               );
             })}
         </div>
-      </div>
+      </div>}
+      {mappedGrid &&
+     <div className={"gridData"}>
+     <div className={"gridColumns"}>
+       {showformbutton && (
+         <div className={"gridColumnHeadingItem"} title="Actions">
+           Actions
+         </div>
+       )}
+
+       {getAPIData.length > 0 &&
+         Object.keys(mappings).map((m) => {
+           const mappingKey = mappings[m][0];
+           if (getAPIData[0].hasOwnProperty(mappingKey)) {
+             return (
+               <div
+                 key={mappingKey}
+                 className="gridColumnHeadingItem"
+                 title={mappingKey}
+               >
+                 {mappingKey}
+               </div>
+             );
+           }
+           return null;
+         })}
+     </div>
+     <div className="gridDataAPI">
+       {getAPIData.length > 0 &&
+         Object.keys(getAPIData).map((key, index) => {
+           return (
+             <div className="apiGridRow" key={index}>
+               {showformbutton && (
+                 <div className="apiGridItems">
+                   <Edit
+                     onClick={() => {
+                       handleData(getAPIData[key]);
+                       setselecteddata(getAPIData[key]);
+                     }}
+                   />
+                 </div>
+               )}
+               {Object.keys(mappings).map((m) => {
+                 const mappingKey = mappings[m][0];
+                 if (getAPIData[key].hasOwnProperty(mappingKey)) {
+                   return (
+                     <div
+                       className="apiGridItems"
+                       title={getAPIData[key][mappingKey]}
+                       key={mappingKey}
+                     >
+                       {getAPIData[key][mappingKey]}
+                     </div>
+                   );
+                 }
+               })}
+             </div>
+           );
+         })}
+     </div>
+   </div>}
 
       {!showformbutton && (
         <Form
@@ -320,13 +388,9 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
           >
             <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
               <AccordionDetails sx={{ pt: 3 }}>
-                <FormComponent
-                  selecteddata={selecteddata}
-                  setAPIData={setAPIData}
-                  showform={showform}
-                  setshowform={setshowform}
-                  submitText={showformbutton ? "Update" : undefined}
-                />
+                <FormComponent selecteddata={selecteddata} setAPIData={setAPIData} showform={showform} setshowform={setshowform}
+                submitText={showformbutton ? "Update" : undefined}
+                showformbutton={showformbutton} />
               </AccordionDetails>
             </Accordion>
           </Container>
