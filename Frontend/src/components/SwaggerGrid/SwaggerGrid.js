@@ -27,7 +27,9 @@ export const handleFileSelectChange = (e, setSwaggerData) => {
 };
 
 export const handleData = (columns, handleSave) => {
-
+    // if(columns.forEach((e)=>{
+    //     console.log(e);
+    // }))
     localStorage.setItem("ColumnData",JSON.stringify(columns));
     let uu = {};
     columns.forEach((column) => {

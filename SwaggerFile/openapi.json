@@ -1,0 +1,1835 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Rmm-ITS-API.",
+    "description": "The purpose of this application is to provide API platform for all\ngeneral Purpose Its Portal specific API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://rmmitsapi.dtitsupport247.net/rmmitsapi"
+    }
+  ],
+  "paths": {
+    "/v1/partners/{partnerID}/sites/{siteID}/resources/{resourceID}/alerts": {
+      "get": {
+        "tags": [
+          "alerts"
+        ],
+        "summary": "Gets the Alert details for the given combination of partner/site/resource.",
+        "operationId": "getAlertIncidentDetails",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Operation",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/sites/{siteID}/resources/{resourceID}/tickets": {
+      "get": {
+        "tags": [
+          "tickets"
+        ],
+        "summary": "Gets the ticket details for the given combination of partner/site/resource.",
+        "operationId": "getTicketIncidentDetails",
+       "x_cw_service": "Customer Service",
+        "x_cw_operation": "Get a customer by ID",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Operation",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/users/{userID}/mAuth": {
+      "get": {
+        "tags": [
+          "mAuth"
+        ],
+        "summary": "Gets the Auth details for the given combination of partner/users.",
+        "operationId": "getMenuAuthDetails",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/migrateEntitlement": {
+      "get": {
+        "tags": [
+          "partnerEntitlementMigration"
+        ],
+        "summary": "Migrates the partner specific entitlements for the mentioned ID.",
+        "operationId": "migratePartnerEntitlments",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/clients/{clientID}/migrateEntitlement": {
+      "get": {
+        "tags": [
+          "clientEntitlementMigration"
+        ],
+        "summary": "Migrates the client specific entitlements for the mentioned ID.",
+        "operationId": "migrateClientEntitlments",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "404": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "version"
+        ],
+        "summary": "Gets the version for the repo.",
+        "operationId": "getVersion",
+        "responses": {
+          "200": {
+            "description": "Local Version type for the RMM Alerting API",
+            "headers": {
+              "Major": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ServiceName": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Build": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "ServiceProvider": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Minor": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "SolutionName": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Patch": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {}
+          },
+          "400": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/alerts": {
+      "put": {
+        "tags": [
+          "AlertSyncResetCount"
+        ],
+        "summary": "Reset the RetryCount",
+        "parameters": [
+          {
+            "name": "Operation",
+            "in": "query",
+            "description": "Operation=resetcount",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Alertsync object that needs to be reset when resetall is true then no need to provide alertid",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/alertsyncreset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "400": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          },
+          "500": {
+            "description": "response structure",
+            "headers": {
+              "data": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/v1/partners/{partnerID}/clients/{clientID}/sites/{siteID}/GetScheduleDetails": {
+      "post": {
+        "tags": [
+          "maintenanceWindowSchedule"
+        ],
+        "summary": "Used to fetch maintenance schedule data for the mentioned ID",
+        "operationId": "GetScheduleDetails",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clientID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "ReourceID is not mandatory field. if resourceId does not contain any value, system will display result for site/client",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/maintenanceResource"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Information about maintenance Window",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaintenanceRespSchCollection"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Maintenance Window is not available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/responses/apiRespSch"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/responses/apiRespSch"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/v1/partners/{partnerID}/sites/{siteID}/resources/{resourceID}/conditions/{conditionID}validatePassword": {
+      "get": {
+        "tags": [
+          "passwordVault"
+        ],
+        "summary": "Check whether specific password is available for the given combination of partner/site/resource.",
+        "operationId": "getResourcePassword",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conditionID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Password is available",
+            "content": {}
+          },
+          "404": {
+            "description": "Password is not available",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/sites/{siteID}/conditions/{conditionID}validatePassword": {
+      "get": {
+        "tags": [
+          "passwordVault"
+        ],
+        "summary": "Check whether specific password is available for the given combination of partner/site.",
+        "operationId": "getSitePassword",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conditionID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Password is available",
+            "content": {}
+          },
+          "404": {
+            "description": "Password is not available",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/sites/{siteID}/resources/{resourceID}/ValidatePasswordVault": {
+      "get": {
+        "tags": [
+          "passwordVault"
+        ],
+        "summary": "Check whether any password is available for the given combination of partner/site/resource.",
+        "operationId": "getgeneralResourcePassword",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Password is available",
+            "content": {}
+          },
+          "404": {
+            "description": "Password is not available",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/v1/resources/{resourceID}/ospatchpolicy": {
+      "get": {
+        "tags": [
+          "OSPatching"
+        ],
+        "summary": "Fetch OS Patch policy details for given resource id",
+        "parameters": [
+          {
+            "name": "resourceID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OS Patch policy details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OSPatchPolicyDetailsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Policy data not found for given resource id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ospatchpolicymigrate": {
+      "post": {
+        "tags": [
+          "OSPatching"
+        ],
+        "summary": "Migrates the endpoint from legacy to fusion policy or vice versa",
+        "requestBody": {
+          "description": "payload to migrate endpoint policy",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OSPatchPolicyMigratePayload"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "successfully migrated OS patch endpoint policy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OSPatchPolicyMigrateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "incorrect payload or invalid migration action",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/v1/authz": {
+      "post": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Gets the email ID and name for the given list of user IDs.",
+        "operationId": "emailusinguserids",
+        "parameters": [
+          {
+            "name": "Operation",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "payload of list of migrated or non migrated userids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetEmailsVsUserIdsPayload"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Get the Fname and EmailId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetEmailsVsUserIdsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthZErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthZErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/v1/emails/{emailId}/authz": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Gets the CWUserIds and userids based on EmailId provided.",
+        "operationId": "useridusingemail",
+        "parameters": [
+          {
+            "name": "emailId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Operation",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get ConnectWise UserId and command UserId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CWUserIdAndUserIdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid emailid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthZErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthZErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerId}/users/{userId}/authz": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "summary": "Gets the CW SSO Partner ID and CW SSO User ID mapped to the Command Partner ID and User ID",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Operation",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful retrieval of mapped CW SSO Partner ID and User ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CWIdMappingsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ill-formed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthZErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No records found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthZErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthZErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/rebootschedules": {
+      "get": {
+        "tags": [
+          "partnerRebootSchedules"
+        ],
+        "summary": "Get partner specific reboot schedules for the mentioned ID.",
+        "operationId": "getRebootScheduleDetails",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns reboot schedules for a partner.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RebootScheduleDetailsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Reboot schedule data not found for given partner id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RebootScheduleErrResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RebootScheduleErrResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/partners/{partnerID}/notifications": {
+      "get": {
+        "tags": [
+          "PartnerNotifications"
+        ],
+        "summary": "Get partner specific all notifications for the mentioned ID.",
+        "operationId": "getpartnerNotifications",
+        "parameters": [
+          {
+            "name": "partnerID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Type",
+            "in": "query",
+            "description": "Type=nocservice",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all notifications for a partner.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerNotificationsDetailsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "notifications not found for given partner id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerNotificationsErrResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerNotificationsErrResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/enduser/{partnerId}/siteId/{siteId}/users/{userId}/desktops": {
+      "get": {
+        "tags": [
+          "EndUser"
+        ],
+        "summary": "Gets the desktop endpoint details.",
+        "operationId": "getDesktopEndDetails",
+        "parameters": [
+          {
+            "name": "partnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "siteId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all desktop endpoints assigned to user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DesktopResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "desktop endpoints not found for given user id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "alertsyncreset": {
+        "required": [
+          "resetall"
+        ],
+        "type": "object",
+        "properties": {
+          "resetall": {
+            "type": "boolean"
+          },
+          "alertid": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "maintenanceResource": {
+        "type": "object",
+        "properties": {
+          "resourceID": {
+            "type": "string"
+          }
+        }
+      },
+      "MaintenanceRespSchCollection": {
+        "type": "object",
+        "properties": {
+          "outdata": {
+            "$ref": "#/components/schemas/MaintenanceRespSch"
+          },
+          "status": {
+            "type": "integer"
+          }
+        }
+      },
+      "MaintenanceRespSch": {
+        "type": "object",
+        "properties": {
+          "Partner_ID": {
+            "type": "integer"
+          },
+          "RegID": {
+            "type": "integer"
+          },
+          "SiteID": {
+            "type": "integer"
+          },
+          "TemplateID": {
+            "type": "integer"
+          },
+          "TemplateName": {
+            "type": "string"
+          },
+          "RestartDays": {
+            "type": "string"
+          },
+          "RestartFromTime": {
+            "type": "string"
+          },
+          "RestartToTime": {
+            "type": "string"
+          },
+          "MaintenanceDays": {
+            "type": "string"
+          },
+          "MaintenanceFromTime": {
+            "type": "string"
+          },
+          "MaintenanceToTime": {
+            "type": "string"
+          },
+          "IsNOCUser": {
+            "type": "boolean"
+          },
+          "CreatedBy": {
+            "type": "string"
+          },
+          "UpdatedBy": {
+            "type": "string"
+          }
+        }
+      },
+      "OSPatchPolicyDetailsResponse": {
+        "type": "object",
+        "properties": {
+          "outdata": {
+            "type": "array",
+            "description": "Array of policy details",
+            "items": {
+              "$ref": "#/components/schemas/OSPatchPolicyDetails"
+            }
+          },
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "OSPatchPolicyDetails": {
+        "type": "object",
+        "properties": {
+          "ConfigString": {
+            "type": "string",
+            "description": "comma separated config IDs"
+          },
+          "DcDtime": {
+            "type": "string",
+            "description": "policy creation time"
+          },
+          "PolicyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "PolicyName": {
+            "type": "string"
+          },
+          "UpdcdTime": {
+            "type": "string",
+            "description": "policy update time",
+            "nullable": true
+          }
+        }
+      },
+      "OSPatchPolicyMigratePayload": {
+        "type": "object",
+        "properties": {
+          "partnerid": {
+            "type": "string"
+          },
+          "resourceids": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "useremailid": {
+            "type": "string"
+          }
+        }
+      },
+      "OSPatchPolicyMigrateResponse": {
+        "type": "object",
+        "properties": {
+          "outdata": {
+            "type": "object",
+            "properties": {},
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "errorResponse": {
+        "type": "object",
+        "properties": {
+          "outdata": {
+            "type": "object",
+            "properties": {},
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "GetEmailsVsUserIdsPayload": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "GetEmailsVsUserIdsResponse": {
+        "type": "object",
+        "properties": {
+          "outdata": {
+            "type": "array",
+            "description": "Array of Emailids and Fname",
+            "items": {
+              "$ref": "#/components/schemas/EmailIdsAndFnameDetails"
+            }
+          },
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "EmailIdsAndFnameDetails": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "CWUserIdAndUserIdResponse": {
+        "type": "object",
+        "properties": {
+          "CWUserId": {
+            "type": "string"
+          },
+          "UserID": {
+            "type": "string"
+          }
+        }
+      },
+      "CWIdMappingsResponse": {
+        "type": "object",
+        "properties": {
+          "outdata": {
+            "type": "array",
+            "description": "Response Data",
+            "items": {
+              "$ref": "#/components/schemas/CWIdMappings"
+            }
+          },
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "CWIdMappings": {
+        "type": "object",
+        "properties": {
+          "CWPartnerId": {
+            "type": "string"
+          },
+          "CWUserId": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthZErrorResponse": {
+        "type": "object",
+        "properties": {
+          "outdata": {
+            "type": "array",
+            "description": "Error Response",
+            "items": {
+              "$ref": "#/components/schemas/AuthZError"
+            }
+          },
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "AuthZError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "RebootScheduleDetailsResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "memberId": {
+              "type": "string"
+            },
+            "templateId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "daysOfWeek": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "startTime": {
+              "type": "string"
+            },
+            "endTime": {
+              "type": "string"
+            },
+            "every": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "frequency": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RebootScheduleErrResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "errmsg": {
+            "type": "string"
+          }
+        }
+      },
+      "PartnerNotificationsDetailsResponse": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "description": "Response Data",
+            "items": {
+              "$ref": "#/components/schemas/PartnerNotifications"
+            }
+          }
+        }
+      },
+      "PartnerNotifications": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "PartnerNotificationsErrResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "errmsg": {
+            "type": "string"
+          }
+        }
+      },
+      "DesktopResponse": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "description": "Response Data",
+            "items": {
+              "$ref": "#/components/schemas/DesktopResp"
+            }
+          }
+        }
+      },
+      "DesktopResp": {
+        "type": "object",
+        "properties": {
+          "memberCode": {
+            "type": "string"
+          },
+          "sitecode": {
+            "type": "string"
+          },
+          "siteId": {
+            "type": "integer"
+          },
+          "resourceName": {
+            "type": "string"
+          },
+          "resFriendlyName": {
+            "type": "string"
+          },
+          "os": {
+            "type": "string"
+          },
+          "osVerSion": {
+            "type": "string"
+          },
+          "alive": {
+            "type": "integer"
+          },
+          "securityUpdates": {
+            "type": "string"
+          },
+          "regtype": {
+            "type": "string"
+          },
+          "diskSpace": {
+            "type": "integer"
+          },
+          "antivirus": {
+            "type": "integer"
+          },
+          "smartDisk": {
+            "type": "integer"
+          },
+          "amt": {
+            "type": "integer"
+          },
+          "memberName": {
+            "type": "string"
+          },
+          "loggedInUser": {
+            "type": "string"
+          },
+          "lastLogin": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "apiResp": {
+        "description": "response structure",
+        "headers": {
+          "data": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        },
+        "content": {}
+      },
+      "apiRespSch": {
+        "description": "response structure",
+        "headers": {
+          "outdata": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        },
+        "content": {}
+      },
+      "versionResp": {
+        "description": "Local Version type for the RMM Alerting API",
+        "headers": {
+          "Major": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "ServiceName": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Build": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "ServiceProvider": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Minor": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "SolutionName": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "Patch": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {}
+      }
+    }
+  }
+}

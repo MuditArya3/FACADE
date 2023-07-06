@@ -2,6 +2,7 @@ import Form from "@rjsf/core";
 import React, { useState } from "react";
 import "./FormComponent.css";
 import axios from "axios";
+import { baseURL } from "../../AppSettings.js";
 
 const FormComponent = ({
     jsonData,
@@ -18,11 +19,11 @@ const FormComponent = ({
             console.log(formData);
             const customerId = selecteddata.customerId;
 
-            const apiUrl = `https://localhost:7184/api/Customers/Customers/${customerId}`;
-            axios
-                .put(apiUrl, formData)
-                .then(() => {
-                    alert("Updated successfully");
+        const apiUrl = `${baseURL}/api/Customers/Customers/${customerId}`;
+        axios
+            .put(apiUrl, formData)
+            .then(() => {
+                alert("Updated successfully");
 
                     setAPIData((prevData) => {
                         const updatedData = prevData.map((item) => {
