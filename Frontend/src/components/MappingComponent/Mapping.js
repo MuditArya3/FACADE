@@ -439,7 +439,13 @@ export const handleData = (
             layout = {
                 key: rcol.Name,
                 title: rcol.Name,
-                type: rcol.Type.toLowerCase(),
+                type: rcol.Type === "Array"
+                ? "string"
+                : rcol.Type === "None" 
+                ? "string"
+                :rcol.Type === "Object"
+                ?"string"  
+                :rcol.Type.toLowerCase(),
               };
         }
 
@@ -448,7 +454,14 @@ export const handleData = (
             layout = {
               key: rcol.Name,
               title: rcol.Name,
-              type: rcol.Type.toLowerCase(),
+              type:
+              rcol.Type === "Array"
+                ? "string"
+                : rcol.Type === "None" 
+                ? "string"
+                :rcol.Type === "Object"
+                ?"string"  
+                :rcol.Type.toLowerCase(),
             };
         }
         console.log(layout);

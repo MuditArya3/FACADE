@@ -36,7 +36,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData ,mappings}) => {
   }, []);
 
   useEffect(() => {
-    if (lowercaseAnnotation.includes("get")) {
+    if (lowercaseAnnotation.includes("update")) {
       setshowformbutton(true);
     }
   }, [lowercaseAnnotation]);
@@ -112,6 +112,8 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData ,mappings}) => {
         type:
           typeof selecteddata[rcol] === "number"
             ? "integer"
+            :typeof selecteddata[rcol]==="None"
+            ? "string"
             : typeof selecteddata[rcol],
         default: selecteddata[rcol],
       };
