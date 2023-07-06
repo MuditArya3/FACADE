@@ -481,7 +481,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 marg
                                                 onClick={handleFormSubmit}
                                             >
-                                                Save Mapping
+                                                Generate
                                             </Button>
                                         </Box>
                                     </>
