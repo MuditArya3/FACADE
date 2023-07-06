@@ -8,7 +8,7 @@ import { useState } from "react";
 import SwaggerGrid from "./components/SwaggerGrid/SwaggerGrid.jsx";
 import Mapping from "./components/MappingComponent/Mapping.jsx";
 import UpdateGrid from "./components/UpdateGrid/UpdateGrid.jsx";
-import AddAnnotations from "./components/AddAnnotations.jsx";
+import AddAnnotations from "./components/AddAnnotation/AddAnnotations.jsx";
 
 function App() {
   const [jsonData, setJsonData] = useState();
