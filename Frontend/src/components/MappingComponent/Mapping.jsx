@@ -34,8 +34,7 @@ import { useEffect } from "react";
 import { red } from "@mui/material/colors";
 import FormComponent from "../FormComponent/FormComponent";
 import { useRef } from "react";
-import GridComponent from "../GridComponent/GridComponent";
-import UpdateGrid from "../UpdateGrid/UpdateGrid";
+import GridComponent from "../GridComponent/GridComponent.jsx";
 
 const Mapping = ({ jsonData, setJsonData }) => {
     const [mappings, setMappings] = useState({});
@@ -458,7 +457,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                                 }}
                                                 onDrop={(ev) => {
                                                     ev.preventDefault();
-                                                    var dragComponent =
+                                                    let dragComponent =
                                                         ev.dataTransfer.getData(
                                                             "dragId"
                                                         );
@@ -594,7 +593,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                                         onDrop={(ev) => {
                                                             ev.preventDefault();
 
-                                                            var dragComponent =
+                                                            let dragComponent =
                                                                 ev.dataTransfer.getData(
                                                                     "dragId"
                                                                 );

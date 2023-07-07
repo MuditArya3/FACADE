@@ -518,7 +518,7 @@ const handleSave = (
   setButtonClicked
 ) => {
   console.log(data);
-  var json = Object.assign({}, data);
+  let json = Object.assign({}, data);
   console.log(json);
   handlecreatefile(
     {

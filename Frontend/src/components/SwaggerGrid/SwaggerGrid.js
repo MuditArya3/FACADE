@@ -26,7 +26,7 @@ export const handleFileSelectChange = (e, setSwaggerData) => {
     reader.readAsText(file);
 };
 
-export const handleData = (columns, handleSave) => {
+export const handleData = (columns,jsonfile,setJsonData) => {
     // if(columns.forEach((e)=>{
     //     console.log(e);
     // }))
@@ -66,14 +66,12 @@ export const handleData = (columns, handleSave) => {
       `;
 
     uu["custom"] = x;
-
     window.open("/mapping", "_blank");
-
-    handleSave(uu);
+    handleSave(uu,jsonfile,setJsonData);
 };
 
 export const handleSave = (data, jsonfile, setJsonData) => {
-    var json = Object.assign({}, data);
+    let json = Object.assign({}, data);
     handlecreatefile({
         label: "search",
         title: "Search Form",
@@ -126,5 +124,64 @@ export  const fetchService = async (swaggerData, setService) => {
         console.log(response);
     } catch (error) {
         console.error("Error fetching service:", error);
+    }
+};
+
+
+export const handleUploadedFileClick = (fileName,uploadedFiles,setUpdatedEndpoints,setEndpoints,setUpdatedServices,setServices,setSelectedService,setSelectedValue,setSwaggerData,setSelectedFileName) => {
+    // Find the file data based on the clicked file name
+    const fileData = uploadedFiles.find((file) => file.name === fileName);
+
+    if (fileData) {
+        const { data } = fileData;
+
+        fetchData(data, (fetchedEndpoints) => {
+            setUpdatedEndpoints(fetchedEndpoints);
+            setEndpoints(fetchedEndpoints);
+        });
+
+        fetchService(data, (fetchedServices) => {
+            setUpdatedServices(fetchedServices);
+            setServices(fetchedServices);
+        });
+
+        setSelectedService("");
+        setSelectedValue("");
+        setSwaggerData(data);
+        setSelectedFileName(fileName);
+    }
+};
+
+export const handleInputChange = (e,allowedExtensions,setSwaggerData,setEndpoints,setUpdatedEndpoints,setUploadedFiles,setShowMessage,setShowInvalidFileType) => {
+    const file = e.target.files[0];
+
+    if (file && allowedExtensions.test(file.name)) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                const fileData = JSON.parse(reader.result);
+                setSwaggerData(fileData);
+                fetchData(fileData, (fetchedEndpoints) => {
+                    setEndpoints(fetchedEndpoints);
+                    setUpdatedEndpoints(fetchedEndpoints);
+                    fetchedEndpoints.length > 0 &&
+                        setUploadedFiles((prevUploadedFiles) => [
+                            ...prevUploadedFiles,
+                            { name: file.name, data: fileData },
+                        ]);
+                });
+                setShowMessage(false);
+                setShowInvalidFileType(false);
+            } catch (error) {
+                console.error("Error parsing Swagger data:", error);
+                setShowMessage(true);
+            }
+        };
+        reader.readAsText(file);
+    } else {
+        setSwaggerData(null);
+        setEndpoints([]);
+        setShowMessage(false);
+        setShowInvalidFileType(true);
     }
 };

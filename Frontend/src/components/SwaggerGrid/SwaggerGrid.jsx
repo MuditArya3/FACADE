@@ -28,6 +28,8 @@ import {
     fetchData,
     fetchService,
     handleService,
+    handleUploadedFileClick,
+    handleInputChange
 } from "./SwaggerGrid";
 
 import "./SwaggerGrid.css";
@@ -54,6 +56,26 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const uniqueServices = services.filter((value, index, self) => {
         return self.indexOf(value) === index;
     });
+
+    const handleFormSubmit = () => {
+        handleData(columns,jsonfile,setJsonData);
+    };
+
+    const allowedExtensions = /\.(json)$/i;
+
+    
+    const handlePreviousButton = () => {
+        setSwaggerData(null);
+        setEndpoints([]);
+        setShowMessage(false);
+        setShowInvalidFileType(false);
+    };
+
+    const filteredEndpoints = endpoints.filter((endpoint) =>
+    endpoint
+        .toLowerCase()
+        .includes(selectedService.toLowerCase().split(" ")[0])
+);
 
     // useEffect(() => {
     //     if (swaggerData) {
@@ -100,71 +122,25 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         }
     }, [selectedValue]);
 
-    const handleSave = (data) => {
-        var json = Object.assign({}, data);
+    // const handleSave = (data) => {
+    //     var json = Object.assign({}, data);
 
-        handlecreatefile({
-            label: "search",
-            title: "Search Form",
-            description: "Search using below Textbox",
-            type: "object",
-            properties: json,
-        });
-    };
+    //     handlecreatefile({
+    //         label: "search",
+    //         title: "Search Form",
+    //         description: "Search using below Textbox",
+    //         type: "object",
+    //         properties: json,
+    //     });
+    // };
 
-    const handlecreatefile = (data) => {
-        const json = JSON.stringify(data);
-        setJsonData(json);
-        localStorage.setItem("jsonSchema", json);
-    };
+    // const handlecreatefile = (data) => {
+    //     const json = JSON.stringify(data);
+    //     setJsonData(json);
+    //     localStorage.setItem("jsonSchema", json);
+    // };
 
-    const handleFormSubmit = () => {
-        handleData(columns, handleSave);
-    };
-
-    const allowedExtensions = /\.(json)$/i;
-
-    const handleInputChange = (e) => {
-        const file = e.target.files[0];
-
-        if (file && allowedExtensions.test(file.name)) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                try {
-                    const fileData = JSON.parse(reader.result);
-                    setSwaggerData(fileData);
-                    fetchData(fileData, (fetchedEndpoints) => {
-                        setEndpoints(fetchedEndpoints);
-                        setUpdatedEndpoints(fetchedEndpoints);
-                        fetchedEndpoints.length > 0 &&
-                            setUploadedFiles((prevUploadedFiles) => [
-                                ...prevUploadedFiles,
-                                { name: file.name, data: fileData },
-                            ]);
-                    });
-                    setShowMessage(false);
-                    setShowInvalidFileType(false);
-                } catch (error) {
-                    console.error("Error parsing Swagger data:", error);
-                    setShowMessage(true);
-                }
-            };
-            reader.readAsText(file);
-        } else {
-            setSwaggerData(null);
-            setEndpoints([]);
-            setShowMessage(false);
-            setShowInvalidFileType(true);
-        }
-    };
-
-    const handlePreviousButton = () => {
-        setSwaggerData(null);
-        setEndpoints([]);
-        setShowMessage(false);
-        setShowInvalidFileType(false);
-    };
-
+   
     useEffect(() => {
         if (swaggerData) {
             if (endpoints.length === 0) {
@@ -177,36 +153,9 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         }
     }, [endpoints, swaggerData]);
 
-    const filteredEndpoints = endpoints.filter((endpoint) =>
-        endpoint
-            .toLowerCase()
-            .includes(selectedService.toLowerCase().split(" ")[0])
-    );
+   
 
-    const handleUploadedFileClick = (fileName) => {
-        // Find the file data based on the clicked file name
-        const fileData = uploadedFiles.find((file) => file.name === fileName);
-
-        if (fileData) {
-            const { data } = fileData;
-
-            fetchData(data, (fetchedEndpoints) => {
-                setUpdatedEndpoints(fetchedEndpoints);
-                setEndpoints(fetchedEndpoints);
-            });
-
-            fetchService(data, (fetchedServices) => {
-                setUpdatedServices(fetchedServices);
-                setServices(fetchedServices);
-            });
-
-            setSelectedService("");
-            setSelectedValue("");
-            setSwaggerData(data);
-            setSelectedFileName(fileName);
-        }
-    };
-
+    
     return (
         <div
             className="acc-container"
@@ -296,7 +245,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 fontSize: "1.5rem",
                                             }}
                                             accept="application/json"
-                                            onChange={handleInputChange}
+                                            onChange={(e)=>handleInputChange(e,allowedExtensions,setSwaggerData,setEndpoints,setUpdatedEndpoints,setUploadedFiles,setShowMessage,setShowInvalidFileType)}
                                         />
                                     </Box>
                                 )}
@@ -517,7 +466,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                         key={index}
                                         variant="outlined"
                                         onClick={(e) =>
-                                            handleUploadedFileClick(file.name)
+                                            handleUploadedFileClick(file.name,uploadedFiles,setUpdatedEndpoints,setEndpoints,setUpdatedServices,setServices,setSelectedService,setSelectedValue,setSwaggerData,setSelectedFileName)
                                         }
                                         sx={{
                                             my: 1,
