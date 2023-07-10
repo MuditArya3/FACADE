@@ -72,6 +72,10 @@ export const handleData = (columns, handleSave) => {
     handleSave(uu);
 };
 
+export const handleClick = () => {
+    window.open("/json", "_blank");
+  };
+
 export const handleSave = (data, jsonfile, setJsonData) => {
     var json = Object.assign({}, data);
     handlecreatefile({
