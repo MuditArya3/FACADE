@@ -3,13 +3,17 @@ import {
     AccordionSummary,
     Box,
     Button,
+    Checkbox,
     Container,
     FormControl,
+    FormControlLabel,
     FormHelperText,
+    IconButton,
     Input,
     InputLabel,
     MenuItem,
     Select,
+    Tooltip,
     Typography,
     makeStyles,
 } from "@mui/material";
@@ -35,6 +39,7 @@ import {
 import "./SwaggerGrid.css";
 import c from "../../assets/3.jpg";
 import { useNavigate } from "react-router-dom";
+import { Delete } from "@mui/icons-material";
 
 const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [swaggerData, setSwaggerData] = useState();
@@ -50,6 +55,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [updatedEndpoints, setUpdatedEndpoints] = useState([]);
     const [updatedServices, setUpdatedServices] = useState([]);
     const [selectedFileName, setSelectedFileName] = useState("");
+    const [correctEndpoints, setCorrectEndpoints] = useState(false);
 
     const selectedEndpoint = selectedValue.split("--")[0];
     const selectedEndpointType = selectedValue.split("--")[1];
@@ -71,13 +77,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         setShowMessage(false);
         setShowInvalidFileType(false);
     };
-
-    const filteredEndpoints = endpoints.filter((endpoint) =>
-    endpoint
-        .toLowerCase()
-        .includes(selectedService.toLowerCase().split(" ")[0])
-);
-
 
     // useEffect(() => {
     //     if (swaggerData) {
@@ -155,7 +154,59 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         }
     }, [endpoints, swaggerData]);
 
-   
+    const handleCorrectEndpoints = () => {
+        console.log("igiugiugiuytiuytyutuy");
+        setCorrectEndpoints(!correctEndpoints);
+    };
+    console.log(endpoints);
+
+    const filteredEndpoints = correctEndpoints
+        ? endpoints.filter((endpoint) => {
+              const endpointKey = endpoint.split("--")[0];
+              const endpointType = endpoint.split("--")[1];
+              const response200 =
+                  //swaggerData.paths[endpointKey] &&
+                  swaggerData.paths[endpointKey][endpointType]?.responses?.[
+                      "200"
+                  ];
+              const endpointIncludesService = endpoint
+                  .toLowerCase()
+                  .includes(selectedService.toLowerCase().split(" ")[0]);
+              return (
+                  response200 &&
+                  Object.keys(response200.content).length > 0 &&
+                  endpointIncludesService
+              );
+          })
+        : endpoints.filter((endpoint) =>
+              endpoint
+                  .toLowerCase()
+                  .includes(selectedService.toLowerCase().split(" ")[0])
+          );
+
+    const handleUploadedFileClick = (fileName) => {
+        // Find the file data based on the clicked file name
+        const fileData = uploadedFiles.find((file) => file.name === fileName);
+
+        if (fileData) {
+            const { data } = fileData;
+
+            fetchData(data, (fetchedEndpoints) => {
+                setUpdatedEndpoints(fetchedEndpoints);
+                setEndpoints(fetchedEndpoints);
+            });
+
+            fetchService(data, (fetchedServices) => {
+                setUpdatedServices(fetchedServices);
+                setServices(fetchedServices);
+            });
+
+            setSelectedService("");
+            setSelectedValue("");
+            setSwaggerData(data);
+            setSelectedFileName(fileName);
+        }
+    };
 
     
     return (
@@ -269,24 +320,39 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 color: "black",
                                             }}
                                         >
-                                            Click here to add annotations to
-                                            your file
+                                            Click{" "}
+                                            <Button
+                                                sx={{
+                                                    pointerEvents: "auto",
+                                                    margin: "-16px",
+                                                }}
+                                                onClick={() =>
+                                                    window.open(
+                                                        "/json",
+                                                        "_blank"
+                                                    )
+                                                }
+                                            >
+                                                here
+                                            </Button>{" "}
+                                            to add annotations to your json file
                                         </Typography>
-                                        <Button
-                                            sx={{
-                                                pointerEvents: "auto",
-                                                height: "5rem",
-                                                fontSize: "0.9rem",
-                                                width: "8.8rem",
-                                            }}
-                                            variant="contained"
-                                            size="small"
-                                            type="button"
-                                            marg
-                                            onClick={() => navigate("/json")}
+                                        {/* <span
+                                            class="hovertext"
+                                            data-hover="Hello, this is the tooltip"
                                         >
-                                            Add
-                                        </Button>
+                                            <Tooltip title="Delete">
+                                                <IconButton>
+                                                    <Delete />
+                                                </IconButton>
+                                            </Tooltip>
+                                            Try hover over me
+                                        </span>
+                                        <Tooltip title="Delete">
+                                            <IconButton>
+                                                <Delete />
+                                            </IconButton>
+                                        </Tooltip> */}
                                     </Box>
                                 )}
                                 <Box
@@ -434,6 +500,39 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                     }
                                                 )}
                                             </Select>
+                                        </FormControl>
+                                        <FormControl>
+                                            <Button
+                                                sx={{
+                                                    pointerEvents: "auto",
+                                                    height: "5rem",
+                                                    fontSize: "0.9rem",
+                                                    width: "8.8rem",
+                                                }}
+                                                variant="contained"
+                                                size="small"
+                                                type="button"
+                                                marg
+                                                onClick={handleCorrectEndpoints}
+                                            >
+                                                Filter Endpoints
+                                            </Button>
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={
+                                                            correctEndpoints
+                                                        }
+                                                        onChange={(event) =>
+                                                            handleCorrectEndpoints(
+                                                                event
+                                                            )
+                                                        }
+                                                        color="primary"
+                                                    />
+                                                }
+                                                label="Show correct Endpoints"
+                                            />
                                         </FormControl>
                                         <Box
                                             sx={{
