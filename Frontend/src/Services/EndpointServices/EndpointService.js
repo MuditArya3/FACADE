@@ -17,6 +17,23 @@ export const EndpointPostApi = async data => {
     }
 };
 
+export const AllEndpointPostApi = async data => {
+    const baseURL = "https://localhost:44356/api/Values/getallendpoints";
+    const headers = {
+        'Content-Type': 'application/json'
+    };
+
+    try {
+        const jsonData = JSON.stringify(data);
+        const response = await postApi(baseURL, jsonData, headers);
+        //console.log("Endpoints", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching endpoints:", error);
+        throw error;
+    }
+};
+
 export const EndpointServicePostApi = async data => {
     const baseURL = "https://localhost:44356/api/Values/getendpointservice";
     const headers = {

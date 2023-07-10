@@ -33,6 +33,7 @@ import {
 
 import "./SwaggerGrid.css";
 import c from "../../assets/3.jpg";
+import { useNavigate } from "react-router-dom";
 
 const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [swaggerData, setSwaggerData] = useState();
@@ -233,6 +234,44 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                             accept="application/json"
                                             onChange={(e)=>handleInputChange(e,allowedExtensions,setSwaggerData,setEndpoints,setUpdatedEndpoints,setUploadedFiles,setShowMessage,setShowInvalidFileType)}
                                         />
+                                        <Typography
+                                            variant="subtitle1"
+                                            sx={{
+                                                fontSize: "1.5rem",
+                                                padding: "1rem",
+                                                fontWeight: 500,
+                                                color: "black",
+                                            }}
+                                        >
+                                            Or
+                                        </Typography>
+                                        <Typography
+                                            variant="subtitle1"
+                                            sx={{
+                                                fontSize: "1.5rem",
+                                                padding: "1rem",
+                                                fontWeight: 500,
+                                                color: "black",
+                                            }}
+                                        >
+                                            Click here to add annotations to
+                                            your file
+                                        </Typography>
+                                        <Button
+                                            sx={{
+                                                pointerEvents: "auto",
+                                                height: "5rem",
+                                                fontSize: "0.9rem",
+                                                width: "8.8rem",
+                                            }}
+                                            variant="contained"
+                                            size="small"
+                                            type="button"
+                                            marg
+                                            onClick={() => navigate("/json")}
+                                        >
+                                            Add
+                                        </Button>
                                     </Box>
                                 )}
                                 <Box
@@ -381,7 +420,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 )}
                                             </Select>
                                         </FormControl>
-
                                         <Box
                                             sx={{
                                                 display: "flex",
