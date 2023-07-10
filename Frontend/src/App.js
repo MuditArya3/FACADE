@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import FormComponent from "./components/FormComponent/FormComponent.jsx";
-import GridComponent from "./components/GridComponent/GridComponent.js";
+import GridComponent from "./components/GridComponent/GridComponent.jsx";
 import ApplicationForm from "./components/ApplicationFormComponent";
 import JsonTemplate from "./components/JsonTemplateComponent/JsonTemplate.jsx";
 import { useState } from "react";
 import SwaggerGrid from "./components/SwaggerGrid/SwaggerGrid.jsx";
 import Mapping from "./components/MappingComponent/Mapping.jsx";
-import UpdateGrid from "./components/UpdateGrid/UpdateGrid.jsx";
-import AddAnnotations from "./components/AddAnnotation/AddAnnotations.jsx";
+import AddAnnotations from "./components/AddAnnotations.jsx";
+
 
 function App() {
   const [jsonData, setJsonData] = useState();
@@ -32,7 +32,6 @@ function App() {
               <SwaggerGrid jsonData={jsonData} setJsonData={setJsonData} />
             }
           />
-          <Route path="/update" element={<UpdateGrid />} />
           <Route
             path="/mapping"
             element={<Mapping jsonData={jsonData} setJsonData={setJsonData} />}

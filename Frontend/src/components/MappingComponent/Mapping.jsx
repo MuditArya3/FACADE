@@ -21,11 +21,11 @@ import React from "react";
 import "./Mapping.css";
 import {
     handleAction,
-    getdesiredvalue,
+    getDesiredValue,
     handleTableSwaggerSubmit,
     handleData,
-    getdesiredannotation,
-    handleform,
+    getDesiredAnnotation,
+    handleForm,
 } from "./Mapping";
 import { useState } from "react";
 import "../JsonTemplateComponent/JsonTemplate.css";
@@ -34,8 +34,7 @@ import { useEffect } from "react";
 import { red } from "@mui/material/colors";
 import FormComponent from "../FormComponent/FormComponent";
 import { useRef } from "react";
-import GridComponent from "../GridComponent/GridComponent";
-import UpdateGrid from "../UpdateGrid/UpdateGrid";
+import GridComponent from "../GridComponent/GridComponent.jsx";
 
 const Mapping = ({ jsonData, setJsonData }) => {
     const [mappings, setMappings] = useState({});
@@ -64,7 +63,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
     const formRef = useRef(null);
     //   let actionMethods=[];
     console.log(options);
-    let annotation = getdesiredannotation(localStorage.getItem("Annotation"));
+    let annotation = getDesiredAnnotation(localStorage.getItem("Annotation"));
     console.log(annotation);
     const lowercaseAnnotation = annotation.toLowerCase();
 
@@ -234,7 +233,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                             "application/vnd.connectwise.com+json; version=2022.1"
                         ].schema.items["$ref"];
                 }
-                let requiredval = getdesiredvalue(apidatas);
+                let requiredval = getDesiredValue(apidatas);
                 let p = swaggerData.components.schemas[requiredval];
 
                 if (Object.keys(p).includes("required")) {
@@ -252,12 +251,12 @@ const Mapping = ({ jsonData, setJsonData }) => {
                     data1 = data1["204"]["$ref"];
                 }
 
-                let requiredval1 = getdesiredvalue(data1);
+                let requiredval1 = getDesiredValue(data1);
 
                 let apidatas =
                     swaggerData.responses[requiredval1].schema["$ref"];
 
-                let requiredval2 = getdesiredvalue(apidatas);
+                let requiredval2 = getDesiredValue(apidatas);
 
                 let p = swaggerData.definitions[requiredval2];
 
@@ -328,7 +327,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                     setButtonClicked,
                     columns
                 );
-            handleform(
+            handleForm(
                 e,
                 buttonClicked,
                 setshowform,
@@ -458,7 +457,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                                 }}
                                                 onDrop={(ev) => {
                                                     ev.preventDefault();
-                                                    var dragComponent =
+                                                    let dragComponent =
                                                         ev.dataTransfer.getData(
                                                             "dragId"
                                                         );
@@ -594,7 +593,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                                         onDrop={(ev) => {
                                                             ev.preventDefault();
 
-                                                            var dragComponent =
+                                                            let dragComponent =
                                                                 ev.dataTransfer.getData(
                                                                     "dragId"
                                                                 );

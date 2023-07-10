@@ -39,13 +39,13 @@ export const handleFileSelectChange = (
   // setColumns();
 };
 
-export const getdesiredvalue = (apidatas) => {
+export const getDesiredValue = (apidatas) => {
   const valueArray = apidatas.split("/");
   const desiredValue = valueArray[valueArray.length - 1];
   console.log("desired----", desiredValue);
   return desiredValue;
 };
-export const getdesiredannotation = (apidatas) => {
+export const getDesiredAnnotation = (apidatas) => {
     console.log(apidatas);
     const valueArray = apidatas.split("--");
     const desiredValue = valueArray[valueArray.length - 1];
@@ -518,9 +518,9 @@ const handleSave = (
   setButtonClicked
 ) => {
   console.log(data);
-  var json = Object.assign({}, data);
+  let json = Object.assign({}, data);
   console.log(json);
-  handlecreatefile(
+  handleCreateFile(
     {
       label: "search",
       title: "JSON Form",
@@ -536,7 +536,7 @@ const handleSave = (
   );
 };
 
-const handlecreatefile = (
+const handleCreateFile = (
   data,
   buttonClicked,
   setJsonData,
@@ -568,7 +568,7 @@ const handlecreatefile = (
   }
 };
 
-export const handleform=(e,buttonClicked,setshowform,showform,setButtonClicked,formRef)=>{
+export const handleForm=(e,buttonClicked,setshowform,showform,setButtonClicked,formRef)=>{
     console.log(buttonClicked);
     if(buttonClicked==="SaveMapping"){
         setshowform(true)
