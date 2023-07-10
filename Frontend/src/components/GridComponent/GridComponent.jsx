@@ -40,33 +40,6 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData ,mappings}) => {
   }, [mappings])
   console.log(mappings);
   console.log(mappedGrid);
-  // const handleSubmit = () => {
-  //   console.log(formData);
-  //   console.log(formData.Search);
-  //   console.log(formData.Comment);
-  //   const valueGridData = searchBox.custom.split(",");
-  //   const valueCustomGridData = valueGridData[0].split("'");
-  //   const getSearchData = valueCustomGridData[1] + formData.Search;
-  //   console.log(searchBox.properties.Search.key);
-  //   console.log(getSearchData);
-  //   if (formData.Search) {
-  //     axios
-  //       .get(getSearchData)
-  //       .then((res) => {
-  //         if (res && res.data) {
-  //           setSearchGrid(res.data);
-  //           console.log(res.data);
-  //           setAPIData(res.data);
-  //           // console.log(formData.Search);
-  //           console.log(searchGrid);
-  //           return res.data;
-  //         } else return [];
-  //       })
-  //       .catch((error) => {
-  //         return error;
-  //       });
-  //   }
-  // };
 
   console.log(searchGrid);
   console.log(getAPIData);

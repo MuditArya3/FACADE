@@ -1,8 +1,8 @@
 import Form from "@rjsf/core";
 import React, { useState } from "react";
 import "./FormComponent.css";
-import axios from "axios";
-import { baseURL } from "../../AppSettings.js";
+
+import { handleSubmit } from "./FormComponent";
 
 const FormComponent = ({
     jsonData,
@@ -13,35 +13,7 @@ const FormComponent = ({
     submitText,
     showformbutton,
 }) => {
-    const handleSubmit = (e) => {
-        if (showformbutton) {
-            const formData = e.formData;
-            console.log(formData);
-            const customerId = selecteddata.customerId;
-
-        const apiUrl = `${baseURL}/api/Customers/Customers/${customerId}`;
-        axios
-            .put(apiUrl, formData)
-            .then(() => {
-                alert("Updated successfully");
-
-                    setAPIData((prevData) => {
-                        const updatedData = prevData.map((item) => {
-                            if (item.customerId === customerId) {
-                                return { ...item, ...formData };
-                            }
-                            return item;
-                        });
-                        return updatedData;
-                    });
-                    setshowform(!showform);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-    };
-
+   
     let schema1 = JSON.parse(localStorage.getItem("jsonSchema"));
     console.log(schema1);
     // console.log(schema);
@@ -55,7 +27,7 @@ const FormComponent = ({
                 <Form
                     schema={schema1}
                     uiSchema={uiSchema}
-                    onSubmit={handleSubmit}
+                    onSubmit={(e)=>{handleSubmit(e,showformbutton,selecteddata,setAPIData,setshowform,showform)}}
                 />
             </div>
         </div>
