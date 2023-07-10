@@ -23,13 +23,12 @@ import {
 } from "../../Services/EndpointServices/EndpointService";
 import {
     handleNameChange,
-    handleFileSelectChange,
-    handleData,
-    fetchData,
     fetchService,
     handleService,
     handleUploadedFileClick,
-    handleInputChange
+    handleInputChange,
+    handleFormSubmit,
+    handlePreviousButton
 } from "./SwaggerGrid";
 
 import "./SwaggerGrid.css";
@@ -56,26 +55,13 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const uniqueServices = services.filter((value, index, self) => {
         return self.indexOf(value) === index;
     });
-
-    const handleFormSubmit = () => {
-        handleData(columns,jsonfile,setJsonData);
-    };
-
     const allowedExtensions = /\.(json)$/i;
-
-    
-    const handlePreviousButton = () => {
-        setSwaggerData(null);
-        setEndpoints([]);
-        setShowMessage(false);
-        setShowInvalidFileType(false);
-    };
-
     const filteredEndpoints = endpoints.filter((endpoint) =>
     endpoint
         .toLowerCase()
         .includes(selectedService.toLowerCase().split(" ")[0])
 );
+
 
     // useEffect(() => {
     //     if (swaggerData) {
@@ -415,7 +401,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 size="small"
                                                 type="button"
                                                 marg
-                                                onClick={handlePreviousButton}
+                                                onClick={handlePreviousButton(setSwaggerData,setEndpoints,setShowMessage,setShowInvalidFileType)}
                                             >
                                                 Previous
                                             </Button>
@@ -428,7 +414,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 size="small"
                                                 type="button"
                                                 marg
-                                                onClick={handleFormSubmit}
+                                                onClick={handleFormSubmit(columns,jsonfile,setJsonData)}
                                             >
                                                 Generate
                                             </Button>

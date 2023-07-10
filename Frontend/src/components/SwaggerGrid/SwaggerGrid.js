@@ -185,3 +185,14 @@ export const handleInputChange = (e,allowedExtensions,setSwaggerData,setEndpoint
         setShowInvalidFileType(true);
     }
 };
+
+export const handleFormSubmit = (columns,jsonfile,setJsonData) => {
+    handleData(columns,jsonfile,setJsonData);
+};
+
+export const handlePreviousButton = (setSwaggerData,setEndpoints,setShowMessage,setShowInvalidFileType) => {
+    setSwaggerData(null);
+    setEndpoints([]);
+    setShowMessage(false);
+    setShowInvalidFileType(false);
+};
