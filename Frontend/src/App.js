@@ -9,6 +9,7 @@ import SwaggerGrid from "./components/SwaggerGrid/SwaggerGrid.jsx";
 import Mapping from "./components/MappingComponent/Mapping.jsx";
 import AddAnnotations from "./components/AddAnnotations.jsx";
 
+
 function App() {
   const [jsonData, setJsonData] = useState();
   console.log(jsonData);
