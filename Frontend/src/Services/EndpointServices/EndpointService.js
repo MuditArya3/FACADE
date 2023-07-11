@@ -1,7 +1,8 @@
+import { CheckURL } from "../../AppSettings";
 import { postApi } from "../baseApiService";
 
 export const EndpointPostApi = async data => {
-    const baseURL = "https://localhost:44356/api/Values/getendpoints";
+    const baseURL = `${CheckURL}/Values/getendpoints`;
     const headers = {
         'Content-Type': 'application/json'
     };
@@ -18,7 +19,7 @@ export const EndpointPostApi = async data => {
 };
 
 export const AllEndpointPostApi = async data => {
-    const baseURL = "https://localhost:44356/api/Values/getallendpoints";
+    const baseURL = `${CheckURL}/Values/getallendpoints`;
     const headers = {
         'Content-Type': 'application/json'
     };
@@ -35,7 +36,7 @@ export const AllEndpointPostApi = async data => {
 };
 
 export const EndpointServicePostApi = async data => {
-    const baseURL = "https://localhost:44356/api/Values/getendpointservice";
+    const baseURL = `${CheckURL}/Values/getendpointservice`;
     const headers = {
         'Content-Type': 'application/json'
     };
@@ -52,7 +53,7 @@ export const EndpointServicePostApi = async data => {
 };
 
 export const ParameterPostApi = async (data, headers) => {
-    const baseURL = "https://localhost:44356/api/Values/getparameters";
+    const baseURL = `${CheckURL}/Values/getparameters`;
     try {
         const jsonData = JSON.stringify(data);
         const response = await postApi(baseURL, jsonData, headers);
@@ -65,7 +66,7 @@ export const ParameterPostApi = async (data, headers) => {
 };
 
 export const ParameterGetApi = async (data, headers) => {
-    const baseURL = "https://localhost:44356/api/Values/getresponce";
+    const baseURL = `${CheckURL}/Values/getresponce`;
     try {
         const jsonData = JSON.stringify(data);
         const response = await postApi(baseURL, jsonData, headers);
