@@ -8,24 +8,19 @@ import FormComponent from "../FormComponent/FormComponent";
 import { Container } from "@mui/system";
 import { Accordion, AccordionDetails } from "@mui/material";
 import { baseURL } from "../../AppSettings.js";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
 import Papa from "papaparse";
-
-// import { statusLabels } from "../../configutaionEnums";
-// import products from "../../configutaionEnums.js";
-// import { statusLabels } from "../../configutaionEnums";
-import { statusLabels as aliveData } from "../../configutaionEnums.js";
 
 const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
   const [csvData, setcsvData] = useState([]);
+  // const csvData = useRef();
+  // useEffect(
+  //   (resuts) => {
+  //     csvData.current = results.data;
+  //     csvFileData();
+  //     console.log("Mounted");
+  //   },
+  //   [csvData, getAPIData]
+  // );
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -85,7 +80,6 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
             setSearchGrid(res.data);
             console.log(res.data);
             setAPIData(res.data);
-            // console.log(formData.Search);
             console.log(searchGrid);
             return res.data;
           } else return [];
@@ -196,50 +190,32 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
     localStorage.setItem("jsonSchema", json);
   };
 
-  // console.log({ statusLabels });
-
-  // const csvFileData = () => {
-  //   csvData.length > 0 && getAPIData &&
-  //     Object.keys(csvData).map((header, index) => {
-  //       header ===
-  //         Object.keys(getAPIData).map(key, index) => {
-  //         Object.keys(getAPIData[key]).map((ind) => ind}
-  //           ind;
-  //         });
-  //     });
-  // };
+  useEffect(() => {
+    console.log(getAPIData);
+    csvFileData();
+    console.log("Hiii");
+  }, [csvData, getAPIData]);
 
   const csvFileData = () => {
     console.log(csvData);
     console.log(getAPIData);
     const updatedData = getAPIData;
+    console.log(updatedData);
     csvData.length > 0 &&
       updatedData &&
       csvData.map((header) => {
-        console.log(header);
-        console.log(header.ColumnName);
-        console.log(header.Value);
         updatedData.map((row) => {
-          console.log(row);
-          console.log(row[header.ColumnName]);
-          console.log(`${row[header.ColumnName]}`);
-          if (
-            row[header.ColumnName] &&
-            `${row[header.ColumnName]}` === header.Value
-          ) {
+          if (`${row[header.ColumnName]}` === header.Value) {
             console.log("shreesh");
             row[header.ColumnName] = header.Status;
           }
         });
       });
-    console.log(updatedData);
+    //setAPIData((x) => [...x, ...updatedData]);
     setAPIData(updatedData);
+    console.log(getAPIData);
+    return 0;
   };
-
-  useEffect(() => {
-    csvFileData();
-    console.log("Hiii");
-  }, [csvData]);
 
   useEffect(() => {
     csvFileData();
@@ -247,7 +223,6 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
   }, [getAPIData]);
 
   console.log(csvData);
-
   return (
     <div>
       <input type="file" accept=".csv" onChange={handleFileUpload} />
@@ -261,7 +236,8 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
           {getAPIData &&
             getAPIData.length > 0 &&
             Object.keys(getAPIData[0]).map((key, id) => {
-              console.log(Object.keys(getAPIData[0]));
+              console.log(getAPIData);
+              console.log(getAPIData[0]);
               console.log(key);
               return (
                 <div
@@ -278,9 +254,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
         <div className={"gridDataAPI"}>
           {getAPIData.length > 0 &&
             Object.keys(getAPIData).map((key, index) => {
-              // debugger;
               console.log(getAPIData);
-
               return (
                 <div className={"apiGridRow"} key={index}>
                   {showformbutton && (
@@ -294,13 +268,14 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
                     </div>
                   )}
 
-                  {Object.keys(getAPIData[key]).map((ind) => {
+                  {Object.keys(getAPIData[key]).map((ind, i) => {
                     console.log(ind);
                     console.log(getAPIData[key][ind]);
                     return (
                       <div
                         className={"apiGridItems"}
                         title={getAPIData[key][ind]}
+                        id={`${index}${i}`}
                       >
                         {getAPIData[key][ind]}
                       </div>
