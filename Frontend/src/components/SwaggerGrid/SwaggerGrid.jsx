@@ -7,6 +7,7 @@ import {
     Container,
     FormControl,
     FormControlLabel,
+    FormGroup,
     FormHelperText,
     IconButton,
     Input,
@@ -39,7 +40,7 @@ import {
 import "./SwaggerGrid.css";
 import c from "../../assets/3.jpg";
 import { useNavigate } from "react-router-dom";
-import { Delete } from "@mui/icons-material";
+import { CheckBox, Delete } from "@mui/icons-material";
 
 const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [swaggerData, setSwaggerData] = useState();
@@ -502,7 +503,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                             </Select>
                                         </FormControl>
                                         <FormControl>
-                                            <Button
+                                            {/* <Button
                                                 sx={{
                                                     pointerEvents: "auto",
                                                     height: "5rem",
@@ -516,17 +517,16 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 onClick={handleCorrectEndpoints}
                                             >
                                                 Filter Endpoints
-                                            </Button>
+                                            </Button> */}
+                                  
                                             <FormControlLabel
                                                 control={
-                                                    <Checkbox
+                                                    <CheckBox
                                                         checked={
                                                             correctEndpoints
                                                         }
-                                                        onChange={(event) =>
-                                                            handleCorrectEndpoints(
-                                                                event
-                                                            )
+                                                        onChange={
+                                                            handleCorrectEndpoints
                                                         }
                                                         color="primary"
                                                     />
