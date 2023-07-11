@@ -8,8 +8,35 @@ import FormComponent from "../FormComponent/FormComponent";
 import { Container } from "@mui/system";
 import { Accordion, AccordionDetails } from "@mui/material";
 import { baseURL } from "../../AppSettings.js";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+import Papa from "papaparse";
+
+// import { statusLabels } from "../../configutaionEnums";
+// import products from "../../configutaionEnums.js";
+// import { statusLabels } from "../../configutaionEnums";
+import { statusLabels as aliveData } from "../../configutaionEnums.js";
 
 const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
+  const [csvData, setcsvData] = useState([]);
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    Papa.parse(file, {
+      header: true,
+      complete: (results) => {
+        setcsvData(results.data);
+      },
+    });
+  };
+
   const [formData, setFormData] = useState([]);
   const [searchGrid, setSearchGrid] = useState([]);
   const [getAPIData, setAPIData] = useState([]);
@@ -19,6 +46,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
   const [selecteddata, setselecteddata] = useState([]);
   const [showform, setshowform] = useState(false);
   const formRef = useRef(null);
+  const [showEnums, setShowEnums] = useState(false);
 
   useEffect(() => {
     if (showform && formRef.current) {
@@ -70,6 +98,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
 
   console.log(searchGrid);
   console.log(getAPIData);
+
   const [newApiState, setNewApiState] = useState([]);
   console.log(baseURL);
   const getGridData = () => {
@@ -87,7 +116,6 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
       .catch((error) => {
         return error;
       });
-
     //   return response;
   };
 
@@ -143,6 +171,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
     //   }
     handleSave(uu);
   };
+
   const handleSave = (data) => {
     console.log(data);
     var json = Object.assign({}, data);
@@ -167,8 +196,61 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
     localStorage.setItem("jsonSchema", json);
   };
 
+  // console.log({ statusLabels });
+
+  // const csvFileData = () => {
+  //   csvData.length > 0 && getAPIData &&
+  //     Object.keys(csvData).map((header, index) => {
+  //       header ===
+  //         Object.keys(getAPIData).map(key, index) => {
+  //         Object.keys(getAPIData[key]).map((ind) => ind}
+  //           ind;
+  //         });
+  //     });
+  // };
+
+  const csvFileData = () => {
+    console.log(csvData);
+    console.log(getAPIData);
+    const updatedData = getAPIData;
+    csvData.length > 0 &&
+      updatedData &&
+      csvData.map((header) => {
+        console.log(header);
+        console.log(header.ColumnName);
+        console.log(header.Value);
+        updatedData.map((row) => {
+          console.log(row);
+          console.log(row[header.ColumnName]);
+          console.log(`${row[header.ColumnName]}`);
+          if (
+            row[header.ColumnName] &&
+            `${row[header.ColumnName]}` === header.Value
+          ) {
+            console.log("shreesh");
+            row[header.ColumnName] = header.Status;
+          }
+        });
+      });
+    console.log(updatedData);
+    setAPIData(updatedData);
+  };
+
+  useEffect(() => {
+    csvFileData();
+    console.log("Hiii");
+  }, [csvData]);
+
+  useEffect(() => {
+    csvFileData();
+    console.log(getAPIData);
+  }, [getAPIData]);
+
+  console.log(csvData);
+
   return (
     <div>
+      <input type="file" accept=".csv" onChange={handleFileUpload} />
       <div className={"gridData"}>
         <div className={"gridColumns"}>
           {showformbutton && (
@@ -196,6 +278,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
         <div className={"gridDataAPI"}>
           {getAPIData.length > 0 &&
             Object.keys(getAPIData).map((key, index) => {
+              // debugger;
               console.log(getAPIData);
 
               return (
@@ -210,78 +293,16 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData }) => {
                       />
                     </div>
                   )}
+
                   {Object.keys(getAPIData[key]).map((ind) => {
                     console.log(ind);
+                    console.log(getAPIData[key][ind]);
                     return (
                       <div
                         className={"apiGridItems"}
                         title={getAPIData[key][ind]}
                       >
-                        {ind === "alive" &&
-                          (getAPIData[key][ind] === 1 ? (
-                            <div
-                              style={{
-                                width: "50px",
-                                height: "20px",
-                                backgroundColor: "green",
-                                marginLeft: "15px",
-                                borderRadius: "10%",
-                                color:"white"
-                              }}
-                            >Online</div>
-                          ) : (
-                            <div
-                              style={{
-                                width: "50px",
-                                height: "20px",
-                                backgroundColor: "red",
-                                marginLeft: "15px",
-                                borderRadius: "10%",
-                              }}
-                            >Offline</div>
-                          ))}
-                        {ind === "antivirus" &&
-                          (getAPIData[key][ind] === 1 ? (
-                            <div> Running</div>
-                          ) : getAPIData[key][ind] === 0 ? (
-                            <div> Inactive</div>
-                          ) : getAPIData[key][ind] === 2 ?(
-                            <div>Not Instlled</div>
-                          ):(
-                            <div>Not Synced</div>
-                          ))}
-                           {ind === "diskSpace" &&
-                          (getAPIData[key][ind] === 1 ? (
-                            <div> Succeeds</div>
-                          ) : getAPIData[key][ind] === 0 ? (
-                            <div> Inactive</div>
-                          ) : (
-                            <div>Exceeds</div>
-                          ))}
-                          {ind === "smartDisk" &&
-                          (getAPIData[key][ind] === 1 ? (
-                            <div>Active</div>
-                          ) : getAPIData[key][ind] === 0 ? (
-                            <div> Inactive</div>
-                          ) : getAPIData[key][ind] === 2 ?(
-                            <div>Offline</div>
-                          ):(
-                            <div>No Info</div>
-                          ))}
-                          {ind === "amt" &&
-                          (getAPIData[key][ind] === 1 ? (
-                            <div> Not Activated</div>
-                          ) : getAPIData[key][ind] === 0 ? (
-                            <div> Not Configured</div>
-                          ) : (
-                            <div>Compliant</div>
-                          ))}
-                        {ind !== "alive" &&
-                          ind !== "antivirus" &&
-                          ind !== "diskSpace" &&
-                          ind !== "smartDisk" &&
-                          ind !== "amt" &&
-                          getAPIData[key][ind]}
+                        {getAPIData[key][ind]}
                       </div>
                     );
                   })}

@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
+// import Status from "../../configutaionEnums";
 import { useEffect } from "react";
 import {
   EndpointPostApi,
@@ -148,6 +149,8 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
   const filteredEndpoints = endpoints.filter((endpoint) =>
     endpoint.toLowerCase().includes(selectedService.toLowerCase().split(" ")[0])
   );
+
+  // console.log(Status);
 
   return (
     <div
