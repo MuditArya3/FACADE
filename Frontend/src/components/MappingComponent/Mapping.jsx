@@ -32,7 +32,7 @@ import "../JsonTemplateComponent/JsonTemplate.css";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useEffect } from "react";
 import { red } from "@mui/material/colors";
-import FormComponent from "../FormComponent/FormComponent";
+import FormComponent from "../FormComponent/FormComponent.jsx";
 import { useRef } from "react";
 import GridComponent from "../GridComponent/GridComponent.jsx";
 
@@ -74,7 +74,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
             actionMethods.map((action) => {
                 console.log(action);
             });
-        } else if (lowercaseAnnotation.includes("get")) { 
+        } else if (lowercaseAnnotation.includes("get")) {
             // setShowGridComponent(true);
             actionMethods.push("FETCH");
             actionMethods.push("SEARCH");
@@ -686,6 +686,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                                                                 {
                                                                                     field
                                                                                 }
+
                                                                                 *
                                                                             </Typography>
                                                                         </Paper>
@@ -741,7 +742,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                     </Container>
                 </div>
             )}
-            {!showGridComponent && lowercaseAnnotation.includes("create") &&(
+            {!showGridComponent && lowercaseAnnotation.includes("create") && (
                 <div
                     className={
                         lowercaseAnnotation.includes("create")
