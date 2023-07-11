@@ -34,13 +34,11 @@ import {
     fetchService,
     handleService,
     handleUploadedFileClick,
-    handleInputChange
+    handleInputChange,
 } from "./SwaggerGrid";
 
 import "./SwaggerGrid.css";
 import c from "../../assets/3.jpg";
-import { useNavigate } from "react-router-dom";
-import { CheckBox, Delete } from "@mui/icons-material";
 
 const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [swaggerData, setSwaggerData] = useState();
@@ -66,12 +64,11 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     });
 
     const handleFormSubmit = () => {
-        handleData(columns,jsonfile,setJsonData);
+        handleData(columns, jsonfile, setJsonData);
     };
 
     const allowedExtensions = /\.(json)$/i;
 
-    
     const handlePreviousButton = () => {
         setSwaggerData(null);
         setEndpoints([]);
@@ -142,7 +139,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     //     localStorage.setItem("jsonSchema", json);
     // };
 
-   
     useEffect(() => {
         if (swaggerData) {
             if (endpoints.length === 0) {
@@ -155,9 +151,9 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         }
     }, [endpoints, swaggerData]);
 
-    const handleCorrectEndpoints = () => {
-        console.log("igiugiugiuytiuytyutuy");
-        setCorrectEndpoints(!correctEndpoints);
+    const handleCorrectEndpoints = (event) => {
+        console.log("helloooooooooooooo");
+        setCorrectEndpoints(event.target.checked);
     };
     console.log(endpoints);
 
@@ -165,19 +161,33 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         ? endpoints.filter((endpoint) => {
               const endpointKey = endpoint.split("--")[0];
               const endpointType = endpoint.split("--")[1];
-              const response200 =
-                  //swaggerData.paths[endpointKey] &&
-                  swaggerData.paths[endpointKey][endpointType]?.responses?.[
-                      "200"
-                  ];
               const endpointIncludesService = endpoint
                   .toLowerCase()
                   .includes(selectedService.toLowerCase().split(" ")[0]);
-              return (
-                  response200 &&
-                  Object.keys(response200.content).length > 0 &&
-                  endpointIncludesService
-              );
+
+              if (endpointType === "get") {
+                  const response200 =
+                      swaggerData.paths[endpointKey]?.[endpointType]
+                          ?.responses?.["200"];
+                  return (
+                      response200 !== undefined &&
+                      response200 !== null &&
+                      response200.content !== undefined &&
+                      response200.content !== null &&
+                      Object.keys(response200.content).length > 0 &&
+                      endpointIncludesService
+                  );
+              } else if (endpointType === "put" || endpointType === "post") {
+                  const requestBody =
+                      swaggerData.paths[endpointKey]?.[endpointType]
+                          ?.requestBody;
+                  return (
+                      requestBody &&
+                      Object.keys(requestBody.content).length > 0 &&
+                      endpointIncludesService
+                  );
+              }
+              return false;
           })
         : endpoints.filter((endpoint) =>
               endpoint
@@ -209,7 +219,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         }
     };
 
-    
     return (
         <div
             className="acc-container"
@@ -299,7 +308,18 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 fontSize: "1.5rem",
                                             }}
                                             accept="application/json"
-                                            onChange={(e)=>handleInputChange(e,allowedExtensions,setSwaggerData,setEndpoints,setUpdatedEndpoints,setUploadedFiles,setShowMessage,setShowInvalidFileType)}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    e,
+                                                    allowedExtensions,
+                                                    setSwaggerData,
+                                                    setEndpoints,
+                                                    setUpdatedEndpoints,
+                                                    setUploadedFiles,
+                                                    setShowMessage,
+                                                    setShowInvalidFileType
+                                                )
+                                            }
                                         />
                                         <Typography
                                             variant="subtitle1"
@@ -502,31 +522,19 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 )}
                                             </Select>
                                         </FormControl>
-                                        <FormControl>
-                                            {/* <Button
-                                                sx={{
-                                                    pointerEvents: "auto",
-                                                    height: "5rem",
-                                                    fontSize: "0.9rem",
-                                                    width: "8.8rem",
-                                                }}
-                                                variant="contained"
-                                                size="small"
-                                                type="button"
-                                                marg
-                                                onClick={handleCorrectEndpoints}
-                                            >
-                                                Filter Endpoints
-                                            </Button> */}
-                                  
+                                        <FormControl
+                                            sx={{
+                                                pointerEvents: "auto",
+                                            }}
+                                        >
                                             <FormControlLabel
                                                 control={
-                                                    <CheckBox
+                                                    <Checkbox
                                                         checked={
                                                             correctEndpoints
                                                         }
-                                                        onChange={
-                                                            handleCorrectEndpoints
+                                                        onChange={(e)=>
+                                                            handleCorrectEndpoints(e)
                                                         }
                                                         color="primary"
                                                     />
@@ -604,7 +612,18 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                         key={index}
                                         variant="outlined"
                                         onClick={(e) =>
-                                            handleUploadedFileClick(file.name,uploadedFiles,setUpdatedEndpoints,setEndpoints,setUpdatedServices,setServices,setSelectedService,setSelectedValue,setSwaggerData,setSelectedFileName)
+                                            handleUploadedFileClick(
+                                                file.name,
+                                                uploadedFiles,
+                                                setUpdatedEndpoints,
+                                                setEndpoints,
+                                                setUpdatedServices,
+                                                setServices,
+                                                setSelectedService,
+                                                setSelectedValue,
+                                                setSwaggerData,
+                                                setSelectedFileName
+                                            )
                                         }
                                         sx={{
                                             my: 1,
