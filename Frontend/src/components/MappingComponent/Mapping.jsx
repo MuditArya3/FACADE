@@ -22,21 +22,20 @@ import "./Mapping.css";
 
 import {
   handleAction,
-  getdesiredvalue,
+  getDesiredValue,
   handleTableSwaggerSubmit,
   handleData,
-  getdesiredannotation,
-  handleform,
+  getDesiredAnnotation,
+  handleForm,
 } from "./Mapping";
 import { useState } from "react";
 import "../JsonTemplateComponent/JsonTemplate.css";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useEffect } from "react";
 import { red } from "@mui/material/colors";
-import FormComponent from "../FormComponent/FormComponent";
+import FormComponent from "../FormComponent/FormComponent.jsx";
 import { useRef } from "react";
-import GridComponent from "../GridComponent/GridComponent";
-import UpdateGrid from "../UpdateGrid/UpdateGrid";
+import GridComponent from "../GridComponent/GridComponent.jsx";
 
 const Mapping = ({ jsonData, setJsonData }) => {
   const [mappings, setMappings] = useState({});
@@ -65,7 +64,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
   const formRef = useRef(null);
   //   let actionMethods=[];
   console.log(options);
-  let annotation = getdesiredannotation(localStorage.getItem("Annotation"));
+  let annotation = getDesiredAnnotation(localStorage.getItem("Annotation"));
   console.log(annotation);
   const lowercaseAnnotation = annotation.toLowerCase();
 
@@ -77,9 +76,9 @@ const Mapping = ({ jsonData, setJsonData }) => {
         console.log(action);
       });
     } else if (lowercaseAnnotation.includes("get")) {
-      setShowGridComponent(true);
-      // actionMethods.push("FETCH");
-      // actionMethods.push("SEARCH");
+      // setShowGridComponent(true);
+      actionMethods.push("FETCH");
+      actionMethods.push("SEARCH");
     } else if (lowercaseAnnotation.includes("update")) {
       // console.log(actionMethods.push("UPDATE"));
       // return (
@@ -231,7 +230,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
               .content["application/vnd.connectwise.com+json; version=2022.1"]
               .schema.items["$ref"];
         }
-        let requiredval = getdesiredvalue(apidatas);
+        let requiredval = getDesiredValue(apidatas);
         let p = swaggerData.components.schemas[requiredval];
 
         if (Object.keys(p).includes("required")) {
@@ -248,11 +247,11 @@ const Mapping = ({ jsonData, setJsonData }) => {
           data1 = data1["204"]["$ref"];
         }
 
-        let requiredval1 = getdesiredvalue(data1);
+        let requiredval1 = getDesiredValue(data1);
 
         let apidatas = swaggerData.responses[requiredval1].schema["$ref"];
 
-        let requiredval2 = getdesiredvalue(apidatas);
+        let requiredval2 = getDesiredValue(apidatas);
 
         let p = swaggerData.definitions[requiredval2];
 
@@ -323,7 +322,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
           setButtonClicked,
           columns
         );
-      handleform(
+      handleForm(
         e,
         buttonClicked,
         setshowform,
@@ -436,7 +435,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                         }}
                         onDrop={(ev) => {
                           ev.preventDefault();
-                          var dragComponent = ev.dataTransfer.getData("dragId");
+                          let dragComponent = ev.dataTransfer.getData("dragId");
                           ev.currentTarget.appendChild(
                             document.getElementById(dragComponent)
                           );
@@ -524,7 +523,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                             onDrop={(ev) => {
                               ev.preventDefault();
 
-                              var dragComponent =
+                              let dragComponent =
                                 ev.dataTransfer.getData("dragId");
                               console.log(dragComponent);
                               ev.currentTarget.appendChild(
@@ -632,7 +631,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
           </Container>
         </div>
       )}
-      {!showGridComponent && (
+      {!showGridComponent && lowercaseAnnotation.includes("create") && (
         <div
           className={lowercaseAnnotation.includes("create") ? "create" : "get"}
           ref={formRef}
@@ -684,6 +683,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                     <GridComponent
                       lowercaseAnnotation={lowercaseAnnotation}
                       setJsonData={setJsonData}
+                      mappings={mappings}
                     />
                   )}
                 </AccordionDetails>

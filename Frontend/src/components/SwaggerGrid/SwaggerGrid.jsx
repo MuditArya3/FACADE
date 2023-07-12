@@ -3,13 +3,18 @@ import {
   AccordionSummary,
   Box,
   Button,
+  Checkbox,
   Container,
   FormControl,
+  FormControlLabel,
+  FormGroup,
   FormHelperText,
+  IconButton,
   Input,
   InputLabel,
   MenuItem,
   Select,
+  Tooltip,
   Typography,
   makeStyles,
 } from "@mui/material";
@@ -29,6 +34,8 @@ import {
   fetchData,
   fetchService,
   handleService,
+  handleUploadedFileClick,
+  handleInputChange,
 } from "./SwaggerGrid";
 
 import "./SwaggerGrid.css";
@@ -44,6 +51,11 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
   const [showInvalidFileType, setShowInvalidFileType] = useState(false);
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState("");
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [updatedEndpoints, setUpdatedEndpoints] = useState([]);
+  const [updatedServices, setUpdatedServices] = useState([]);
+  const [selectedFileName, setSelectedFileName] = useState("");
+  const [correctEndpoints, setCorrectEndpoints] = useState(false);
 
   const selectedEndpoint = selectedValue.split("--")[0];
   const selectedEndpointType = selectedValue.split("--")[1];
@@ -52,15 +64,37 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     return self.indexOf(value) === index;
   });
 
-  useEffect(() => {
-    swaggerData && fetchData(swaggerData, setEndpoints);
-  }, [swaggerData]);
+  const handleFormSubmit = () => {
+    handleData(columns, jsonfile, setJsonData);
+  };
+
+  const allowedExtensions = /\.(json)$/i;
+
+  const handlePreviousButton = () => {
+    setSwaggerData(null);
+    setEndpoints([]);
+    setShowMessage(false);
+    setShowInvalidFileType(false);
+  };
+
+  // useEffect(() => {
+  //     if (swaggerData) {
+  //         fetchData(swaggerData, (fetchedEndpoints) => {
+  //             setEndpoints(fetchedEndpoints);
+  //             setUpdatedEndpoints(fetchedEndpoints);
+  //         });
+  //     }
+  // }, [swaggerData]);
 
   useEffect(() => {
-    swaggerData && fetchService(swaggerData, setServices);
+    if (swaggerData) {
+      fetchService(swaggerData, (fetchedServices) => {
+        setServices(fetchedServices);
+        setUpdatedServices(fetchedServices);
+      });
+    }
   }, [swaggerData]);
 
-  console.log(selectedValue);
   useEffect(() => {
     if (selectedValue) {
       const fetchParameters = async () => {
@@ -88,51 +122,23 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     }
   }, [selectedValue]);
 
-  const handleSave = (data) => {
-    var json = Object.assign({}, data);
+  // const handleSave = (data) => {
+  //     var json = Object.assign({}, data);
 
-    handlecreatefile({
-      label: "search",
-      title: "Search Form",
-      description: "Search using below Textbox",
-      type: "object",
-      properties: json,
-    });
-  };
+  //     handlecreatefile({
+  //         label: "search",
+  //         title: "Search Form",
+  //         description: "Search using below Textbox",
+  //         type: "object",
+  //         properties: json,
+  //     });
+  // };
 
-  const handlecreatefile = (data) => {
-    const json = JSON.stringify(data);
-    setJsonData(json);
-    localStorage.setItem("jsonSchema", json);
-  };
-
-  const handleFormSubmit = () => {
-    handleData(columns, handleSave);
-  };
-
-  const allowedExtensions = /\.(json)$/i;
-
-  const handleInputChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file && allowedExtensions.test(file.name)) {
-      handleFileSelectChange(e, setSwaggerData);
-      setShowMessage(false);
-      setShowInvalidFileType(false);
-    } else {
-      setSwaggerData(null);
-      setEndpoints([]);
-      setShowMessage(false);
-      setShowInvalidFileType(true);
-    }
-  };
-
-  const handlePreviousButton = () => {
-    setSwaggerData(null);
-    setEndpoints([]);
-    setShowMessage(false);
-    setShowInvalidFileType(false);
-  };
+  // const handlecreatefile = (data) => {
+  //     const json = JSON.stringify(data);
+  //     setJsonData(json);
+  //     localStorage.setItem("jsonSchema", json);
+  // };
 
   useEffect(() => {
     if (swaggerData) {
@@ -146,40 +152,107 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     }
   }, [endpoints, swaggerData]);
 
-  const filteredEndpoints = endpoints.filter((endpoint) =>
-    endpoint.toLowerCase().includes(selectedService.toLowerCase().split(" ")[0])
-  );
+  const handleCorrectEndpoints = (event) => {
+    console.log("helloooooooooooooo");
+    setCorrectEndpoints(event.target.checked);
+  };
+  console.log(endpoints);
 
-  // console.log(Status);
+  const filteredEndpoints = correctEndpoints
+    ? endpoints.filter((endpoint) => {
+        const endpointKey = endpoint.split("--")[0];
+        const endpointType = endpoint.split("--")[1];
+        const endpointIncludesService = endpoint
+          .toLowerCase()
+          .includes(selectedService.toLowerCase().split(" ")[0]);
+
+        if (endpointType === "get") {
+          const response200 =
+            swaggerData.paths[endpointKey]?.[endpointType]?.responses?.["200"];
+          return (
+            response200 !== undefined &&
+            response200 !== null &&
+            response200.content !== undefined &&
+            response200.content !== null &&
+            Object.keys(response200.content).length > 0 &&
+            endpointIncludesService
+          );
+        } else if (endpointType === "put" || endpointType === "post") {
+          const requestBody =
+            swaggerData.paths[endpointKey]?.[endpointType]?.requestBody;
+          return (
+            requestBody &&
+            Object.keys(requestBody.content).length > 0 &&
+            endpointIncludesService
+          );
+        }
+        return false;
+      })
+    : endpoints.filter((endpoint) =>
+        endpoint
+          .toLowerCase()
+          .includes(selectedService.toLowerCase().split(" ")[0])
+      );
+
+  const handleUploadedFileClick = (fileName) => {
+    // Find the file data based on the clicked file name
+    const fileData = uploadedFiles.find((file) => file.name === fileName);
+
+    if (fileData) {
+      const { data } = fileData;
+
+      fetchData(data, (fetchedEndpoints) => {
+        setUpdatedEndpoints(fetchedEndpoints);
+        setEndpoints(fetchedEndpoints);
+      });
+
+      fetchService(data, (fetchedServices) => {
+        setUpdatedServices(fetchedServices);
+        setServices(fetchedServices);
+      });
+
+      setSelectedService("");
+      setSelectedValue("");
+      setSwaggerData(data);
+      setSelectedFileName(fileName);
+    }
+  };
 
   return (
     <div
       className="acc-container"
-      //style={{ backgroundImage: `url(${bg})` }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+      }}
     >
       <img className="bg_image" src={c} />
+      <Typography
+        variant="h4"
+        sx={{
+          fontWeight: 600,
+          color: "white",
+          zIndex: 1,
+          position: "relative",
+          marginTop: "6rem",
+          textAlign: "center",
+        }}
+      >
+        Facade Application
+      </Typography>
       <Container
         sx={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           alignItems: "center",
           py: 4,
           justifyContent: "center",
-          pt: "7rem",
           position: "relative",
         }}
       >
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 2,
-            marginBottom: "3rem",
-            fontWeight: 600,
-            color: "white",
-          }}
-        >
-          Facade Application
-        </Typography>
         <Accordion
           sx={{
             width: "35%",
@@ -234,8 +307,67 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                         fontSize: "1.5rem",
                       }}
                       accept="application/json"
-                      onChange={handleInputChange}
+                      onChange={(e) =>
+                        handleInputChange(
+                          e,
+                          allowedExtensions,
+                          setSwaggerData,
+                          setEndpoints,
+                          setUpdatedEndpoints,
+                          setUploadedFiles,
+                          setShowMessage,
+                          setShowInvalidFileType
+                        )
+                      }
                     />
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontSize: "1.5rem",
+                        padding: "1rem",
+                        fontWeight: 500,
+                        color: "black",
+                      }}
+                    >
+                      Or
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontSize: "1.5rem",
+                        padding: "1rem",
+                        fontWeight: 500,
+                        color: "black",
+                      }}
+                    >
+                      Click{" "}
+                      <Button
+                        sx={{
+                          pointerEvents: "auto",
+                          margin: "-16px",
+                        }}
+                        onClick={() => window.open("/json", "_blank")}
+                      >
+                        here
+                      </Button>{" "}
+                      to add annotations to your json file
+                    </Typography>
+                    {/* <span
+                                            class="hovertext"
+                                            data-hover="Hello, this is the tooltip"
+                                        >
+                                            <Tooltip title="Delete">
+                                                <IconButton>
+                                                    <Delete />
+                                                </IconButton>
+                                            </Tooltip>
+                                            Try hover over me
+                                        </span>
+                                        <Tooltip title="Delete">
+                                            <IconButton>
+                                                <Delete />
+                                            </IconButton>
+                                        </Tooltip> */}
                   </Box>
                 )}
                 <Box
@@ -367,7 +499,22 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                         })}
                       </Select>
                     </FormControl>
-
+                    <FormControl
+                      sx={{
+                        pointerEvents: "auto",
+                      }}
+                    >
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={correctEndpoints}
+                            onChange={(e) => handleCorrectEndpoints(e)}
+                            color="primary"
+                          />
+                        }
+                        label="Show correct Endpoints"
+                      />
+                    </FormControl>
                     <Box
                       sx={{
                         display: "flex",
@@ -402,7 +549,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                         marg
                         onClick={handleFormSubmit}
                       >
-                        Save Mapping
+                        Generate
                       </Button>
                     </Box>
                   </>
@@ -411,6 +558,61 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
             </form>
           </AccordionSummary>
         </Accordion>
+        {uploadedFiles.length > 0 && (
+          <Accordion
+            className="toprightaccordian"
+            style={{
+              position: "absolute",
+              top: "4rem",
+              right: "8rem",
+              borderRadius: "4px",
+            }}
+          >
+            <AccordionSummary>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  my: 2,
+                }}
+              >
+                <Typography variant="h6" sx={{ mb: 1 }}>
+                  Uploaded Files:
+                </Typography>
+                {uploadedFiles.map((file, index) => (
+                  <Button
+                    key={index}
+                    variant="outlined"
+                    onClick={(e) =>
+                      handleUploadedFileClick(
+                        file.name,
+                        uploadedFiles,
+                        setUpdatedEndpoints,
+                        setEndpoints,
+                        setUpdatedServices,
+                        setServices,
+                        setSelectedService,
+                        setSelectedValue,
+                        setSwaggerData,
+                        setSelectedFileName
+                      )
+                    }
+                    sx={{
+                      my: 1,
+                      backgroundColor:
+                        selectedFileName === file.name
+                          ? "lightblue"
+                          : "transparent",
+                    }}
+                  >
+                    {file.name}
+                  </Button>
+                ))}
+              </Box>
+            </AccordionSummary>
+          </Accordion>
+        )}
       </Container>
     </div>
   );
