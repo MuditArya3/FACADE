@@ -683,7 +683,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                     <GridComponent
                       lowercaseAnnotation={lowercaseAnnotation}
                       setJsonData={setJsonData}
-                      mappings={mappings}
+                      // mappings={mappings} //uncomment this line to how grid as per mapping
                     />
                   )}
                 </AccordionDetails>

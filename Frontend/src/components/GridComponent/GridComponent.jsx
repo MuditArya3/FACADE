@@ -43,6 +43,8 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
     const updatedData = getAPIData.map((obj) => {
       return { ...obj };
     });
+    console.log(updatedData);
+    console.log(getAPIData);
     csvData.length > 0 &&
       updatedData &&
       csvData.map((header) => {
