@@ -64,8 +64,9 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     };
 
     const handleGenerateClick = () => {
-        handleData(inputValue);
+        handleData(inputValue, columns);
     };
+    console.log(columns);
 
     const selectedEndpoint = selectedValue.split("--")[0];
     const selectedEndpointType = selectedValue.split("--")[1];

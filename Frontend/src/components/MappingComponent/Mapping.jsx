@@ -100,6 +100,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
         }
     }, [lowercaseAnnotation]);
     let st = localStorage.getItem("ColumnData");
+    console.log(st);
 
     useEffect(() => {
         setColumns(JSON.parse(st));
