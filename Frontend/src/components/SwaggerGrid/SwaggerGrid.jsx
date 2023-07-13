@@ -14,6 +14,7 @@ import {
     InputLabel,
     MenuItem,
     Select,
+    TextField,
     Tooltip,
     Typography,
     makeStyles,
@@ -55,6 +56,15 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [updatedServices, setUpdatedServices] = useState([]);
     const [selectedFileName, setSelectedFileName] = useState("");
     const [correctEndpoints, setCorrectEndpoints] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+
+    const handleUrlChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleGenerateClick = () => {
+        handleData(inputValue);
+    };
 
     const selectedEndpoint = selectedValue.split("--")[0];
     const selectedEndpointType = selectedValue.split("--")[1];
@@ -62,10 +72,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const uniqueServices = services.filter((value, index, self) => {
         return self.indexOf(value) === index;
     });
-
-    const handleFormSubmit = () => {
-        handleData(columns, jsonfile, setJsonData);
-    };
 
     const allowedExtensions = /\.(json)$/i;
 
@@ -75,15 +81,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         setShowMessage(false);
         setShowInvalidFileType(false);
     };
-
-    // useEffect(() => {
-    //     if (swaggerData) {
-    //         fetchData(swaggerData, (fetchedEndpoints) => {
-    //             setEndpoints(fetchedEndpoints);
-    //             setUpdatedEndpoints(fetchedEndpoints);
-    //         });
-    //     }
-    // }, [swaggerData]);
 
     useEffect(() => {
         if (swaggerData) {
@@ -121,24 +118,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         }
     }, [selectedValue]);
 
-    // const handleSave = (data) => {
-    //     var json = Object.assign({}, data);
-
-    //     handlecreatefile({
-    //         label: "search",
-    //         title: "Search Form",
-    //         description: "Search using below Textbox",
-    //         type: "object",
-    //         properties: json,
-    //     });
-    // };
-
-    // const handlecreatefile = (data) => {
-    //     const json = JSON.stringify(data);
-    //     setJsonData(json);
-    //     localStorage.setItem("jsonSchema", json);
-    // };
-
     useEffect(() => {
         if (swaggerData) {
             if (endpoints.length === 0) {
@@ -156,6 +135,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
         setCorrectEndpoints(event.target.checked);
     };
     console.log(endpoints);
+    console.log(swaggerData);
 
     const filteredEndpoints = correctEndpoints
         ? endpoints.filter((endpoint) => {
@@ -522,6 +502,32 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 )}
                                             </Select>
                                         </FormControl>
+                                        <InputLabel
+                                            id="table-select-label"
+                                            sx={{
+                                                fontSize: "1.5rem",
+                                                marginLeft: "7px",
+                                            }}
+                                        >
+                                            Domain URL
+                                        </InputLabel>
+                                        <FormControl
+                                            sx={{
+                                                pointerEvents: "auto",
+                                                width: "80%",
+                                            }}
+                                        >
+                                            <TextField
+                                                sx={{
+                                                    fontSize: "1.5rem",
+                                                }}
+                                                label={"Domain URL"}
+                                                required
+                                                variant="outlined"
+                                                value={inputValue}
+                                                onChange={handleUrlChange}
+                                            />
+                                        </FormControl>
                                         <FormControl
                                             sx={{
                                                 pointerEvents: "auto",
@@ -574,7 +580,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 size="small"
                                                 type="button"
                                                 marg
-                                                onClick={handleFormSubmit}
+                                                onClick={handleGenerateClick}
                                             >
                                                 Generate
                                             </Button>

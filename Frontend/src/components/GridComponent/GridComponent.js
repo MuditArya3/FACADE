@@ -1,8 +1,9 @@
 import axios from "axios";
+import { domainUrl } from "../MappingComponent/Mapping";
 
 export const getGridData = (setAPIData,setNewApiState) => {
     axios
-      .get(`https://localhost:7184/api/Desktop/Desktops`)
+      .get(domainUrl)
       .then((res) => {
         if (res && res.data) {
           // props = res.data;

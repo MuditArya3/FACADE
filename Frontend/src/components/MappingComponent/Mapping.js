@@ -59,6 +59,15 @@ export const getDesiredAnnotation = (apidatas) => {
     return value;
   };
 
+  const getDesiredUrl = (apidatas) =>{
+    const url = apidatas.split("--")[0]
+    console.log(url);
+    const apiurl = url.split('"')[1]
+    return apiurl
+  }
+
+  let url = getDesiredUrl(localStorage.getItem("Annotation"));
+
 // export const handleTableSwaggerSubmit = (
 //   selectedTable,
 //   selectApiMethod,
@@ -412,6 +421,9 @@ export const handleApiSelected = (tableName, setSelectedTable) => {
 //       handleSave(uu, requiredFields,buttonClicked,setJsonData,setJsonfile,setButtonClicked);
 //       console.log(selected);
 //     };
+const inputValue = localStorage.getItem("inputValue")
+
+export const domainUrl = inputValue + url
 
 export const handleData = (
   e,
@@ -471,30 +483,32 @@ export const handleData = (
     });
   });
 
-  // let x = `fetch('https://yrzoud88dh5x80f4266.simplifycloudlab.com/v4_6_release/apis/3.0/service/tickets', {
-  //       method: 'POST',
-  //       headers: {
-  //           'Content-Type': 'application/json',
-  //           'Access-Control-Allow-Origin': '*',
-  //           'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
-  //           'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
-  //       },
-  //       body:JSON.stringify({})
-  //     }).then(function (response) {
-  //     console.log(response,'gagan');
-  //       if (response.ok) {
-  //         return response.json();
-  //       }
-  //       //throw response;
-  //     }).then(function (data) {
-  //       console.log(data);
-  //     }).catch(function (error) {
-  //       console.warn(error);
-  //     });
-  //     input: true,
-  //     `;
+ 
 
-  // uu["custom"] = x;
+  let x = `fetch(${inputValue + url}, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
+            'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
+        },
+        body:JSON.stringify({})
+      }).then(function (response) {
+      console.log(response,'gagan');
+        if (response.ok) {
+          return response.json();
+        }
+        //throw response;
+      }).then(function (data) {
+        console.log(data);
+      }).catch(function (error) {
+        console.warn(error);
+      });
+      input: true,
+      `;
+
+  uu["custom"] = x;
   
 //   if (buttonClicked === "SaveMapping") {
 //     window.open("/form", "_blank");
