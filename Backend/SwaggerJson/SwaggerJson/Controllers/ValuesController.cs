@@ -9,6 +9,7 @@ using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using SwaggerJson;
 
 namespace SwaggerJson.Controllers
 {
@@ -22,6 +23,14 @@ namespace SwaggerJson.Controllers
         {
             var document = await OpenApiDocument.FromJsonAsync(jsonString);
             var endpoints = fetchAllEnpoints(document);
+            return endpoints;
+        }
+        [HttpPost]
+        [Route("getallendpoints")]
+        public async Task<List<string>> GetEndpoints([FromBody] string jsonString)
+        {
+            var document = await OpenApiDocument.FromJsonAsync(jsonString);
+            var endpoints = fetchEndpoints(document);
             return endpoints;
         }
         [HttpPost]
@@ -65,6 +74,20 @@ namespace SwaggerJson.Controllers
             var document = await OpenApiDocument.FromJsonAsync(jsonString);
             var endpointsTypes = GetStringParameers(endpoint, document, endpointType, jsonData);
             return endpointsTypes;
+        }
+        public List<string> fetchEndpoints(OpenApiDocument document)
+        {
+            var paths = document.Paths.Select(p => p.Key).ToList();
+            var pathList = new List<string>();
+            foreach (var path in paths)
+            {
+                var types = fetchAllEnpointType(path, document);
+                foreach (var type in types)
+                {
+                    pathList.Add(path + "--" + type);
+                }
+            }
+            return pathList;
         }
 
         public List<string> fetchAllEnpoints(OpenApiDocument document)
