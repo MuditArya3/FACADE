@@ -1,0 +1,5 @@
+ColumnName,Value,Status
+alive,0,Offline
+alive,1,Online
+securityUpdates,0,No info
+securityUpdates,1,Updates Pending

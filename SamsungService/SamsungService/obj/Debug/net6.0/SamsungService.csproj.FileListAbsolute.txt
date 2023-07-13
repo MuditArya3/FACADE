@@ -1,0 +1,269 @@
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\appsettings.Development.json
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\appsettings.json
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.exe
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.deps.json
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.runtimeconfig.json
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.pdb
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Azure.Core.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Azure.Identity.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Humanizer.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.CodeDom.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.Memory.Data.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.Runtime.Caching.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.Text.Json.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Facade\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.csproj.AssemblyReference.cache
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.AssemblyInfoInputs.cache
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.AssemblyInfo.cs
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.csproj.CoreCompileInputs.cache
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.MvcApplicationPartsAssemblyInfo.cs
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.MvcApplicationPartsAssemblyInfo.cache
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.SamsungService.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.build.SamsungService.props
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.SamsungService.props
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.SamsungService.props
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets.build.json
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets.development.json
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\scopedcss\bundle\SamsungService.styles.css
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.csproj.CopyComplete
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.dll
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\refint\SamsungService.dll
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.pdb
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.genruntimeconfig.cache
+C:\Facade\SamsungService\SamsungService\obj\Debug\net6.0\ref\SamsungService.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\appsettings.json
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.exe
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.deps.json
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.runtimeconfig.json
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.pdb
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Azure.Core.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Azure.Identity.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.Memory.Data.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.Runtime.Caching.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.csproj.AssemblyReference.cache
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.AssemblyInfoInputs.cache
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.AssemblyInfo.cs
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.csproj.CoreCompileInputs.cache
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.SamsungService.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.build.SamsungService.props
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.SamsungService.props
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.SamsungService.props
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\scopedcss\bundle\SamsungService.styles.css
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.csproj.CopyComplete
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\refint\SamsungService.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.pdb
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.genruntimeconfig.cache
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\obj\Debug\net6.0\ref\SamsungService.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Mudit.Arya\Desktop\FACADE PROJECT\BACKEND\SamsungService\SamsungService\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\appsettings.json
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.exe
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.deps.json
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.runtimeconfig.json
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\SamsungService.pdb
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Azure.Core.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Azure.Identity.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.Memory.Data.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.Runtime.Caching.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.csproj.AssemblyReference.cache
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.AssemblyInfoInputs.cache
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.AssemblyInfo.cs
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.csproj.CoreCompileInputs.cache
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.SamsungService.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.build.SamsungService.props
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.SamsungService.props
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.SamsungService.props
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\scopedcss\bundle\SamsungService.styles.css
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.csproj.CopyComplete
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\refint\SamsungService.dll
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.pdb
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\SamsungService.genruntimeconfig.cache
+C:\Users\Mudit.Arya\Desktop\RJSF\SamsungService\SamsungService\obj\Debug\net6.0\ref\SamsungService.dll
