@@ -330,7 +330,7 @@
         }
       }
     },
-    "/api/Invoices/Invoices/{invoiceId}": {
+    "/api/Invoices/Invoices": {
       "put": {
         "tags": [
           "Invoices"

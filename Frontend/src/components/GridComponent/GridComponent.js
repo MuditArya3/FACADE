@@ -1,4 +1,5 @@
 import axios from "axios";
+import { domainUrl } from "../MappingComponent/Mapping";
 
 export const getGridData = (setAPIData, setNewApiState) => {
   axios
@@ -17,9 +18,52 @@ export const getGridData = (setAPIData, setNewApiState) => {
     });
   //   return response;
 };
+// export const getGridData = (setAPIData,setNewApiState) => {
+//     axios
+//       .get(domainUrl)
+//       .then((res) => {
+//         if (res && res.data) {
+//           // props = res.data;
+//           console.log(res.data);
+//           setAPIData(res.data);
+//           setNewApiState(res.data);
+//           // return props;
+//         } else return [];
+//       })
+//       .catch((error) => {
+//         return error;
+//       });
+
+//     //   return response;
+//   };
+
+//   export const handleData = (selecteddata,setshowform,setJsonData) => {
+//     //   localStorage.setItem("ColumnData", JSON.stringify(columns));
+//     console.log("helloooooo");
+//     let requiredFields;
+//     let uu = {};
+//     let layout = {};
+//     Object.keys(selecteddata).map((rcol) => {
+//       console.log(rcol);
+//       console.log(selecteddata[rcol]);
+//       layout = {
+//         key: rcol,
+//         title: rcol,
+//         type:
+//           typeof selecteddata[rcol] === "number"
+//             ? "integer"
+//             :typeof selecteddata[rcol]==="None"
+//             ? "string"
+//             : typeof selecteddata[rcol],
+//         default: selecteddata[rcol],
+//       };
+//       uu[rcol] = { ...layout };
+//     });
+//   //   return response;
+// };
 
 export const handleData = (selecteddata, setshowform, setJsonData) => {
-  //   localStorage.setItem("ColumnData", JSON.stringify(columns));
+  // localStorage.setItem("ColumnData", JSON.stringify(columns));
   console.log("helloooooo");
   let requiredFields;
   let uu = {};
@@ -69,4 +113,14 @@ const handlecreatefile = (data, setJsonData) => {
   // setJsonfile(JSON.stringify(data));
   setJsonData(JSON.stringify(data));
   localStorage.setItem("jsonSchema", json);
+};
+
+export const getDesiredValue = (apidatas) => {
+  console.log(apidatas);
+  let valueArray = apidatas.split('“');
+  valueArray=valueArray[1].split('”');
+  console.log(valueArray);
+  const desiredValue = valueArray[0];
+  console.log("desired----", desiredValue);
+  return desiredValue;
 };

@@ -3,12 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "../GridComponent/GridComponent.css";
 import { Edit, FolderZip } from "@mui/icons-material";
-// import { handleData } from "../SwaggerGrid/SwaggerGrid";
 import FormComponent from "../FormComponent/FormComponent.jsx";
 import { Container } from "@mui/system";
 import { Accordion, AccordionDetails } from "@mui/material";
 import { baseURL } from "../../AppSettings.js";
-import { getGridData, handleData } from "./GridComponent.js";
+import { getDesiredValue, getGridData, handleData } from "./GridComponent.js";
 import Papa from "papaparse";
 
 const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
@@ -34,9 +33,23 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
       },
     });
   };
-
+ const x={};
   useEffect(() => {
+    console.log(csvData);
     csvFileData();
+    csvData.map((head) => {
+      console.log(head);
+      if (head && head.Validations) {
+        console.log(head.Validations);
+        if (head.Validations.includes("IS GREATER TO")) {
+          console.log("hello");
+          let abc = head.Validations;
+          x= getDesiredValue(abc)
+          console.log(x);
+          console.log(abc);
+        }
+      }
+    });
   }, [csvData]);
 
   const csvFileData = () => {
@@ -45,9 +58,11 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
     });
     console.log(updatedData);
     console.log(getAPIData);
+    console.log(csvData);
     csvData.length > 0 &&
       updatedData &&
       csvData.map((header) => {
+        console.log(header);
         updatedData.map((row) => {
           console.log(row);
           if (`${row[header.ColumnName]}` === header.Value) {
