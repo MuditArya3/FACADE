@@ -1,22 +1,25 @@
 import {
-  Accordion,
-  AccordionSummary,
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
-  IconButton,
-  Input,
-  InputLabel,
-  MenuItem,
-  Select,
-  Tooltip,
-  Typography,
-  makeStyles,
+
+    Accordion,
+    AccordionSummary,
+    Box,
+    Button,
+    Checkbox,
+    Container,
+    FormControl,
+    FormControlLabel,
+    FormGroup,
+    FormHelperText,
+    IconButton,
+    Input,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+    Tooltip,
+    Typography,
+    makeStyles,
+
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
@@ -42,27 +45,42 @@ import "./SwaggerGrid.css";
 import c from "../../assets/3.jpg";
 
 const SwaggerGrid = ({ jsonData, setJsonData }) => {
-  const [swaggerData, setSwaggerData] = useState();
-  const [columns, setColumns] = useState([]);
-  const [jsonfile, setJsonfile] = useState([]);
-  const [endpoints, setEndpoints] = useState([]);
-  const [selectedValue, setSelectedValue] = useState("");
-  const [showMessage, setShowMessage] = useState(false);
-  const [showInvalidFileType, setShowInvalidFileType] = useState(false);
-  const [services, setServices] = useState([]);
-  const [selectedService, setSelectedService] = useState("");
-  const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [updatedEndpoints, setUpdatedEndpoints] = useState([]);
-  const [updatedServices, setUpdatedServices] = useState([]);
-  const [selectedFileName, setSelectedFileName] = useState("");
-  const [correctEndpoints, setCorrectEndpoints] = useState(false);
+
+    const [swaggerData, setSwaggerData] = useState();
+    const [columns, setColumns] = useState([]);
+    const [jsonfile, setJsonfile] = useState([]);
+    const [endpoints, setEndpoints] = useState([]);
+    const [selectedValue, setSelectedValue] = useState("");
+    const [showMessage, setShowMessage] = useState(false);
+    const [showInvalidFileType, setShowInvalidFileType] = useState(false);
+    const [services, setServices] = useState([]);
+    const [selectedService, setSelectedService] = useState("");
+    const [uploadedFiles, setUploadedFiles] = useState([]);
+    const [updatedEndpoints, setUpdatedEndpoints] = useState([]);
+    const [updatedServices, setUpdatedServices] = useState([]);
+    const [selectedFileName, setSelectedFileName] = useState("");
+    const [correctEndpoints, setCorrectEndpoints] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
 
   const selectedEndpoint = selectedValue.split("--")[0];
   const selectedEndpointType = selectedValue.split("--")[1];
 
+
   const uniqueServices = services.filter((value, index, self) => {
     return self.indexOf(value) === index;
   });
+
+    const handleGenerateClick = () => {
+        if (selectedService && selectedValue && inputValue) {
+            handleData(inputValue, columns);
+            setErrorMessage("");
+        } else {
+            setErrorMessage("Please fill in all required fields");
+        }
+    };
+    console.log(columns);
 
   const handleFormSubmit = () => {
     handleData(columns, jsonfile, setJsonData);
@@ -152,11 +170,14 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     }
   }, [endpoints, swaggerData]);
 
-  const handleCorrectEndpoints = (event) => {
-    console.log("helloooooooooooooo");
-    setCorrectEndpoints(event.target.checked);
-  };
-  console.log(endpoints);
+
+    const handleCorrectEndpoints = (event) => {
+        console.log("helloooooooooooooo");
+        setCorrectEndpoints(event.target.checked);
+    };
+    console.log(endpoints);
+    console.log(swaggerData);
+
 
   const filteredEndpoints = correctEndpoints
     ? endpoints.filter((endpoint) => {
@@ -368,68 +389,270 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 <Delete />
                                             </IconButton>
                                         </Tooltip> */}
-                  </Box>
-                )}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                    width: "100%",
-                    mt: "5rem",
-                  }}
-                >
-                  {swaggerData && endpoints.length === 0 && (
-                    <Typography
-                      variant="subtitle1"
-                      sx={{
-                        fontSize: "1.5rem",
-                        padding: "1rem",
-                        fontWeight: 600,
-                        color: "red",
-                      }}
-                    >
-                      Please upload a JSON file with proper data annotation!!
-                    </Typography>
-                  )}
-                  {showInvalidFileType && (
-                    <Typography
-                      variant="subtitle1"
-                      sx={{
-                        fontSize: "1.5rem",
-                        padding: "1rem",
-                        fontWeight: 500,
-                        color: "red",
-                      }}
-                    >
-                      Invalid file type. Please select a valid JSON file.
-                    </Typography>
-                  )}
-                </Box>
-                {!showMessage && endpoints.length > 0 && (
-                  <>
-                    <FormControl
-                      sx={{
-                        width: "80%",
-                        display: "flex",
-                        //justifyContent: "space-between",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        mb: 2,
-                        pointerEvents: "auto",
-                      }}
-                    >
-                      <InputLabel
-                        id="table-select-label"
-                        sx={{ fontSize: "1.5rem" }}
-                      >
-                        Select Service:
-                      </InputLabel>
-                      <Select
-                        labelId="table-select-label"
-                        id="table-select"
-                        value={selectedService}
-                        onChange={(e) => {
-                          handleService(e, setSelectedService);
+
+                                    </Box>
+                                )}
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-evenly",
+                                        width: "100%",
+                                        mt: "5rem",
+                                    }}
+                                >
+                                    {swaggerData && endpoints.length === 0 && (
+                                        <Typography
+                                            variant="subtitle1"
+                                            sx={{
+                                                fontSize: "1.5rem",
+                                                padding: "1rem",
+                                                fontWeight: 600,
+                                                color: "red",
+                                            }}
+                                        >
+                                            Please upload a JSON file with
+                                            proper data annotation!!
+                                        </Typography>
+                                    )}
+                                    {showInvalidFileType && (
+                                        <Typography
+                                            variant="subtitle1"
+                                            sx={{
+                                                fontSize: "1.5rem",
+                                                padding: "1rem",
+                                                fontWeight: 500,
+                                                color: "red",
+                                            }}
+                                        >
+                                            Invalid file type. Please select a
+                                            valid JSON file.
+                                        </Typography>
+                                    )}
+                                </Box>
+                                {!showMessage && endpoints.length > 0 && (
+                                    <>
+                                        <FormControl
+                                            required
+                                            sx={{
+                                                width: "80%",
+                                                display: "flex",
+                                                //justifyContent: "space-between",
+                                                flexDirection: "row",
+                                                alignItems: "center",
+                                                mb: 2,
+                                                pointerEvents: "auto",
+                                            }}
+                                        >
+                                            <InputLabel
+                                                id="table-select-label"
+                                                sx={{ fontSize: "1.5rem" }}
+                                            >
+                                                Select Service:
+                                            </InputLabel>
+                                            <Select
+                                                required
+                                                labelId="table-select-label"
+                                                id="table-select"
+                                                value={selectedService}
+                                                onChange={(e) => {
+                                                    handleService(
+                                                        e,
+                                                        setSelectedService
+                                                    );
+                                                }}
+                                                label="Select Service:"
+                                                sx={{ flex: 1, ml: 1 }}
+                                            >
+                                                <MenuItem value={""}>
+                                                    <em>None</em>
+                                                </MenuItem>
+                                                {uniqueServices.map(
+                                                    (service, index) => {
+                                                        return (
+                                                            <MenuItem
+                                                                value={service}
+                                                                key={index}
+                                                                sx={{
+                                                                    fontSize:
+                                                                        "1.3rem",
+                                                                }}
+                                                            >
+                                                                {service}
+                                                            </MenuItem>
+                                                        );
+                                                    }
+                                                )}
+                                            </Select>
+                                        </FormControl>
+                                        <FormControl
+                                            required
+                                            sx={{
+                                                width: "80%",
+                                                display: "flex",
+                                                //justifyContent: "space-between",
+                                                flexDirection: "row",
+                                                alignItems: "center",
+                                                mb: 2,
+                                                pointerEvents: "auto",
+                                            }}
+                                        >
+                                            <InputLabel
+                                                id="table-select-label"
+                                                sx={{ fontSize: "1.5rem" }}
+                                            >
+                                                Select Api:
+                                            </InputLabel>
+                                            <Select
+                                                required
+                                                labelId="table-select-label"
+                                                id="table-select"
+                                                value={selectedValue}
+                                                onChange={(e) => {
+                                                    handleNameChange(
+                                                        e,
+                                                        setSelectedValue
+                                                    );
+                                                }}
+                                                label="Select Annotation:"
+                                                sx={{ flex: 1, ml: 1 }}
+                                                className="scrollable"
+                                            >
+                                                <MenuItem value={""}>
+                                                    <em>None</em>
+                                                </MenuItem>
+                                                {filteredEndpoints.map(
+                                                    (endpoint, index) => {
+                                                        const displayValue =
+                                                            endpoint.split(
+                                                                "--"
+                                                            )[2];
+                                                        return (
+                                                            <MenuItem
+                                                                value={endpoint}
+                                                                key={index}
+                                                                sx={{
+                                                                    fontSize:
+                                                                        "1.3rem",
+                                                                }}
+                                                            >
+                                                                {displayValue}
+                                                            </MenuItem>
+                                                        );
+                                                    }
+                                                )}
+                                            </Select>
+                                        </FormControl>
+                                        <InputLabel
+                                            id="table-select-label"
+                                            sx={{
+                                                fontSize: "1.5rem",
+                                                marginLeft: "7px",
+                                            }}
+                                        >
+                                            Domain URL
+                                        </InputLabel>
+                                        <FormControl
+                                            required
+                                            sx={{
+                                                pointerEvents: "auto",
+                                                width: "80%",
+                                            }}
+                                        >
+                                            <TextField
+                                                sx={{
+                                                    fontSize: "1.5rem",
+                                                }}
+                                                label={"Domain URL"}
+                                                required
+                                                variant="outlined"
+                                                value={inputValue}
+                                                onChange={handleUrlChange}
+                                            />
+                                        </FormControl>
+                                        <FormControl
+                                            sx={{
+                                                pointerEvents: "auto",
+                                            }}
+                                        >
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={
+                                                            correctEndpoints
+                                                        }
+                                                        onChange={(e)=>
+                                                            handleCorrectEndpoints(e)
+                                                        }
+                                                        color="primary"
+                                                    />
+                                                }
+                                                label="Show correct Endpoints"
+                                            />
+                                        </FormControl>
+                                        {errorMessage && (
+                                            <Typography
+                                                variant="subtitle1"
+                                                sx={{
+                                                    fontSize: "1.5rem",
+                                                    padding: "1rem",
+                                                    fontWeight: 500,
+                                                    color: "red",
+                                                }}
+                                            >
+                                                {errorMessage}
+                                            </Typography>
+                                        )}
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                justifyContent: "space-evenly",
+                                                width: "100%",
+                                                mt: "5rem",
+                                            }}
+                                        >
+                                            <Button
+                                                sx={{
+                                                    pointerEvents: "auto",
+                                                    height: "5rem",
+                                                    fontSize: "0.9rem",
+                                                    width: "8.8rem",
+                                                }}
+                                                variant="contained"
+                                                size="small"
+                                                type="button"
+                                                marg
+                                                onClick={handlePreviousButton}
+                                            >
+                                                Previous
+                                            </Button>
+                                            <Button
+                                                sx={{
+                                                    pointerEvents: "auto",
+                                                    height: "5rem",
+                                                }}
+                                                variant="contained"
+                                                size="small"
+                                                type="button"
+                                                marg
+                                                onClick={handleGenerateClick}
+                                            >
+                                                Generate
+                                            </Button>
+                                        </Box>
+                                    </>
+                                )}
+                            </Box>
+                        </form>
+                    </AccordionSummary>
+                </Accordion>
+                {uploadedFiles.length > 0 && (
+                    <Accordion
+                        className="toprightaccordian"
+                        style={{
+                            position: "absolute",
+                            top: "4rem",
+                            right: "8rem",
+                            borderRadius: "4px",
                         }}
                         label="Select Service:"
                         sx={{ flex: 1, ml: 1 }}

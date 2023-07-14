@@ -26,46 +26,10 @@ export const handleFileSelectChange = (e, setSwaggerData) => {
     reader.readAsText(file);
 };
 
-export const handleData = (columns,jsonfile,setJsonData) => {
-    // if(columns.forEach((e)=>{
-    //     console.log(e);
-    // }))
+
+export const handleData = (inputValue,columns) => {
+    localStorage.setItem("inputValue", inputValue);
     localStorage.setItem("ColumnData",JSON.stringify(columns));
-    // let uu = {};
-    // columns.forEach((column) => {
-    //     const layout = {
-    //         key: column.Name,
-    //         title: column.Name,
-    //         type: column.Type.toLowerCase(),
-    //     };
-
-    //     uu[column.Name] = { ...layout };
-    // });
-
-    // let x = `fetch('https://yrzoud88dh5x80f4266.simplifycloudlab.com/v4_6_release/apis/3.0/service/tickets', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Allow-Origin': '*',
-    //         'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
-    //         'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
-    //     },
-    //     body:JSON.stringify({})
-    //   }).then(function (response) {
-    //   console.log(response,'gagan');
-    //     if (response.ok) {
-    //       return response.json();
-    //     }
-    //     //throw response;
-    //   }).then(function (data) {
-    //     console.log(data);
-    //   }).catch(function (error) {
-    //     console.warn(error);
-    //   });
-    //   input: true,
-    //   `;
-
-    // uu["custom"] = x;
     window.open("/mapping", "_blank");
     // handleSave(uu,jsonfile,setJsonData);
 };
@@ -199,4 +163,6 @@ export const handleInputChange = (e,allowedExtensions,setSwaggerData,setEndpoint
 //     setEndpoints([]);
 //     setShowMessage(false);
 //     setShowInvalidFileType(false);
+
 // };
+

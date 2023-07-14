@@ -230,8 +230,10 @@ const Mapping = ({ jsonData, setJsonData }) => {
               .content["application/vnd.connectwise.com+json; version=2022.1"]
               .schema.items["$ref"];
         }
+
         let requiredval = getDesiredValue(apidatas);
         let p = swaggerData.components.schemas[requiredval];
+
 
         if (Object.keys(p).includes("required")) {
           setRequired(p.required);
@@ -417,8 +419,30 @@ const Mapping = ({ jsonData, setJsonData }) => {
                         width: "90%",
                       }}
                     >
+
                       <Paper
                         id="columnsCard"
+
+                        {showform && (
+                            <Accordion
+                                sx={{ width: "100%" }}
+                                expanded={true}
+                                Hidden={false}
+                            >
+                                <AccordionDetails sx={{ pt: 3 }}>
+                                    {showform && <FormComponent />}
+                                </AccordionDetails>
+                            </Accordion>
+                        )}
+                    </Container>
+                </div>
+            )}
+            {!showGridComponent && lowercaseAnnotation.includes("get") && (
+                <div className={"get"} ref={formRef}>
+                    <Container
+                        // style={{ background: '#f3e5f5' }}
+                        // {annotation.includes("create")?className="create" : className="get" }
+
                         sx={{
                           minWidth: "90%",
                           flexWrap: "wrap",

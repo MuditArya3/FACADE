@@ -8,6 +8,12 @@ import {
     InputLabel,
     MenuItem,
     Select,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
     Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -23,7 +29,7 @@ const AddAnnotations = () => {
     const [operationInput, setOperationInput] = useState("");
     const [methods, setMethods] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
-
+    const [annotationTable, setAnnotationTable] = useState([]);
     useEffect(() => {
         if (swaggerData) {
             fetchEndpoints(swaggerData, setEndpoints);
@@ -114,7 +120,15 @@ const AddAnnotations = () => {
             console.log("Swagger data updated:", updatedSwaggerData);
             setServiceInput("");
             setOperationInput("");
-            alert("Saved successfully");
+            setAnnotationTable([
+                {
+                    endpoint: selectedApi,
+                    method: selectedMethod,
+                    service: serviceInput,
+                    operation: operationInput,
+                },
+                ...annotationTable,
+            ]);
         }
     };
 
@@ -149,7 +163,7 @@ const AddAnnotations = () => {
                     display: "flex",
                     justifyContent: "center",
                     marginBottom: "20px",
-                    marginTop: "25vh",
+                    marginTop: "15vh",
                 }}
             >
                 <div
@@ -343,20 +357,108 @@ const AddAnnotations = () => {
                 </Typography>
             )}
 
+            {annotationTable.length > 0 && (
+                <div style={{ marginTop: "1.8rem", width: "50%" }}>
+                    <TableContainer
+                        style={{ maxHeight: "199px", overflow: "auto" }}
+                    >
+                        <Table
+                            style={{
+                                border: "1px solid snow",
+                                background: "#fff",
+                            }}
+                        >
+                            <TableHead>
+                                <TableRow style={{ fontSize: "1.2rem" }}>
+                                    <TableCell
+                                        style={{
+                                            fontSize: "1.2rem",
+                                        }}
+                                    >
+                                        Endpoint
+                                    </TableCell>
+
+                                    <TableCell
+                                        style={{
+                                            fontSize: "1.2rem",
+                                        }}
+                                    >
+                                        Method
+                                    </TableCell>
+
+                                    <TableCell
+                                        style={{
+                                            fontSize: "1.2rem",
+                                        }}
+                                    >
+                                        Service
+                                    </TableCell>
+
+                                    <TableCell
+                                        style={{
+                                            fontSize: "1.2rem",
+                                        }}
+                                    >
+                                        Operation
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+
+                            <TableBody>
+                                {annotationTable.map((row, index) => (
+                                    <TableRow key={index} style={{ zIndex: 0 }}>
+                                        <TableCell
+                                            style={{
+                                                fontSize: "1.2rem",
+                                                zIndex: 0,
+                                            }}
+                                        >
+                                            {row.endpoint}
+                                        </TableCell>
+
+                                        <TableCell
+                                            style={{
+                                                fontSize: "1.2rem",
+                                                zIndex: 0,
+                                            }}
+                                        >
+                                            {row.method}
+                                        </TableCell>
+
+                                        <TableCell
+                                            style={{
+                                                fontSize: "1.2rem",
+                                                zIndex: 0,
+                                            }}
+                                        >
+                                            {row.service}
+                                        </TableCell>
+
+                                        <TableCell
+                                            style={{
+                                                fontSize: "1.2rem",
+                                                zIndex: 0,
+                                            }}
+                                        >
+                                            {row.operation}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
+            )}
             <div
                 style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    position: "fixed",
-                    bottom: "20px",
-                    right: "20px",
+                    marginTop: "auto",
+                    marginBottom: "2rem",
                 }}
             >
                 <Button
                     sx={{
                         pointerEvents: "auto",
                         height: "5rem",
-                        marginRight: "10px",
                         fontSize: "1rem",
                     }}
                     variant="contained"
