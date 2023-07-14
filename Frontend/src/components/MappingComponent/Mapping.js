@@ -434,7 +434,8 @@ export const handleData = (
   setButtonClicked,
   columns
 ) => {
-//   localStorage.setItem("ColumnData", JSON.stringify(columns));
+  localStorage.setItem("ColumnData", JSON.stringify(columns));
+  console.log(columns);
   let requiredFields;
   console.log(mappings);
   let uu = {};

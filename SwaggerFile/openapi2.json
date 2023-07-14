@@ -680,6 +680,8 @@
             }
           }
         },
+        "x_cw_service": "Partner Service",
+        "x_cw_operation": "Create maintainance schedule data",
         "x-codegen-request-body-name": "body"
       }
     },
@@ -885,7 +887,9 @@
               }
             }
           }
-        }
+        },
+        "x_cw_service": "Resource service",
+        "x_cw_operation": "Get  ospatchpolicy"
       }
     },
     "/v1/ospatchpolicymigrate": {
@@ -937,6 +941,8 @@
             }
           }
         },
+        "x_cw_service": "ospatchpolicymigrate service",
+        "x_cw_operation": "Create ospatchpolicymigrate",
         "x-codegen-request-body-name": "body"
       }
     },
@@ -1000,8 +1006,8 @@
             }
           }
         },
-        "x_cw_service": "Customer Service",
-        "x_cw_operation": "Get a customer by ID",
+        "x_cw_service": "Authz Service",
+        "x_cw_operation": "Create Authz",
         "x-codegen-request-body-name": "body"
       }
     },
@@ -1061,7 +1067,9 @@
               }
             }
           }
-        }
+        },
+        "x_cw_service": "Email service",
+        "x_cw_operation": "Get the userids by emailId"
       }
     },
     "/v1/partners/{partnerId}/users/{userId}/authz": {
@@ -1137,7 +1145,9 @@
               }
             }
           }
-        }
+        },
+        "x_cw_service": "User Authz service",
+        "x_cw_operation": "Get the user Authz"
       }
     },
     "/v1/partners/{partnerID}/rebootschedules": {
@@ -1188,7 +1198,9 @@
               }
             }
           }
-        }
+        },
+        "x_cw_service": "Partner service",
+        "x_cw_operation": "Get the partners Reboot Schedule"
       }
     },
     "/v1/partners/{partnerID}/notifications": {
@@ -1248,7 +1260,9 @@
               }
             }
           }
-        }
+        },
+        "x_cw_service": "Partner service",
+        "x_cw_operation": "Get notifications of partner by Id"
       }
     },
     "/v1/enduser/{partnerId}/siteId/{siteId}/users/{userId}/desktops": {
@@ -1290,7 +1304,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DesktopResponse"
+                  "$ref": "#/components/schemas/DesktopResp"
                 }
               }
             }
@@ -1315,7 +1329,9 @@
               }
             }
           }
-        }
+        },
+        "x_cw_service": "EndUser service",
+        "x_cw_operation": "Get the desktops"
       }
     }
   },
@@ -1688,12 +1704,56 @@
       "DesktopResponse": {
         "type": "object",
         "properties": {
-          "values": {
-            "type": "array",
-            "description": "Response Data",
-            "items": {
-              "$ref": "#/components/schemas/DesktopResp"
-            }
+          "memberCode": {
+            "type": "string"
+          },
+          "sitecode": {
+            "type": "string"
+          },
+          "siteId": {
+            "type": "integer"
+          },
+          "resourceName": {
+            "type": "string"
+          },
+          "resFriendlyName": {
+            "type": "string"
+          },
+          "os": {
+            "type": "string"
+          },
+          "osVerSion": {
+            "type": "string"
+          },
+          "alive": {
+            "type": "integer"
+          },
+          "securityUpdates": {
+            "type": "string"
+          },
+          "regtype": {
+            "type": "string"
+          },
+          "diskSpace": {
+            "type": "integer"
+          },
+          "antivirus": {
+            "type": "integer"
+          },
+          "smartDisk": {
+            "type": "integer"
+          },
+          "amt": {
+            "type": "integer"
+          },
+          "memberName": {
+            "type": "string"
+          },
+          "loggedInUser": {
+            "type": "string"
+          },
+          "lastLogin": {
+            "type": "string"
           }
         }
       },
