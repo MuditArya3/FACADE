@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { fetchEndpoints } from "./AddAnnotation.js";
+import { Delete } from "@mui/icons-material";
 
 const AddAnnotations = () => {
     const [swaggerData, setSwaggerData] = useState();
@@ -145,6 +146,20 @@ const AddAnnotations = () => {
         } else {
             console.log("No Swagger data available to download.");
         }
+    };
+
+    const handleDelete = (index) => {
+        const updatedAnnotationTable = [...annotationTable];
+        const deletedRow = updatedAnnotationTable.splice(index, 1)[0];
+
+        const updatedSwaggerData = [...swaggerData];
+        const endpointData =
+            updatedSwaggerData.paths[deletedRow.endpoint][deletedRow.method];
+        delete endpointData["x_cw_operation"];
+        delete endpointData["x_cw_service"];
+
+        setAnnotationTable(updatedAnnotationTable);
+        setSwaggerData(updatedSwaggerData);
     };
 
     return (
@@ -401,6 +416,13 @@ const AddAnnotations = () => {
                                     >
                                         Operation
                                     </TableCell>
+                                    <TableCell
+                                        style={{
+                                            fontSize: "1.2rem",
+                                        }}
+                                    >
+                                        Action
+                                    </TableCell>
                                 </TableRow>
                             </TableHead>
 
@@ -441,6 +463,20 @@ const AddAnnotations = () => {
                                             }}
                                         >
                                             {row.operation}
+                                        </TableCell>
+                                        <TableCell
+                                            style={{
+                                                fontSize: "1.2rem",
+                                                zIndex: 0,
+                                            }}
+                                        >
+                                            <Button
+                                                onClick={() =>
+                                                    handleDelete(index)
+                                                }
+                                            >
+                                                <Delete />
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
