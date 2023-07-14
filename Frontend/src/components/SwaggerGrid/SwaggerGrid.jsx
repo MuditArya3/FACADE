@@ -57,14 +57,21 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [selectedFileName, setSelectedFileName] = useState("");
     const [correctEndpoints, setCorrectEndpoints] = useState(false);
     const [inputValue, setInputValue] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleUrlChange = (event) => {
         setInputValue(event.target.value);
     };
 
     const handleGenerateClick = () => {
-        handleData(inputValue);
+        if (selectedService && selectedValue && inputValue) {
+            handleData(inputValue, columns);
+            setErrorMessage("");
+        } else {
+            setErrorMessage("Please fill in all required fields");
+        }
     };
+    console.log(columns);
 
     const selectedEndpoint = selectedValue.split("--")[0];
     const selectedEndpointType = selectedValue.split("--")[1];
@@ -396,6 +403,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                 {!showMessage && endpoints.length > 0 && (
                                     <>
                                         <FormControl
+                                            required
                                             sx={{
                                                 width: "80%",
                                                 display: "flex",
@@ -413,6 +421,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 Select Service:
                                             </InputLabel>
                                             <Select
+                                                required
                                                 labelId="table-select-label"
                                                 id="table-select"
                                                 value={selectedService}
@@ -447,6 +456,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                             </Select>
                                         </FormControl>
                                         <FormControl
+                                            required
                                             sx={{
                                                 width: "80%",
                                                 display: "flex",
@@ -464,6 +474,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 Select Api:
                                             </InputLabel>
                                             <Select
+                                                required
                                                 labelId="table-select-label"
                                                 id="table-select"
                                                 value={selectedValue}
@@ -512,6 +523,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                             Domain URL
                                         </InputLabel>
                                         <FormControl
+                                            required
                                             sx={{
                                                 pointerEvents: "auto",
                                                 width: "80%",
@@ -548,6 +560,19 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 label="Show correct Endpoints"
                                             />
                                         </FormControl>
+                                        {errorMessage && (
+                                            <Typography
+                                                variant="subtitle1"
+                                                sx={{
+                                                    fontSize: "1.5rem",
+                                                    padding: "1rem",
+                                                    fontWeight: 500,
+                                                    color: "red",
+                                                }}
+                                            >
+                                                {errorMessage}
+                                            </Typography>
+                                        )}
                                         <Box
                                             sx={{
                                                 display: "flex",

@@ -100,6 +100,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
         }
     }, [lowercaseAnnotation]);
     let st = localStorage.getItem("ColumnData");
+    console.log(st);
 
     useEffect(() => {
         setColumns(JSON.parse(st));
@@ -777,15 +778,8 @@ const Mapping = ({ jsonData, setJsonData }) => {
                     </Container>
                 </div>
             )}
-            {!showGridComponent && (
-                <div
-                    className={
-                        lowercaseAnnotation.includes("create")
-                            ? "create"
-                            : "get"
-                    }
-                    ref={formRef}
-                >
+            {!showGridComponent && lowercaseAnnotation.includes("get") && (
+                <div className={"get"} ref={formRef}>
                     <Container
                         // style={{ background: '#f3e5f5' }}
                         // {annotation.includes("create")?className="create" : className="get" }
