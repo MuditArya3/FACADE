@@ -26,29 +26,34 @@ export const handleFileSelectChange = (e, setSwaggerData) => {
     reader.readAsText(file);
 };
 
+
 export const handleData = (inputValue,columns) => {
     localStorage.setItem("inputValue", inputValue);
     localStorage.setItem("ColumnData",JSON.stringify(columns));
     window.open("/mapping", "_blank");
+    // handleSave(uu,jsonfile,setJsonData);
 };
 
+export const handleClick = () => {
+    window.open("/json", "_blank");
+  };
 
-export const handleSave = (data, jsonfile, setJsonData) => {
-    let json = Object.assign({}, data);
-    handlecreatefile({
-        label: "search",
-        title: "Search Form",
-        description: "Search using below Textbox",
-        type: "object",
-        properties: json,
-    }, jsonfile, setJsonData);
-};
+// export const handleSave = (data, jsonfile, setJsonData) => {
+//     let json = Object.assign({}, data);
+//     handlecreatefile({
+//         label: "search",
+//         title: "Search Form",
+//         description: "Search using below Textbox",
+//         type: "object",
+//         properties: json,
+//     }, jsonfile, setJsonData);
+// };
 
-export const handlecreatefile = (data, setJsonData) => {
-    const json = JSON.stringify(data);
-    setJsonData(json);
-    localStorage.setItem("jsonSchema", json);
-};
+// export const handlecreatefile = (data, setJsonData) => {
+//     const json = JSON.stringify(data);
+//     setJsonData(json);
+//     localStorage.setItem("jsonSchema", json);
+// };
 
 export   const fetchParameters = async (selectedEndpoint,selectedEndpointType,setColumns,swaggerData) => {
     try {
@@ -148,3 +153,16 @@ export const handleInputChange = (e,allowedExtensions,setSwaggerData,setEndpoint
         setShowInvalidFileType(true);
     }
 };
+
+// export const handleFormSubmit = (columns,jsonfile,setJsonData) => {
+//     handleData(columns,jsonfile,setJsonData);
+// };
+
+// export const handlePreviousButton = (setSwaggerData,setEndpoints,setShowMessage,setShowInvalidFileType) => {
+//     setSwaggerData(null);
+//     setEndpoints([]);
+//     setShowMessage(false);
+//     setShowInvalidFileType(false);
+
+// };
+

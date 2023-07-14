@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "JmTeGwskc8ZUWYlqft732iWdpwaiNyVQBWsgNZ9EpuM=",
+  "Source": "SamsungService",
+  "BasePath": "_content/SamsungService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

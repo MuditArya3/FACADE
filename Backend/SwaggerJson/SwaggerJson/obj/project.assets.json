@@ -2306,19 +2306,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Anjali.Saini\\.nuget\\packages\\": {}
+    "C:\\Users\\Mudit.Arya\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Mapping\\SwaggerJson\\SwaggerJson\\SwaggerJson.csproj",
+      "projectUniqueName": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\Backend\\SwaggerJson\\SwaggerJson\\SwaggerJson.csproj",
       "projectName": "SwaggerJson",
-      "projectPath": "C:\\Mapping\\SwaggerJson\\SwaggerJson\\SwaggerJson.csproj",
-      "packagesPath": "C:\\Users\\Anjali.Saini\\.nuget\\packages\\",
-      "outputPath": "C:\\Mapping\\SwaggerJson\\SwaggerJson\\obj\\",
+      "projectPath": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\Backend\\SwaggerJson\\SwaggerJson\\SwaggerJson.csproj",
+      "packagesPath": "C:\\Users\\Mudit.Arya\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\Backend\\SwaggerJson\\SwaggerJson\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Anjali.Saini\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mudit.Arya\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2375,7 +2375,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.31, 3.1.31]"
+            "version": "[3.1.32, 3.1.32]"
           }
         ],
         "frameworkReferences": {
@@ -2386,7 +2386,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

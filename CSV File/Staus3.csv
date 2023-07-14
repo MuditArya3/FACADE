@@ -1,0 +1,5 @@
+﻿ColumnName,Value,Status,Validations
+alive,0,Offline,IF status=online then SHOW membercode
+alive,1,Online,IF osVersion IS GREATER TO “10” SHOW Form
+securityUpdates,0,No info,
+securityUpdates,1,Updates Pending,
