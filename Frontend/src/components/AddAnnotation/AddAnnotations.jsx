@@ -17,7 +17,22 @@ import {
     Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { fetchEndpoints } from "./AddAnnotation.js";
+import {
+    fetchEndpoints,
+    handleInputChange,
+    handleEndpointChange,
+    handleMethodChange,
+    handleOperationInputChange,
+    handleServiceInputChange,
+    handleSave,
+    handleDownload,
+    handleDelete,
+    handleEdit,
+    handleEditInputChange,
+    handleEditSave,
+    handleEditCancel,
+} from "./AddAnnotation.js";
+import { Delete, Edit } from "@mui/icons-material";
 
 const AddAnnotations = () => {
     const [swaggerData, setSwaggerData] = useState();
@@ -30,6 +45,8 @@ const AddAnnotations = () => {
     const [methods, setMethods] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
     const [annotationTable, setAnnotationTable] = useState([]);
+    const [editRowIndex, setEditRowIndex] = useState(-1);
+
     useEffect(() => {
         if (swaggerData) {
             fetchEndpoints(swaggerData, setEndpoints);
@@ -42,110 +59,6 @@ const AddAnnotations = () => {
         );
         setUniqueEndpoints(uniqueEndpoints);
     }, [endpoints]);
-
-    const allowedExtensions = /\.(json)$/i;
-
-    const handleInputChange = (e) => {
-        const file = e.target.files[0];
-
-        if (file && allowedExtensions.test(file.name)) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                try {
-                    const fileData = JSON.parse(reader.result);
-                    setSwaggerData(fileData);
-                    //fetchEndpoints(swaggerData, setEndpoints);
-                } catch {
-                    setErrorMessage("Error parsing Swagger data");
-                }
-            };
-            reader.readAsText(file);
-        } else {
-            setErrorMessage("Please upload a valid json file");
-        }
-    };
-
-    const handleEndpointChange = (event) => {
-        setSelectedApi(event.target.value);
-        setSelectedMethod(""); // Reset the selected method when the API changes
-
-        const selectedEndpoint = event.target.value;
-
-        // Filter the endpoints based on the selected API
-        const filteredEndpoints = endpoints.filter(
-            (endpoint) => endpoint.split("--")[0] === selectedEndpoint
-        );
-
-        // Extract the methods from the filtered endpoints
-        const methods = filteredEndpoints.map(
-            (endpoint) => endpoint.split("--")[1]
-        );
-
-        setMethods(methods);
-    };
-
-    const handleMethodChange = (event) => {
-        setSelectedMethod(event.target.value);
-    };
-
-    const handleServiceInputChange = (event) => {
-        setServiceInput(event.target.value);
-    };
-
-    const handleOperationInputChange = (event) => {
-        setOperationInput(event.target.value);
-    };
-
-    const handleSave = () => {
-        if (!serviceInput || !operationInput) {
-            setErrorMessage("Please enter the service and operation.");
-        } else if (!selectedApi || !selectedMethod) {
-            setErrorMessage(
-                "Please select an endpoint and method before saving."
-            );
-        } else if (!swaggerData) {
-            setErrorMessage("Please upload a valid JSON file before saving.");
-        } else {
-            setErrorMessage("");
-            const updatedSwaggerData = { ...swaggerData };
-            const endpointData =
-                updatedSwaggerData.paths[selectedApi][selectedMethod];
-
-            // Update the annotations in the endpoint data
-            endpointData["x_cw_operation"] = operationInput;
-            endpointData["x_cw_service"] = serviceInput;
-
-            // Save the updated Swagger data
-            setSwaggerData(updatedSwaggerData);
-            console.log("Swagger data updated:", updatedSwaggerData);
-            setServiceInput("");
-            setOperationInput("");
-            setAnnotationTable([
-                {
-                    endpoint: selectedApi,
-                    method: selectedMethod,
-                    service: serviceInput,
-                    operation: operationInput,
-                },
-                ...annotationTable,
-            ]);
-        }
-    };
-
-    const handleDownload = () => {
-        if (swaggerData) {
-            const jsonData = JSON.stringify(swaggerData, null, 2);
-            const blob = new Blob([jsonData], { type: "application/json" });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = "updated-swagger.json";
-            link.click();
-            URL.revokeObjectURL(url);
-        } else {
-            console.log("No Swagger data available to download.");
-        }
-    };
 
     return (
         <div
@@ -163,7 +76,7 @@ const AddAnnotations = () => {
                     display: "flex",
                     justifyContent: "center",
                     marginBottom: "20px",
-                    marginTop: "15vh",
+                    marginTop: "12vh",
                 }}
             >
                 <div
@@ -181,7 +94,13 @@ const AddAnnotations = () => {
                             fontSize: "1.5rem",
                         }}
                         accept="application/json"
-                        onChange={handleInputChange}
+                        onChange={(e) =>
+                            handleInputChange(
+                                e,
+                                setSwaggerData,
+                                setErrorMessage
+                            )
+                        }
                     />
                 </div>
                 <FormControl
@@ -205,7 +124,15 @@ const AddAnnotations = () => {
                         labelId="table-select-label"
                         id="table-select"
                         value={selectedApi}
-                        onChange={handleEndpointChange}
+                        onChange={(e) =>
+                            handleEndpointChange(
+                                e,
+                                setSelectedApi,
+                                setSelectedMethod,
+                                setMethods,
+                                endpoints
+                            )
+                        }
                         label="Select Annotation:"
                         sx={{
                             flex: 1,
@@ -255,7 +182,9 @@ const AddAnnotations = () => {
                         labelId="table-select-label"
                         id="table-select"
                         value={selectedMethod}
-                        onChange={handleMethodChange}
+                        onChange={(e) =>
+                            handleMethodChange(e, setSelectedMethod)
+                        }
                         label="Select Annotation:"
                         sx={{ flex: 1, ml: 1, backgroundColor: "snow" }}
                         className="scrollable"
@@ -305,7 +234,12 @@ const AddAnnotations = () => {
                                 <input
                                     type="text"
                                     value={serviceInput}
-                                    onChange={handleServiceInputChange}
+                                    onChange={(e) =>
+                                        handleServiceInputChange(
+                                            e,
+                                            setServiceInput
+                                        )
+                                    }
                                     style={{ marginTop: "5px", padding: "5px" }}
                                 />
                             </Box>
@@ -319,7 +253,12 @@ const AddAnnotations = () => {
                                 <input
                                     type="text"
                                     value={operationInput}
-                                    onChange={handleOperationInputChange}
+                                    onChange={(e) =>
+                                        handleOperationInputChange(
+                                            e,
+                                            setOperationInput
+                                        )
+                                    }
                                     style={{ marginTop: "5px", padding: "5px" }}
                                 />
                             </Box>
@@ -335,7 +274,21 @@ const AddAnnotations = () => {
                             size="small"
                             type="button"
                             marg
-                            onClick={handleSave}
+                            onClick={() =>
+                                handleSave(
+                                    serviceInput,
+                                    operationInput,
+                                    setErrorMessage,
+                                    selectedApi,
+                                    selectedMethod,
+                                    swaggerData,
+                                    setSwaggerData,
+                                    setOperationInput,
+                                    setAnnotationTable,
+                                    annotationTable,
+                                    setServiceInput
+                                )
+                            }
                         >
                             Save
                         </Button>
@@ -358,9 +311,18 @@ const AddAnnotations = () => {
             )}
 
             {annotationTable.length > 0 && (
-                <div style={{ marginTop: "1.8rem", width: "50%" }}>
+                <div
+                    style={{
+                        marginTop: "1.6rem",
+                        width: "70%",
+                    }}
+                >
                     <TableContainer
-                        style={{ maxHeight: "199px", overflow: "auto" }}
+                        style={{
+                            maxHeight: "199px",
+                            overflow: "auto",
+                            marginBottom: "1rem",
+                        }}
                     >
                         <Table
                             style={{
@@ -372,15 +334,16 @@ const AddAnnotations = () => {
                                 <TableRow style={{ fontSize: "1.2rem" }}>
                                     <TableCell
                                         style={{
-                                            fontSize: "1.2rem",
+                                            fontSize: "1.4rem",
+                                            textAlign: "center",
                                         }}
                                     >
                                         Endpoint
                                     </TableCell>
-
                                     <TableCell
                                         style={{
-                                            fontSize: "1.2rem",
+                                            fontSize: "1.4rem",
+                                            textAlign: "center",
                                         }}
                                     >
                                         Method
@@ -388,7 +351,8 @@ const AddAnnotations = () => {
 
                                     <TableCell
                                         style={{
-                                            fontSize: "1.2rem",
+                                            fontSize: "1.4rem",
+                                            textAlign: "center",
                                         }}
                                     >
                                         Service
@@ -396,80 +360,221 @@ const AddAnnotations = () => {
 
                                     <TableCell
                                         style={{
-                                            fontSize: "1.2rem",
+                                            fontSize: "1.4rem",
+                                            textAlign: "center",
                                         }}
                                     >
                                         Operation
                                     </TableCell>
+                                    <TableCell
+                                        style={{
+                                            fontSize: "1.4rem",
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        Actions
+                                    </TableCell>
                                 </TableRow>
                             </TableHead>
-
                             <TableBody>
                                 {annotationTable.map((row, index) => (
                                     <TableRow key={index} style={{ zIndex: 0 }}>
-                                        <TableCell
-                                            style={{
-                                                fontSize: "1.2rem",
-                                                zIndex: 0,
-                                            }}
-                                        >
-                                            {row.endpoint}
-                                        </TableCell>
-
-                                        <TableCell
-                                            style={{
-                                                fontSize: "1.2rem",
-                                                zIndex: 0,
-                                            }}
-                                        >
-                                            {row.method}
-                                        </TableCell>
-
-                                        <TableCell
-                                            style={{
-                                                fontSize: "1.2rem",
-                                                zIndex: 0,
-                                            }}
-                                        >
-                                            {row.service}
-                                        </TableCell>
-
-                                        <TableCell
-                                            style={{
-                                                fontSize: "1.2rem",
-                                                zIndex: 0,
-                                            }}
-                                        >
-                                            {row.operation}
-                                        </TableCell>
+                                        {editRowIndex === index ? (
+                                            <>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    {row.endpoint}
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    {row.method}
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    <input
+                                                        type="text"
+                                                        value={row.service}
+                                                        onChange={(e) =>
+                                                            handleEditInputChange(
+                                                                e,
+                                                                "service",
+                                                                index,
+                                                                annotationTable,
+                                                                setAnnotationTable
+                                                            )
+                                                        }
+                                                    />
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    <input
+                                                        type="text"
+                                                        value={row.operation}
+                                                        onChange={(e) =>
+                                                            handleEditInputChange(
+                                                                e,
+                                                                "operation",
+                                                                index,
+                                                                annotationTable,
+                                                                setAnnotationTable
+                                                            )
+                                                        }
+                                                    />
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    <Button
+                                                        onClick={() =>
+                                                            handleEditSave(
+                                                                index,
+                                                                setEditRowIndex,
+                                                                annotationTable,
+                                                                setAnnotationTable,
+                                                                swaggerData,
+                                                                setSwaggerData
+                                                            )
+                                                        }
+                                                    >
+                                                        {" "}
+                                                        Save{" "}
+                                                    </Button>
+                                                    <Button
+                                                        onClick={(e) =>
+                                                            handleEditCancel(
+                                                                setEditRowIndex
+                                                            )
+                                                        }
+                                                    >
+                                                        Cancel{" "}
+                                                    </Button>
+                                                </TableCell>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    {row.endpoint}
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    {row.method}
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    {row.service}
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    {row.operation}
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        fontSize: "1.2rem",
+                                                        zIndex: 0,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    <Button
+                                                        onClick={() =>
+                                                            handleEdit(
+                                                                index,
+                                                                setEditRowIndex
+                                                            )
+                                                        }
+                                                    >
+                                                        <Edit />
+                                                    </Button>
+                                                    <Button
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                index,
+                                                                annotationTable,
+                                                                swaggerData,
+                                                                setAnnotationTable,
+                                                                setSwaggerData
+                                                            )
+                                                        }
+                                                    >
+                                                        <Delete />
+                                                    </Button>
+                                                </TableCell>
+                                            </>
+                                        )}
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <div
+                        style={{
+                            marginTop: "auto",
+                            marginBottom: "2rem",
+                            display: "flex",
+                            justifyContent: "center",
+                        }}
+                    >
+                        <Button
+                            sx={{
+                                pointerEvents: "auto",
+                                height: "5rem",
+                                fontSize: "1rem",
+                            }}
+                            variant="contained"
+                            size="small"
+                            type="button"
+                            marg
+                            onClick={() => handleDownload(swaggerData)}
+                        >
+                            Download
+                        </Button>
+                    </div>
                 </div>
             )}
-            <div
-                style={{
-                    marginTop: "auto",
-                    marginBottom: "2rem",
-                }}
-            >
-                <Button
-                    sx={{
-                        pointerEvents: "auto",
-                        height: "5rem",
-                        fontSize: "1rem",
-                    }}
-                    variant="contained"
-                    size="small"
-                    type="button"
-                    marg
-                    onClick={handleDownload}
-                >
-                    Download
-                </Button>
-            </div>
         </div>
     );
 };
