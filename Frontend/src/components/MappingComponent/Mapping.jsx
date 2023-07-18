@@ -19,7 +19,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import "./Mapping.css";
-
 import {
   handleAction,
   getDesiredValue,
@@ -69,132 +68,134 @@ const Mapping = ({ jsonData, setJsonData }) => {
   const lowercaseAnnotation = annotation.toLowerCase();
 
   useEffect(() => {
-    if (lowercaseAnnotation.includes("create")) {
-      console.log("Create");
-      actionMethods.push("CREATE");
-      actionMethods.map((action) => {
-        console.log(action);
-      });
-    } else if (lowercaseAnnotation.includes("get")) {
-      // setShowGridComponent(true);
-      actionMethods.push("FETCH");
-      actionMethods.push("SEARCH");
-    } else if (lowercaseAnnotation.includes("update")) {
-      // console.log(actionMethods.push("UPDATE"));
-      // return (
-      //   <GridComponent/>
-      // );
-      actionMethods.push("FETCH");
-      actionMethods.push("CREATE");
-    } else if (lowercaseAnnotation.includes("delete")) {
-      actionMethods.push("DELETE");
-    } else if (lowercaseAnnotation.includes("search")) {
-      actionMethods.push("SEARCH");
-    } else {
-      console.log("Invalid annotation");
-    }
+      if (lowercaseAnnotation.includes("create")) {
+          console.log("Create");
+          actionMethods.push("CREATE");
+          actionMethods.map((action) => {
+              console.log(action);
+          });
+      } else if (lowercaseAnnotation.includes("get")) {
+          // setShowGridComponent(true);
+          actionMethods.push("FETCH");
+          actionMethods.push("SEARCH");
+      } else if (lowercaseAnnotation.includes("update")) {
+          // console.log(actionMethods.push("UPDATE"));
+          // return (
+          //   <GridComponent/>
+          // );
+          actionMethods.push("FETCH");
+          actionMethods.push("CREATE");
+      } else if (lowercaseAnnotation.includes("delete")) {
+          actionMethods.push("DELETE");
+      } else if (lowercaseAnnotation.includes("search")) {
+          actionMethods.push("SEARCH");
+      } else {
+          console.log("Invalid annotation");
+      }
   }, [annotation]);
 
   useEffect(() => {
-    if (lowercaseAnnotation.includes("update")) {
-      setShowGridComponent(true);
-    }
+      if (lowercaseAnnotation.includes("update")) {
+          setShowGridComponent(true);
+      }
   }, [lowercaseAnnotation]);
   let st = localStorage.getItem("ColumnData");
+  console.log(st);
 
   useEffect(() => {
-    setColumns(JSON.parse(st));
+      setColumns(JSON.parse(st));
   }, [st]);
   console.log(columns);
 
   useEffect(() => {
-    console.log(columns);
-    // columns && Object.keys(columns).map((col)=>{
-    //     console.log(columns[col].IsRequired);
+      console.log(columns);
+      // columns && Object.keys(columns).map((col)=>{
+      //     console.log(columns[col].IsRequired);
 
-    // })
-    columns &&
-      columns.map((col) => {
-        if (col.IsRequired === true) {
-          setRequired((prev) => {
-            return [...prev, col.Name];
+      // })
+      columns &&
+          columns.map((col) => {
+              if (col.IsRequired === true) {
+                  setRequired((prev) => {
+                      return [...prev, col.Name];
+                  });
+              } else {
+                  setNewColumns((prevw) => {
+                      return [...prevw, col.Name];
+                  });
+              }
+              console.log(col.Name);
           });
-        } else {
-          setNewColumns((prevw) => {
-            return [...prevw, col.Name];
-          });
-        }
-        console.log(col.Name);
-      });
   }, [columns]);
   console.log(newcolumns);
   // let columns=JSON.parse(st);
   console.log(columns);
   useEffect(() => {
-    setTableNames(
-      swaggerData
-        ? // eslint-disable-next-line
+      setTableNames(
+          swaggerData
+              ? // eslint-disable-next-line
 
-          Object.keys(swaggerData.paths).map((item) => {
-            Object.keys(swaggerData.paths[item]);
-            // console.log(swaggerData.paths[item].selectApiMethod);
-          })
-        : []
-    );
+                Object.keys(swaggerData.paths).map((item) => {
+                    Object.keys(swaggerData.paths[item]);
+
+                    // console.log(swaggerData.paths[item].selectApiMethod);
+                })
+              : []
+      );
   }, [swaggerData]);
 
   useEffect(() => {
-    console.log(selectedTable);
+      console.log(selectedTable);
 
-    swaggerData &&
-      selectedTable &&
-      setapiMethods(Object.keys(swaggerData.paths[selectedTable]));
+      swaggerData &&
+          selectedTable &&
+          setapiMethods(Object.keys(swaggerData.paths[selectedTable]));
   }, [swaggerData, selectedTable]);
 
   console.log(apiMethods);
 
   useEffect(() => {
-    swaggerData &&
-      selectedTable &&
-      selectApiMethod &&
-      setResponse(
-        Object.keys(swaggerData.paths[selectedTable][selectApiMethod])
-      );
+      swaggerData &&
+          selectedTable &&
+          selectApiMethod &&
+          setResponse(
+              Object.keys(swaggerData.paths[selectedTable][selectApiMethod])
+          );
   }, [swaggerData, selectedTable, apiMethods, selectApiMethod]);
 
   console.log(response);
 
   useEffect(() => {
-    console.log("shreesh");
-    swaggerData && setSelectApiMethod("");
-    setSelectedResponse("");
-    setActions();
-    //   setColumns();
+      console.log("shreesh");
+      swaggerData && setSelectApiMethod("");
+      setSelectedResponse("");
+      setActions();
+      //   setColumns();
   }, [selectedTable]);
 
   const handlechange = () => {
-    setapiMethods("");
+      setapiMethods("");
 
-    setResponse("");
+      setResponse("");
   };
 
   useEffect(() => {
-    swaggerData &&
-      selectedTable.length &&
-      selectApiMethod.length &&
-      // setColumns();
+      swaggerData &&
+          selectedTable.length &&
+          selectApiMethod.length &&
+          // setColumns();
 
-      setActions();
+          setActions();
   }, [SelectedResponse]);
 
   useEffect(() => {
-    const filteredEndpoints = swaggerData
-      ? Object.keys(swaggerData.paths).filter(() => {
-          return swaggerData.paths;
-        })
-      : [];
+      const filteredEndpoints = swaggerData
+          ? Object.keys(swaggerData.paths).filter(() => {
+                return swaggerData.paths;
+            })
+          : [];
 
-    setTableNames(filteredEndpoints);
+      setTableNames(filteredEndpoints);
   }, [selectApiMethod, swaggerData]);
 
   // useEffect(() => {
@@ -211,55 +212,60 @@ const Mapping = ({ jsonData, setJsonData }) => {
   // }, [columns]);
 
   useEffect(() => {
-    if (
-      swaggerData &&
-      selectedTable.length &&
-      selectApiMethod.length &&
-      SelectedResponse.length
-    ) {
-      if (Object.keys(swaggerData).includes("openapi")) {
-        console.log("hello");
-        let apidatas;
-        if (selectApiMethod === "post") {
-          apidatas =
-            swaggerData.paths[selectedTable][selectApiMethod].requestBody
-              .content["application/json"].schema["$ref"];
-        } else if (selectApiMethod === "get") {
-          apidatas =
-            swaggerData.paths[selectedTable][selectApiMethod].responses["200"]
-              .content["application/vnd.connectwise.com+json; version=2022.1"]
-              .schema.items["$ref"];
-        }
-        let requiredval = getDesiredValue(apidatas);
-        let p = swaggerData.components.schemas[requiredval];
+      if (
+          swaggerData &&
+          selectedTable.length &&
+          selectApiMethod.length &&
+          SelectedResponse.length
+      ) {
+          if (Object.keys(swaggerData).includes("openapi")) {
+              console.log("hello");
+              let apidatas;
+              if (selectApiMethod === "post") {
+                  apidatas =
+                      swaggerData.paths[selectedTable][selectApiMethod]
+                          .requestBody.content["application/json"].schema[
+                          "$ref"
+                      ];
+              } else if (selectApiMethod === "get") {
+                  apidatas =
+                      swaggerData.paths[selectedTable][selectApiMethod]
+                          .responses["200"].content[
+                          "application/vnd.connectwise.com+json; version=2022.1"
+                      ].schema.items["$ref"];
+              }
+              let requiredval = getDesiredValue(apidatas);
+              let p = swaggerData.components.schemas[requiredval];
 
-        if (Object.keys(p).includes("required")) {
-          setRequired(p.required);
-        }
-      } else {
-        let data1 = swaggerData.paths[selectedTable][selectApiMethod].responses;
+              if (Object.keys(p).includes("required")) {
+                  setRequired(p.required);
+              }
+          } else {
+              let data1 =
+                  swaggerData.paths[selectedTable][selectApiMethod].responses;
 
-        if (Object.keys(data1).includes("200")) {
-          data1 = data1["200"]["$ref"];
-        } else if (Object.keys(data1).includes("201")) {
-          data1 = data1["201"]["$ref"];
-        } else {
-          data1 = data1["204"]["$ref"];
-        }
+              if (Object.keys(data1).includes("200")) {
+                  data1 = data1["200"]["$ref"];
+              } else if (Object.keys(data1).includes("201")) {
+                  data1 = data1["201"]["$ref"];
+              } else {
+                  data1 = data1["204"]["$ref"];
+              }
 
-        let requiredval1 = getDesiredValue(data1);
+              let requiredval1 = getDesiredValue(data1);
 
-        let apidatas = swaggerData.responses[requiredval1].schema["$ref"];
+              let apidatas =
+                  swaggerData.responses[requiredval1].schema["$ref"];
 
-        let requiredval2 = getDesiredValue(apidatas);
+              let requiredval2 = getDesiredValue(apidatas);
 
-        let p = swaggerData.definitions[requiredval2];
+              let p = swaggerData.definitions[requiredval2];
 
-        if (Object.keys(p).includes("required")) {
-          setRequired(p.required);
-        }
+              if (Object.keys(p).includes("required")) {
+                  setRequired(p.required);
+              }
+          }
       }
-    }
   }, [swaggerData, selectedTable, selectApiMethod, SelectedResponse]);
 
   console.log(required);
@@ -280,448 +286,569 @@ const Mapping = ({ jsonData, setJsonData }) => {
   // }, [swaggerData, selectedTable, selectApiMethod]);
 
   useEffect(() => {
-    required.map((e, index) => {
-      setMappings((prev) => {
-        return {
-          ...prev,
+      required.map((e, index) => {
+          setMappings((prev) => {
+              return {
+                  ...prev,
 
-          [e]: [e],
-        };
+                  [e]: [e],
+              };
+          });
       });
-    });
   }, [required]);
 
   // let json;
 
   useEffect(() => {
-    const handlestatedatachange = () => {
-      setStateData({
-        ...stateData,
-        ApiEndpoint: selectedTable,
-        ApiMethod: selectApiMethod,
-        Response: SelectedResponse,
-        MappedServices: services,
-        jsonTemplate: jsonfile,
-        ActionTag: Actions,
-      });
-    };
-    jsonfile.length && handlestatedatachange();
+      const handlestatedatachange = () => {
+          setStateData({
+              ...stateData,
+              ApiEndpoint: selectedTable,
+              ApiMethod: selectApiMethod,
+              Response: SelectedResponse,
+              MappedServices: services,
+              jsonTemplate: jsonfile,
+              ActionTag: Actions,
+          });
+      };
+      jsonfile.length && handlestatedatachange();
   }, [jsonfile]);
 
   useEffect(
-    (e) => {
-      console.log(mappings);
-      buttonClicked &&
-        mappings &&
-        handleData(
-          e,
-          mappings,
-          buttonClicked,
-          setJsonData,
-          setJsonfile,
-          setButtonClicked,
-          columns
-        );
-      handleForm(
-        e,
-        buttonClicked,
-        setshowform,
-        showform,
-        setButtonClicked,
-        formRef
-      );
-    },
-    [buttonClicked]
+      (e) => {
+          console.log(mappings);
+          buttonClicked &&
+              mappings &&
+              handleData(
+                  e,
+                  mappings,
+                  buttonClicked,
+                  setJsonData,
+                  setJsonfile,
+                  setButtonClicked,
+                  columns
+              );
+          handleForm(
+              e,
+              buttonClicked,
+              setshowform,
+              showform,
+              setButtonClicked,
+              formRef
+          );
+      },
+      [buttonClicked]
   );
   useEffect(() => {
-    if (showform && formRef.current) {
-      formRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    }
+      if (showform && formRef.current) {
+          formRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "nearest",
+          });
+      }
   }, [showform]);
 
   return (
-    <div className="outerdiv">
-      {!showGridComponent && (
-        <div
-          className={lowercaseAnnotation.includes("create") ? "create" : "get"}
-        >
-          <Container
-            // style={{ background: '#f3e5f5' }}
-            // {annotation.includes("create")?className="create" : className="get" }
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              overflow: "Hidden",
-              py: 4,
-              // bgcolor: purple
-            }}
-          >
-            <Typography variant="h2" sx={{ mb: 2 }}>
-              {annotation}
-            </Typography>
-
-            <Accordion sx={{ width: "100%" }} expanded={true}>
-              <AccordionDetails sx={{ pt: 3 }}>
-                {columns && (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Box
+      <div className="outerdiv">
+          {!showGridComponent && (
+              <div
+                  className={
+                      lowercaseAnnotation.includes("create")
+                          ? "create"
+                          : "get"
+                  }
+              >
+                  <Container
+                      // style={{ background: '#f3e5f5' }}
+                      // {annotation.includes("create")?className="create" : className="get" }
                       sx={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        width: "100%",
-                        maxWidth: "100%",
-                        pb: 2,
-                        pt: 2,
-                      }}
-                    >
-                      <FormControl fullWidth sx={{ ml: 1 }}>
-                        <InputLabel id="demo-simple-select-label">
-                          Action Tag
-                        </InputLabel>
-
-                        <Select
-                          required
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          value={Actions}
-                          label="Select Services"
-                          onChange={(e) => handleAction(e, setActions)}
-
-                          // sx={{width:"50%"}}
-                        >
-                          {actionMethods.map((action, index) => (
-                            <MenuItem value={action} key={index}>
-                              {action}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Box>
-
-                    <FormControl
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                        width: "90%",
-                      }}
-                    >
-                      <Paper
-                        id="columnsCard"
-                        sx={{
-                          minWidth: "90%",
-                          flexWrap: "wrap",
                           display: "flex",
-                          alignItems: "flex-start",
-                          backgroundColor: "#e7eaf6",
-                          mt: 2,
-                          py: 2,
-                          px: 2,
-                        }}
-                        elevation={5}
-                        onDragOver={(e) => {
-                          e.preventDefault();
-                        }}
-                        onDrop={(ev) => {
-                          ev.preventDefault();
-                          let dragComponent = ev.dataTransfer.getData("dragId");
-                          ev.currentTarget.appendChild(
-                            document.getElementById(dragComponent)
-                          );
-                        }}
-                      >
-                        {newcolumns.map((lsCol, index) => {
-                          return (
-                            <Paper
-                              key={index}
-                              id={`${lsCol}${index}`}
-                              elevation={4}
-                              sx={{
-                                pr: 2,
-                                py: 1,
-                                mx: 2,
-                                my: 1,
-                                cursor: "grab",
-                                minWidth: "160px",
-                                maxWidth: "80%",
-                                display: "flex",
-                                height: "min-content",
-                              }}
-                              draggable="true"
-                              onDragStart={(e) => {
-                                console.log("Dragged element ID:", e.target.id);
-                                e.dataTransfer.setData("dragId", e.target.id); // eslint-disable-next-line
-
-                                mappings &&
-                                  Object.keys(mappings).map((mapKey) => {
-                                    mappings[mapKey].includes(
-                                      e.target.textContent
-                                    ) &&
-                                      setMappings((prev) => {
-                                        return {
-                                          ...prev,
-
-                                          [mapKey]: prev[mapKey].filter(
-                                            (x) => x !== e.target.textContent
-                                          ),
-                                        };
-                                      });
-                                  });
-                              }}
-                            >
-                              <DragIndicatorIcon
-                                sx={{
-                                  mr: 2,
-                                }}
-                              />
-
-                              <Typography
-                                key={index}
-                                value={lsCol}
-                                className={"capitalizeData"}
-                              >
-                                {lsCol}
-                              </Typography>
-                            </Paper>
-                          );
-                        })}
-                      </Paper>
-
-                      <Box
-                        sx={{
-                          minWidth: "72%",
-                          maxWidth: "80%",
-                          px: 2,
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            my: 1,
-                            mt: 5,
-                            width: "251%",
-                            minHeight: "76px",
-                          }}
-                        >
-                          <Box
-                            onDragOver={(e) => {
-                              e.preventDefault();
-                            }}
-                            onDrop={(ev) => {
-                              ev.preventDefault();
-
-                              let dragComponent =
-                                ev.dataTransfer.getData("dragId");
-                              console.log(dragComponent);
-                              ev.currentTarget.appendChild(
-                                document.getElementById(dragComponent)
-                              );
-
-                              setMappings((prev) => {
-                                return {
-                                  ...prev,
-
-                                  [dragComponent]: [
-                                    document.getElementById(dragComponent)
-                                      .textContent,
-                                  ],
-                                };
-                              });
-
-                              console.log(mappings);
-                            }}
-                            component="span"
-                            sx={{
-                              p: 1,
-                              border: "2px dashed grey",
-                              width: "50%",
-                              minHeight: "56px",
-                              backgroundColor: "#e7eaf6",
-                              display: "flex",
-                              justifyContent: "center",
-                              flexWrap: "wrap",
-                            }}
-                          >
-                            {required.length > 0 &&
-                              required.map((field, index) => {
-                                return (
-                                  <Paper
-                                    key={index}
-                                    id={`${field}${index}`}
-                                    sx={{
-                                      pr: 2,
-                                      py: 1,
-                                      pl: 2,
-                                      mx: 2,
-                                      my: 1,
-                                      cursor: "grab",
-                                      minWidth: "160px",
-                                      maxWidth: "80%",
-                                      display: "flex",
-                                      height: "min-content",
-                                    }}
-                                    elevation={5}
-                                  >
-                                    <Typography
-                                      key={field}
-                                      value={field}
-                                      className={"capitalizeData"}
-                                      // style={{ margin: "4px" }}
-                                    >
-                                      {field}*
-                                    </Typography>
-                                  </Paper>
-                                );
-                              })}
-                          </Box>
-                        </Box>
-                      </Box>
-                    </FormControl>
-
-                    <Box
-                      sx={{
-                        mt: 5,
-                        ml: "auto",
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "space-between",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          overflow: "Hidden",
+                          py: 4,
+                          // bgcolor: purple
                       }}
-                    >
-                      <Button
-                        variant={"contained"}
-                        onClick={() => {
-                          setButtonClicked("GenerateForm");
-                        }}
-                        sx={{ mt: 1 }}
-                        type="submit"
-                        disabled={!Actions}
-                      >
-                        Download JSON
-                      </Button>
+                  >
+                      <Typography variant="h2" sx={{ mb: 2 }}>
+                          {annotation}
+                      </Typography>
 
-                      <Button
-                        variant={"contained"}
-                        onClick={(e) => {
-                          setButtonClicked("SaveMapping");
-                        }}
-                        sx={{ mt: 1 }}
-                        type="submit"
-                        disabled={!Actions}
+                      <Accordion sx={{ width: "100%" }} expanded={true}>
+                          <AccordionDetails sx={{ pt: 3 }}>
+                              {columns && (
+                                  <Box
+                                      sx={{
+                                          display: "flex",
+                                          flexDirection: "column",
+                                          alignItems: "center",
+                                      }}
+                                  >
+                                      <Box
+                                          sx={{
+                                              display: "flex",
+                                              justifyContent: "space-evenly",
+                                              width: "100%",
+                                              maxWidth: "100%",
+                                              pb: 2,
+                                              pt: 2,
+                                          }}
+                                      >
+                                          <FormControl
+                                              fullWidth
+                                              sx={{ ml: 1 }}
+                                          >
+                                              <InputLabel id="demo-simple-select-label">
+                                                  Action Tag
+                                              </InputLabel>
+
+                                              <Select
+                                                  required
+                                                  labelId="demo-simple-select-label"
+                                                  id="demo-simple-select"
+                                                  value={Actions}
+                                                  label="Select Services"
+                                                  onChange={(e) =>
+                                                      handleAction(
+                                                          e,
+                                                          setActions
+                                                      )
+                                                  }
+
+                                                  // sx={{width:"50%"}}
+                                              >
+                                                  {actionMethods.map(
+                                                      (action, index) => (
+                                                          <MenuItem
+                                                              value={action}
+                                                              key={index}
+                                                          >
+                                                              {action}
+                                                          </MenuItem>
+                                                      )
+                                                  )}
+                                              </Select>
+                                          </FormControl>
+                                      </Box>
+
+                                      <FormControl
+                                          sx={{
+                                              display: "flex",
+                                              flexDirection: "column",
+                                              justifyContent: "space-between",
+                                              width: "90%",
+                                          }}
+                                      >
+                                          <Paper
+                                              id="columnsCard"
+                                              sx={{
+                                                  minWidth: "90%",
+                                                  flexWrap: "wrap",
+                                                  display: "flex",
+                                                  alignItems: "flex-start",
+                                                  backgroundColor: "#e7eaf6",
+                                                  mt: 2,
+                                                  py: 2,
+                                                  px: 2,
+                                              }}
+                                              elevation={5}
+                                              onDragOver={(e) => {
+                                                  e.preventDefault();
+                                              }}
+                                              onDrop={(ev) => {
+                                                  ev.preventDefault();
+                                                  let dragComponent =
+                                                      ev.dataTransfer.getData(
+                                                          "dragId"
+                                                      );
+                                                  ev.currentTarget.appendChild(
+                                                      document.getElementById(
+                                                          dragComponent
+                                                      )
+                                                  );
+                                              }}
+                                          >
+                                              {newcolumns.map(
+                                                  (lsCol, index) => {
+                                                      return (
+                                                          <Paper
+                                                              key={index}
+                                                              id={`${lsCol}${index}`}
+                                                              elevation={4}
+                                                              sx={{
+                                                                  pr: 2,
+                                                                  py: 1,
+                                                                  mx: 2,
+                                                                  my: 1,
+                                                                  cursor: "grab",
+                                                                  minWidth:
+                                                                      "160px",
+                                                                  maxWidth:
+                                                                      "80%",
+                                                                  display:
+                                                                      "flex",
+                                                                  height: "min-content",
+                                                              }}
+                                                              draggable="true"
+                                                              onDragStart={(
+                                                                  e
+                                                              ) => {
+                                                                  console.log(
+                                                                      "Dragged element ID:",
+                                                                      e.target
+                                                                          .id
+                                                                  );
+                                                                  e.dataTransfer.setData(
+                                                                      "dragId",
+                                                                      e.target
+                                                                          .id
+                                                                  ); // eslint-disable-next-line
+
+                                                                  mappings &&
+                                                                      Object.keys(
+                                                                          mappings
+                                                                      ).map(
+                                                                          (
+                                                                              mapKey
+                                                                          ) => {
+                                                                              mappings[
+                                                                                  mapKey
+                                                                              ].includes(
+                                                                                  e
+                                                                                      .target
+                                                                                      .textContent
+                                                                              ) &&
+                                                                                  setMappings(
+                                                                                      (
+                                                                                          prev
+                                                                                      ) => {
+                                                                                          return {
+                                                                                              ...prev,
+
+                                                                                              [mapKey]:
+                                                                                                  prev[
+                                                                                                      mapKey
+                                                                                                  ].filter(
+                                                                                                      (
+                                                                                                          x
+                                                                                                      ) =>
+                                                                                                          x !==
+                                                                                                          e
+                                                                                                              .target
+                                                                                                              .textContent
+                                                                                                  ),
+                                                                                          };
+                                                                                      }
+                                                                                  );
+                                                                          }
+                                                                      );
+                                                              }}
+                                                          >
+                                                              <DragIndicatorIcon
+                                                                  sx={{
+                                                                      mr: 2,
+                                                                  }}
+                                                              />
+
+                                                              <Typography
+                                                                  key={index}
+                                                                  value={
+                                                                      lsCol
+                                                                  }
+                                                                  className={
+                                                                      "capitalizeData"
+                                                                  }
+                                                              >
+                                                                  {lsCol}
+                                                              </Typography>
+                                                          </Paper>
+                                                      );
+                                                  }
+                                              )}
+                                          </Paper>
+
+                                          <Box
+                                              sx={{
+                                                  minWidth: "72%",
+                                                  maxWidth: "80%",
+                                                  px: 2,
+                                              }}
+                                          >
+                                              <Box
+                                                  sx={{
+                                                      display: "flex",
+                                                      justifyContent:
+                                                          "space-between",
+                                                      alignItems: "center",
+                                                      my: 1,
+                                                      mt: 5,
+                                                      width: "251%",
+                                                      minHeight: "76px",
+                                                  }}
+                                              >
+                                                  <Box
+                                                      onDragOver={(e) => {
+                                                          e.preventDefault();
+                                                      }}
+                                                      onDrop={(ev) => {
+                                                          ev.preventDefault();
+
+                                                          let dragComponent =
+                                                              ev.dataTransfer.getData(
+                                                                  "dragId"
+                                                              );
+                                                          console.log(
+                                                              dragComponent
+                                                          );
+                                                          ev.currentTarget.appendChild(
+                                                              document.getElementById(
+                                                                  dragComponent
+                                                              )
+                                                          );
+
+                                                          setMappings(
+                                                              (prev) => {
+                                                                  return {
+                                                                      ...prev,
+
+                                                                      [dragComponent]:
+                                                                          [
+                                                                              document.getElementById(
+                                                                                  dragComponent
+                                                                              )
+                                                                                  .textContent,
+                                                                          ],
+                                                                  };
+                                                              }
+                                                          );
+
+                                                          console.log(
+                                                              mappings
+                                                          );
+                                                      }}
+                                                      component="span"
+                                                      sx={{
+                                                          p: 1,
+                                                          border: "2px dashed grey",
+                                                          width: "50%",
+                                                          minHeight: "56px",
+                                                          backgroundColor:
+                                                              "#e7eaf6",
+                                                          display: "flex",
+                                                          justifyContent:
+                                                              "center",
+                                                          flexWrap: "wrap",
+                                                      }}
+                                                  >
+                                                      {required.length > 0 &&
+                                                          required.map(
+                                                              (
+                                                                  field,
+                                                                  index
+                                                              ) => {
+                                                                  return (
+                                                                      <Paper
+                                                                          key={
+                                                                              index
+                                                                          }
+                                                                          id={`${field}${index}`}
+                                                                          sx={{
+                                                                              pr: 2,
+                                                                              py: 1,
+                                                                              pl: 2,
+                                                                              mx: 2,
+                                                                              my: 1,
+                                                                              cursor: "grab",
+                                                                              minWidth:
+                                                                                  "160px",
+                                                                              maxWidth:
+                                                                                  "80%",
+                                                                              display:
+                                                                                  "flex",
+                                                                              height: "min-content",
+                                                                          }}
+                                                                          elevation={
+                                                                              5
+                                                                          }
+                                                                      >
+                                                                          <Typography
+                                                                              key={
+                                                                                  field
+                                                                              }
+                                                                              value={
+                                                                                  field
+                                                                              }
+                                                                              className={
+                                                                                  "capitalizeData"
+                                                                              }
+                                                                              // style={{ margin: "4px" }}
+                                                                          >
+                                                                              {
+                                                                                  field
+                                                                              }
+
+                                                                              *
+                                                                          </Typography>
+                                                                      </Paper>
+                                                                  );
+                                                              }
+                                                          )}
+                                                  </Box>
+                                              </Box>
+                                          </Box>
+                                      </FormControl>
+
+                                      <Box
+                                          sx={{
+                                              mt: 5,
+                                              ml: "auto",
+                                              width: "100%",
+                                              display: "flex",
+                                              justifyContent: "space-between",
+                                          }}
+                                      >
+                                          <Button
+                                              variant={"contained"}
+                                              onClick={() => {
+                                                  setButtonClicked(
+                                                      "GenerateForm"
+                                                  );
+                                              }}
+                                              sx={{ mt: 1 }}
+                                              type="submit"
+                                              disabled={!Actions}
+                                          >
+                                              Download JSON
+                                          </Button>
+
+                                          <Button
+                                              variant={"contained"}
+                                              onClick={(e) => {
+                                                  setButtonClicked(
+                                                      "SaveMapping"
+                                                  );
+                                              }}
+                                              sx={{ mt: 1 }}
+                                              type="submit"
+                                              disabled={!Actions}
+                                          >
+                                              Generate Form
+                                          </Button>
+                                      </Box>
+                                  </Box>
+                              )}
+                          </AccordionDetails>
+                      </Accordion>
+                  </Container>
+              </div>
+          )}
+          {!showGridComponent && lowercaseAnnotation.includes("create") && (
+              <div
+                  className={
+                      lowercaseAnnotation.includes("create")
+                          ? "create"
+                          : "get"
+                  }
+                  ref={formRef}
+              >
+                  <Container
+                      // style={{ background: '#f3e5f5' }}
+                      // {annotation.includes("create")?className="create" : className="get" }
+                      sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          overflow: "Hidden",
+                          py: 4,
+                          // bgcolor: purple
+                      }}
+                  >
+                      {showform && (
+                          <Accordion
+                              sx={{ width: "100%" }}
+                              expanded={true}
+                              Hidden={false}
+                          >
+                              <AccordionDetails sx={{ pt: 3 }}>
+                                  {showform && <FormComponent />}
+                              </AccordionDetails>
+                          </Accordion>
+                      )}
+                  </Container>
+              </div>
+          )}
+          {!showGridComponent && lowercaseAnnotation.includes("get") && (
+              <div className={"get"} ref={formRef}>
+                  <Container
+                      // style={{ background: '#f3e5f5' }}
+                      // {annotation.includes("create")?className="create" : className="get" }
+                      sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          overflow: "Hidden",
+                          py: 4,
+                          // bgcolor: purple
+                      }}
+                  >
+                      {showform && (
+                          <Accordion
+                              sx={{ width: "100%" }}
+                              expanded={true}
+                              Hidden={false}
+                          >
+                              <AccordionDetails sx={{ pt: 3 }}>
+                                  <h3>FORM GRID</h3>
+                                  {showform && (
+                                      <GridComponent
+                                          lowercaseAnnotation={
+                                              lowercaseAnnotation
+                                          }
+                                          setJsonData={setJsonData}
+                                          mappings={mappings}
+                                      />
+                                  )}
+                              </AccordionDetails>
+                          </Accordion>
+                      )}
+                  </Container>
+              </div>
+          )}{" "}
+          {showGridComponent && (
+              <div className="update">
+                  <Container
+                      // style={{ background: '#f3e5f5' }}
+                      // {annotation.includes("create")?className="create" : className="get" }
+                      sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          overflow: "Hidden",
+                          py: 4,
+                          // bgcolor: purple
+                      }}
+                  >
+                      <Typography variant="h2" sx={{ mb: 2 }}>
+                          {annotation}
+                      </Typography>
+                      <Accordion
+                          sx={{ width: "100%" }}
+                          expanded={true}
+                          Hidden={false}
                       >
-                        Generate Form
-                      </Button>
-                    </Box>
-                  </Box>
-                )}
-              </AccordionDetails>
-            </Accordion>
-          </Container>
-        </div>
-      )}
-      {!showGridComponent && lowercaseAnnotation.includes("create") && (
-        <div
-          className={lowercaseAnnotation.includes("create") ? "create" : "get"}
-          ref={formRef}
-        >
-          <Container
-            // style={{ background: '#f3e5f5' }}
-            // {annotation.includes("create")?className="create" : className="get" }
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              overflow: "Hidden",
-              py: 4,
-              // bgcolor: purple
-            }}
-          >
-            {showform && (
-              <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
-                <AccordionDetails sx={{ pt: 3 }}>
-                  {showform && <FormComponent />}
-                </AccordionDetails>
-              </Accordion>
-            )}
-          </Container>
-        </div>
-      )}
-      {!showGridComponent && (
-        <div
-          className={lowercaseAnnotation.includes("create") ? "create" : "get"}
-          ref={formRef}
-        >
-          <Container
-            // style={{ background: '#f3e5f5' }}
-            // {annotation.includes("create")?className="create" : className="get" }
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              overflow: "Hidden",
-              py: 4,
-              // bgcolor: purple
-            }}
-          >
-            {showform && (
-              <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
-                <AccordionDetails sx={{ pt: 3 }}>
-                  <h3>FORM GRID</h3>
-                  {showform && (
-                    <GridComponent
-                      lowercaseAnnotation={lowercaseAnnotation}
-                      setJsonData={setJsonData}
-                      mappings={mappings} //uncomment this line to how grid as per mapping
-                    />
-                  )}
-                </AccordionDetails>
-              </Accordion>
-            )}
-          </Container>
-        </div>
-      )}{" "}
-      {showGridComponent && (
-        <div className="update">
-          <Container
-            // style={{ background: '#f3e5f5' }}
-            // {annotation.includes("create")?className="create" : className="get" }
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              overflow: "Hidden",
-              py: 4,
-              // bgcolor: purple
-            }}
-          >
-            <Typography variant="h2" sx={{ mb: 2 }}>
-              {annotation}
-            </Typography>
-            <Accordion sx={{ width: "100%" }} expanded={true} Hidden={false}>
-              <AccordionDetails sx={{ pt: 3 }}>
-                <h3>FORM GRID</h3>
-                <GridComponent
-                  lowercaseAnnotation={lowercaseAnnotation}
-                  setJsonData={setJsonData}
-                />
-              </AccordionDetails>
-            </Accordion>
-          </Container>
-        </div>
-      )}
-    </div>
+                          <AccordionDetails sx={{ pt: 3 }}>
+                              <h3>FORM GRID</h3>
+                              <GridComponent
+                                  lowercaseAnnotation={lowercaseAnnotation}
+                                  setJsonData={setJsonData}
+                              />
+                          </AccordionDetails>
+                      </Accordion>
+                  </Container>
+              </div>
+          )}
+      </div>
   );
 };
 

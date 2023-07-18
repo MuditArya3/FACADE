@@ -7,7 +7,7 @@ import FormComponent from "../FormComponent/FormComponent.jsx";
 import { Container } from "@mui/system";
 import { Accordion, AccordionDetails } from "@mui/material";
 import { baseURL } from "../../AppSettings.js";
-import { getDesiredValue, getGridData, handleData } from "./GridComponent.js";
+import { getGridData, handleData } from "./GridComponent.js";
 import Papa from "papaparse";
 
 const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
@@ -33,23 +33,23 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
       },
     });
   };
- const x={};
+//  let x={};
   useEffect(() => {
     console.log(csvData);
     csvFileData();
-    csvData.map((head) => {
-      console.log(head);
-      if (head && head.Validations) {
-        console.log(head.Validations);
-        if (head.Validations.includes("IS GREATER TO")) {
-          console.log("hello");
-          let abc = head.Validations;
-          x= getDesiredValue(abc)
-          console.log(x);
-          console.log(abc);
-        }
-      }
-    });
+    // csvData.map((head) => {
+    //   console.log(head);
+    //   if (head && head.Validations) {
+    //     console.log(head.Validations);
+    //     if (head.Validations.includes("IS GREATER TO")) {
+    //       console.log("hello");
+    //       let abc = head.Validations;
+    //       x= getDesiredValue(abc)
+    //       console.log(x);
+    //       console.log(abc);
+    //     }
+    //   }
+    // });
   }, [csvData]);
 
   const csvFileData = () => {

@@ -1,0 +1,54 @@
+{
+    "ui:submitButtonOptions": {
+      "submitText": "Confirm Details",
+      "norender": false,
+      "props": {
+        "disabled": true,
+        "className": "btn btn-info"
+      }
+      
+    },
+    "firstName": {
+      "ui:disabled": false,
+      "ui:autofocus": true,
+      "ui:emptyValue": "",
+      "ui:autocomplete": "family-name",
+      "ui:globalOptions": { 
+        "copyable" : false 
+      },
+      "ui:options": {
+        "widget": "textarea",
+        "rows": 5
+      }
+    },
+    "lastName": {
+      "ui:title": "Surname",
+      "ui:emptyValue": "",
+      "ui:autocomplete": "given-name"
+    },
+    "age": {
+      "ui:widget": "updown",
+      "ui:title": "Age of person",
+      "ui:description": "(earthian year)"
+    },
+    "bio": {
+      "ui:widget": "textarea"
+    },
+    "password": {
+      "ui:widget": "password",
+      "ui:help": "Hint: Make it strong!"
+    },
+    "date": {
+      "ui:widget": "alt-datetime"
+    },
+    "telephone": {
+      "ui:options": {
+        "inputType": "tel"
+      }
+    },
+    "file":{
+      "ui:options": {
+        "filePreview": true
+      }
+    }
+  }
