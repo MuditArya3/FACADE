@@ -24,6 +24,15 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
   const [mappedGrid, setMappedGrid] = useState(false);
   const [newApiState, setNewApiState] = useState([]);
 
+
+console.log(mappings);
+Object.keys(mappings).map((m)=>{
+  console.log(m);
+  const mapp=mappings[m].toString();
+  console.log(mapp.toLowerCase());
+})
+
+
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     Papa.parse(file, {
@@ -33,7 +42,7 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
       },
     });
   };
-//  let x={};
+ let x={};
   useEffect(() => {
     console.log(csvData);
     csvFileData();
@@ -173,7 +182,12 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
 
             {getAPIData.length > 0 &&
               Object.keys(mappings).map((m) => {
+                // const mapp=mappings[m].toString();
+                // console.log(mapp.toLowerCase());
                 const mappingKey = mappings[m][0];
+                console.log(mappingKey);
+                // const getdata=getAPIData.toString();
+                // console.log(getdata);
                 if (getAPIData[0].hasOwnProperty(mappingKey)) {
                   return (
                     <div
