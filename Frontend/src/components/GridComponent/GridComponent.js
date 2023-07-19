@@ -2,8 +2,11 @@ import axios from "axios";
 import { domainUrl } from "../MappingComponent/Mapping";
 
 export const getGridData = (setAPIData, setNewApiState) => {
+  // console.log(dom);
   axios
     .get(`https://localhost:7184/api/Desktop/Desktops`)
+    // .get(domainUrl)
+    // .get(`https://localhost:7184/v1/enduser/2/sites/2/user/2/desktops?Type=all`)
     .then((res) => {
       if (res && res.data) {
         // props = res.data;
@@ -115,12 +118,4 @@ const handlecreatefile = (data, setJsonData) => {
   localStorage.setItem("jsonSchema", json);
 };
 
-export const getDesiredValue = (apidatas) => {
-  console.log(apidatas);
-  let valueArray = apidatas.split('“');
-  valueArray=valueArray[1].split('”');
-  console.log(valueArray);
-  const desiredValue = valueArray[0];
-  console.log("desired----", desiredValue);
-  return desiredValue;
-};
+
