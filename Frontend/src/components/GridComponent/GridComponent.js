@@ -1,11 +1,11 @@
 import axios from "axios";
 import { domainUrl } from "../MappingComponent/Mapping";
-
+import React from 'react';
 export const getGridData = (setAPIData, setNewApiState) => {
   // console.log(dom);
   axios
-    .get(`https://localhost:7184/api/Desktop/Desktops`)
-    // .get(domainUrl)
+    // .get(`https://localhost:7184/api/Desktop/Desktops`)
+    .get(domainUrl)
     // .get(`https://localhost:7184/v1/enduser/2/sites/2/user/2/desktops?Type=all`)
     .then((res) => {
       if (res && res.data) {
@@ -118,4 +118,26 @@ const handlecreatefile = (data, setJsonData) => {
   localStorage.setItem("jsonSchema", json);
 };
 
+export const handleRowData=(mappings,getAPIData,key)=>{
+  {Object.keys(mappings).map((m) => {
+    const mappingKey = mappings[m][0];
+    const mapp = mappingKey.toLowerCase();
+    console.log(mappingKey);
+    console.log(getAPIData[key]);
+    return Object.keys(getAPIData[key]).map((m)=>{
+      console.log(m);
+      const getdata=m.toLowerCase();
+      if(getdata===mapp){
+        return (
+          <div
+            className="apiGridItems"
+            title={getAPIData[key][mappingKey]}
+            key={mappingKey}
+          >
+            {getAPIData[key][mappingKey]}
+          </div>
+        );
+      }
+    })
 
+})}}
