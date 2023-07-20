@@ -24,14 +24,12 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
   const [mappedGrid, setMappedGrid] = useState(false);
   const [newApiState, setNewApiState] = useState([]);
 
-
-console.log(mappings);
-Object.keys(mappings).map((m)=>{
-  console.log(m);
-  const mapp=mappings[m].toString();
-  console.log(mapp.toLowerCase());
-})
-
+  console.log(mappings);
+  Object.keys(mappings).map((m) => {
+    console.log(m);
+    const mapp = mappings[m].toString();
+    console.log(mapp.toLowerCase());
+  });
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -42,7 +40,7 @@ Object.keys(mappings).map((m)=>{
       },
     });
   };
- let x={};
+  let x = {};
   useEffect(() => {
     console.log(csvData);
     csvFileData();
@@ -185,22 +183,58 @@ Object.keys(mappings).map((m)=>{
                 // const mapp=mappings[m].toString();
                 // console.log(mapp.toLowerCase());
                 const mappingKey = mappings[m][0];
+                const mapp = mappingKey.toLowerCase().trim();
                 console.log(mappingKey);
                 // const getdata=getAPIData.toString();
-                // console.log(getdata);
-                if (getAPIData[0].hasOwnProperty(mappingKey)) {
-                  return (
-                    <div
-                      key={mappingKey}
-                      className="gridColumnHeadingItem"
-                      title={mappingKey}
-                    >
-                      {mappingKey}
-                    </div>
-                  );
-                }
-                return null;
+
+                console.log(getAPIData);
+                return Object.keys(getAPIData[0]).map((data) => {
+                  const getdata = data.toLowerCase();
+                  console.log(data);
+                  if (getdata === mapp) {
+                    console.log("yesssssssssssss");
+                    console.log(data, mappingKey);
+                    return (
+                      <div
+                        key={mappingKey}
+                        className="gridColumnHeadingItem"
+                        title={mappingKey}
+                      >
+                        {mappingKey}
+                      </div>
+                    );
+                  }
+                });
+
+                //   if (getAPIData[0].hasOwnProperty(mappingKey)) {
+                //     return (
+                //       <div
+                //         key={mappingKey}
+                //         className="gridColumnHeadingItem"
+                //         title={mappingKey}
+                //       >
+                //         {mappingKey}
+                //       </div>
+                //     );
+                //   }
+                //   return null;
               })}
+
+            {/* {getAPIData.length > 0 && Object.keys(mappings).map((m) => {
+const mappingKey = mappings[m][0];
+const mapp = mappingKey.toLowerCase();
+
+if (Object.keys(getAPIData[0]).some((data) => data.toLowerCase() === mapp)) {
+console.log("yesssssssssssss");
+return (
+<div key={mappingKey} className="gridColumnHeadingItem" title={mappingKey}>
+{mappingKey}
+</div>
+);
+}
+
+ return null;
+})} */}
           </div>
           <div className="gridDataAPI">
             {getAPIData.length > 0 &&
@@ -222,18 +256,41 @@ Object.keys(mappings).map((m)=>{
                       </div>
                     )}
                     {Object.keys(mappings).map((m) => {
-                      const mappingKey = mappings[m][0];
-                      if (getAPIData[key].hasOwnProperty(mappingKey)) {
-                        return (
-                          <div
-                            className="apiGridItems"
-                            title={getAPIData[key][mappingKey]}
-                            key={mappingKey}
-                          >
-                            {getAPIData[key][mappingKey]}
-                          </div>
-                        );
-                      }
+                      const mappingKey = mappings[m][0].trim();
+                      const mapp = mappingKey.charAt(0).toLowerCase()+ mappingKey.substring(1);
+                      console.log(mappingKey);
+                      console.log(getAPIData[key]);
+                      return Object.keys(getAPIData[key]).map((m)=>{
+                        console.log(m);
+                        const getdata=m;
+                        if(getdata===mapp){
+                          return (
+                            <div
+                              className="apiGridItems"
+                              title={getAPIData[key][mapp]}
+                              key={mappingKey}
+                            >
+                              {getAPIData[key][mapp]}
+                            </div>
+                          );
+                        }
+                      })
+
+
+
+
+                      
+                      // if (getAPIData[key].hasOwnProperty(mappingKey)) {
+                      //   return (
+                      //     <div
+                      //       className="apiGridItems"
+                      //       title={getAPIData[key][mappingKey]}
+                      //       key={mappingKey}
+                      //     >
+                      //       {getAPIData[key][mappingKey]}
+                      //     </div>
+                      //   );
+                      // }
                     })}
                   </div>
                 );
