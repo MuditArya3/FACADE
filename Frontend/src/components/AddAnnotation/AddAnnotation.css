@@ -1,0 +1,36 @@
+.boxx{
+    /* display: flex; */
+    flex-direction: row;
+    position: relative;
+    top: 2rem;
+    /* left: 0; */
+    right: 19.3rem;
+
+}
+/* .outerBox{
+    display: flex;
+    flex-direction: column;
+    
+} */
+.description{
+    width: 450px;
+    padding: 1rem;
+    max-height: 160px;
+    overflow: auto;
+    background-color:snow;
+}
+.description h5{
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+    font-weight: 600;
+}
+
+.description p{
+    font-size: larger;
+    font-weight: 600;
+}
+
+.descrip{
+    margin-bottom: 10px;
+}
