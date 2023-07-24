@@ -9,6 +9,7 @@ import { Accordion, AccordionDetails } from "@mui/material";
 import { baseURL } from "../../AppSettings.js";
 import { getGridData, handleData } from "./GridComponent.js";
 import Papa from "papaparse";
+import csvParser from "csv-parser";
 
 const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
   const [csvData, setcsvData] = useState([]);
@@ -24,12 +25,107 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
   const [mappedGrid, setMappedGrid] = useState(false);
   const [newApiState, setNewApiState] = useState([]);
 
-  console.log(mappings);
-  Object.keys(mappings).map((m) => {
-    console.log(m);
-    const mapp = mappings[m].toString();
-    console.log(mapp.toLowerCase());
-  });
+    const handleFileUpload = (e) => {
+        const file = e.target.files[0];
+        Papa.parse(file, {
+            header: true,
+            complete: (results) => {
+                setcsvData(results.data);
+            },
+        });
+    };
+
+    const handleFileUploadif = (event) => {
+        const file = event.target.files[0];
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            const csvText = reader.result;
+            console.log(csvText);
+
+            const rows = csvText.split("\n").map((row) => row.split(","));
+
+            const propertyNames = rows[0].map((property) => property.trim());
+            const requiredProperties = propertyNames.map((name) =>
+                name.startsWith("Required-")
+                    ? name.replace("Required-", "")
+                    : name
+            );
+            const requiredIndex = propertyNames.findIndex((name) =>
+                name.startsWith("Required-")
+            );
+            const animalValues = rows
+                .slice(1)
+                .map((row) => row[requiredIndex].trim());
+            const animalEnum = animalValues.filter(Boolean);
+
+            const jsonStructure = {
+                type: "object",
+                properties: {},
+                allOf: [],
+            };
+
+            jsonStructure.properties[requiredProperties[requiredIndex]] = {
+                enum: animalEnum,
+            };
+            for (let i = 1; i < requiredProperties.length; i++) {
+                if (i === requiredIndex) continue;
+                const propertyName = requiredProperties[i];
+                const values = rows[i].map((value) =>
+                    value.trim().replace(/"/g, "")
+                );
+                const actions = values.slice(1);
+
+                const propertyObj = {
+                    if: {
+                        properties: {
+                            [requiredProperties[requiredIndex]]: {
+                                const: animalEnum[i - 1],
+                            },
+                        },
+                    },
+                    then: {
+                        properties: {
+                            [propertyName]: {
+                                type: "string",
+                                enum: actions.filter(Boolean),
+                            },
+                        },
+                        required: [propertyName],
+                    },
+                };
+
+                jsonStructure.allOf.push(propertyObj);
+            }
+            const required = {
+                required: [requiredProperties[requiredIndex]],
+            };
+            jsonStructure.allOf.push(required);
+
+            console.log(jsonStructure);
+        };
+
+        reader.readAsText(file);
+    };
+
+    const x = {};
+    useEffect(() => {
+        console.log(csvData);
+        csvFileData();
+        csvData.map((head) => {
+            console.log(head);
+            if (head && head.Validations) {
+                console.log(head.Validations);
+                if (head.Validations.includes("IS GREATER TO")) {
+                    console.log("hello");
+                    let abc = head.Validations;
+                    x = getDesiredValue(abc);
+                    console.log(x);
+                    console.log(abc);
+                }
+            }
+        });
+    }, [csvData]);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];

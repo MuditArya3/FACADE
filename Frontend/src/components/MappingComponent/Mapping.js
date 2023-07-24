@@ -484,8 +484,6 @@ export const handleData = (
     });
   });
 
- 
-
   let x = `fetch(${inputValue + url}, {
         method: 'POST',
         headers: {
