@@ -26,6 +26,10 @@ import {
     handleData,
     getDesiredAnnotation,
     handleForm,
+    domainUrl,
+    jsonSchema,
+    service,
+    fileName,
 } from "./Mapping";
 import { useState } from "react";
 import "../JsonTemplateComponent/JsonTemplate.css";
@@ -35,6 +39,7 @@ import { red } from "@mui/material/colors";
 import FormComponent from "../FormComponent/FormComponent.jsx";
 import { useRef } from "react";
 import GridComponent from "../GridComponent/GridComponent.jsx";
+import { PostJson } from "../../Services/EndpointServices/SaveJson";
 
 const Mapping = ({ jsonData, setJsonData }) => {
     const [mappings, setMappings] = useState({});
@@ -60,6 +65,14 @@ const Mapping = ({ jsonData, setJsonData }) => {
     const [actionMethods, setactionMethods] = useState([]);
     const [showform, setshowform] = useState(false);
     const [showGridComponent, setShowGridComponent] = useState(false);
+    const [postData, setPostData] = useState({
+        ServiceAPIName: fileName,
+        DomainURL: domainUrl,
+        ServiceName: service,
+        Description: "",
+        ServiceJSON: jsonSchema,
+        AudienceType: 0,
+    });
     const formRef = useRef(null);
     //   let actionMethods=[];
     console.log(options);
@@ -348,6 +361,58 @@ const Mapping = ({ jsonData, setJsonData }) => {
             });
         }
     }, [showform]);
+
+    const postjsonData = async () => {
+        try {
+            // Destructure the data array
+            const [
+                ServiceAPIName,
+                DomainURL,
+                ServiceName,
+                Description,
+                ServiceJSON,
+            ] = postData;
+
+            // Set AudienceType to 0
+            const AudienceType = 0;
+
+            // Prepare the request body
+            const requestBody = {
+                ServiceAPIName,
+                DomainURL,
+                ServiceName,
+                Description,
+                ServiceJSON,
+                AudienceType,
+            };
+            const headers = {
+                "Content-Type": "application/json",
+            };
+            const response = await fetch("YOUR_API_ENDPOINT", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    // Add any additional headers if required
+                },
+                body: JSON.stringify(requestBody),
+            });
+
+            // Check if the request was successful
+            if (!response.ok) {
+                throw new Error("Failed to make the API request.");
+            }
+
+            // Parse the response data (if any)
+            const responseData = await response.json();
+            return responseData;
+        } catch (error) {
+            console.error(
+                "Error occurred while making the API request:",
+                error.message
+            );
+            throw error;
+        }
+    };
 
     return (
         <div className="outerdiv">
@@ -720,6 +785,19 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                                 disabled={!Actions}
                                             >
                                                 Download JSON
+                                            </Button>
+                                            <Button
+                                                variant={"contained"}
+                                                onClick={() => {
+                                                    setButtonClicked(
+                                                        "GenerateForm"
+                                                    );
+                                                }}
+                                                sx={{ mt: 1 }}
+                                                type="submit"
+                                                disabled={!Actions}
+                                            >
+                                                Submit
                                             </Button>
 
                                             <Button

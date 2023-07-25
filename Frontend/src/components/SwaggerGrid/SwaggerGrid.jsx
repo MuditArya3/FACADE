@@ -66,13 +66,12 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
 
     const handleGenerateClick = () => {
         if (selectedService && selectedValue && inputValue) {
-            handleData(inputValue, columns);
+            handleData(inputValue, columns, selectedService);
             setErrorMessage("");
         } else {
             setErrorMessage("Please fill in all required fields");
         }
     };
-    console.log(columns);
 
     const selectedEndpoint = selectedValue.split("--")[0];
     const selectedEndpointType = selectedValue.split("--")[1];
@@ -96,8 +95,14 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                 setServices(fetchedServices);
                 setUpdatedServices(fetchedServices);
             });
+            uploadedFiles.map((file) => {
+                setSelectedFileName(file.name);
+            });
+            localStorage.setItem("filename", selectedFileName);
         }
-    }, [swaggerData]);
+    }, [swaggerData, uploadedFiles]);
+
+    console.log(selectedFileName);
 
     useEffect(() => {
         if (selectedValue) {
@@ -141,8 +146,6 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const handleCorrectEndpoints = (event) => {
         setCorrectEndpoints(event.target.checked);
     };
-    console.log(endpoints);
-    console.log(swaggerData);
 
     const filteredEndpoints = correctEndpoints
         ? endpoints.filter((endpoint) => {
@@ -304,7 +307,10 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                     setUpdatedEndpoints,
                                                     setUploadedFiles,
                                                     setShowMessage,
-                                                    setShowInvalidFileType
+                                                    setShowInvalidFileType,
+                                                    setSelectedFileName,
+                                                    selectedFileName,
+                                                    uploadedFiles
                                                 )
                                             }
                                         />
@@ -642,7 +648,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                     <Button
                                         key={index}
                                         variant="outlined"
-                                        onClick={(e) =>
+                                        onClick={(e) => {
                                             handleUploadedFileClick(
                                                 file.name,
                                                 uploadedFiles,
@@ -654,8 +660,8 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 setSelectedValue,
                                                 setSwaggerData,
                                                 setSelectedFileName
-                                            )
-                                        }
+                                            );
+                                        }}
                                         sx={{
                                             my: 1,
                                             backgroundColor:
@@ -665,6 +671,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                         }}
                                     >
                                         {file.name}
+                                        {/* {setSelectedFileName(file.name)} */}
                                     </Button>
                                 ))}
                             </Box>
