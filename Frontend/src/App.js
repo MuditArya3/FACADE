@@ -8,6 +8,7 @@ import { useState } from "react";
 import SwaggerGrid from "./components/SwaggerGrid/SwaggerGrid.jsx";
 import Mapping from "./components/MappingComponent/Mapping.jsx";
 import AddAnnotations from "./components/AddAnnotation/AddAnnotations.jsx";
+import RenderUIComponent from "./components/RenderComponent/RenderUIComponent.jsx";
 
 
 
@@ -38,6 +39,7 @@ function App() {
             element={<Mapping jsonData={jsonData} setJsonData={setJsonData} />}
           />
           <Route path="/json" element={<AddAnnotations/>}/>
+          <Route path="/renderui" element={<RenderUIComponent />} />
         </Routes>
       </Router>
     </div>

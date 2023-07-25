@@ -408,6 +408,34 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                 </Box>
                                 {!showMessage && endpoints.length > 0 && (
                                     <>
+                                     {/* <InputLabel
+                                            id="table-select-label"
+                                            sx={{
+                                                fontSize: "1.5rem",
+                                                marginLeft: "7px",
+                                            }}
+                                        >
+                                            Domain URL
+                                        </InputLabel> */}
+                                        <FormControl
+                                            required
+                                            sx={{
+                                                pointerEvents: "auto",
+                                                width: "80%",
+                                                mb:"2rem"
+                                            }}
+                                        >
+                                            <TextField
+                                                sx={{
+                                                    fontSize: "1.5rem",
+                                                }}
+                                                label={"Domain URL"}
+                                                required
+                                                variant="outlined"
+                                                value={inputValue}
+                                                onChange={handleUrlChange}
+                                            />
+                                        </FormControl>
                                         <FormControl
                                             required
                                             sx={{
@@ -519,33 +547,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 )}
                                             </Select>
                                         </FormControl>
-                                        <InputLabel
-                                            id="table-select-label"
-                                            sx={{
-                                                fontSize: "1.5rem",
-                                                marginLeft: "7px",
-                                            }}
-                                        >
-                                            Domain URL
-                                        </InputLabel>
-                                        <FormControl
-                                            required
-                                            sx={{
-                                                pointerEvents: "auto",
-                                                width: "80%",
-                                            }}
-                                        >
-                                            <TextField
-                                                sx={{
-                                                    fontSize: "1.5rem",
-                                                }}
-                                                label={"Domain URL"}
-                                                required
-                                                variant="outlined"
-                                                value={inputValue}
-                                                onChange={handleUrlChange}
-                                            />
-                                        </FormControl>
+                                       
                                         <FormControl
                                             sx={{
                                                 pointerEvents: "auto",

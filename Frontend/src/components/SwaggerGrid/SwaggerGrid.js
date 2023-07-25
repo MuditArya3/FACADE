@@ -26,7 +26,6 @@ export const handleFileSelectChange = (e, setSwaggerData) => {
     reader.readAsText(file);
 };
 
-
 export const handleData = (inputValue,columns, selectedService) => {
     localStorage.setItem("inputValue", inputValue);
     localStorage.setItem("ColumnData",JSON.stringify(columns));

@@ -29,3 +29,14 @@ export const handleSubmit = (e,showformbutton,selecteddata,setAPIData,setshowfor
             });
     }
 };
+
+
+export const getDesiredValue = (apidatas) => {
+    console.log(apidatas);
+    let valueArray = apidatas.split('“');
+    valueArray=valueArray[1].split('”');
+    console.log(valueArray);
+    const desiredValue = valueArray[0];
+    console.log("desired----", desiredValue);
+    return desiredValue;
+  };

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { domainUrl } from "../MappingComponent/Mapping";
-
+import React from 'react';
 export const getGridData = (setAPIData, setNewApiState) => {
+  // console.log(dom);
   axios
     .get(domainUrl)
     .then((res) => {
@@ -115,12 +116,26 @@ const handlecreatefile = (data, setJsonData) => {
   localStorage.setItem("jsonSchema", json);
 };
 
-export const getDesiredValue = (apidatas) => {
-  console.log(apidatas);
-  let valueArray = apidatas.split('“');
-  valueArray=valueArray[1].split('”');
-  console.log(valueArray);
-  const desiredValue = valueArray[0];
-  console.log("desired----", desiredValue);
-  return desiredValue;
-};
+export const handleRowData=(mappings,getAPIData,key)=>{
+  {Object.keys(mappings).map((m) => {
+    const mappingKey = mappings[m][0];
+    const mapp = mappingKey.toLowerCase();
+    console.log(mappingKey);
+    console.log(getAPIData[key]);
+    return Object.keys(getAPIData[key]).map((m)=>{
+      console.log(m);
+      const getdata=m.toLowerCase();
+      if(getdata===mapp){
+        return (
+          <div
+            className="apiGridItems"
+            title={getAPIData[key][mappingKey]}
+            key={mappingKey}
+          >
+            {getAPIData[key][mappingKey]}
+          </div>
+        );
+      }
+    })
+
+})}}
