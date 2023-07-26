@@ -424,7 +424,8 @@ export const handleApiSelected = (tableName, setSelectedTable) => {
 const inputValue = localStorage.getItem("inputValue")
 
 export const domainUrl = inputValue + url
-
+export const file = localStorage.getItem("filename")
+export const desc = localStorage.getItem("desc")
 export const handleData = (
   e,
   mappings,
@@ -548,6 +549,10 @@ const handleSave = (
     setButtonClicked
   );
 };
+
+export const jsonSchema =  localStorage.getItem("jsonSchema");
+export const service =  localStorage.getItem("service");
+
 
 const handleCreateFile = (
   data,

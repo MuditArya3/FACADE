@@ -26,6 +26,12 @@ import {
     handleData,
     getDesiredAnnotation,
     handleForm,
+    domainUrl,
+    jsonSchema,
+    service,
+    fileName,
+    desc,
+    file,
 } from "./Mapping";
 import { useState } from "react";
 import "../JsonTemplateComponent/JsonTemplate.css";
@@ -35,6 +41,7 @@ import { red } from "@mui/material/colors";
 import FormComponent from "../FormComponent/FormComponent.jsx";
 import { useRef } from "react";
 import GridComponent from "../GridComponent/GridComponent.jsx";
+import { PostJson } from "../../Services/EndpointServices/SaveJson";
 
 const Mapping = ({ jsonData, setJsonData }) => {
     const [mappings, setMappings] = useState({});
@@ -60,6 +67,16 @@ const Mapping = ({ jsonData, setJsonData }) => {
     const [actionMethods, setactionMethods] = useState([]);
     const [showform, setshowform] = useState(false);
     const [showGridComponent, setShowGridComponent] = useState(false);
+    const [postData, setPostData] = useState({
+        ServiceAPIName: file,
+        SwaggerFilePath: "",
+        DomainURL: domainUrl,
+        ServiceName: service,
+        Description: desc,
+        ServiceJSON: jsonSchema,
+        AudienceType: 0,
+    });
+    console.log(file);
     const formRef = useRef(null);
     //   let actionMethods=[];
     console.log(options);
@@ -348,6 +365,18 @@ const Mapping = ({ jsonData, setJsonData }) => {
             });
         }
     }, [showform]);
+
+    const postjsonData = async (data) => {
+        try {
+            const response = await PostJson(data);
+        } catch (error) {
+            console.error(
+                "Error occurred while making the API request:",
+                error.message
+            );
+            throw error;
+        }
+    };
 
     return (
         <div className="outerdiv">
@@ -720,6 +749,17 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                                 disabled={!Actions}
                                             >
                                                 Download JSON
+                                            </Button>
+                                            <Button
+                                                variant={"contained"}
+                                                onClick={() => {
+                                                    postjsonData(postData);
+                                                }}
+                                                sx={{ mt: 1 }}
+                                                type="submit"
+                                                disabled={!Actions}
+                                            >
+                                                Submit
                                             </Button>
 
                                             <Button

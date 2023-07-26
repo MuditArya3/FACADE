@@ -5,7 +5,6 @@ export const getGridData = (setAPIData, setNewApiState) => {
   // console.log(dom);
   axios
     .get(domainUrl)
-
     .then((res) => {
       if (res && res.data) {
         // props = res.data;
