@@ -126,8 +126,8 @@ const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
                 if (head.Validations.includes("IS GREATER TO")) {
                     console.log("hello");
                     let abc = head.Validations;
-                    x = getDesiredValue(abc);
-                    console.log(x);
+                    //x = getDesiredValue(abc);
+                    //console.log(x);
                     console.log(abc);
                 }
             }

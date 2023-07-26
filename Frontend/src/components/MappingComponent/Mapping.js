@@ -424,7 +424,8 @@ export const handleApiSelected = (tableName, setSelectedTable) => {
 const inputValue = localStorage.getItem("inputValue")
 
 export const domainUrl = inputValue + url
-export const fileName = localStorage.getItem("filename")
+export const file = localStorage.getItem("filename")
+export const desc = localStorage.getItem("desc")
 export const handleData = (
   e,
   mappings,

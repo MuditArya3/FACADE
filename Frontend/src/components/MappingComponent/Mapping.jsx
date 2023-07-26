@@ -30,6 +30,8 @@ import {
     jsonSchema,
     service,
     fileName,
+    desc,
+    file,
 } from "./Mapping";
 import { useState } from "react";
 import "../JsonTemplateComponent/JsonTemplate.css";
@@ -66,13 +68,15 @@ const Mapping = ({ jsonData, setJsonData }) => {
     const [showform, setshowform] = useState(false);
     const [showGridComponent, setShowGridComponent] = useState(false);
     const [postData, setPostData] = useState({
-        ServiceAPIName: fileName,
+        ServiceAPIName: file,
+        SwaggerFilePath: "",
         DomainURL: domainUrl,
         ServiceName: service,
-        Description: "",
+        Description: desc,
         ServiceJSON: jsonSchema,
         AudienceType: 0,
     });
+    console.log(file);
     const formRef = useRef(null);
     //   let actionMethods=[];
     console.log(options);
@@ -362,49 +366,9 @@ const Mapping = ({ jsonData, setJsonData }) => {
         }
     }, [showform]);
 
-    const postjsonData = async () => {
+    const postjsonData = async (data) => {
         try {
-            // Destructure the data array
-            const [
-                ServiceAPIName,
-                DomainURL,
-                ServiceName,
-                Description,
-                ServiceJSON,
-            ] = postData;
-
-            // Set AudienceType to 0
-            const AudienceType = 0;
-
-            // Prepare the request body
-            const requestBody = {
-                ServiceAPIName,
-                DomainURL,
-                ServiceName,
-                Description,
-                ServiceJSON,
-                AudienceType,
-            };
-            const headers = {
-                "Content-Type": "application/json",
-            };
-            const response = await fetch("YOUR_API_ENDPOINT", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    // Add any additional headers if required
-                },
-                body: JSON.stringify(requestBody),
-            });
-
-            // Check if the request was successful
-            if (!response.ok) {
-                throw new Error("Failed to make the API request.");
-            }
-
-            // Parse the response data (if any)
-            const responseData = await response.json();
-            return responseData;
+            const response = await PostJson(data);
         } catch (error) {
             console.error(
                 "Error occurred while making the API request:",
@@ -789,9 +753,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                             <Button
                                                 variant={"contained"}
                                                 onClick={() => {
-                                                    setButtonClicked(
-                                                        "GenerateForm"
-                                                    );
+                                                    postjsonData(postData);
                                                 }}
                                                 sx={{ mt: 1 }}
                                                 type="submit"
