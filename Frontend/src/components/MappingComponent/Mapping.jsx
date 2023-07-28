@@ -811,7 +811,17 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                 Hidden={false}
                             >
                                 <AccordionDetails sx={{ pt: 3 }}>
-                                    {showform && <FormComponent />}
+                                    {showform && (
+                                        <FormComponent
+                                            mappings={mappings}
+                                            setMappings={setMappings}
+                                            buttonClicked={buttonClicked}
+                                            setJsonData={setJsonData}
+                                            setJsonfile={setJsonfile}
+                                            setButtonClicked={setButtonClicked}
+                                            columns={columns}
+                                        />
+                                    )}
                                 </AccordionDetails>
                             </Accordion>
                         )}
