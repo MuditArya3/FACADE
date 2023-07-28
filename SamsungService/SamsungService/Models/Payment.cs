@@ -17,4 +17,5 @@ public partial class Payment
 
     public int? TransactionId { get; set; }
 
+    public virtual Invoice? Invoice { get; set; }
 }

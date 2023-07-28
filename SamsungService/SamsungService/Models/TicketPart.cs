@@ -11,4 +11,7 @@ public partial class TicketPart
 
     public int? QuantityUsed { get; set; }
 
+    public virtual Part? Part { get; set; }
+
+    public virtual ServiceTicket? Ticket { get; set; }
 }

@@ -15,4 +15,5 @@ public partial class Product
 
     public int? Price { get; set; }
 
+    public virtual ICollection<ServiceRequest> ServiceRequests { get; set; } = new List<ServiceRequest>();
 }

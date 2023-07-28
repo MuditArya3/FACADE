@@ -15,4 +15,5 @@ public partial class Technician
 
     public string? Specialization { get; set; }
 
+    public virtual ICollection<ServiceTicket> ServiceTickets { get; set; } = new List<ServiceTicket>();
 }
