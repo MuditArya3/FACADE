@@ -9,7 +9,7 @@ import SwaggerGrid from "./components/SwaggerGrid/SwaggerGrid.jsx";
 import Mapping from "./components/MappingComponent/Mapping.jsx";
 import AddAnnotations from "./components/AddAnnotation/AddAnnotations.jsx";
 import RenderUIComponent from "./components/RenderComponent/RenderUIComponent.jsx";
-import CsvToJsonConverter from "./components/CsvtoJsonConverter.jsx";
+import NewFormComponent from "./components/NewFormComponent/NewFormComponent.jsx";
 
 
 
@@ -41,7 +41,7 @@ function App() {
           />
           <Route path="/json" element={<AddAnnotations/>}/>
           <Route path="/renderui" element={<RenderUIComponent />} />
-          <Route path="/csv" element={<CsvToJsonConverter/>}/>
+          <Route path="/newform" element={<NewFormComponent />} />
         </Routes>
       </Router>
     </div>

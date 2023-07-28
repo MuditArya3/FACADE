@@ -1,0 +1,25 @@
+.inputbox{
+    padding-left: 2rem;
+    padding-top:2rem ;
+}
+.fullpage{
+    background-color: rgb(214, 213, 208);
+    background-size: cover;
+    height: 100vh;
+    overflow: auto;
+}
+
+.json-display{
+    padding: 2rem;
+}
+
+.editdata{
+    height: 20rem;
+    max-width: 110rem;
+    min-width: 110rem;
+    min-height: 40rem;
+}
+.heading{
+    padding: 2rem 0px  0px  2rem;
+    color: crimson;
+}
