@@ -10,7 +10,6 @@ import Mapping from "./components/MappingComponent/Mapping.jsx";
 import AddAnnotations from "./components/AddAnnotation/AddAnnotations.jsx";
 import RenderUIComponent from "./components/RenderComponent/RenderUIComponent.jsx";
 import NewFormComponent from "./components/NewFormComponent/NewFormComponent.jsx";
-import CsvToJsonConverter from "./components/CsvtoJsonConverter.jsx";
 
 
 
@@ -43,7 +42,6 @@ function App() {
           <Route path="/json" element={<AddAnnotations/>}/>
           <Route path="/renderui" element={<RenderUIComponent />} />
           <Route path="/newform" element={<NewFormComponent />} />
-          <Route path="/csv" element={<CsvToJsonConverter/>}/>
         </Routes>
       </Router>
     </div>
