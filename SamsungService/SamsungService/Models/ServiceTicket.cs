@@ -16,8 +16,4 @@ public partial class ServiceTicket
     public string? TicketNotes { get; set; }
 
     public string? Status { get; set; }
-
-    public virtual ServiceRequest? Request { get; set; }
-
-    public virtual Technician? Technician { get; set; }
 }

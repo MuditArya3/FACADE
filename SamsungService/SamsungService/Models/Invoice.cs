@@ -17,7 +17,5 @@ public partial class Invoice
 
     public string? Status { get; set; }
 
-    public virtual Customer? Customer { get; set; }
 
-    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 }

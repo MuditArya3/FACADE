@@ -17,9 +17,4 @@ public partial class ServiceRequest
 
     public string? Status { get; set; }
 
-    public virtual Customer? Customer { get; set; }
-
-    public virtual Product? Product { get; set; }
-
-    public virtual ICollection<ServiceTicket> ServiceTickets { get; set; } = new List<ServiceTicket>();
 }
