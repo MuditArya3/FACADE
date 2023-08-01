@@ -15,7 +15,6 @@ import NewFormComponent from "./components/NewFormComponent/NewFormComponent.jsx
 
 function App() {
   const [jsonData, setJsonData] = useState();
-  console.log(jsonData);
   return (
     <div className="App">
       <Router>

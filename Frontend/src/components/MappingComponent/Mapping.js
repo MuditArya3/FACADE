@@ -46,14 +46,11 @@ export const getDesiredValue = (apidatas) => {
   return desiredValue;
 };
 export const getDesiredAnnotation = (apidatas) => {
-    console.log(apidatas);
     const valueArray = apidatas.split("--");
     const desiredValue = valueArray[valueArray.length - 1];
     console.log("desired----", desiredValue);
     const Arr=desiredValue.split('"');
-    console.log(Arr);
     const value=Arr[0]
-    console.log(value);
     // desiredValue=desiredValue.split('"');
     // console.log(desiredValue);
     return value;
@@ -61,7 +58,6 @@ export const getDesiredAnnotation = (apidatas) => {
 
   const getDesiredUrl = (apidatas) =>{
     const url = apidatas.split("--")[0]
-    console.log(url);
     const apiurl = url.split('"')[1]
     return apiurl
   }
@@ -436,20 +432,14 @@ export const handleData = (
   columns
 ) => {
   localStorage.setItem("ColumnData", JSON.stringify(columns));
-  console.log(columns);
   let requiredFields;
-  console.log(mappings);
   let uu = {};
   let layout={}
   Object.keys(mappings).map((col) => {
-    console.log(mappings[col][0]);
     columns.forEach((rcol) => {
-      console.log(columns);
-      console.log(rcol.Name);
       if (mappings[col][0] === rcol.Name) {
         if(rcol.IsRequired===true){
             requiredFields=rcol.Name;
-            console.log("hi");
             layout = {
                 key: rcol.Name,
                 title: rcol.Name,
@@ -464,7 +454,6 @@ export const handleData = (
         }
 
         else{
-            console.log("hello");
             layout = {
               key: rcol.Name,
               title: rcol.Name,
@@ -478,10 +467,8 @@ export const handleData = (
                 :rcol.Type.toLowerCase(),
             };
         }
-        console.log(layout);
         uu[rcol.Name] = { ...layout };
       }
-      console.log(uu);
     });
   });
 
@@ -531,9 +518,7 @@ const handleSave = (
   setJsonfile,
   setButtonClicked
 ) => {
-  console.log(data);
   let json = Object.assign({}, data);
-  console.log(json);
   handleCreateFile(
     {
       label: "search",
@@ -561,9 +546,7 @@ const handleCreateFile = (
   setJsonfile,
   setButtonClicked
 ) => {
-  console.log(data);
   const json = JSON.stringify(data);
-  console.log(buttonClicked);
   if (buttonClicked === "SaveMapping") {
     setJsonfile(JSON.stringify(data));
     setJsonData(JSON.stringify(data));
@@ -587,11 +570,9 @@ const handleCreateFile = (
 };
 
 export const handleForm=(e,buttonClicked,setshowform,showform,setButtonClicked,formRef)=>{
-    console.log(buttonClicked);
     if(buttonClicked==="SaveMapping"){
         setshowform(true)
         formRef.current.scrollIntoView({ behavior: "smooth" });
         setButtonClicked();
     }
-    console.log(showform);
 }

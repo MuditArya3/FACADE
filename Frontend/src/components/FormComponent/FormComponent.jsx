@@ -21,7 +21,7 @@ const FormComponent = ({
     const [fileUploaded, setFileUploaded] = useState(false);
     const [schema, setSchema] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
-    const shouldRunEffectRef = useRef(false);
+
     let schema1 = JSON.parse(localStorage.getItem("jsonSchema"));
     const uiSchema = require("../../jsonFiles/uiSchema.json");
     uiSchema["ui:options"]["submitButtonOptions"]["submitText"] =
@@ -34,6 +34,35 @@ const FormComponent = ({
             complete: (results) => {
                 setcsvData(results.data);
                 setFileUploaded(true);
+                results.data.forEach((item) => {
+                    const property = item.Properties;
+                    const action = item.Action;
+                    const field = item.Field;
+                    const value = Object.values(mappings);
+
+                    if (
+                        value.some((valArr) => valArr.includes(field)) &&
+                        value.some((valArr) => valArr.includes(property))
+                    ) {
+                        if (action === "SHOW") {
+                            const fieldValue = formData[property];
+                            console.log(fieldValue);
+                            if (!fieldValue && field) {
+                                console.log("file");
+                                setSchema((prevSchema) => {
+                                    const newSchema = { ...prevSchema };
+                                    delete newSchema.properties[field];
+                                    return newSchema;
+                                });
+                                setFormData((prevFormData) => {
+                                    const newFormData = { ...prevFormData };
+                                    delete newFormData[field];
+                                    return newFormData;
+                                });
+                            }
+                        }
+                    }
+                });
             },
         });
     };
@@ -71,116 +100,110 @@ const FormComponent = ({
         setSchema(schema1);
     }, []);
 
-    useEffect(() => {
+    console.log(formData);
+    console.log(mappings);
+    console.log(schema);
+
+    const handleFormChange = (e) => {
+        setFormData((prevData) => ({ ...prevData, ...e.formData }));
+
         if (csvData.length > 0) {
             csvData.forEach((item) => {
                 const property = item.Properties;
                 const action = item.Action;
                 const field = item.Field;
+                const value = Object.values(mappings);
 
-                if (mappings.hasOwnProperty("phoneNumber2")) {
-                    const fieldValue = formData[property];
-                    if (fieldValue && field) {
-                        if (action === "SHOW") {
-                            const newSchema = {
-                                ...schema,
-                                properties: {
-                                    ...schema.properties,
-                                    [field]: {
-                                        key: field,
-                                        title: field,
-                                        type: "string",
+                if (
+                    value.some((valArr) => valArr.includes(field)) &&
+                    value.some((valArr) => valArr.includes(property))
+                ) {
+                    const fieldValue = e.formData[property];
+                    if (action === "SHOW") {
+                        if (fieldValue && field) {
+                            console.log("show");
+                            setSchema((prevSchema) => {
+                                const newSchema = {
+                                    ...prevSchema,
+                                    properties: {
+                                        ...prevSchema.properties,
+                                        [field]: {
+                                            key: field,
+                                            title: field,
+                                            type: "string",
+                                        },
                                     },
-                                },
-                            };
-                            setSchema(newSchema);
-                            setMappings((prevdata) => ({
-                                ...prevdata,
-                                address3: [field],
-                            }));
-
-                            setFormData((prevFormData) => ({
-                                ...prevFormData,
-                                [field]: "",
-                            }));
-                        }
-                    }
-                } else if (mappings.hasOwnProperty("address3")) {
-                    const fieldValue = formData[property];
-                    console.log(formData[property]);
-                    if (fieldValue && field) {
-                        if (action === "HIDE") {
-                            setMappings((prevMappings) => {
-                                const newMappings = { ...prevMappings };
-                                delete newMappings[property];
-                                return newMappings;
+                                };
+                                return newSchema;
                             });
-
+                            // setMappings((prevdata) => ({
+                            //     ...prevdata,
+                            //     [field]: [field],
+                            // }));
+                            // setFormData((prevFormData) => ({
+                            //     ...prevFormData,
+                            //     [field]: "",
+                            // }));
+                        } else if (fieldValue === undefined && field) {
+                            console.log("hide");
                             setSchema((prevSchema) => {
                                 const newSchema = { ...prevSchema };
                                 delete newSchema.properties[field];
                                 return newSchema;
                             });
-
+                            // setMappings((prevMappings) => {
+                            //     const newMappings = { ...prevMappings };
+                            //     delete newMappings[property];
+                            //     return newMappings;
+                            // });
                             setFormData((prevFormData) => {
                                 const newFormData = { ...prevFormData };
                                 delete newFormData[field];
                                 return newFormData;
                             });
                         }
+                    } else if (action === "HIDE") {
+                        if (fieldValue && field) {
+                            console.log("hide  hide");
+                            setMappings((prevMappings) => {
+                                const newMappings = { ...prevMappings };
+                                delete newMappings[property];
+                                return newMappings;
+                            });
+                            setSchema((prevSchema) => {
+                                const newSchema = { ...prevSchema };
+                                delete newSchema.properties[field];
+                                return newSchema;
+                            });
+                            setFormData((prevFormData) => {
+                                const newFormData = { ...prevFormData };
+                                delete newFormData[field];
+                                return newFormData;
+                            });
+                        } else if (fieldValue === undefined && field) {
+                            setMappings((prevdata) => ({
+                                ...prevdata,
+                                [field]: [field],
+                            }));
+                            setSchema((prevSchema) => {
+                                const newSchema = {
+                                    ...prevSchema,
+                                    properties: {
+                                        ...prevSchema.properties,
+                                        [field]: {
+                                            key: field,
+                                            title: field,
+                                            type: "string",
+                                        },
+                                    },
+                                };
+                                return newSchema;
+                            });
+                        }
                     }
                 }
             });
         }
-    }, [csvData, formData, mappings]);
-
-    useEffect(() => {
-        shouldRunEffectRef.current = true;
-    }, [formData]);
-
-    // useEffect(() => {
-    //     if (csvData.length > 0) {
-    //         const showAddressAction = csvData.find(
-    //             (item) =>
-    //                 item.Action === "SHOW" &&
-    //                 item.Properties === "phoneNumber" &&
-    //                 item.Field === "address"
-    //         );
-
-    //         if (showAddressAction) {
-    //             if (showAddressAction.Properties === mappings.phoneNumber2[0]) {
-    //                 const addressProperty =
-    //                     showAddressAction.Action.split(" ")[1].toLowerCase();
-    //                 const newSchema1 = {
-    //                     ...schema1,
-    //                     properties: {
-    //                         ...schema1.properties,
-    //                         [addressProperty]: {
-    //                             key: addressProperty,
-    //                             title: "Address",
-    //                             type: "string",
-    //                         },
-    //                     },
-    //                 };
-    //                 setFormData((prevFormData) => ({
-    //                     ...prevFormData,
-    //                     [addressProperty]: "",
-    //                 }));
-    //                 setMappings((prevdata) => ({
-    //                     ...prevdata,
-    //                     address3: [addressProperty],
-    //                 }));
-    //                 setSchema(newSchema1);
-    //             }
-    //         }
-    //     }
-    // }, [csvData]);
-
-    console.log(schema);
-    console.log(formData);
-
-    const handleFormChange = (e) => {
-        setFormData((prevData) => ({ ...prevData, ...e.formData }));
     };
 
     return (

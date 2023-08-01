@@ -1,15 +1,13 @@
 import Form from "@rjsf/core";
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import "../GridComponent/GridComponent.css";
-import { Edit, FolderZip } from "@mui/icons-material";
+import { Edit } from "@mui/icons-material";
 import FormComponent from "../FormComponent/FormComponent.jsx";
 import { Container } from "@mui/system";
 import { Accordion, AccordionDetails } from "@mui/material";
 import { baseURL } from "../../AppSettings.js";
 import { getGridData, handleData } from "./GridComponent.js";
 import Papa from "papaparse";
-import csvParser from "csv-parser";
 
 const GridComponent = ({ lowercaseAnnotation, setJsonData, mappings }) => {
     const [csvData, setcsvData] = useState([]);

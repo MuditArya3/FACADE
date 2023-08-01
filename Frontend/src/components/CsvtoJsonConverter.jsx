@@ -53,32 +53,6 @@ const CsvToJsonConverter = () => {
                         );
                     }
                 });
-                //let properties = {};
-
-                // Object.entries(row).forEach(([key, value]) => {
-                //     if (key !== entityNameColumn && value) {
-                //         const trimmedValue = value.trim();
-
-                //         if (!properties[key]) {
-                //             properties[key] = { type: "string", enum: [] };
-                //         }
-
-                //         properties[key].enum.push(trimmedValue);
-                //     }
-                // });
-
-                // if (!entityProperties[entity]) {
-                //     entityProperties[entity] = { enum: [entity] };
-                // }
-
-                // if (!entityProperties[entity].properties) {
-                //     entityProperties[entity].properties = {};
-                // }
-
-                // entityProperties[entity].properties = {
-                //     ...entityProperties[entity].properties,
-                //     ...properties,
-                // };
             }
         });
 

@@ -7,45 +7,36 @@ import {
     Container,
     FormControl,
     FormControlLabel,
-    FormHelperText,
-    IconButton,
     Input,
     InputLabel,
     MenuItem,
     Select,
     TextField,
-    Tooltip,
     Typography,
-    makeStyles,
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import {
-    EndpointPostApi,
     ParameterGetApi,
     ParameterPostApi,
 } from "../../Services/EndpointServices/EndpointService";
 import {
     handleNameChange,
-    handleFileSelectChange,
     handleData,
     fetchData,
     fetchService,
     handleService,
-    handleUploadedFileClick,
     handleInputChange,
 } from "./SwaggerGrid";
 
 import "./SwaggerGrid.css";
 import c from "../../assets/3.jpg";
-import { useNavigate } from "react-router-dom";
-import { Add, Delete } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 
 const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [swaggerData, setSwaggerData] = useState();
     const [columns, setColumns] = useState([]);
-    const [jsonfile, setJsonfile] = useState([]);
     const [endpoints, setEndpoints] = useState([]);
     const [selectedValue, setSelectedValue] = useState("");
     const [showMessage, setShowMessage] = useState(false);
