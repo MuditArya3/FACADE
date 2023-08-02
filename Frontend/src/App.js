@@ -10,6 +10,7 @@ import Mapping from "./components/MappingComponent/Mapping.jsx";
 import AddAnnotations from "./components/AddAnnotation/AddAnnotations.jsx";
 import RenderUIComponent from "./components/RenderComponent/RenderUIComponent.jsx";
 import NewFormComponent from "./components/NewFormComponent/NewFormComponent.jsx";
+import FormIO from "./components/FormIOComponent/FormIO.jsx";
 
 
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/json" element={<AddAnnotations/>}/>
           <Route path="/renderui" element={<RenderUIComponent />} />
           <Route path="/newform" element={<NewFormComponent />} />
+          <Route path="/formio" element={<FormIO />} />
         </Routes>
       </Router>
     </div>
