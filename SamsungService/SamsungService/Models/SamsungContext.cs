@@ -27,6 +27,8 @@ public partial class SamsungContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<Server> Servers { get; set; }
+
     public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
 
     public virtual DbSet<ServiceTicket> ServiceTickets { get; set; }
@@ -34,6 +36,8 @@ public partial class SamsungContext : DbContext
     public virtual DbSet<Technician> Technicians { get; set; }
 
     public virtual DbSet<TicketPart> TicketParts { get; set; }
+
+    public virtual DbSet<UserInfo> UserInfos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -53,45 +57,18 @@ public partial class SamsungContext : DbContext
         {
             entity.HasNoKey();
 
-            entity.Property(e => e.Alive).HasColumnName("alive");
-            entity.Property(e => e.Amt).HasColumnName("amt");
-            entity.Property(e => e.Antivirus).HasColumnName("antivirus");
-            entity.Property(e => e.DiskSpace).HasColumnName("diskSpace");
-            entity.Property(e => e.LastLogin)
-                .HasMaxLength(50)
-                .HasColumnName("lastLogin");
-            entity.Property(e => e.LoggedInUser)
-                .HasMaxLength(50)
-                .HasColumnName("loggedInUser");
-            entity.Property(e => e.MemberCode)
-                .HasMaxLength(50)
-                .HasColumnName("memberCode");
-            entity.Property(e => e.MemberName)
-                .HasMaxLength(50)
-                .HasColumnName("memberName");
-            entity.Property(e => e.Os)
-                .HasMaxLength(50)
-                .HasColumnName("os");
-            entity.Property(e => e.OsVerSion)
-                .HasMaxLength(50)
-                .HasColumnName("osVerSion");
-            entity.Property(e => e.Regtype)
-                .HasMaxLength(50)
-                .HasColumnName("regtype");
-            entity.Property(e => e.ResFriendlyName)
-                .HasMaxLength(50)
-                .HasColumnName("resFriendlyName");
-            entity.Property(e => e.ResourceName)
-                .HasMaxLength(50)
-                .HasColumnName("resourceName");
-            entity.Property(e => e.SecurityUpdates)
-                .HasMaxLength(50)
-                .HasColumnName("securityUpdates");
-            entity.Property(e => e.SiteId).HasColumnName("siteId");
-            entity.Property(e => e.Sitecode)
-                .HasMaxLength(50)
-                .HasColumnName("sitecode");
-            entity.Property(e => e.SmartDisk).HasColumnName("smartDisk");
+            entity.Property(e => e.LastLogin).HasMaxLength(50);
+            entity.Property(e => e.LoggedInUser).HasMaxLength(50);
+            entity.Property(e => e.MemberCode).HasMaxLength(50);
+            entity.Property(e => e.MemberName).HasMaxLength(50);
+            entity.Property(e => e.Os).HasMaxLength(50);
+            entity.Property(e => e.OsVerSion).HasMaxLength(50);
+            entity.Property(e => e.Regtype).HasMaxLength(50);
+            entity.Property(e => e.ResFriendlyName).HasMaxLength(50);
+            entity.Property(e => e.ResourceName).HasMaxLength(50);
+            entity.Property(e => e.SecurityUpdates).HasMaxLength(50);
+            entity.Property(e => e.SiteId).HasColumnName("SiteID");
+            entity.Property(e => e.Sitecode).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Invoice>(entity =>
@@ -130,6 +107,32 @@ public partial class SamsungContext : DbContext
             entity.Property(e => e.Category).HasMaxLength(50);
             entity.Property(e => e.Description).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Server>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.Property(e => e.AddedToLmifavourite).HasColumnName("AddedToLMIFavourite");
+            entity.Property(e => e.ApplicationMonitoring).HasMaxLength(50);
+            entity.Property(e => e.IsBdronly).HasColumnName("IsBDROnly");
+            entity.Property(e => e.IsSso).HasColumnName("IsSSO");
+            entity.Property(e => e.LastDownTime).HasMaxLength(50);
+            entity.Property(e => e.LowDiskSpace).HasMaxLength(50);
+            entity.Property(e => e.MemberCode).HasMaxLength(50);
+            entity.Property(e => e.MemberName).HasMaxLength(50);
+            entity.Property(e => e.Os).HasMaxLength(50);
+            entity.Property(e => e.OsVersion).HasMaxLength(50);
+            entity.Property(e => e.ResType).HasMaxLength(50);
+            entity.Property(e => e.ResourceFriendlyName).HasMaxLength(50);
+            entity.Property(e => e.ResourceName).HasMaxLength(50);
+            entity.Property(e => e.SecUpdatesNx).HasColumnName("SecUpdatesNX");
+            entity.Property(e => e.SecurityUpdates).HasMaxLength(50);
+            entity.Property(e => e.ServiceIdServer).HasMaxLength(50);
+            entity.Property(e => e.SiteCode).HasMaxLength(50);
+            entity.Property(e => e.SiteName).HasMaxLength(50);
+            entity.Property(e => e.SiteSubCode).HasMaxLength(50);
+            entity.Property(e => e.Ssomc).HasColumnName("SSOmc");
         });
 
         modelBuilder.Entity<ServiceRequest>(entity =>
@@ -188,6 +191,28 @@ public partial class SamsungContext : DbContext
             entity.HasOne(d => d.Ticket).WithMany()
                 .HasForeignKey(d => d.TicketId)
                 .HasConstraintName("FK_TicketParts_ServiceTickets");
+        });
+
+        modelBuilder.Entity<UserInfo>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("UserInfo");
+
+            entity.Property(e => e.EmailId)
+                .HasMaxLength(50)
+                .HasColumnName("EmailID");
+            entity.Property(e => e.Fname)
+                .HasMaxLength(50)
+                .HasColumnName("FName");
+            entity.Property(e => e.IsSso).HasColumnName("IsSSO");
+            entity.Property(e => e.Locked).HasMaxLength(50);
+            entity.Property(e => e.Mcountry)
+                .HasMaxLength(50)
+                .HasColumnName("MCountry");
+            entity.Property(e => e.MemberCode).HasMaxLength(50);
+            entity.Property(e => e.MemberName).HasMaxLength(50);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
         });
 
         OnModelCreatingPartial(modelBuilder);

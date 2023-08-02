@@ -5,7 +5,7 @@ namespace SamsungService.Models;
 
 public partial class Desktop
 {
-    public string MemberCode { get; set; } = null!;
+    public string? MemberCode { get; set; }
 
     public string? Sitecode { get; set; }
 
@@ -13,7 +13,7 @@ public partial class Desktop
 
     public string? ResourceName { get; set; }
 
-    public string ResFriendlyName { get; set; } = null!;
+    public string? ResFriendlyName { get; set; }
 
     public string? Os { get; set; }
 
