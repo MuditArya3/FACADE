@@ -16,7 +16,6 @@ import FormIO from "./components/FormIOComponent/FormIO.jsx";
 
 function App() {
   const [jsonData, setJsonData] = useState();
-  console.log(jsonData);
   return (
     <div className="App">
       <Router>

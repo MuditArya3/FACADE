@@ -27,7 +27,11 @@ public partial class SamsungContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+<<<<<<< HEAD
     public virtual DbSet<Server> Servers { get; set; }
+=======
+    public virtual DbSet<ServiceIntegration> ServiceIntegrations { get; set; }
+>>>>>>> 1339bdf1dfc71ced39bfe9a8afb558301e486fcc
 
     public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
 
@@ -41,7 +45,7 @@ public partial class SamsungContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=BHAVNAWKS706;Database=Samsung;User Id=sa;password=Bhavna@123;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=BHAVNAWKS636;Database=Samsung;User Id=sa;password=Bhavna@123;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -109,6 +113,7 @@ public partial class SamsungContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(50);
         });
 
+<<<<<<< HEAD
         modelBuilder.Entity<Server>(entity =>
         {
             entity.HasNoKey();
@@ -133,6 +138,22 @@ public partial class SamsungContext : DbContext
             entity.Property(e => e.SiteName).HasMaxLength(50);
             entity.Property(e => e.SiteSubCode).HasMaxLength(50);
             entity.Property(e => e.Ssomc).HasColumnName("SSOmc");
+=======
+        modelBuilder.Entity<ServiceIntegration>(entity =>
+        {
+            entity.ToTable("ServiceIntegration");
+
+            entity.Property(e => e.Description).HasMaxLength(250);
+            entity.Property(e => e.DomainUrl)
+                .HasMaxLength(250)
+                .HasColumnName("DomainURL");
+            entity.Property(e => e.ServiceApiname)
+                .HasMaxLength(250)
+                .HasColumnName("ServiceAPIName");
+            entity.Property(e => e.ServiceJson).HasColumnName("ServiceJSON");
+            entity.Property(e => e.ServiceName).HasMaxLength(250);
+            entity.Property(e => e.SwaggerFilePath).HasMaxLength(250);
+>>>>>>> 1339bdf1dfc71ced39bfe9a8afb558301e486fcc
         });
 
         modelBuilder.Entity<ServiceRequest>(entity =>

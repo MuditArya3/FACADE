@@ -1,20 +1,14 @@
 import {
     Accordion,
     AccordionDetails,
-    AccordionSummary,
     Box,
     Button,
     Container,
     FormControl,
-    Hidden,
-    Input,
     InputLabel,
     MenuItem,
-    Modal,
     Paper,
     Select,
-    TextField,
-    ToggleButtonGroup,
     Typography,
 } from "@mui/material";
 import React from "react";
@@ -26,6 +20,12 @@ import {
     handleData,
     getDesiredAnnotation,
     handleForm,
+    domainUrl,
+    jsonSchema,
+    service,
+    fileName,
+    desc,
+    file,
 } from "./Mapping";
 import { useState } from "react";
 import "../JsonTemplateComponent/JsonTemplate.css";
@@ -35,6 +35,7 @@ import { red } from "@mui/material/colors";
 import FormComponent from "../FormComponent/FormComponent.jsx";
 import { useRef } from "react";
 import GridComponent from "../GridComponent/GridComponent.jsx";
+import { PostJson } from "../../Services/EndpointServices/SaveJson";
 
 const Mapping = ({ jsonData, setJsonData }) => {
     const [mappings, setMappings] = useState({});
@@ -53,27 +54,35 @@ const Mapping = ({ jsonData, setJsonData }) => {
     const [selected, setSelected] = useState({});
     const [jsonfile, setJsonfile] = useState([]);
     const [ApiData, setApiData] = useState();
-    const [Actions, setActions] = useState();
+    const [Actions, setActions] = useState("");
     const [stateData, setStateData] = useState({});
     const [required, setRequired] = useState([]);
     const [buttonClicked, setButtonClicked] = useState();
     const [actionMethods, setactionMethods] = useState([]);
     const [showform, setshowform] = useState(false);
     const [showGridComponent, setShowGridComponent] = useState(false);
+    const [postData, setPostData] = useState({
+        ServiceAPIName: file,
+        SwaggerFilePath: "",
+        DomainURL: domainUrl,
+        ServiceName: service,
+        Description: desc,
+        ServiceJSON: jsonSchema,
+        AudienceType: 0,
+    });
     const formRef = useRef(null);
     //   let actionMethods=[];
-    console.log(options);
     let annotation = getDesiredAnnotation(localStorage.getItem("Annotation"));
-    console.log(annotation);
     const lowercaseAnnotation = annotation.toLowerCase();
+
+    console.log(Actions);
+    console.log(selected);
 
     useEffect(() => {
         if (lowercaseAnnotation.includes("create")) {
             console.log("Create");
             actionMethods.push("CREATE");
-            actionMethods.map((action) => {
-                console.log(action);
-            });
+            actionMethods.map((action) => {});
         } else if (lowercaseAnnotation.includes("get")) {
             // setShowGridComponent(true);
             actionMethods.push("FETCH");
@@ -100,15 +109,12 @@ const Mapping = ({ jsonData, setJsonData }) => {
         }
     }, [lowercaseAnnotation]);
     let st = localStorage.getItem("ColumnData");
-    console.log(st);
 
     useEffect(() => {
         setColumns(JSON.parse(st));
     }, [st]);
-    console.log(columns);
 
     useEffect(() => {
-        console.log(columns);
         // columns && Object.keys(columns).map((col)=>{
         //     console.log(columns[col].IsRequired);
 
@@ -124,12 +130,9 @@ const Mapping = ({ jsonData, setJsonData }) => {
                         return [...prevw, col.Name];
                     });
                 }
-                console.log(col.Name);
             });
     }, [columns]);
-    console.log(newcolumns);
     // let columns=JSON.parse(st);
-    console.log(columns);
     useEffect(() => {
         setTableNames(
             swaggerData
@@ -145,14 +148,10 @@ const Mapping = ({ jsonData, setJsonData }) => {
     }, [swaggerData]);
 
     useEffect(() => {
-        console.log(selectedTable);
-
         swaggerData &&
             selectedTable &&
             setapiMethods(Object.keys(swaggerData.paths[selectedTable]));
     }, [swaggerData, selectedTable]);
-
-    console.log(apiMethods);
 
     useEffect(() => {
         swaggerData &&
@@ -163,13 +162,10 @@ const Mapping = ({ jsonData, setJsonData }) => {
             );
     }, [swaggerData, selectedTable, apiMethods, selectApiMethod]);
 
-    console.log(response);
-
     useEffect(() => {
-        console.log("shreesh");
         swaggerData && setSelectApiMethod("");
         setSelectedResponse("");
-        setActions();
+        setActions("");
         //   setColumns();
     }, [selectedTable]);
 
@@ -268,8 +264,6 @@ const Mapping = ({ jsonData, setJsonData }) => {
         }
     }, [swaggerData, selectedTable, selectApiMethod, SelectedResponse]);
 
-    console.log(required);
-
     // useEffect(() => {
     //   swaggerData &&
     //     selectedTable.length &&
@@ -316,7 +310,6 @@ const Mapping = ({ jsonData, setJsonData }) => {
 
     useEffect(
         (e) => {
-            console.log(mappings);
             buttonClicked &&
                 mappings &&
                 handleData(
@@ -349,6 +342,18 @@ const Mapping = ({ jsonData, setJsonData }) => {
         }
     }, [showform]);
 
+    const postjsonData = async (data) => {
+        try {
+            const response = await PostJson(data);
+        } catch (error) {
+            console.error(
+                "Error occurred while making the API request:",
+                error.message
+            );
+            throw error;
+        }
+    };
+
     return (
         <div className="outerdiv">
             {!showGridComponent && (
@@ -366,7 +371,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            overflow: "Hidden",
+                            overflow: "hidden",
                             py: 4,
                             // bgcolor: purple
                         }}
@@ -721,6 +726,17 @@ const Mapping = ({ jsonData, setJsonData }) => {
                                             >
                                                 Download JSON
                                             </Button>
+                                            <Button
+                                                variant={"contained"}
+                                                onClick={() => {
+                                                    postjsonData(postData);
+                                                }}
+                                                sx={{ mt: 1 }}
+                                                type="submit"
+                                                disabled={!Actions}
+                                            >
+                                                Submit
+                                            </Button>
 
                                             <Button
                                                 variant={"contained"}
@@ -759,7 +775,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            overflow: "Hidden",
+                            overflow: "hidden",
                             py: 4,
                             // bgcolor: purple
                         }}
@@ -768,10 +784,20 @@ const Mapping = ({ jsonData, setJsonData }) => {
                             <Accordion
                                 sx={{ width: "100%" }}
                                 expanded={true}
-                                Hidden={false}
+                                hidden={false}
                             >
                                 <AccordionDetails sx={{ pt: 3 }}>
-                                    {showform && <FormComponent />}
+                                    {showform && (
+                                        <FormComponent
+                                            mappings={mappings}
+                                            setMappings={setMappings}
+                                            buttonClicked={buttonClicked}
+                                            setJsonData={setJsonData}
+                                            setJsonfile={setJsonfile}
+                                            setButtonClicked={setButtonClicked}
+                                            columns={columns}
+                                        />
+                                    )}
                                 </AccordionDetails>
                             </Accordion>
                         )}
@@ -787,7 +813,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            overflow: "Hidden",
+                            overflow: "hidden",
                             py: 4,
                             // bgcolor: purple
                         }}
@@ -796,7 +822,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                             <Accordion
                                 sx={{ width: "100%" }}
                                 expanded={true}
-                                Hidden={false}
+                                hidden={false}
                             >
                                 <AccordionDetails sx={{ pt: 3 }}>
                                     <h3>FORM GRID</h3>
@@ -824,7 +850,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            overflow: "Hidden",
+                            overflow: "hidden",
                             py: 4,
                             // bgcolor: purple
                         }}
@@ -835,7 +861,7 @@ const Mapping = ({ jsonData, setJsonData }) => {
                         <Accordion
                             sx={{ width: "100%" }}
                             expanded={true}
-                            Hidden={false}
+                            hidden={false}
                         >
                             <AccordionDetails sx={{ pt: 3 }}>
                                 <h3>FORM GRID</h3>

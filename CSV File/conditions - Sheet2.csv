@@ -1,0 +1,3 @@
+Properties,Action
+phoneNumber,NOT GREATER THAN 10
+phoneNumber,SHOW ADDRESS

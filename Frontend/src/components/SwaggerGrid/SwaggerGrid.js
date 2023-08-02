@@ -1,4 +1,4 @@
-import { json } from "react-router-dom";
+
 import { EndpointPostApi, EndpointServicePostApi, ParameterPostApi } from "../../Services/EndpointServices/EndpointService";
 
 export const handleNameChange = (event, setSelectedValue) => {
@@ -26,9 +26,10 @@ export const handleFileSelectChange = (e, setSwaggerData) => {
     reader.readAsText(file);
 };
 
-export const handleData = (inputValue,columns) => {
+export const handleData = (inputValue,columns, selectedService) => {
     localStorage.setItem("inputValue", inputValue);
     localStorage.setItem("ColumnData",JSON.stringify(columns));
+    localStorage.setItem("service", selectedService)
     window.open("/mapping", "_blank");
     // handleSave(uu,jsonfile,setJsonData);
 };
@@ -119,7 +120,7 @@ export const handleUploadedFileClick = (fileName,uploadedFiles,setUpdatedEndpoin
     }
 };
 
-export const handleInputChange = (e,allowedExtensions,setSwaggerData,setEndpoints,setUpdatedEndpoints,setUploadedFiles,setShowMessage,setShowInvalidFileType) => {
+export const handleInputChange = (e,allowedExtensions,setSwaggerData,setEndpoints,setUpdatedEndpoints,setUploadedFiles,uploadedFiles,setSelectedFileName,setShowMessage,setShowInvalidFileType) => {
     const file = e.target.files[0];
 
     if (file && allowedExtensions.test(file.name)) {
@@ -138,7 +139,10 @@ export const handleInputChange = (e,allowedExtensions,setSwaggerData,setEndpoint
                         ]);
                 });
                 setShowMessage(false);
-                setShowInvalidFileType(false);
+                 setShowInvalidFileType(false);
+                // uploadedFiles.map((file)=>(
+                //     setSelectedFileName(file.name)
+                // ))
             } catch (error) {
                 console.error("Error parsing Swagger data:", error);
                 setShowMessage(true);

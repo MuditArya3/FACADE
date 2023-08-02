@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "properties": {
+    "Animal": {
+      "enum": [
+        "Cat",
+        "Fish"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "Animal": {
+            "const": "Cat"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "Food": {
+            "type": "string",
+            "enum": [
+              "meat",
+              "grass",
+              "fish"
+            ]
+          }
+        },
+        "required": [
+          "Food"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "Animal": {
+            "const": "Fish"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "Water": {
+            "type": "string",
+            "enum": [
+              "insects",
+              "worms",
+              "lake",
+              "ocean"
+            ]
+          }
+        },
+        "required": [
+          "Water"
+        ]
+      }
+    },
+    {
+      "required": [
+        "Animal"
+      ]
+    }
+  ]
+}

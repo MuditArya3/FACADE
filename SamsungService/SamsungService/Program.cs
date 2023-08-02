@@ -37,6 +37,8 @@ builder.Services.AddScoped<IServiceRequestRepository, ServiceRequestRepository>(
 builder.Services.AddScoped<IServiceRequestService, ServiceRequestService>();
 builder.Services.AddScoped<IServiceTicketRepository, ServiceTicketRepository>();
 builder.Services.AddScoped<IServiceTicketService, ServiceTicketService>();
+builder.Services.AddScoped<IServiceIntService, ServiceIntService>();
+builder.Services.AddScoped<IServiceIntRepository, ServiceIntRepository>();
 //builder.Services.AddScoped<IDesktopService, DesktopService>();
 var app = builder.Build();
 

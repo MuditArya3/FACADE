@@ -1,0 +1,4 @@
+Properties,Action,Field
+phoneNumber,10,
+phoneNumber,SHOW,address
+address,HIDE,email
