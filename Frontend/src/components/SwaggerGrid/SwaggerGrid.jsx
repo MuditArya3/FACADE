@@ -40,7 +40,7 @@ import {
 import "./SwaggerGrid.css";
 import c from "../../assets/3.jpg";
 import { useNavigate } from "react-router-dom";
-import { Delete } from "@mui/icons-material";
+import { Add, Delete } from "@mui/icons-material";
 
 const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [swaggerData, setSwaggerData] = useState();
@@ -56,23 +56,57 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const [updatedEndpoints, setUpdatedEndpoints] = useState([]);
     const [updatedServices, setUpdatedServices] = useState([]);
     const [selectedFileName, setSelectedFileName] = useState("");
+    const [fileName, setFileName] = useState("");
     const [correctEndpoints, setCorrectEndpoints] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+    //const [additionalTextBoxes, setAdditionalTextBoxes] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
+    const [descrip, setdescrip] = useState("");
+    const [productService, setProductService] = useState("");
+    const [additionalTextBoxes, setAdditionalTextBoxes] = useState([
+        { inputValue: "", envInput: "" },
+    ]);
 
-    const handleUrlChange = (event) => {
-        setInputValue(event.target.value);
+    const handleUrlChange = (index, event) => {
+        const updatedAdditionalTextBoxes = [...additionalTextBoxes];
+        updatedAdditionalTextBoxes[index] = {
+            ...updatedAdditionalTextBoxes[index],
+            inputValue: event.target.value,
+        };
+        setAdditionalTextBoxes(updatedAdditionalTextBoxes);
+    };
+
+    const handleEnvChange = (index, event) => {
+        const updatedAdditionalTextBoxes = [...additionalTextBoxes];
+        updatedAdditionalTextBoxes[index] = {
+            ...updatedAdditionalTextBoxes[index],
+            envInput: event.target.value,
+        };
+        setAdditionalTextBoxes(updatedAdditionalTextBoxes);
+    };
+
+    const handleAddClick = () => {
+        setAdditionalTextBoxes([
+            ...additionalTextBoxes,
+            { inputValue: "", envInput: "" },
+        ]);
+    };
+
+    const handleProductService = (event) => {
+        setProductService(event.target.value);
     };
 
     const handleGenerateClick = () => {
-        if (selectedService && selectedValue && inputValue) {
-            handleData(inputValue, columns);
+        if (selectedService && selectedValue && additionalTextBoxes) {
+            handleData(
+                additionalTextBoxes.inputValue,
+                columns,
+                selectedService
+            );
             setErrorMessage("");
         } else {
             setErrorMessage("Please fill in all required fields");
         }
     };
-    console.log(columns);
 
     const selectedEndpoint = selectedValue.split("--")[0];
     const selectedEndpointType = selectedValue.split("--")[1];
@@ -98,6 +132,34 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
             });
         }
     }, [swaggerData]);
+
+    useEffect(() => {
+        swaggerData &&
+            selectedValue &&
+            swaggerData.paths[selectedEndpoint][selectedEndpointType]
+                .description &&
+            setdescrip(
+                swaggerData.paths[selectedEndpoint][selectedEndpointType]
+                    .description
+            );
+
+        console.log(descrip);
+        console.log(swaggerData);
+        localStorage.setItem("desc", descrip);
+    }, [swaggerData, selectedValue]);
+
+    useEffect(() => {
+        if (uploadedFiles) {
+            uploadedFiles.map((file) => {
+                setFileName(file.name);
+            });
+            localStorage.setItem("filename", fileName);
+        }
+    }, [uploadedFiles]);
+
+    console.log(fileName);
+
+    console.log(additionalTextBoxes);
 
     useEffect(() => {
         if (selectedValue) {
@@ -141,8 +203,20 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
     const handleCorrectEndpoints = (event) => {
         setCorrectEndpoints(event.target.checked);
     };
-    console.log(endpoints);
-    console.log(swaggerData);
+
+    // const handleAddClick = () => {
+    //     setAdditionalTextBoxes([...additionalTextBoxes, textInput]);
+    //     setTextInput([...textInput, { inputValue: "", envInput: "" }]);
+    // };
+
+    // const handleAdditionalTextBoxChange = (index, field, event) => {
+    //     const updatedTextInput = [...textInput];
+    //     updatedTextInput[index] = {
+    //         ...updatedTextInput[index],
+    //         [field]: event.target.value,
+    //     };
+    //     setTextInput(updatedTextInput);
+    // };
 
     const filteredEndpoints = correctEndpoints
         ? endpoints.filter((endpoint) => {
@@ -270,6 +344,9 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                     pt: 2,
                                     flexDirection: "column",
                                     alignItems: "center",
+                                    overflowY: "auto",
+                                    height: "70vh",
+                                    justifyContent: "center",
                                 }}
                             >
                                 {endpoints.length === 0 && (
@@ -280,6 +357,52 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                             alignItems: "center",
                                         }}
                                     >
+                                        <FormControl
+                                            required
+                                            sx={{
+                                                width: "80%",
+                                                display: "flex",
+                                                //justifyContent: "space-between",
+                                                flexDirection: "row",
+                                                alignItems: "center",
+                                                mb: 2,
+                                                pointerEvents: "auto",
+                                                marginTop: "2rem",
+                                            }}
+                                        >
+                                            <InputLabel
+                                                id="table-select-label"
+                                                sx={{
+                                                    fontSize: "1.5rem",
+                                                }}
+                                            >
+                                                Select Product Service:
+                                            </InputLabel>
+                                            <Select
+                                                required
+                                                labelId="table-select-label"
+                                                id="table-select"
+                                                value={productService}
+                                                onChange={(e) => {
+                                                    handleProductService(e);
+                                                }}
+                                                label="Select Product Service:"
+                                                sx={{ flex: 1, ml: 1 }}
+                                            >
+                                                <MenuItem value={""}>
+                                                    <em>None</em>
+                                                </MenuItem>
+                                                <MenuItem value={"RMMITS"}>
+                                                    RMMITS
+                                                </MenuItem>
+                                                <MenuItem value={"Samsung"}>
+                                                    Samsung
+                                                </MenuItem>
+                                                <MenuItem value={"CNS"}>
+                                                    CNS
+                                                </MenuItem>
+                                            </Select>
+                                        </FormControl>
                                         <InputLabel
                                             htmlFor="json-file"
                                             id="json-file-label"
@@ -304,7 +427,10 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                     setUpdatedEndpoints,
                                                     setUploadedFiles,
                                                     setShowMessage,
-                                                    setShowInvalidFileType
+                                                    setShowInvalidFileType,
+                                                    setSelectedFileName,
+                                                    selectedFileName,
+                                                    uploadedFiles
                                                 )
                                             }
                                         />
@@ -402,34 +528,75 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                 </Box>
                                 {!showMessage && endpoints.length > 0 && (
                                     <>
-                                     {/* <InputLabel
-                                            id="table-select-label"
-                                            sx={{
-                                                fontSize: "1.5rem",
-                                                marginLeft: "7px",
-                                            }}
-                                        >
-                                            Domain URL
-                                        </InputLabel> */}
-                                        <FormControl
-                                            required
-                                            sx={{
-                                                pointerEvents: "auto",
-                                                width: "80%",
-                                                mb:"2rem"
-                                            }}
-                                        >
-                                            <TextField
-                                                sx={{
-                                                    fontSize: "1.5rem",
-                                                }}
-                                                label={"Domain URL"}
-                                                required
-                                                variant="outlined"
-                                                value={inputValue}
-                                                onChange={handleUrlChange}
-                                            />
-                                        </FormControl>
+                                        {additionalTextBoxes.map(
+                                            (row, index) => (
+                                                <FormControl
+                                                    key={index}
+                                                    sx={{
+                                                        pointerEvents: "auto",
+                                                        width: "80%",
+                                                        mb: "2rem",
+                                                        display: "flex",
+                                                        flexDirection: "row",
+                                                        alignItems: "center",
+                                                    }}
+                                                >
+                                                    <TextField
+                                                        sx={{
+                                                            fontSize: "1.5rem",
+                                                            width: "60%",
+                                                        }}
+                                                        label={"Environment"}
+                                                        required
+                                                        variant="outlined"
+                                                        value={row.envInput}
+                                                        onChange={(event) =>
+                                                            handleEnvChange(
+                                                                index,
+                                                                event
+                                                            )
+                                                        }
+                                                    />
+                                                    <TextField
+                                                        sx={{
+                                                            fontSize: "1.5rem",
+                                                            width: "85%",
+                                                        }}
+                                                        label={"Domain URL"}
+                                                        required
+                                                        variant="outlined"
+                                                        value={row.inputValue}
+                                                        onChange={(event) =>
+                                                            handleUrlChange(
+                                                                index,
+                                                                event
+                                                            )
+                                                        }
+                                                    />
+                                                    {index ===
+                                                        additionalTextBoxes.length -
+                                                            1 && (
+                                                        <Button
+                                                            variant="contained"
+                                                            fontSize="small"
+                                                            sx={{
+                                                                minWidth:
+                                                                    "20px",
+                                                                width: "30px",
+                                                                height: "30px",
+                                                                marginLeft:
+                                                                    "5px",
+                                                            }}
+                                                            onClick={
+                                                                handleAddClick
+                                                            }
+                                                        >
+                                                            <Add />
+                                                        </Button>
+                                                    )}
+                                                </FormControl>
+                                            )
+                                        )}
                                         <FormControl
                                             required
                                             sx={{
@@ -541,7 +708,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 )}
                                             </Select>
                                         </FormControl>
-                                       
+
                                         <FormControl
                                             sx={{
                                                 pointerEvents: "auto",
@@ -644,7 +811,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                     <Button
                                         key={index}
                                         variant="outlined"
-                                        onClick={(e) =>
+                                        onClick={(e) => {
                                             handleUploadedFileClick(
                                                 file.name,
                                                 uploadedFiles,
@@ -656,8 +823,8 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                                 setSelectedValue,
                                                 setSwaggerData,
                                                 setSelectedFileName
-                                            )
-                                        }
+                                            );
+                                        }}
                                         sx={{
                                             my: 1,
                                             backgroundColor:
@@ -667,6 +834,7 @@ const SwaggerGrid = ({ jsonData, setJsonData }) => {
                                         }}
                                     >
                                         {file.name}
+                                        {/* {setSelectedFileName(file.name)} */}
                                     </Button>
                                 ))}
                             </Box>

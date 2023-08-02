@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\SamsungService\\SamsungService\\SamsungService.csproj": {}
+    "C:\\Facade app\\FACADE\\SamsungService\\SamsungService\\SamsungService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\SamsungService\\SamsungService\\SamsungService.csproj": {
+    "C:\\Facade app\\FACADE\\SamsungService\\SamsungService\\SamsungService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\SamsungService\\SamsungService\\SamsungService.csproj",
+        "projectUniqueName": "C:\\Facade app\\FACADE\\SamsungService\\SamsungService\\SamsungService.csproj",
         "projectName": "SamsungService",
-        "projectPath": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\SamsungService\\SamsungService\\SamsungService.csproj",
-        "packagesPath": "C:\\Users\\Mudit.Arya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mudit.Arya\\Desktop\\RJSF\\SamsungService\\SamsungService\\obj\\",
+        "projectPath": "C:\\Facade app\\FACADE\\SamsungService\\SamsungService\\SamsungService.csproj",
+        "packagesPath": "C:\\Users\\Anjali.Saini\\.nuget\\packages\\",
+        "outputPath": "C:\\Facade app\\FACADE\\SamsungService\\SamsungService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Mudit.Arya\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Anjali.Saini\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -78,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
