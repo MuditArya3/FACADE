@@ -61,6 +61,7 @@ const NewFormComponent = () => {
               className="inputbox"
             />
             {schemaa && (
+              <div>
               <div className="json-display">
                 <h4>JSON Data from Schema:</h4>
                 <textarea
@@ -70,6 +71,16 @@ const NewFormComponent = () => {
                   // rows={50}
                 />
               </div>
+              <div className="json-display">
+              <h4>UiSchema Data:</h4>
+              <textarea
+                value={JSON.stringify(uiSchema2,null,2)}
+                // onChange={handleJsonEdit}
+                className="editdata"
+                // rows={50}
+              />
+            </div>
+            </div>
             )}
 
             <AccordionDetails sx={{ pt: 3 }}>

@@ -424,8 +424,113 @@ export const handleApiSelected = (tableName, setSelectedTable) => {
 const inputValue = localStorage.getItem("inputValue")
 
 export const domainUrl = inputValue + url
+
+
+// export const handleData = (
+//   e,
+//   mappings,
+//   buttonClicked,
+//   setJsonData,
+//   setJsonfile,
+//   setButtonClicked,
+//   columns
+// ) => {
+//   localStorage.setItem("ColumnData", JSON.stringify(columns));
+//   console.log(columns);
+//   let requiredFields;
+//   console.log(mappings);
+//   let uu = {};
+//   let layout={}
+//   Object.keys(mappings).map((col) => {
+//     console.log(mappings[col][0]);
+//     columns.forEach((rcol) => {
+//       console.log(columns);
+//       console.log(rcol.Name);
+//       if (mappings[col][0] === rcol.Name) {
+//         if(rcol.IsRequired===true){
+//             requiredFields=rcol.Name;
+//             console.log("hi");
+//             layout = {
+//                 key: rcol.Name,
+//                 title: rcol.Name,
+//                 type: rcol.Type === "Array"
+//                 ? "string"
+//                 : rcol.Type === "None" 
+//                 ? "string"
+//                 :rcol.Type === "Object"
+//                 ?"string"  
+//                 :rcol.Type.toLowerCase(),
+//               };
+//         }
+
+//         else{
+//             console.log("hello");
+//             layout = {
+//               key: rcol.Name,
+//               title: rcol.Name,
+//               type:
+//               rcol.Type === "Array"
+//                 ? "string"
+//                 : rcol.Type === "None" 
+//                 ? "string"
+//                 :rcol.Type === "Object"
+//                 ?"string"  
+//                 :rcol.Type.toLowerCase(),
+//             };
+//         }
+//         console.log(layout);
+//         uu[rcol.Name] = { ...layout };
+//         // uu["components"]={ ...layout};
+//       }
+//       console.log(uu);
+//     });
+//   });
+
+ 
+
+//   let x = `fetch(${inputValue + url}, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Access-Control-Allow-Origin': '*',
+//             'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
+//             'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
+//         },
+//         body:JSON.stringify({})
+//       }).then(function (response) {
+//       console.log(response,'gagan');
+//         if (response.ok) {
+//           return response.json();
+//         }
+//         //throw response;
+//       }).then(function (data) {
+//         console.log(data);
+//       }).catch(function (error) {
+//         console.warn(error);
+//       });
+//       input: true,
+//       `;
+
+//   uu["custom"] = x;
+  
+// //   if (buttonClicked === "SaveMapping") {
+// //     window.open("/form", "_blank");
+// //   }
+
+//   handleSave(
+//     uu,
+//     requiredFields,
+//     buttonClicked,
+//     setJsonData,
+//     setJsonfile,
+//     setButtonClicked
+//   );
+// };
+
+
 export const file = localStorage.getItem("filename")
 export const desc = localStorage.getItem("desc")
+
 export const handleData = (
   e,
   mappings,
@@ -439,14 +544,16 @@ export const handleData = (
   console.log(columns);
   let requiredFields;
   console.log(mappings);
-  let uu = {};
+  let uu = [];
+
   let layout={}
-  Object.keys(mappings).map((col) => {
+  Object.keys(mappings).map((col,index) => {
     console.log(mappings[col][0]);
     columns.forEach((rcol) => {
       console.log(columns);
       console.log(rcol.Name);
       if (mappings[col][0] === rcol.Name) {
+        let dd=()=>{
         if(rcol.IsRequired===true){
             requiredFields=rcol.Name;
             console.log("hi");
@@ -479,36 +586,44 @@ export const handleData = (
             };
         }
         console.log(layout);
-        uu[rcol.Name] = { ...layout };
+        // uu[rcol.Name] = { ...layout };
+        // uu["components"]={ ...layout};
+        return layout
       }
+      uu[index]=dd();
+    }
       console.log(uu);
     });
   });
 
-  let x = `fetch(${inputValue + url}, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
-            'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
-        },
-        body:JSON.stringify({})
-      }).then(function (response) {
-      console.log(response,'gagan');
-        if (response.ok) {
-          return response.json();
-        }
-        //throw response;
-      }).then(function (data) {
-        console.log(data);
-      }).catch(function (error) {
-        console.warn(error);
-      });
-      input: true,
-      `;
+  window.open("/formio", "_blank");
+// uu[index] = dd();
 
-  uu["custom"] = x;
+  // let x = `fetch(${inputValue + url}, {
+  //       method: 'POST',
+  //       headers: {
+  //           'Content-Type': 'application/json',
+  //           'Access-Control-Allow-Origin': '*',
+  //           'Authorization':'Basic cGVubWFuYWdlKzhldDRWUVZZb0taQ1hMeTQ6NUdNc0h3OVNZdEV0RTI5Zw==',
+  //           'clientId':'f9163e2b-a465-46e4-8f42-0a193c68ee9c',
+  //       },
+  //       body:JSON.stringify({})
+  //     }).then(function (response) {
+  //     console.log(response,'gagan');
+  //       if (response.ok) {
+  //         return response.json();
+  //       }
+  //       //throw response;
+  //     }).then(function (data) {
+  //       console.log(data);
+  //     }).catch(function (error) {
+  //       console.warn(error);
+  //     });
+  //     input: true,
+  //     `;
+
+  // uu["custom"] = x;
+
   
 //   if (buttonClicked === "SaveMapping") {
 //     window.open("/form", "_blank");
@@ -523,6 +638,8 @@ export const handleData = (
     setButtonClicked
   );
 };
+
+
 const handleSave = (
   data,
   requiredFields,
@@ -532,8 +649,8 @@ const handleSave = (
   setButtonClicked
 ) => {
   console.log(data);
-  let json = Object.assign({}, data);
-  console.log(json);
+  // let json = Object.assign({}, data);
+  // console.log(json);
   handleCreateFile(
     {
       label: "search",
@@ -541,7 +658,7 @@ const handleSave = (
       // description: "Search using below Textbox",
       type: "object",
       required: [requiredFields],
-      properties: json,
+      components: data,
     },
     buttonClicked,
     setJsonData,
